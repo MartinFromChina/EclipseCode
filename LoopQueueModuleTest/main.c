@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include "mul_loop_queues.h"
 
-#define PUSH_EQUAL_POP     1
+#define PUSH_EQUAL_POP     0
+
 #define MAX_QUEUE_LENGTH   10
 
 APP_LOOPQUEUE_DEF(Queue,Qmanager,Qlength,MAX_QUEUE_LENGTH);
@@ -38,6 +39,7 @@ int main(void)
 		}
 		i ++;
 
+		#if (PUSH_EQUAL_POP == 0)
 		buf_number = QueueFirstIn(Qmanager,&isOK,X_False);
 		if(isOK == X_True)
 		{
@@ -49,7 +51,7 @@ int main(void)
 			printf("push failed  i = %d\r\n",i);
 		}
 		i ++;
-
+		#endif
 
 		buf_number = QueueFirstOut(Qmanager,&isOK);
 		if(isOK == X_True)
