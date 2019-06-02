@@ -49,5 +49,6 @@ typedef struct
 X_Void queueInitialize( data_list * p_list,List_Manager *p_manager,uint8_t length);
 uint16_t QueueFirstIn( List_Manager *p_manager,X_Boolean *isOK,X_Boolean is_OccupyPermit);
 uint16_t QueueFirstOut( List_Manager *p_manager,X_Boolean *isOK);
+X_Boolean DoesQueueEmpty(X_Void);
 
 #endif

@@ -1,5 +1,7 @@
 #include "mul_loop_queues.h"
 
+static X_Boolean isQueueEmpty;
+
 static X_Boolean ConfigListNode(data_list *dlist)
 {
 	if(dlist == X_Null) {return X_False;}
@@ -72,6 +74,8 @@ X_Void queueInitialize(data_list * p_list,List_Manager *p_manager,uint8_t length
 	p_manager->FirstOut = &p_list[0];
 	p_manager->l_state = empty;
 	p_manager->FilledBufNum = 0 ;
+
+	isQueueEmpty = X_True;
 }
 
 uint16_t QueueFirstIn(List_Manager *p_manager,X_Boolean *isOK,X_Boolean is_OccupyPermit)
@@ -93,6 +97,8 @@ uint16_t QueueFirstIn(List_Manager *p_manager,X_Boolean *isOK,X_Boolean is_Occup
 			*isOK = X_True;
 			p_manager->FilledBufNum ++;
 			buf_number = FI->list_number;
+
+			isQueueEmpty = X_False;
 		break;
 		case full:
 			if(p_manager->FirstOut->isOccupyPermit == X_True)
@@ -115,6 +121,8 @@ uint16_t QueueFirstIn(List_Manager *p_manager,X_Boolean *isOK,X_Boolean is_Occup
 				*isOK = X_True;
 
 				buf_number = FI->list_number;
+
+				isQueueEmpty = X_False;
 			}
 			else
 			{
@@ -142,6 +150,8 @@ uint16_t QueueFirstOut(List_Manager *p_manager,X_Boolean *isOK)
 		case empty:
 			*isOK = X_False;
 			buf_number = 0;
+
+			isQueueEmpty = X_True;
 		break;
 		case normal:
 		case full:
@@ -168,4 +178,7 @@ uint16_t QueueFirstOut(List_Manager *p_manager,X_Boolean *isOK)
 	}
 	return buf_number;
 }
-
+X_Boolean DoesQueueEmpty(X_Void)
+{
+	return isQueueEmpty;
+}

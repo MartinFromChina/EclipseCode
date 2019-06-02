@@ -1,5 +1,5 @@
-23:42:20 **** Incremental Build of configuration Debug for project CharStringDebugTest ****
+00:00:44 **** Incremental Build of configuration Debug for project CharStringDebugTest ****
 Info: Internal Builder is used for build
-gcc -O0 -g3 -Wall -c -fmessage-length=0 -o main.o "..\\main.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o CharStringDebugModule.o "..\\CharStringDebugModule.c" 
 gcc -o CharStringDebugTest.exe CharStringDebugModule.o LocalQueue.o main.o 
 Info: Nothing to build for CharStringDebugTest
