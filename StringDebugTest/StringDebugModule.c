@@ -70,7 +70,9 @@ typedef struct
 
 static StringParam string_param_buf[STRING_DEBUG_BUF_NUMBER];
 
-
+/*
+ * can't handle float type data !!!!
+ */
 static void DebugPrintString(StringParam * p_SP){
 		switch(p_SP->arg_number)
 		{
@@ -231,5 +233,5 @@ void StringDebugInit(void(*p_init)(void))
 {
 	queueInitialize(string_queue,string_queue_manager,string_queue_length);
 	DebugPopStringMethodInit(p_init);
-	String_Debug(FOW_NOW_DEBUG,(1,"hello %s\r\n","I am string debug"));
+	String_Debug(FOW_NOW_DEBUG,(1,"hello %s \r\n","I am string debug"));
 }
