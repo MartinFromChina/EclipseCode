@@ -1,16 +1,4 @@
-23:47:52 **** Incremental Build of configuration Debug for project [T]TempProjectForES ****
+00:10:33 **** Incremental Build of configuration Debug for project [T]TempProjectForES ****
 Info: Internal Builder is used for build
-gcc -O0 -g3 -Wall -c -fmessage-length=0 -o LocalDebug.o "..\\LocalDebug.c" 
-gcc -o [T]TempProjectForES.exe LocalDebug.o LocalIrq.o LocalLog.o LocalTimer.o main.o 
-LocalDebug.o: In function `PushStringIntoCharBuf':
-D:\AllApplication\GitAll\EclipseCode\[T]TempProjectForES\Debug/../../CommonSource/CharStringDebug/CharStringDebugModule.c:66: undefined reference to `QueueFirstIn'
-LocalDebug.o: In function `StringDebugFlush':
-D:\AllApplication\GitAll\EclipseCode\[T]TempProjectForES\Debug/../../CommonSource/CharStringDebug/CharStringDebugModule.c:97: undefined reference to `DoesQueueEmpty'
-D:\AllApplication\GitAll\EclipseCode\[T]TempProjectForES\Debug/../../CommonSource/CharStringDebug/CharStringDebugModule.c:103: undefined reference to `QueueFirstOut'
-D:\AllApplication\GitAll\EclipseCode\[T]TempProjectForES\Debug/../../CommonSource/CharStringDebug/CharStringDebugModule.c:109: undefined reference to `QueueFirstOut'
-LocalDebug.o: In function `StringDebugProcess':
-D:\AllApplication\GitAll\EclipseCode\[T]TempProjectForES\Debug/../../CommonSource/CharStringDebug/CharStringDebugModule.c:123: undefined reference to `DoesQueueEmpty'
-D:\AllApplication\GitAll\EclipseCode\[T]TempProjectForES\Debug/../../CommonSource/CharStringDebug/CharStringDebugModule.c:135: undefined reference to `QueueFirstOut'
-LocalDebug.o: In function `StringDebugInit':
-D:\AllApplication\GitAll\EclipseCode\[T]TempProjectForES\Debug/../../CommonSource/CharStringDebug/CharStringDebugModule.c:176: undefined reference to `queueInitialize'
-collect2.exe: error: ld returned 1 exit status
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "Common\\CharStringDebug\\CharStringDebugModule.o" "..\\..\\CommonSource\\CharStringDebug\\CharStringDebugModule.c" 
+gcc -o [T]TempProjectForES.exe "Common\\CharStringDebug\\CharStringDebugModule.o" "Common\\IrqAndTimer\\app_timer.o" "Common\\IrqAndTimer\\user_irq.o" "Common\\LogFile\\user_log.o" "Common\\MulLoopQueue\\mul_loop_queues.o" main.o 
