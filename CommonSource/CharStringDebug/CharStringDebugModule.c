@@ -122,11 +122,11 @@ APP_LOOPQUEUE_DEF(string_queue,string_queue_manager,string_queue_length,STRING_D
 
 		if(DoesQueueEmpty() == X_True)
 		{
-			printf("empty\r\n");
+//			printf("empty\r\n");
 			return;
 		}
 
-		printf("not empty\r\n");
+//		printf("not empty\r\n");
 
 		#if(USE_OPERATION_SYSTEM == 1)
 		GET_DEBUG_SEMPHORE_METHOD;
@@ -175,5 +175,5 @@ void StringDebugInit(void(*p_init)(void))
 {
 	queueInitialize(string_queue,string_queue_manager,string_queue_length);
 	(*p_init)();
-	String_Debug(FOW_NOW_DEBUG,(25,"hello %s \r\n","I am string debug"));
+	String_Debug(FOW_NOW_DEBUG,(30,"hello %s \r\n","I am string debug"));
 }

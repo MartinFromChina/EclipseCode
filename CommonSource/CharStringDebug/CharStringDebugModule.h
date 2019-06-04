@@ -3,11 +3,11 @@
 
 #include "..\KeilMDK.h"
 
-#if (USE_LOCAL_CONFIG == 0)
+//#if (USE_LOCAL_CONFIG == 0)
 	#include "CharStringModuleConfig.h"
-#else
-	#include "CharStringModuleConfigExtern.h"
-#endif
+//#else
+//	#include "CharStringModuleConfigExtern.h"
+//#endif
 
 
 
@@ -38,18 +38,18 @@
 	X_Boolean OnceEntryCheck(uint16_t *backup_entry,uint16_t new_value) ;
 	X_Boolean CounterEntryCheck(uint32_t *backup_entry,uint32_t counter_limit);
 	#define String_Debug(flag,message)   do{ 																\
-														if(flag == 1)	\
+														if(flag != 0)	\
 														{	DEBUG_PUSH_METHOD	message ;	   	}			\
 													}while(0)
 		/*******************************************/
 
 		#define String_Debug_Once(flag,entry,once_ref,message)   do{ 																\
-															if(flag == 1 && OnceEntryCheck(entry,once_ref) == X_True)	\
+															if(flag != 0 && OnceEntryCheck(entry,once_ref) == X_True)	\
 															{	DEBUG_PUSH_METHOD	message ;	   	}			\
 														}while(0)
 		/*******************************************/
 		#define String_Debug_Counter(flag,entry,counter_ref,message)   do{ 																\
-															if(flag == 1 && CounterEntryCheck(entry,counter_ref) == X_True)	\
+															if(flag != 0 && CounterEntryCheck(entry,counter_ref) == X_True)	\
 															{	DEBUG_PUSH_METHOD	message ;	   	}			\
 														}while(0)
 

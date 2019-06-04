@@ -1,4 +1,6 @@
-00:10:33 **** Incremental Build of configuration Debug for project [T]TempProjectForES ****
+01:03:41 **** Incremental Build of configuration Debug for project [T]TempProjectForES ****
 Info: Internal Builder is used for build
 gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "Common\\CharStringDebug\\CharStringDebugModule.o" "..\\..\\CommonSource\\CharStringDebug\\CharStringDebugModule.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o main.o "..\\main.c" 
 gcc -o [T]TempProjectForES.exe "Common\\CharStringDebug\\CharStringDebugModule.o" "Common\\IrqAndTimer\\app_timer.o" "Common\\IrqAndTimer\\user_irq.o" "Common\\LogFile\\user_log.o" "Common\\MulLoopQueue\\mul_loop_queues.o" main.o 
+Info: Nothing to build for [T]TempProjectForES
