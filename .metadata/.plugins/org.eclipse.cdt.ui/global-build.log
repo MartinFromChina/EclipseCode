@@ -1,5 +1,6 @@
-00:27:26 **** Incremental Build of configuration Debug for project FakeIrqTest ****
+22:42:18 **** Incremental Build of configuration Debug for project FakeIrqTest ****
 Info: Internal Builder is used for build
 gcc -O0 -g3 -Wall -c -fmessage-length=0 -o main.o "..\\main.c" 
 gcc -o FakeIrqTest.exe app_timer.o main.o user_irq.o 
+Info: Nothing to build for FakeIrqTest
 Info: Nothing to build for FakeIrqTest

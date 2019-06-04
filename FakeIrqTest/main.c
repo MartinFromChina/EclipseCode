@@ -2,6 +2,14 @@
 #include <stdio.h>
 #include "app_timer.h"
 
+static void NormalDelay(unsigned int counter)
+{
+	for(; counter > 0; counter --)
+	{
+
+	}
+}
+
 APP_TIMER_DEF(timer1);
 APP_TIMER_DEF(timer2);
 
@@ -26,7 +34,10 @@ int main(int argc,char * argv[]) {
 	AppTimerStart(timer2);
     while (1)
     {
-
+    	NormalDelay(0xefffffff);
+    	AppTimerStop(timer1);
+    	NormalDelay(0xefffffff);
+    	AppTimerRestart(timer1);
     }
     UserIrqDelete();
     return 0;

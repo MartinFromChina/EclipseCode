@@ -23,6 +23,8 @@ typedef struct
 X_Void AppTimerHook(X_Void);
 uint32_t AppTimerCreated(AppTimerEntry *p_entry,uint32_t interval,void(*callBack)(void));
 uint32_t AppTimerStart(AppTimerEntry *p_entry);
+uint32_t AppTimerRestart(AppTimerEntry *p_entry);
+uint32_t AppTimerStop(AppTimerEntry *p_entry);
 
 #define TIMER_HOOK  AppTimerHook
 
