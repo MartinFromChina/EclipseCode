@@ -1,7 +1,7 @@
 #ifndef __APP_TIMER_H
 #define __APP_TIMER_H
 
-#include "..\CommonSource\KeilMDK.h"
+#include "..\KeilMDK.h"
 
 #define MAX_TIMER_ENTRY_NUMBER    10
 
