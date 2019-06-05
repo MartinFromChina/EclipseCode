@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include "..\IrqAndTimer\app_timer.h"
+#include "..\LogFile\user_log.h"
 
 #define USE_ARM_GCC              0
 #define USE_STRING_DEBUG         1
@@ -19,7 +20,7 @@
 #define DEBUG_EXIT_CRITICAL_METHOD    AppTimerUnlocked()
 
 #define DEBUG_PUSH_METHOD			   PushStringIntoCharBuf
-#define DEBUG_POP_METHOD       		   printf
+#define DEBUG_POP_METHOD       		   Log//printf
 
 #define FOW_NOW_DEBUG			1
 #define COUNTR_DEBUG            1
