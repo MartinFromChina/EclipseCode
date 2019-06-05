@@ -145,6 +145,24 @@ APP_LOOPQUEUE_DEF(string_queue,string_queue_manager,string_queue_length,STRING_D
 		RELEASE_DEBUG_SEMPHORE_METHOD;
 		#endif
 	}
+
+	void StringDebugInit(void(*p_init)(void))
+	{
+		uint8_t i,j;
+		for(i = 0;i<STRING_DEBUG_BUF_NUMBER ;i++)
+		{
+			for(j = 0 ; j< MAX_STRING_LENGTH ; j++)
+			{
+
+				CharBuf[i][j] = '\0';
+			}
+
+		}
+		queueInitialize(string_queue,string_queue_manager,string_queue_length);
+		(*p_init)();
+		String_Debug(FOW_NOW_DEBUG,(30,"hello %s \r\n","I am string debug"));
+	}
+
 #else
 	static char Canot_Translate[2][9] = {
 			"unknow",
@@ -167,13 +185,12 @@ APP_LOOPQUEUE_DEF(string_queue,string_queue_manager,string_queue_length,STRING_D
 	{
 
 	}
+	void StringDebugInit(void(*p_init)(void))
+	{
+
+	}
 #endif
 
 
 
-void StringDebugInit(void(*p_init)(void))
-{
-	queueInitialize(string_queue,string_queue_manager,string_queue_length);
-	(*p_init)();
-	String_Debug(FOW_NOW_DEBUG,(30,"hello %s \r\n","I am string debug"));
-}
+

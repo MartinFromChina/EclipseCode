@@ -10,7 +10,6 @@
 CRITICAL_SECTION cs_log;
 
 
-
 #ifdef WIN32
 static void Lock(CRITICAL_SECTION *l) {
     EnterCriticalSection(l);

@@ -1,6 +1,12 @@
-01:03:41 **** Incremental Build of configuration Debug for project [T]TempProjectForES ****
+23:59:49 **** Incremental Build of configuration Debug for project [T]TempProjectForES ****
 Info: Internal Builder is used for build
-gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "Common\\CharStringDebug\\CharStringDebugModule.o" "..\\..\\CommonSource\\CharStringDebug\\CharStringDebugModule.c" 
 gcc -O0 -g3 -Wall -c -fmessage-length=0 -o main.o "..\\main.c" 
+In file included from ..\main.c:1:0:
+..\main.c:10:32: warning: 'p_counter' defined but not used [-Wunused-variable]
+ STRING_DEBUG_COUNTER_ENTRY_DEF(p_counter);
+                                ^
+..\..\CommonSource\CharStringDebug\CharStringDebugModule.h:25:25: note: in definition of macro 'STRING_DEBUG_COUNTER_ENTRY_DEF'
+      static uint32_t*   p_entry_name = &CONCAT_2(p_entry_name,_whole) ;
+                         ^~~~~~~~~~~~
 gcc -o [T]TempProjectForES.exe "Common\\CharStringDebug\\CharStringDebugModule.o" "Common\\IrqAndTimer\\app_timer.o" "Common\\IrqAndTimer\\user_irq.o" "Common\\LogFile\\user_log.o" "Common\\MulLoopQueue\\mul_loop_queues.o" main.o 
 Info: Nothing to build for [T]TempProjectForES

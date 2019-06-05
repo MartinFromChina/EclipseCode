@@ -2,6 +2,7 @@
 #define __CHARSTRINGMODULECONFIG_H
 
 #include <stdio.h>
+#include "..\IrqAndTimer\app_timer.h"
 
 #define USE_ARM_GCC              0
 #define USE_STRING_DEBUG         1
@@ -14,8 +15,8 @@
 
 #define GET_DEBUG_SEMPHORE_METHOD
 #define RELEASE_DEBUG_SEMPHORE_METHOD
-#define DEBUG_ENTER_CRITICAL_METHOD
-#define DEBUG_EXIT_CRITICAL_METHOD
+#define DEBUG_ENTER_CRITICAL_METHOD   AppTimerLocked()
+#define DEBUG_EXIT_CRITICAL_METHOD    AppTimerUnlocked()
 
 #define DEBUG_PUSH_METHOD			   PushStringIntoCharBuf
 #define DEBUG_POP_METHOD       		   printf

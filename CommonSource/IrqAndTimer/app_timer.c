@@ -4,9 +4,18 @@
 static uint8_t current_entry_number = 0;
 static AppTimerEntry * pEntryBuf[MAX_TIMER_ENTRY_NUMBER];
 
+static X_Boolean isTimerLocked;
+
+X_Void AppTimerInit(X_Void)
+{
+	isTimerLocked = X_False;
+}
+
 X_Void AppTimerHook(X_Void)
 {
 	uint8_t i;
+
+	if(isTimerLocked == X_True) {return;}
 	for(i = 0 ; i<current_entry_number ; i++)
 	{
 		if(pEntryBuf[i] == X_Null) {break;}
@@ -61,3 +70,11 @@ uint32_t AppTimerStop(AppTimerEntry *p_entry)
 	return APP_SUCCESSED;
 }
 
+X_Void AppTimerLocked(X_Void)
+{
+	isTimerLocked = X_True;
+}
+X_Void AppTimerUnlocked(X_Void)
+{
+	isTimerLocked = X_False;
+}
