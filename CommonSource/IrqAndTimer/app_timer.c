@@ -1,7 +1,7 @@
 #include "app_timer.h"
 #include "..\AppError.h"
 
-static uint8_t current_entry_number = 0;
+static uint8_t current_entry_number;
 static AppTimerEntry * pEntryBuf[MAX_TIMER_ENTRY_NUMBER];
 
 static X_Boolean isTimerLocked;
@@ -9,6 +9,7 @@ static X_Boolean isTimerLocked;
 X_Void AppTimerInit(X_Void)
 {
 	isTimerLocked = X_False;
+	current_entry_number = 0;
 }
 
 X_Void AppTimerHook(X_Void)

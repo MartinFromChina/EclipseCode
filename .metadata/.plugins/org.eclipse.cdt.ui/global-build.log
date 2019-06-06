@@ -1,6 +1,5 @@
-00:04:01 **** Incremental Build of configuration Debug for project [T]TempProjectForES ****
+23:51:34 **** Incremental Build of configuration Debug for project [T]TempProjectForES ****
 Info: Internal Builder is used for build
-gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "Common\\CharStringDebug\\CharStringDebugModule.o" "..\\..\\CommonSource\\CharStringDebug\\CharStringDebugModule.c" 
 gcc -O0 -g3 -Wall -c -fmessage-length=0 -o main.o "..\\main.c" 
 In file included from ..\main.c:1:0:
 ..\main.c:10:32: warning: 'p_counter' defined but not used [-Wunused-variable]

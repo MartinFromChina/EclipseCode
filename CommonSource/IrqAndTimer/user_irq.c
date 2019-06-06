@@ -1,5 +1,6 @@
 #include "user_irq.h"
 #include "app_timer.h"
+#include "..\AppError.h"
 
 #ifndef TIMER_HOOK
 	static void TimerHook(void){}
@@ -34,12 +35,13 @@ void sleep_ms(int ms) {
 
 bool isTimerStart;
 
-
+static void SystemTimerHook(void);
 static void TimerThread(void *pcn) {
     while (1) {
 		sleep_ms(TimerTicksInMs);
 		if(isTimerStart == true)
 		{
+			SystemTimerHook();
 			TIMER_HOOK();
     	}
     }
@@ -82,4 +84,62 @@ void LockIrq(void)
 void UnlockIrq(void)
 {
 	Unlock(&cs_log);
+}
+
+static uint8_t current_entry_number = 0;
+static SystemTimerEntry * pEntryBuf[MAX_SYS_TIMER_ENTRY_NUMBER];
+
+void SystemTimerInit(void)
+{
+	current_entry_number = 0;
+}
+
+uint32_t SystemTimerStart(SystemTimerEntry *p_entry)
+{
+	p_entry->isTimerStart  = X_True;
+	return APP_SUCCESSED;
+}
+uint32_t SystemTimerStop(SystemTimerEntry *p_entry)
+{
+	p_entry->isTimerStart  = X_False;
+	return APP_SUCCESSED;
+}
+uint32_t SystemTimerCreated(SystemTimerEntry *p_entry,uint32_t interval,void(*callBack)(void))
+{
+	if(interval == 0xffffffff) {return APP_BEYOND_SCOPE;}
+	if(current_entry_number > MAX_SYS_TIMER_ENTRY_NUMBER) {return APP_BEYOND_SCOPE;}
+	p_entry->entry_number   = current_entry_number;
+	pEntryBuf[current_entry_number] = p_entry;
+	current_entry_number ++;
+	p_entry->current_counter = 0;
+	p_entry->divider       = interval;
+	p_entry->isTimerStart  = X_False;
+	p_entry->p_action      = callBack;
+	return APP_SUCCESSED;
+}
+
+static void SystemTimerHook(void)
+{
+	uint8_t i;
+	for(i = 0 ; i<current_entry_number ; i++)
+	{
+		if(pEntryBuf[i] == X_Null) {break;}
+		if(pEntryBuf[i]->isTimerStart == X_True)
+		{
+			if(pEntryBuf[i]->current_counter == pEntryBuf[i]->divider)
+			{
+				pEntryBuf[i]->current_counter = 0;
+				if(pEntryBuf[i]->p_action != X_Null)
+				{
+					(*pEntryBuf[i]->p_action)();
+				}
+			}
+			else
+			{
+				pEntryBuf[i]->current_counter ++;
+			}
+
+		}
+
+	}
 }
