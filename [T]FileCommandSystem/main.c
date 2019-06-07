@@ -1,5 +1,6 @@
 #include "..\CommonSource\CharStringDebug\CharStringDebugModule.h"
 #include "..\CommonSource\IrqAndTimer\user_irq.h"
+#include "..\CommonSource\Math\lcm_gcd.h"
 
 #include "user_timer.h"
 
@@ -24,7 +25,8 @@ int main(void)
 	while(1)
 	{
 		sleep_ms(1);// important !!!
-		StringDebugProcess();
+//		StringDebugProcess();
+		StringDebugFlush();
 	}
 	 UserIrqDelete();
 	 return 0;

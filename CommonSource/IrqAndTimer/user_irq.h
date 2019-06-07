@@ -18,6 +18,8 @@
     #define  MYVOID             void *
 #endif
 
+#define RELATIVE_TIMER_DIVIDER        10
+
 void sleep_ms(int ms);
 void UserIrqCreated(void);
 void UserIrqDelete(void);

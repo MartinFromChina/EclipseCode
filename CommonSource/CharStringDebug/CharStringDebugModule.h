@@ -70,6 +70,7 @@
 
 char *StringErrorTranslate(uint32_t error_code,char*(*error_get)(uint32_t error,char* p_cannot));
 void StringDebugProcess(void);
+void StringDebugFlush(void);
 void StringDebugInit(void(*p_init)(void));
 
 #endif

@@ -38,7 +38,6 @@ void sleep_ms(int ms) {
 
 bool isTimerStart;
 
-
 static void TimerThread(void *pcn) {
     while (1) {
 		sleep_ms(TimerTicksInMs);

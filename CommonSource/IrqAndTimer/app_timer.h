@@ -9,7 +9,6 @@ typedef struct
 {
 	uint8_t  entry_number;
 	uint32_t divider;
-	uint32_t current_counter;
 	X_Boolean isTimerStart;
 	void (*p_action)(void);
 }AppTimerEntry;
@@ -24,7 +23,6 @@ X_Void AppTimerInit(X_Void);
 X_Void AppTimerHook(X_Void);
 uint32_t AppTimerCreated(AppTimerEntry *p_entry,uint32_t interval,void(*callBack)(void));
 uint32_t AppTimerStart(AppTimerEntry *p_entry);
-uint32_t AppTimerRestart(AppTimerEntry *p_entry);
 uint32_t AppTimerStop(AppTimerEntry *p_entry);
 X_Void AppTimerLocked(X_Void);
 X_Void AppTimerUnlocked(X_Void);

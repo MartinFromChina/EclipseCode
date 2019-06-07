@@ -26,8 +26,8 @@ void AllTimerConfig(void)
 	AppTimerInit();
 	timer1_counter = 0;
 	timer2_counter = 0;
-	AppTimerCreated(timer1,200,timer1_callback);
-//	AppTimerCreated(timer2,100,timer2_callback);
+	AppTimerCreated(timer1,500/RELATIVE_TIMER_DIVIDER,timer1_callback);
+	AppTimerCreated(timer2,1000/RELATIVE_TIMER_DIVIDER,timer2_callback);
 	AppTimerStart(timer1);
-//	AppTimerStart(timer2);
+	AppTimerStart(timer2);
 }
