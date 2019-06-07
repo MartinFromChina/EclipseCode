@@ -42,7 +42,6 @@ typedef struct
 		static SystemTimerEntry   CONCAT_TWO(timer_id,_entry);								\
 		static SystemTimerEntry 	* timer_id =   &CONCAT_TWO(timer_id,_entry);
 
-void SystemTimerInit(void);
 uint32_t SystemTimerStart(SystemTimerEntry *p_entry);
 uint32_t SystemTimerStop(SystemTimerEntry *p_entry);
 uint32_t SystemTimerCreated(SystemTimerEntry *p_entry,uint32_t interval,void(*callBack)(void));

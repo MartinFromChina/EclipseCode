@@ -1,12 +1,17 @@
-23:51:34 **** Incremental Build of configuration Debug for project [T]TempProjectForES ****
+10:24:26 **** Incremental Build of configuration Debug for project [T]FileCommandSystem ****
 Info: Internal Builder is used for build
-gcc -O0 -g3 -Wall -c -fmessage-length=0 -o main.o "..\\main.c" 
-In file included from ..\main.c:1:0:
-..\main.c:10:32: warning: 'p_counter' defined but not used [-Wunused-variable]
- STRING_DEBUG_COUNTER_ENTRY_DEF(p_counter);
-                                ^
-..\..\CommonSource\CharStringDebug\CharStringDebugModule.h:25:25: note: in definition of macro 'STRING_DEBUG_COUNTER_ENTRY_DEF'
-      static uint32_t*   p_entry_name = &CONCAT_2(p_entry_name,_whole) ;
-                         ^~~~~~~~~~~~
-gcc -o [T]TempProjectForES.exe "Common\\CharStringDebug\\CharStringDebugModule.o" "Common\\IrqAndTimer\\app_timer.o" "Common\\IrqAndTimer\\user_irq.o" "Common\\LogFile\\user_log.o" "Common\\MulLoopQueue\\mul_loop_queues.o" main.o 
-Info: Nothing to build for [T]TempProjectForES
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o user_timer.o "..\\user_timer.c" 
+..\user_timer.c:19:13: warning: 'timer2_callback' defined but not used [-Wunused-function]
+ static void timer2_callback(void)
+             ^~~~~~~~~~~~~~~
+In file included from ..\..\CommonSource\CharStringDebug\CharStringModuleConfig.h:5:0,
+                 from ..\..\CommonSource\CharStringDebug\CharStringDebugModule.h:7,
+                 from ..\user_timer.c:1:
+..\user_timer.c:10:15: warning: 'timer2' defined but not used [-Wunused-variable]
+ APP_TIMER_DEF(timer2);
+               ^
+..\..\CommonSource\CharStringDebug\..\IrqAndTimer\app_timer.h:21:27: note: in definition of macro 'APP_TIMER_DEF'
+   static AppTimerEntry  * timer_id =   &CONCAT_TWO(timer_id,_entry);
+                           ^~~~~~~~
+gcc -o [T]FileCommandSystem.exe "CommonSource\\CharStringDebug\\CharStringDebugModule.o" "CommonSource\\IrqAndTimer\\app_timer.o" "CommonSource\\IrqAndTimer\\user_irq.o" "CommonSource\\LogFile\\user_log.o" "CommonSource\\MulLoopQueue\\mul_loop_queues.o" main.o user_timer.o 
+Info: Nothing to build for [T]FileCommandSystem

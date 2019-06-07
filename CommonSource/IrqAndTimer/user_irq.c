@@ -2,6 +2,9 @@
 #include "app_timer.h"
 #include "..\AppError.h"
 
+static void SystemTimerHook(void);
+static void SystemTimerInit(void);
+
 #ifndef TIMER_HOOK
 	static void TimerHook(void){}
 	#define TIMER_HOOK TimerHook
@@ -35,7 +38,7 @@ void sleep_ms(int ms) {
 
 bool isTimerStart;
 
-static void SystemTimerHook(void);
+
 static void TimerThread(void *pcn) {
     while (1) {
 		sleep_ms(TimerTicksInMs);
@@ -64,6 +67,7 @@ void UserIrqCreated(void)
     rc=pthread_create(&(threads[threadsN++]),NULL,TimerThread,(void *)1);if (rc) Log("%d=pthread_create %d error!\n",rc,threadsN-1);
 	#endif
     isTimerStart = false;
+    SystemTimerInit();
 }
 void UserIrqDelete(void)
 {
@@ -86,10 +90,10 @@ void UnlockIrq(void)
 	Unlock(&cs_log);
 }
 
-static uint8_t current_entry_number = 0;
+static uint8_t current_entry_number;
 static SystemTimerEntry * pEntryBuf[MAX_SYS_TIMER_ENTRY_NUMBER];
 
-void SystemTimerInit(void)
+static void SystemTimerInit(void)
 {
 	current_entry_number = 0;
 }

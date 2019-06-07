@@ -2276,3 +2276,78 @@ Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.e
 
 !ENTRY org.eclipse.launchbar.core 2 0 2019-06-06 23:36:48.758
 !MESSAGE Enablement expression is missing for config provider for org.eclipse.cdt.debug.core.coreBuildDescriptorType
+!SESSION 2019-06-07 09:44:34.351 -----------------------------------------------
+eclipse.buildId=4.7.3.M20180330-0640
+java.version=1.8.0_144
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=zh_CN
+Framework arguments:  -product org.eclipse.epp.package.cpp.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.cpp.product
+
+!ENTRY org.eclipse.launchbar.core 2 0 2019-06-07 09:52:59.794
+!MESSAGE Enablement expression is missing for descriptor type org.eclipse.cdt.debug.core.coreBuildDescriptorType
+
+!ENTRY org.eclipse.launchbar.core 2 0 2019-06-07 09:52:59.824
+!MESSAGE Enablement expression is missing for config provider for org.eclipse.cdt.debug.core.coreBuildDescriptorType
+
+!ENTRY org.eclipse.launchbar.core 2 0 2019-06-07 09:52:59.824
+!MESSAGE Enablement expression is missing for config provider for org.eclipse.cdt.debug.core.coreBuildDescriptorType
+
+!ENTRY org.eclipse.cdt.core 1 0 2019-06-07 09:56:18.231
+!MESSAGE Indexed '[T]FileCommandSystem' (0 sources, 0 headers) in 0 sec: 0 declarations; 0 references; 0 unresolved inclusions; 0 syntax errors; 0 unresolved names (0%)
+
+!ENTRY org.eclipse.cdt.core 4 0 2019-06-07 10:00:53.788
+!MESSAGE Error: Cannot run program "rm": Launching failed
+!STACK 0
+java.io.IOException: Cannot run program "rm": Launching failed
+	at org.eclipse.cdt.utils.spawner.Spawner.exec(Spawner.java:349)
+	at org.eclipse.cdt.utils.spawner.Spawner.<init>(Spawner.java:91)
+	at org.eclipse.cdt.utils.spawner.ProcessFactory.exec(ProcessFactory.java:91)
+	at org.eclipse.cdt.core.CommandLauncher.execute(CommandLauncher.java:208)
+	at org.eclipse.cdt.managedbuilder.internal.buildmodel.CommandBuilder.build(CommandBuilder.java:109)
+	at org.eclipse.cdt.managedbuilder.internal.buildmodel.StepBuilder.build(StepBuilder.java:96)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.cleanWithInternalBuilder(CommonBuilder.java:1209)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.clean(CommonBuilder.java:1098)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.clean(CommonBuilder.java:1046)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:737)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:206)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:246)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:301)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:304)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:360)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:383)
+	at org.eclipse.core.internal.resources.Workspace.buildInternal(Workspace.java:487)
+	at org.eclipse.core.internal.resources.Workspace.build(Workspace.java:406)
+	at org.eclipse.ui.actions.BuildAction$1.runInWorkspace(BuildAction.java:285)
+	at org.eclipse.core.internal.resources.InternalWorkspaceJob.run(InternalWorkspaceJob.java:39)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:56)
+
+!ENTRY org.eclipse.cdt.core 4 0 2019-06-07 10:15:42.573
+!MESSAGE Error: Cannot run program "rm": Launching failed
+!STACK 0
+java.io.IOException: Cannot run program "rm": Launching failed
+	at org.eclipse.cdt.utils.spawner.Spawner.exec(Spawner.java:349)
+	at org.eclipse.cdt.utils.spawner.Spawner.<init>(Spawner.java:91)
+	at org.eclipse.cdt.utils.spawner.ProcessFactory.exec(ProcessFactory.java:91)
+	at org.eclipse.cdt.core.CommandLauncher.execute(CommandLauncher.java:208)
+	at org.eclipse.cdt.managedbuilder.internal.buildmodel.CommandBuilder.build(CommandBuilder.java:109)
+	at org.eclipse.cdt.managedbuilder.internal.buildmodel.StepBuilder.build(StepBuilder.java:96)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.cleanWithInternalBuilder(CommonBuilder.java:1209)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.clean(CommonBuilder.java:1098)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.clean(CommonBuilder.java:1046)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:737)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:206)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:246)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:301)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:304)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:360)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:383)
+	at org.eclipse.core.internal.resources.Workspace.buildInternal(Workspace.java:487)
+	at org.eclipse.core.internal.resources.Workspace.build(Workspace.java:406)
+	at org.eclipse.ui.actions.BuildAction$1.runInWorkspace(BuildAction.java:285)
+	at org.eclipse.core.internal.resources.InternalWorkspaceJob.run(InternalWorkspaceJob.java:39)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:56)
