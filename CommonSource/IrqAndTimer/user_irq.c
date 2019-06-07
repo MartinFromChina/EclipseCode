@@ -40,7 +40,7 @@ bool isTimerStart;
 
 static void TimerThread(void *pcn) {
     while (1) {
-		sleep_ms(TimerTicksInMs);
+		sleep_ms(100);
 		if(isTimerStart == true)
 		{
 			SystemTimerHook();

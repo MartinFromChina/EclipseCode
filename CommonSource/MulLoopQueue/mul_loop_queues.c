@@ -135,6 +135,7 @@ uint16_t QueueFirstIn(List_Manager *p_manager,X_Boolean *isOK,X_Boolean is_Occup
 			buf_number = 0;
 		break;
 	}
+
 	return buf_number;
 }
 uint16_t QueueFirstOut(List_Manager *p_manager,X_Boolean *isOK)
@@ -176,6 +177,7 @@ uint16_t QueueFirstOut(List_Manager *p_manager,X_Boolean *isOK)
 			buf_number = 0;
 		break;
 	}
+
 	return buf_number;
 }
 X_Boolean DoesQueueEmpty(X_Void)

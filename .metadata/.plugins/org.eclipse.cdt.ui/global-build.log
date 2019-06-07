@@ -1,5 +1,5 @@
-12:27:16 **** Incremental Build of configuration Debug for project [T]FileCommandSystem ****
+14:20:56 **** Incremental Build of configuration Debug for project [T]FileCommandSystem ****
 Info: Internal Builder is used for build
-gcc -O0 -g3 -Wall -c -fmessage-length=0 -o main.o "..\\main.c" 
-gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "CommonSource\\Math\\lcm_gcd.o" "..\\..\\CommonSource\\Math\\lcm_gcd.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "CommonSource\\IrqAndTimer\\app_timer.o" "..\\..\\CommonSource\\IrqAndTimer\\app_timer.c" 
 gcc -o [T]FileCommandSystem.exe "CommonSource\\CharStringDebug\\CharStringDebugModule.o" "CommonSource\\IrqAndTimer\\app_timer.o" "CommonSource\\IrqAndTimer\\user_irq.o" "CommonSource\\LogFile\\user_log.o" "CommonSource\\Math\\lcm_gcd.o" "CommonSource\\MulLoopQueue\\mul_loop_queues.o" main.o user_timer.o 
+Info: Nothing to build for [T]FileCommandSystem

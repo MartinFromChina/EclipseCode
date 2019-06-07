@@ -3,6 +3,8 @@
 #include <stdarg.h>
 #include "..\MulLoopQueue\mul_loop_queues.h"
 
+
+
 APP_LOOPQUEUE_DEF(string_queue,string_queue_manager,string_queue_length,STRING_DEBUG_BUF_NUMBER);
 
 
@@ -64,6 +66,7 @@ APP_LOOPQUEUE_DEF(string_queue,string_queue_manager,string_queue_length,STRING_D
 		DEBUG_ENTER_CRITICAL_METHOD;
 
 		bufnumber = QueueFirstIn(string_queue_manager,&isOK,X_False);
+
 		if(isOK != X_True)
 		{
 			DEBUG_EXIT_CRITICAL_METHOD;
@@ -168,7 +171,7 @@ APP_LOOPQUEUE_DEF(string_queue,string_queue_manager,string_queue_length,STRING_D
 			"unknow",
 			"unsupport",
 	};
-	char *StringErrorTranslate(uint32_t error_code,char*(*error_get)(uint32_t error))
+	char *StringErrorTranslate(uint32_t error_code,char*(*error_get)(uint32_t error,char* p_cannot))
 	{
 		return &Canot_Translate[1][0];
 	}
@@ -187,7 +190,7 @@ APP_LOOPQUEUE_DEF(string_queue,string_queue_manager,string_queue_length,STRING_D
 	}
 	void StringDebugInit(void(*p_init)(void))
 	{
-
+		(*p_init)();
 	}
 #endif
 

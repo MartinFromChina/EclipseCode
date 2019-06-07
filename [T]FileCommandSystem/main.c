@@ -1,6 +1,5 @@
 #include "..\CommonSource\CharStringDebug\CharStringDebugModule.h"
 #include "..\CommonSource\IrqAndTimer\user_irq.h"
-#include "..\CommonSource\Math\lcm_gcd.h"
 
 #include "user_timer.h"
 
@@ -18,15 +17,15 @@ int main(void)
 {
 	StringDebugInit(PrintfInit);
 	UserIrqCreated();
-	AllTimerConfig();
+	AppTimerModuleStart(AllTimerConfig);
 	StartTimer();// important !!!
 
 	String_Debug_Once(ENTRY_DEBUG,p_entry,1,(30,"entry 1\r\n"));
 	while(1)
 	{
-		sleep_ms(1);// important !!!
+		sleep_ms(500000);// important !!!
 //		StringDebugProcess();
-		StringDebugFlush();
+////		StringDebugFlush();
 	}
 	 UserIrqDelete();
 	 return 0;
