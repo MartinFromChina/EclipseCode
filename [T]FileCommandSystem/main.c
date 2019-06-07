@@ -1,5 +1,6 @@
 #include "..\CommonSource\CharStringDebug\CharStringDebugModule.h"
 #include "..\CommonSource\IrqAndTimer\user_irq.h"
+#include "..\CommonSource\FileOperation\read_scripts.h"
 
 #include "user_timer.h"
 
@@ -13,9 +14,17 @@ static void PrintfInit(void)
 	setbuf(stdout,NULL);
 }
 
+static FILE * UserOpenFile(void)
+{
+	return fopen(".//FileCommandScripts//command.txt", "r");
+}
+
 int main(void)
 {
 	StringDebugInit(PrintfInit);
+
+	ReadScriptsInit(UserOpenFile);
+
 	UserIrqCreated();
 	AppTimerModuleStart(AllTimerConfig);
 	StartTimer();// important !!!
