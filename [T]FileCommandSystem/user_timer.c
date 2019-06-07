@@ -2,7 +2,7 @@
 #include "user_timer.h"
 #include "..\CommonSource\IrqAndTimer\user_irq.h"
 #include "..\CommonSource\IrqAndTimer\app_timer.h"
-//#include <stdio.h>
+#include "HexCommand.h"
 
 static uint32_t timer1_counter,timer2_counter;
 
@@ -18,9 +18,7 @@ static void Debugtimer_callback(void)
 
 static void timer1_callback(void)
 {
-	String_Debug(FOW_NOW_DEBUG,(30,"one      :%d\r\n",timer1_counter));
-//	printf("one      :%d\r\n",timer1_counter);
-	timer1_counter = timer1_counter + 1000;
+	ScriptCommandHandle(DoAsCommand);
 }
 static void timer2_callback(void)
 {

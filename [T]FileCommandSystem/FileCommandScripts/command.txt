@@ -1,6 +1,9 @@
-111
-2222
-3333
-haha
-ÄãºÃ
+:command:04223344
+:command:05223344
+:command:03223344
+:command:04778856
+:wait:20
+:command:04ÄãºÃ¹ş¹ş
+:command:041234ff
+:command:04f0000f
 :end

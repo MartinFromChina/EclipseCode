@@ -5,9 +5,21 @@
 #include "..\KeilMDK.h"
 #include "read_scripts_debug_switch.h"
 
-//#include "command.h"
-//
-//X_Boolean GetCommandFromOneTxtLine(CommandParam *p_commparam);
+typedef enum
+{
+	UnknowCommand,
+	KnowCommand,
+	Wait,
+	NoCommandAnyMore,
+}ScriptCommandType;
+
+typedef struct
+{
+	ScriptCommandType  command;
+	uint32_t wait_time;
+}ScriptCommandParam;
+
 void ReadScriptsInit(FILE* (*open_file)(void));
+void ScriptCommandHandle(X_Boolean(*doAsCommand)(uint8_t* p_command,uint8_t length));
 
 #endif

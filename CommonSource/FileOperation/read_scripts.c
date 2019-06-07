@@ -1,5 +1,10 @@
 #include "read_scripts.h"
+#include "command.h"
 #include "..\CharStringDebug\CharStringDebugModule.h"
+
+
+STRING_DEBUG_ONCE_ENTRY_DEF(p_entry,100);
+
 
 static X_Boolean isOpenFileSucessed,isCommandReadFinished;
 
@@ -15,14 +20,16 @@ static uint32_t wait_time_counter;
 static ReadState rs;
 
 #define MaxCommandReadTimes  100
-#define MaxCommandLength     60
+#define MaxScriptsCommandLength     60
 
 static FILE* pFile;// just a pointer ? why?
-static char CmdLine[MaxCommandReadTimes][MaxCommandLength];
+static char CmdLine[MaxCommandReadTimes][MaxScriptsCommandLength];
 static uint32_t commandLineNum,MaxcommandLineNum;
+static ScriptCommandParam SCP;
 
-/*
-static X_Boolean GetCommandInfoFromCmdLine(CommandParam *p_commparam,X_Boolean (*command_analysis)(char * command_string,CommandParam *p_commparam))
+
+static X_Boolean GetCommandInfoFromCmdLine(ScriptCommandParam *p_commparam
+				,X_Boolean (*command_analysis)(char * command_string,ScriptCommandParam *p_commparam))
 {
 	X_Boolean isCommandAnalysisSuccessed;
 	if((commandLineNum+1 >= MaxCommandReadTimes) || (commandLineNum+1 >= MaxcommandLineNum ) )
@@ -35,41 +42,27 @@ static X_Boolean GetCommandInfoFromCmdLine(CommandParam *p_commparam,X_Boolean (
 	commandLineNum ++ ;
 	return isCommandAnalysisSuccessed;
 }
-*/
 
-/*
-X_Boolean GetCommandFromOneTxtLine(CommandParam *p_commparam)
+static X_Boolean GetCommandFromOneTxtLine(ScriptCommandParam *p_commparam
+					,X_Boolean (*command_analysis)(char * command_string,ScriptCommandParam *p_commparam))
 {
 	X_Boolean isNewComamndCome;
-	Command   comm;
+	ScriptCommandType   comm;
 
 	isNewComamndCome = X_False;
 	comm = UnknowCommand;
 	if(isOpenFileSucessed == X_False || isCommandReadFinished == X_False) {return isNewComamndCome;}
-	switch(rs)
-	{
-		case StateIdle:
-		case StateWait:
-		case StateStop:
-			break;
-		case StateRead:
-			isNewComamndCome = GetCommandInfoFromCmdLine(p_commparam,CommandAnalysis);
-		    comm = p_commparam->command;
-			break;
-		default:
-			break;
-	}
 
 	switch(rs)
 	{
 		case StateIdle:
-			PRINTF_Debug_Once(READ_SCRIPTS_STATE_DEBUG,ONCE_ENTRY_CONVER("scrp")
-					,StateIdle,(" --StateIdle\r\n"));
+			String_Debug_Once(READ_SCRIPTS_STATE_DEBUG,p_entry,StateIdle,(30," --StateIdle\r\n"));
 			rs = StateRead;
 			break;
 		case StateRead:
-			PRINTF_Debug_Once(READ_SCRIPTS_STATE_DEBUG,ONCE_ENTRY_CONVER("scrp")
-					,StateRead,(" --StateRead\r\n"));
+			String_Debug_Once(READ_SCRIPTS_STATE_DEBUG,p_entry,StateRead,(30," --StateRead\r\n"));
+			isNewComamndCome = GetCommandInfoFromCmdLine(p_commparam,command_analysis);
+			comm = p_commparam->command;
 			if(comm == Wait )//command == Wait
 			{
 				wait_time_counter = 0;
@@ -85,8 +78,7 @@ X_Boolean GetCommandFromOneTxtLine(CommandParam *p_commparam)
 			}
 			break;
 		case StateWait:
-			PRINTF_Debug_Once(READ_SCRIPTS_STATE_DEBUG,ONCE_ENTRY_CONVER("scrp")
-					,StateWait,(" --StateWait\r\n"));
+			String_Debug_Once(READ_SCRIPTS_STATE_DEBUG,p_entry,StateWait,(30," --StateWait\r\n"));
 			wait_time_counter ++;
 			if(wait_time_counter >= p_commparam->wait_time)// wait timeout
 			{
@@ -94,12 +86,10 @@ X_Boolean GetCommandFromOneTxtLine(CommandParam *p_commparam)
 			}
 			break;
 		case StateStop:
-			PRINTF_Debug_Once(READ_SCRIPTS_STATE_DEBUG,ONCE_ENTRY_CONVER("scrp")
-								,StateStop,(" --StateStop\r\n"));
+			String_Debug_Once(READ_SCRIPTS_STATE_DEBUG,p_entry,StateStop,(30," --StateStop\r\n"));
 			break;
 		default:
-			PRINTF_Debug_Once(READ_SCRIPTS_STATE_DEBUG,ONCE_ENTRY_CONVER("scrp")
-					,StateWait+1,(" --default\r\n"));
+			String_Debug_Once(READ_SCRIPTS_STATE_DEBUG,p_entry,StateWait+1,(30," --default\r\n"));
 			rs = StateIdle;
 			break;
 	}
@@ -107,13 +97,14 @@ X_Boolean GetCommandFromOneTxtLine(CommandParam *p_commparam)
 	return isNewComamndCome;
 
 }
-*/
+
 void ReadScriptsInit(FILE* (*open_file)(void))
 {
 	isOpenFileSucessed = X_False;
 	isCommandReadFinished = X_False;
-	//pFile = fopen(".//test_target//txt_script//command_temp.txt", "r");
-//	pFile = fopen(".//test_target//txt_script//command_temp_usart.txt", "r");
+
+	CommandReceivedInit();
+
 	pFile = (*open_file)();
 	if(pFile != X_Null)
 	{
@@ -124,7 +115,7 @@ void ReadScriptsInit(FILE* (*open_file)(void))
 		commandLineNum = 0;
 		while (!feof(pFile))
 		{
-			if(fgets(&CmdLine[commandLineNum][0],MaxCommandLength,pFile) != X_Null)
+			if(fgets(&CmdLine[commandLineNum][0],MaxScriptsCommandLength,pFile) != X_Null)
 			{
 				MaxcommandLineNum = commandLineNum + 1;
 				String_Debug(SCRIPTS_COMMAND_CONTEXT_DEBUG,(30,"%s\r\n",&CmdLine[commandLineNum][0]));
@@ -151,3 +142,17 @@ void ReadScriptsInit(FILE* (*open_file)(void))
 
 }
 
+static uint8_t *p_command; // !!! can't in the function ScriptCommandHandle scope
+static uint8_t length;
+
+void ScriptCommandHandle(X_Boolean(*doAsCommand)(uint8_t* p_command,uint8_t length))
+{
+	X_Boolean isOK;
+
+	GetCommandFromOneTxtLine(&SCP,CommandAnalysis);
+	isOK = LoadCommand(&p_command,&length);
+	if(isOK == X_True)
+	{
+	    doAsCommand(p_command,length);
+	}
+}
