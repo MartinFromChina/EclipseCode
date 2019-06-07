@@ -13,6 +13,7 @@ APP_TIMER_DEF(timer2);
 static void Debugtimer_callback(void)
 {
 	StringDebugProcess();
+//	StringDebugFlush();////
 }
 
 static void timer1_callback(void)

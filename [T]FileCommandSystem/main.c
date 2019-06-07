@@ -23,9 +23,8 @@ int main(void)
 	String_Debug_Once(ENTRY_DEBUG,p_entry,1,(30,"entry 1\r\n"));
 	while(1)
 	{
-		sleep_ms(500000);// important !!!
+		sleep_ms(500);// important !!!
 //		StringDebugProcess();
-////		StringDebugFlush();
 	}
 	 UserIrqDelete();
 	 return 0;
