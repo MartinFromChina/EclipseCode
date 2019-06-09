@@ -75,7 +75,28 @@ static X_Boolean CopyHexModeCommandByCharType(char *p_command)
 	return X_False;
 }
 
-X_Boolean CommandAnalysis(char * command_string,ScriptCommandParam *p_commparam)
+static X_Boolean CopyHexModeCommandByCharTypeImmediately(char *p_command)
+{
+	X_Boolean isOK;
+	uint16_t bufnumber,i,commandsize;
+
+	bufnumber = 0;
+	commandsize = GetStringLength(p_command);
+	if(commandsize < CommandStartAddr) {return X_False;}
+	commandsize = commandsize - CommandStartAddr;
+	if(commandsize %2 != 0) {commandsize = commandsize + 1;}
+	commandsize = commandsize /2;
+	if(commandsize > MaxCommandLength){commandsize = MaxCommandLength;}
+
+	for(i=0;i<commandsize;i++)
+	{
+		CommandBuf[bufnumber][i] = CharToHex(p_command[CommandStartAddr+(i*2)],p_command[CommandStartAddr+(i*2)+1],&isOK);
+		String_Debug(SCRIPTS_COMMAND_CONTEXT_DEBUG,(10," %2x\r\n",CommandBuf[bufnumber][i]));
+	}
+	return X_True;
+}
+
+X_Boolean CommandAnalysis(char * command_string,ScriptCommandParam *p_commparam,X_Boolean isImmediately)
 {
 	X_Boolean isOk;
 	uint8_t result;
@@ -107,7 +128,14 @@ X_Boolean CommandAnalysis(char * command_string,ScriptCommandParam *p_commparam)
 	else if(strncmp(str_2,command_string,9) == 0)
 	{
 		p_commparam->command = KnowCommand;  //
-		return CopyHexModeCommandByCharType(command_string);
+		if(isImmediately == X_False)
+		{
+			return CopyHexModeCommandByCharType(command_string);
+		}
+		else
+		{
+			return CopyHexModeCommandByCharTypeImmediately(command_string);
+		}
 	}
 	else
 	{
@@ -116,11 +144,22 @@ X_Boolean CommandAnalysis(char * command_string,ScriptCommandParam *p_commparam)
 
 }
 
-X_Boolean LoadCommand(uint8_t **p_command_value,uint8_t *length)
+X_Boolean LoadCommand(uint8_t **p_command_value,uint8_t *length,X_Boolean isImmediately)
 {
 	X_Boolean isOK;
 	uint16_t bufnumber;
-	bufnumber 	= QueueFirstOut(command_queue_manager,&isOK);
+
+	if(isImmediately == X_True)
+	{
+		bufnumber = 0;
+		if(CommandBuf[bufnumber][CommandLengthAddr] > MaxCommandLength ) {*length = MaxCommandLength;}
+		else {*length = CommandBuf[bufnumber][CommandLengthAddr];}
+
+		*p_command_value = &CommandBuf[bufnumber][0];
+		return X_True;
+	}
+
+	bufnumber = QueueFirstOut(command_queue_manager,&isOK);
 	if(isOK == X_False) {bufnumber = 0;}
 
 	if(CommandBuf[bufnumber][CommandLengthAddr] > MaxCommandLength ) {*length = MaxCommandLength;}
@@ -129,4 +168,6 @@ X_Boolean LoadCommand(uint8_t **p_command_value,uint8_t *length)
 	*p_command_value = &CommandBuf[bufnumber][0];
 	return isOK;
 }
+
+
 

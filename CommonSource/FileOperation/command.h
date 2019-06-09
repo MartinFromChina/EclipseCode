@@ -11,6 +11,6 @@
 #define CommandLengthAddr  		 0
 
 void CommandReceivedInit(void);
-X_Boolean CommandAnalysis(char * command_string,ScriptCommandParam *p_commparam);
-X_Boolean LoadCommand(uint8_t **p_command_value,uint8_t *length);
+X_Boolean CommandAnalysis(char * command_string,ScriptCommandParam *p_commparam,X_Boolean isImmediately);
+X_Boolean LoadCommand(uint8_t **p_command_value,uint8_t *length,X_Boolean isImmediately);
 #endif

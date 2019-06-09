@@ -29,7 +29,8 @@ static ScriptCommandParam SCP;
 
 
 static X_Boolean GetCommandInfoFromCmdLine(ScriptCommandParam *p_commparam
-				,X_Boolean (*command_analysis)(char * command_string,ScriptCommandParam *p_commparam))
+				,X_Boolean (*command_analysis)(char * command_string,ScriptCommandParam *p_commparam,X_Boolean isImmediately)
+				,X_Boolean isImmediately)
 {
 	X_Boolean isCommandAnalysisSuccessed;
 	if((commandLineNum+1 >= MaxCommandReadTimes) || (commandLineNum+1 >= MaxcommandLineNum ) )
@@ -38,13 +39,14 @@ static X_Boolean GetCommandInfoFromCmdLine(ScriptCommandParam *p_commparam
 		return X_False;
 	}
 
-	isCommandAnalysisSuccessed = command_analysis(&CmdLine[commandLineNum][0],p_commparam);
+	isCommandAnalysisSuccessed = command_analysis(&CmdLine[commandLineNum][0],p_commparam,isImmediately);
 	commandLineNum ++ ;
 	return isCommandAnalysisSuccessed;
 }
 
 static X_Boolean GetCommandFromOneTxtLine(ScriptCommandParam *p_commparam
-					,X_Boolean (*command_analysis)(char * command_string,ScriptCommandParam *p_commparam))
+					,X_Boolean (*command_analysis)(char * command_string,ScriptCommandParam *p_commparam,X_Boolean isImmediately)
+					,X_Boolean isImmediately)
 {
 	X_Boolean isNewComamndCome;
 	ScriptCommandType   comm;
@@ -61,7 +63,7 @@ static X_Boolean GetCommandFromOneTxtLine(ScriptCommandParam *p_commparam
 			break;
 		case StateRead:
 			String_Debug_Once(READ_SCRIPTS_STATE_DEBUG,p_entry,StateRead,(30," --StateRead\r\n"));
-			isNewComamndCome = GetCommandInfoFromCmdLine(p_commparam,command_analysis);
+			isNewComamndCome = GetCommandInfoFromCmdLine(p_commparam,command_analysis,isImmediately);
 			comm = p_commparam->command;
 			if(comm == Wait )//command == Wait
 			{
@@ -125,7 +127,7 @@ void ReadScriptsInit(FILE* (*open_file)(void))
 									&& CmdLine[commandLineNum][2] == 'n'
 									&& CmdLine[commandLineNum][3] == 'd'))
 					{
-					String_Debug(SCRIPTS_COMMAND_CONTEXT_DEBUG,(30," read command finished\r\n"));
+					String_Debug(SCRIPTS_COMMAND_CONTEXT_DEBUG,(30,"MaxcommandLineNum : %d\r\n",MaxcommandLineNum));
 					isCommandReadFinished = X_True;
 					break;
 					}
@@ -149,10 +151,24 @@ void ScriptCommandHandle(X_Boolean(*doAsCommand)(uint8_t* p_command,uint8_t leng
 {
 	X_Boolean isOK;
 
-	GetCommandFromOneTxtLine(&SCP,CommandAnalysis);
-	isOK = LoadCommand(&p_command,&length);
+	GetCommandFromOneTxtLine(&SCP,CommandAnalysis,X_False);
+	isOK = LoadCommand(&p_command,&length,X_False);
 	if(isOK == X_True)
 	{
 	    doAsCommand(p_command,length);
 	}
+}
+
+static uint32_t ReadScriptAndDoAsCommand(uint32_t (*ExecuCommandAndGetNextOne)(uint8_t* p_command,uint8_t length))
+{
+	X_Boolean isOK;
+	GetCommandFromOneTxtLine(&SCP,CommandAnalysis,X_True);
+	isOK = LoadCommand(&p_command,&length,X_True);
+	return 0;
+}
+
+void ConditionalScriptCommandHandle(uint32_t (*ExecuCommandAndGetNextOne)(uint8_t* p_command,uint8_t length))
+{
+	commandLineNum = (ReadScriptAndDoAsCommand)(ExecuCommandAndGetNextOne);
+
 }
