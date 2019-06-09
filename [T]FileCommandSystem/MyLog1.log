@@ -1,0 +1,9 @@
+2019-06-10 00:31:22.053 hello I am string debug 
+2019-06-10 00:31:22.162 command  4 22 33; length:4 
+2019-06-10 00:31:23.133 command  5 22 33; length:5 
+2019-06-10 00:31:24.217 command  3 22 33; length:3 
+2019-06-10 00:31:25.289 command  3 54  2; length:3 
+2019-06-10 00:31:33.905 command  4  0  0; length:4 
+2019-06-10 00:31:34.990 command  3 55  2; length:3 
+2019-06-10 00:31:36.063 command  3 22 33; length:3 
+2019-06-10 00:31:37.133 command  3 54  2; length:3 

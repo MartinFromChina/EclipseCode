@@ -18,7 +18,8 @@ static void Debugtimer_callback(void)
 
 static void timer1_callback(void)
 {
-	ScriptCommandHandle(DoAsCommand);
+//	ScriptCommandHandle(DoAsCommand);
+	ConditionalScriptCommandHandle(ConditionalDoAsCommand);
 }
 static void timer2_callback(void)
 {
@@ -35,5 +36,5 @@ void AllTimerConfig(void)
 	AppTimerCreated(timer2,2000/RELATIVE_TIMER_DIVIDER,timer2_callback);
 	AppTimerStart(DebugTimer);
 	AppTimerStart(timer1);
-	AppTimerStart(timer2);
+//	AppTimerStart(timer2);
 }

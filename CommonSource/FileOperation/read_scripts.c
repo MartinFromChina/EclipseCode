@@ -67,15 +67,18 @@ static X_Boolean GetCommandFromOneTxtLine(ScriptCommandParam *p_commparam
 			comm = p_commparam->command;
 			if(comm == Wait )//command == Wait
 			{
+				isNewComamndCome = X_False;
 				wait_time_counter = 0;
 				rs = StateWait;
 			}
 			else if(comm == UnknowCommand)//command == nothing
 			{
+				isNewComamndCome = X_False;
 				rs = StateIdle;
 			}
 			else if(comm == NoCommandAnyMore)
 			{
+				isNewComamndCome = X_False;
 				rs = StateStop;
 			}
 			break;
@@ -159,16 +162,21 @@ void ScriptCommandHandle(X_Boolean(*doAsCommand)(uint8_t* p_command,uint8_t leng
 	}
 }
 
-static uint32_t ReadScriptAndDoAsCommand(uint32_t (*ExecuCommandAndGetNextOne)(uint8_t* p_command,uint8_t length))
+static uint32_t ReadScriptAndDoAsCommand(uint32_t (*ExecuCommandAndGetNextOne)(uint8_t* p_command,uint8_t length,uint32_t current_command_line))
 {
-	X_Boolean isOK;
-	GetCommandFromOneTxtLine(&SCP,CommandAnalysis,X_True);
+	X_Boolean isOK,isNewCommand;
+	isNewCommand = GetCommandFromOneTxtLine(&SCP,CommandAnalysis,X_True);
 	isOK = LoadCommand(&p_command,&length,X_True);
-	return 0;
+	if(isOK == X_True && isNewCommand == X_True)
+	{
+		return ExecuCommandAndGetNextOne(p_command,length,commandLineNum);
+	}
+	return commandLineNum;
+
 }
 
-void ConditionalScriptCommandHandle(uint32_t (*ExecuCommandAndGetNextOne)(uint8_t* p_command,uint8_t length))
+void ConditionalScriptCommandHandle(uint32_t (*ExecuCommandAndGetNextOne)(uint8_t* p_command,uint8_t length,uint32_t current_command_line))
 {
 	commandLineNum = (ReadScriptAndDoAsCommand)(ExecuCommandAndGetNextOne);
-
+//	String_Debug(READ_SCRIPTS_COMMAND_DEBUG,(35,"CurrentcommandLineNum : %d\r\n",commandLineNum));
 }

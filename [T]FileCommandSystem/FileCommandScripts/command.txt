@@ -1,9 +1,9 @@
 :command:04223344
 :command:05223344
 :command:03223344
-:command:04778856
-:wait:20
+:command:035402
+:wait:05
 :command:04ÄãºÃ¹þ¹þ
-:command:041234ff
+:command:035502
 :command:04f0000f
 :end
