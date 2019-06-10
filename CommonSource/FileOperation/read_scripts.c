@@ -35,6 +35,7 @@ static X_Boolean GetCommandInfoFromCmdLine(ScriptCommandParam *p_commparam
 	X_Boolean isCommandAnalysisSuccessed;
 	if((commandLineNum+1 >= MaxCommandReadTimes) || (commandLineNum+1 >= MaxcommandLineNum ) )
 	{
+		String_Debug(READ_SCRIPTS_COMMAND_DEBUG,(40,"NoCommandAnyMore at line :%d \r\n",commandLineNum));
 		p_commparam->command = NoCommandAnyMore;
 		return X_False;
 	}

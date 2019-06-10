@@ -1,7 +1,7 @@
 :command:04223344
 :command:05223344
 :command:03223344
-:command:035402
+:command:0354ff
 :wait:05
 :command:04ÄãºÃ¹þ¹þ
 :command:035502
