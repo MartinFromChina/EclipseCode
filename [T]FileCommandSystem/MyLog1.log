@@ -1,0 +1,12 @@
+2019-06-11 23:52:31.258 hello I am string debug 
+2019-06-11 23:52:31.367 1 :initial is called
+2019-06-11 23:52:32.327 2 : ForNow is called
+2019-06-11 23:52:32.434 2 : ForNow is called
+2019-06-11 23:52:32.544 2 : ForNow is called
+2019-06-11 23:52:33.374 3 : Loop is called
+2019-06-11 23:52:34.428 3 : Loop is called
+2019-06-11 23:52:35.485 3 : Loop is called
+2019-06-11 23:52:36.535 3 : Loop is called
+2019-06-11 23:52:37.615 3 : Loop is called
+2019-06-11 23:52:38.671 4 : Function4 is called
+2019-06-11 23:52:40.791 NoCommandAnyMore at line :5 

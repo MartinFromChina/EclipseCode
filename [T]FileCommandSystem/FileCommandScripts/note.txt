@@ -41,3 +41,11 @@
 :command:035502
 :command:04f0000f
 :end
+
+АэИзЈє
+:command:030101
+:command:0402020501
+:command:030303
+:command:0504040205
+:command:5566778899
+:end
