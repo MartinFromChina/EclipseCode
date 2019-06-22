@@ -24,6 +24,6 @@
 
 #define FOW_NOW_DEBUG			1
 #define COUNTR_DEBUG            0
-#define ENTRY_DEBUG             0
+#define ENTRY_DEBUG             1
 
 #endif

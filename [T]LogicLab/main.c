@@ -16,7 +16,7 @@ static void PrintfInit(void)
 
 static FILE * UserOpenFile(void)
 {
-	return fopen(".//ScriptCommandModule//command.txt", "r");
+	return fopen(".//ScriptsCommandModule//command.txt", "r");
 }
 
 int main(void)
@@ -29,7 +29,7 @@ int main(void)
 	AppTimerModuleStart(AllTimerConfig);
 	StartTimer();// important !!!
 
-	String_Debug_Once(ENTRY_DEBUG,p_entry,1,(30,"entry 1\r\n"));
+//	String_Debug_Once(ENTRY_DEBUG,p_entry,1,(30,"entry 1\r\n"));
 	while(1)
 	{
 		sleep_ms(500);// important !!!

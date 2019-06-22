@@ -97,7 +97,7 @@ APP_LOOPQUEUE_DEF(string_queue,string_queue_manager,string_queue_length,STRING_D
 		uint8_t bufnumber;
 		char *p_buf;
 
-		if(DoesQueueEmpty() == X_True){return;}
+		if(DoesQueueEmpty(string_queue_manager) == X_True){return;}
 
 		#if(USE_OPERATION_SYSTEM == 1)
 		GET_DEBUG_SEMPHORE_METHOD;
@@ -123,7 +123,7 @@ APP_LOOPQUEUE_DEF(string_queue,string_queue_manager,string_queue_length,STRING_D
 		uint8_t bufnumber;
 		char *p_buf;
 
-		if(DoesQueueEmpty() == X_True)
+		if(DoesQueueEmpty(string_queue_manager) == X_True)
 		{
 //			printf("empty\r\n");
 			return;

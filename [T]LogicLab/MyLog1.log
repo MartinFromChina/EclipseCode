@@ -1,19 +1,57 @@
-2019-06-22 15:56:19.520 hello I am string debug 
-2019-06-22 15:56:19.627 1 :initial is called
-2019-06-22 15:56:20.582 2 : ForNow is called : 5
-2019-06-22 15:56:21.635 3 : Loop is called : 0
-2019-06-22 15:56:22.699 3 : Loop is called : 1
-2019-06-22 15:56:23.770 3 : Loop is called : 2
-2019-06-22 15:56:24.833 3 : Loop is called : 3
-2019-06-22 15:56:25.883 3 : Loop is called : 4
-2019-06-22 15:56:26.965 4 : Function4 is called
-2019-06-22 15:56:29.094 NoCommandAnyMore at line :5 
-2019-06-22 15:57:06.062 hello I am string debug 
-2019-06-22 15:57:06.169 1 :initial is called
-2019-06-22 15:57:07.110 2 : ForNow is called : 4
-2019-06-22 15:57:08.158 3 : Loop is called : 0
-2019-06-22 15:57:09.212 3 : Loop is called : 1
-2019-06-22 15:57:10.261 3 : Loop is called : 2
-2019-06-22 15:57:11.324 3 : Loop is called : 3
-2019-06-22 15:57:12.397 4 : Function4 is called
-2019-06-22 15:57:14.484 NoCommandAnyMore at line :5 
+2019-06-22 16:18:32.400 hello I am string debug 
+2019-06-22 16:18:32.502 entry 1
+2019-06-22 16:18:32.604 two come :0
+2019-06-22 16:18:34.517 two come :2000
+2019-06-22 16:18:36.531 two come :4000
+2019-06-22 16:18:38.544 two come :6000
+2019-06-22 16:19:07.923 hello I am string debug 
+2019-06-22 16:19:08.024 two come :0
+2019-06-22 16:19:09.937 two come :2000
+2019-06-22 16:20:25.798 hello I am string debug 
+2019-06-22 16:20:25.900 entry 1
+2019-06-22 16:22:43.042 hello I am string debug 
+2019-06-22 16:22:43.143 entry 1
+2019-06-22 16:22:43.245 CurrentcommandLineNum : 0
+2019-06-22 16:22:44.153 CurrentcommandLineNum : 0
+2019-06-22 16:22:45.162 CurrentcommandLineNum : 0
+2019-06-22 16:22:46.171 CurrentcommandLineNum : 0
+2019-06-22 16:22:47.179 CurrentcommandLineNum : 0
+2019-06-22 16:22:48.189 CurrentcommandLineNum : 0
+2019-06-22 16:22:49.197 CurrentcommandLineNum : 0
+2019-06-22 16:22:50.206 CurrentcommandLineNum : 0
+2019-06-22 16:22:51.214 CurrentcommandLineNum : 0
+2019-06-22 16:22:52.222 CurrentcommandLineNum : 0
+2019-06-22 16:22:53.232 CurrentcommandLineNum : 0
+2019-06-22 16:22:54.240 CurrentcommandLineNum : 0
+2019-06-22 16:22:55.249 CurrentcommandLineNum : 0
+2019-06-22 16:22:56.258 CurrentcommandLineNum : 0
+2019-06-22 16:22:57.267 CurrentcommandLineNum : 0
+2019-06-22 16:22:58.276 CurrentcommandLineNum : 0
+2019-06-22 16:22:59.284 CurrentcommandLineNum : 0
+2019-06-22 16:23:00.293 CurrentcommandLineNum : 0
+2019-06-22 16:23:01.302 CurrentcommandLineNum : 0
+2019-06-22 16:23:02.310 CurrentcommandLineNum : 0
+2019-06-22 16:23:03.319 CurrentcommandLineNum : 0
+2019-06-22 16:23:53.793 hello I am string debug 
+2019-06-22 16:23:53.896 entry 1
+2019-06-22 16:23:54.904 1 :initial is called
+2019-06-22 16:23:55.912 2 : ForNow is called : 4
+2019-06-22 16:23:56.921 3 : Loop is called : 0
+2019-06-22 16:23:57.930 3 : Loop is called : 1
+2019-06-22 16:23:58.938 3 : Loop is called : 2
+2019-06-22 16:23:59.947 3 : Loop is called : 3
+2019-06-22 16:24:00.956 4 : Function4 is called
+2019-06-22 16:24:02.971 NoCommandAnyMore at line :5 
+2019-06-22 16:24:45.767 hello I am string debug 
+2019-06-22 16:24:45.869 entry 1
+2019-06-22 16:38:48.574 hello I am string debug 
+2019-06-22 16:56:51.858 hello I am string debug 
+2019-06-22 16:58:16.413 hello I am string debug 
+2019-06-22 16:58:17.521 1 :initial is called
+2019-06-22 16:58:18.527 2 : ForNow is called : 4
+2019-06-22 16:58:19.533 3 : Loop is called : 0
+2019-06-22 16:58:20.540 3 : Loop is called : 1
+2019-06-22 16:58:21.547 3 : Loop is called : 2
+2019-06-22 16:58:22.552 3 : Loop is called : 3
+2019-06-22 16:58:23.560 4 : Function4 is called
+2019-06-22 16:58:25.572 NoCommandAnyMore at line :5 

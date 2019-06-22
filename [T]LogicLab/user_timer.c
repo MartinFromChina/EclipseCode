@@ -2,7 +2,7 @@
 #include "user_timer.h"
 #include "..\CommonSource\IrqAndTimer\user_irq.h"
 #include "..\CommonSource\IrqAndTimer\app_timer.h"
-#include "ScriptCommandModule\HexCommand.h"
+#include "ScriptsCommandModule\HexCommand.h"
 
 static uint32_t timer1_counter,timer2_counter;
 

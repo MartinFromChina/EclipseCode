@@ -27,6 +27,7 @@ typedef enum
 
 typedef struct
 {
+	X_Boolean   isEmpty;
 	list_state  l_state;
 	uint16_t    FilledBufNum;
 	uint16_t    MaxBufNumber;
@@ -49,6 +50,6 @@ typedef struct
 X_Void queueInitialize( data_list * p_list,List_Manager *p_manager,uint8_t length);
 uint16_t QueueFirstIn( List_Manager *p_manager,X_Boolean *isOK,X_Boolean is_OccupyPermit);
 uint16_t QueueFirstOut( List_Manager *p_manager,X_Boolean *isOK);
-X_Boolean DoesQueueEmpty(X_Void);
+X_Boolean DoesQueueEmpty(List_Manager *p_manager);
 
 #endif
