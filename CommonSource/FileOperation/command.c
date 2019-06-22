@@ -15,10 +15,6 @@ static const uint8_t CharToHexTable[MaxCharToHexTableSize]={
 
 static uint8_t CommandBuf[MaxCommandBufNumber][MaxCommandLength];
 
-void CommandReceivedInit(void)
-{
-	queueInitialize(command_queue,command_queue_manager,command_queue_length);
-}
 static uint8_t GetStringLength(char *p_strings)
 {
 	uint8_t i;
@@ -142,6 +138,11 @@ X_Boolean CommandAnalysis(char * command_string,ScriptCommandParam *p_commparam,
 		return X_False;
 	}
 
+}
+
+void CommandReceivedInit(void)
+{
+	queueInitialize(command_queue,command_queue_manager,command_queue_length);
 }
 
 X_Boolean LoadCommand(uint8_t **p_command_value,uint8_t *length,X_Boolean isImmediately)

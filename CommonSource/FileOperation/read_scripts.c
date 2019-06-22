@@ -104,6 +104,21 @@ static X_Boolean GetCommandFromOneTxtLine(ScriptCommandParam *p_commparam
 
 }
 
+static uint8_t *p_command; // !!! can't in the function ScriptCommandHandle scope
+static uint8_t length;
+
+static uint32_t ReadScriptAndDoAsCommand(uint32_t (*ExecuCommandAndGetNextOne)(uint8_t* p_command,uint8_t length,uint32_t current_command_line))
+{
+	X_Boolean isOK,isNewCommand;
+	isNewCommand = GetCommandFromOneTxtLine(&SCP,CommandAnalysis,X_True);
+	isOK = LoadCommand(&p_command,&length,X_True);
+	if(isOK == X_True && isNewCommand == X_True)
+	{
+		return ExecuCommandAndGetNextOne(p_command,length,commandLineNum);
+	}
+	return commandLineNum;
+
+}
 void ReadScriptsInit(FILE* (*open_file)(void))
 {
 	isOpenFileSucessed = X_False;
@@ -148,9 +163,6 @@ void ReadScriptsInit(FILE* (*open_file)(void))
 
 }
 
-static uint8_t *p_command; // !!! can't in the function ScriptCommandHandle scope
-static uint8_t length;
-
 void ScriptCommandHandle(X_Boolean(*doAsCommand)(uint8_t* p_command,uint8_t length))
 {
 	X_Boolean isOK;
@@ -163,21 +175,8 @@ void ScriptCommandHandle(X_Boolean(*doAsCommand)(uint8_t* p_command,uint8_t leng
 	}
 }
 
-static uint32_t ReadScriptAndDoAsCommand(uint32_t (*ExecuCommandAndGetNextOne)(uint8_t* p_command,uint8_t length,uint32_t current_command_line))
-{
-	X_Boolean isOK,isNewCommand;
-	isNewCommand = GetCommandFromOneTxtLine(&SCP,CommandAnalysis,X_True);
-	isOK = LoadCommand(&p_command,&length,X_True);
-	if(isOK == X_True && isNewCommand == X_True)
-	{
-		return ExecuCommandAndGetNextOne(p_command,length,commandLineNum);
-	}
-	return commandLineNum;
-
-}
-
 void ConditionalScriptCommandHandle(uint32_t (*ExecuCommandAndGetNextOne)(uint8_t* p_command,uint8_t length,uint32_t current_command_line))
 {
-	commandLineNum = (ReadScriptAndDoAsCommand)(ExecuCommandAndGetNextOne);
+	commandLineNum = ReadScriptAndDoAsCommand(ExecuCommandAndGetNextOne);
 //	String_Debug(READ_SCRIPTS_COMMAND_DEBUG,(35,"CurrentcommandLineNum : %d\r\n",commandLineNum));
 }
