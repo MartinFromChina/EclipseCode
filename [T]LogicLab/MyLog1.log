@@ -1,0 +1,19 @@
+2019-06-22 15:56:19.520 hello I am string debug 
+2019-06-22 15:56:19.627 1 :initial is called
+2019-06-22 15:56:20.582 2 : ForNow is called : 5
+2019-06-22 15:56:21.635 3 : Loop is called : 0
+2019-06-22 15:56:22.699 3 : Loop is called : 1
+2019-06-22 15:56:23.770 3 : Loop is called : 2
+2019-06-22 15:56:24.833 3 : Loop is called : 3
+2019-06-22 15:56:25.883 3 : Loop is called : 4
+2019-06-22 15:56:26.965 4 : Function4 is called
+2019-06-22 15:56:29.094 NoCommandAnyMore at line :5 
+2019-06-22 15:57:06.062 hello I am string debug 
+2019-06-22 15:57:06.169 1 :initial is called
+2019-06-22 15:57:07.110 2 : ForNow is called : 4
+2019-06-22 15:57:08.158 3 : Loop is called : 0
+2019-06-22 15:57:09.212 3 : Loop is called : 1
+2019-06-22 15:57:10.261 3 : Loop is called : 2
+2019-06-22 15:57:11.324 3 : Loop is called : 3
+2019-06-22 15:57:12.397 4 : Function4 is called
+2019-06-22 15:57:14.484 NoCommandAnyMore at line :5 
