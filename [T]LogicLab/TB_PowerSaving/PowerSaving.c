@@ -3,6 +3,10 @@
 #include "..\..\CommonSource\Math\random_number.h"
 #include "..\..\CommonSource\CharStringDebug\CharStringDebugModule.h"
 
+STRING_DEBUG_ONCE_ENTRY_DEF(p_move_entry,0);
+STRING_DEBUG_ONCE_ENTRY_DEF(p_ble_entry,0);
+STRING_DEBUG_ONCE_ENTRY_DEF(p_magnetic_entry,0);
+
 #define SCRIPT_FUNCTION_DEBUG		1
 
 static X_Boolean ScriptsFunctionInitial(X_Void * p_param)
@@ -42,17 +46,17 @@ static X_Boolean LoopSpecificTimes(X_Void * p_param)
 	ScriptFunctionParam * p_SFP;
 	p_SFP = (ScriptFunctionParam *)p_param;
 
-	String_Debug(SCRIPT_FUNCTION_DEBUG,(30,"3 : Loop is called : %d\r\n",p_SFP ->buf_8[0]));
+//	String_Debug(SCRIPT_FUNCTION_DEBUG,(30,"3 : Loop is called : %d\r\n",p_SFP ->buf_8[0]));
 
 	p_SFP ->isParamValid = X_True;
-	if(p_SFP ->buf_8[0]+1 >= p_SFP ->buf_8[1])
+	if(p_SFP ->buf_8[5]+1 >= p_SFP ->buf_8[6])
 	{
-		p_SFP ->buf_8[0] = 0;
+		p_SFP ->buf_8[5] = 0;
 		return X_True;
 	}
 	else
 	{
-		p_SFP ->buf_8[0] ++;
+		p_SFP ->buf_8[5] ++;
 		return X_False;
 	}
 }
@@ -60,8 +64,63 @@ static X_Boolean StateGenerator(X_Void * p_param)
 {
 	uint32_t random_num;
 
-	random_num = GetRandomNumber(29,99);
+	ScriptFunctionParam * p_SFP;
+	p_SFP = (ScriptFunctionParam *)p_param;
+
+	p_SFP->buf_8[5] = 0;
+	p_SFP->buf_8[6] = p_SFP ->param_from_script;
+
+	random_num = GetRandomNumber(1,20);
 	String_Debug(SCRIPT_FUNCTION_DEBUG,(30,"4 : random_num %d\r\n",random_num));
+
+	if(random_num == 20)
+	{
+		String_Debug(SCRIPT_FUNCTION_DEBUG,(30,"user shut down the pen\r\n"));
+	}
+	if(random_num % 5 == 0)
+	{
+		String_Debug_Once(SCRIPT_FUNCTION_DEBUG,p_move_entry,1,(30,"pen silence\r\n"));
+	}
+	else if(random_num % 4 == 0)
+	{
+		String_Debug_Once(SCRIPT_FUNCTION_DEBUG,p_move_entry,2,(30,"pen move\r\n"));
+	}
+
+	if(random_num % 2 == 0)
+	{
+		String_Debug_Once(SCRIPT_FUNCTION_DEBUG,p_ble_entry,1,(30,"ble connected \r\n"));
+	}
+	else
+	{
+		String_Debug_Once(SCRIPT_FUNCTION_DEBUG,p_ble_entry,2,(30,"ble dis connected \r\n"));
+	}
+
+
+	if(p_SFP ->buf_8[0] >= p_SFP ->buf_8[1] )
+	{
+		p_SFP ->buf_8[0] = 0;
+		String_Debug(SCRIPT_FUNCTION_DEBUG,(30,"pen charge state change\r\n"));
+	}
+	else
+	{
+		p_SFP ->buf_8[0] = p_SFP ->buf_8[0] + random_num;
+	}
+
+	p_SFP ->buf_8[3] = p_SFP ->buf_8[3] + random_num;
+	if(p_SFP ->buf_8[3] >= 60 && p_SFP ->buf_8[3] <= 100 )
+	{
+		String_Debug_Once(SCRIPT_FUNCTION_DEBUG,p_magnetic_entry,1,(30,"pen near magnetic\r\n"));
+	}
+	else if (p_SFP ->buf_8[3] < 60 )
+	{
+		String_Debug_Once(SCRIPT_FUNCTION_DEBUG,p_magnetic_entry,2,(30,"pen far away from magnetic\r\n"));
+	}
+	else
+	{
+		p_SFP ->buf_8[3] = 0;
+	}
+
+
 	return X_False;
 }
 
