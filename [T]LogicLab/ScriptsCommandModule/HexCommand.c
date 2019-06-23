@@ -1,5 +1,6 @@
 #include "HexCommand.h"
-#include "CalledByScripts.h"
+//#include "CalledByScripts.h"
+#include "..\TB_PowerSaving\PowerSaving.h"
 #include "..\..\CommonSource\CharStringDebug\CharStringDebugModule.h"
 
 #define ConditionalCommandLength  7
