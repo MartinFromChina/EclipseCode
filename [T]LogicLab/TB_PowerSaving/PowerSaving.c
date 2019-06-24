@@ -1,4 +1,5 @@
 #include "PowerSaving.h"
+#include "PenState.h"
 #include "..\ScriptsCommandModule\HexCommand.h"
 #include "..\..\CommonSource\Math\random_number.h"
 #include "..\..\CommonSource\CharStringDebug\CharStringDebugModule.h"
@@ -6,6 +7,7 @@
 STRING_DEBUG_ONCE_ENTRY_DEF(p_move_entry,0);
 STRING_DEBUG_ONCE_ENTRY_DEF(p_ble_entry,0);
 STRING_DEBUG_ONCE_ENTRY_DEF(p_magnetic_entry,0);
+STRING_DEBUG_ONCE_ENTRY_DEF(p_power_entry,0);
 
 #define SCRIPT_FUNCTION_DEBUG		1
 
@@ -16,9 +18,12 @@ STRING_DEBUG_ONCE_ENTRY_DEF(p_magnetic_entry,0);
 #define MAGNETIC_FUNCTION_PARAM_ADDRESS   	4
 #define LOOP_COUNTER_THRESHOLD_ADDRESS      5
 #define BLE_FUNCTION_PARAM_ADDRESS       	6
+#define POWER_FUNCTION_PARAM_ADDRESS   		7
 
 #define SECOND_CONDITION_JUMP_ADDRESS  ScriptFunctionParamBufLength
 
+static X_Boolean BatteryChargeStateToggle(X_Void);
+static X_Void BatteryChargeInit(X_Void);
 
 static X_Boolean ScriptsFunctionInitial(X_Void * p_param)
 {
@@ -50,6 +55,8 @@ static X_Boolean ForNow(X_Void * p_param)
 	p_SFP ->buf_8[PARAM_FROM_SCRIPT_ADDRESS] = p_SFP->param_from_script;
 
 	String_Debug(SCRIPT_FUNCTION_DEBUG,(30,"2 : ForNow is called \r\n"));
+
+	BatteryChargeInit();
 	return X_True;
 }
 static X_Boolean LoopSpecificTimes(X_Void * p_param)
@@ -96,7 +103,7 @@ static X_Boolean UserShutDownGenerator(X_Void * p_param)
 
 	// get app state
 
-	if(random_num == 20 || random_num == 1)
+	if(random_num == 20 )
 	{
 		String_Debug(SCRIPT_FUNCTION_DEBUG,(30,"user shut down the pen\r\n"));
 		p_SFP ->buf_8[SECOND_CONDITION_JUMP_ADDRESS] = 1;
@@ -165,6 +172,7 @@ static X_Boolean PenMoveStateGenerator(X_Void * p_param)
 static X_Boolean PenChargeStateGenerator(X_Void * p_param)
 {
 	uint8_t random_num;
+	X_Boolean isOK;
 	ScriptFunctionParam * p_SFP;
 
 	p_SFP = (ScriptFunctionParam *)p_param;
@@ -175,7 +183,8 @@ static X_Boolean PenChargeStateGenerator(X_Void * p_param)
 	if(p_SFP ->buf_8[CHARGE_FUNCTION_PARAM_ADDRESS] >= p_SFP ->param_from_script )
 	{
 		p_SFP ->buf_8[CHARGE_FUNCTION_PARAM_ADDRESS] = 0;
-		String_Debug(SCRIPT_FUNCTION_DEBUG,(30,"pen charge state change\r\n"));
+		isOK = BatteryChargeStateToggle();
+		String_Debug(SCRIPT_FUNCTION_DEBUG,(40,"pen charge state change %d\r\n",isOK));
 	}
 	else
 	{
@@ -216,6 +225,32 @@ static X_Boolean PenDistanceFromMagneticGenerator(X_Void * p_param)
 		return X_True;
 	}
 }
+static X_Boolean PenPowerStateGenerator(X_Void * p_param)
+{
+	uint8_t random_num;
+	ScriptFunctionParam * p_SFP;
+
+	p_SFP = (ScriptFunctionParam *)p_param;
+	random_num = p_SFP ->buf_8[CURRENT_RANDOM_NUM_ADDRESS];
+
+	// get app state
+
+	p_SFP ->buf_8[POWER_FUNCTION_PARAM_ADDRESS] = p_SFP ->buf_8[POWER_FUNCTION_PARAM_ADDRESS] + random_num;
+	if(p_SFP ->buf_8[POWER_FUNCTION_PARAM_ADDRESS] >= 100 && p_SFP ->buf_8[POWER_FUNCTION_PARAM_ADDRESS] <= 120 )
+	{
+		String_Debug_Once(SCRIPT_FUNCTION_DEBUG,p_power_entry,1,(30,"pen power extrlow\r\n"));
+	}
+	else if (p_SFP ->buf_8[POWER_FUNCTION_PARAM_ADDRESS] < 100 )
+	{
+		String_Debug_Once(SCRIPT_FUNCTION_DEBUG,p_power_entry,2,(30,"pen power normal\r\n"));
+	}
+	else
+	{
+		p_SFP ->buf_8[POWER_FUNCTION_PARAM_ADDRESS] = 0;
+	}
+	return X_True;
+}
+
 static X_Boolean PowerOff(X_Void * p_param)
 {
 
@@ -231,6 +266,7 @@ static X_Boolean StartAgain(X_Void * p_param)
 {
 	String_Debug(SCRIPT_FUNCTION_DEBUG,(30,"start again\r\n"));
 	// sent app state
+	AllPeripheralInit();
 	return X_True;
 }
 
@@ -251,7 +287,7 @@ const ScriptsFunctionArray[] = {
 	  {9,PenDistanceFromMagneticGenerator},
 	  {0x0a,PowerOff},
 	  {0x0b,StartAgain},
-
+	  {0x0c,PenPowerStateGenerator},
 };
 
 X_Boolean CallFunction(uint8_t func_num,X_Void * p_param)
@@ -280,9 +316,10 @@ X_Boolean CallFunction(uint8_t func_num,X_Void * p_param)
  *	6	:PenMoveStateGenerator 00
  *	7	:BleStateGenerator 00
  *	8	:PenChargeStateGenerator 00 xx xx 64
- *	9	:PenDistanceFromMagneticGenerator 01 04 0a
- *	a	:PowerOff 00 xx xx 0a
- *	b	:LoopSpecificTimes 01 03 0b
+ *	9	:PenPowerStateGenerator 00
+ *	a	:PenDistanceFromMagneticGenerator 01 04 0b
+ *	b	:PowerOff 00 xx xx 0a
+ *	c	:LoopSpecificTimes 01 03 0c
  *
 1:command:07550100010100
 2:command:07550200010100
@@ -292,8 +329,27 @@ X_Boolean CallFunction(uint8_t func_num,X_Void * p_param)
 6:command:07550700010100
 7:command:07550600010100
 8:command:07550800010164
-9:command:07550901040a00
-a:command:07550a0001010a
-b:command:07550301030b00
-c:end
+9:command:07550c00010100
+a:command:07550901040b00
+b:command:07550a0001010a
+c:command:07550301030c00
+d:end
  */
+static X_Boolean isBatteryCharge;
+
+static X_Void BatteryChargeInit(X_Void)
+{
+	isBatteryCharge = X_False;
+}
+
+static X_Boolean BatteryChargeStateToggle(X_Void)
+{
+	if(isBatteryCharge == X_True) {isBatteryCharge = X_False;}
+	else {isBatteryCharge = X_True;}
+	return isBatteryCharge;
+}
+
+X_Boolean BatteryIsChargerConnected(X_Void)
+{
+	return isBatteryCharge;
+}

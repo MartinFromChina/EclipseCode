@@ -3,6 +3,7 @@
 #include "..\CommonSource\IrqAndTimer\user_irq.h"
 #include "..\CommonSource\IrqAndTimer\app_timer.h"
 #include "ScriptsCommandModule\HexCommand.h"
+#include "TB_PowerSaving\PenState.h"
 
 static uint32_t timer1_counter,timer2_counter;
 
@@ -18,6 +19,7 @@ static void Debugtimer_callback(void)
 static void timer1_callback(void)
 {
 	ConditionalScriptCommandHandle(ConditionalDoAsCommand);
+	onTick();
 }
 static void timer2_callback(void)
 {
