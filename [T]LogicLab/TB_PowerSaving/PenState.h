@@ -12,18 +12,23 @@ typedef enum
 	PenStatePenNearMagnetic,
 	PenStatePenPowerLow,
 	PenStatePenChargeWhenShutDown,
+	PenStateWakeUpButtonPush,
 }FactorAboutPenState;
 
 typedef enum
 {
-	ChargeWhenShutDown,
-	DisConnected,
-	Connected,
-	GoingToShutDown,
-}PenState;
+	PBS_JustWakeUp,
+	PBS_GetGlobalState,
+	PBS_ChargeWhenShutDown,
+	PBS_DisConnected,
+	PBS_Connected,
+	PBS_GoingToShutDown,
+}PenBasicState;
 
 X_Void AllPeripheralInit(X_Void);
 void onTick(void);
 void PenStateFactorCollector(FactorAboutPenState factor_mul,uint32_t factor);
+PenBasicState PenBasicStateGetUnderCertainState(PenBasicState current_state);
+X_Boolean SetCurrentBasicState(PenBasicState state);
 
 #endif

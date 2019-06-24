@@ -56,7 +56,17 @@ void SetAdcRefreshEnable(X_Boolean isenable)
 }
 void AdcGetSum(void){}
 void BatteryStrengthMonitor(void){}
-void BatteryLevelStateCollect(void){}
+void BatteryLevelStateCollect(void)
+{
+	if(PowerStateGet() == X_True)
+	{
+		PenStateFactorCollector(PenStatePenPowerLow,1);
+	}
+	else
+	{
+		PenStateFactorCollector(PenStatePenPowerLow,0);
+	}
+}
 void AllEmkCharacteristicAction(void){}
 void CharacteristicBatteryHandle(void){}
 void DoesChargeIn(void)

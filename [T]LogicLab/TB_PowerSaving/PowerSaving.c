@@ -38,7 +38,7 @@ static X_Void UserShutDownStateSet(X_Boolean isOK);
 static X_Boolean ScriptsFunctionInitial(X_Void * p_param)
 {
 	uint8_t i;
-	String_Debug(SCRIPT_FUNCTION_DEBUG,(30,"1 :initial is called\r\n"));
+//	String_Debug(SCRIPT_FUNCTION_DEBUG,(30,"1 :initial is called\r\n"));
 
 	ScriptFunctionParam * p_SFP;
 	p_SFP = (ScriptFunctionParam *)p_param;
@@ -64,7 +64,7 @@ static X_Boolean ForNow(X_Void * p_param)
 	p_SFP ->isParamValid = X_True;
 	p_SFP ->buf_8[PARAM_FROM_SCRIPT_ADDRESS] = p_SFP->param_from_script;
 
-	String_Debug(SCRIPT_FUNCTION_DEBUG,(30,"2 : ForNow is called \r\n"));
+//	String_Debug(SCRIPT_FUNCTION_DEBUG,(30,"2 : ForNow is called \r\n"));
 
 	BatteryChargeInit();
 	PenMoveStateInit();
