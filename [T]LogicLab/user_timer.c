@@ -30,7 +30,7 @@ void AllTimerConfig(void)
 	timer1_counter = 0;
 	timer2_counter = 0;
 	AppTimerCreated(DebugTimer,1,Debugtimer_callback);
-	AppTimerCreated(timer1,1000/RELATIVE_TIMER_DIVIDER,timer1_callback);
+	AppTimerCreated(timer1,600/RELATIVE_TIMER_DIVIDER,timer1_callback);
 	AppTimerCreated(timer2,2000/RELATIVE_TIMER_DIVIDER,timer2_callback);
 	AppTimerStart(DebugTimer);
 	AppTimerStart(timer1);

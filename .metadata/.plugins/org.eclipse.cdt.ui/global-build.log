@@ -1,5 +1,4 @@
-16:58:10 **** Incremental Build of configuration Debug for project [T]LogicLab ****
+11:47:05 **** Incremental Build of configuration Debug for project [T]LogicLab ****
 Info: Internal Builder is used for build
-gcc "-ID:\\AllApplication\\GitAll\\EclipseCode\\[T]LogicLab\\ScriptsCommandModule" -O0 -g3 -Wall -c -fmessage-length=0 -o user_timer.o "..\\user_timer.c" 
-gcc -o [T]LogicLab.exe "CommonSource\\CharStringDebug\\CharStringDebugModule.o" "CommonSource\\FileOperation\\command.o" "CommonSource\\FileOperation\\read_scripts.o" "CommonSource\\IrqAndTimer\\app_timer.o" "CommonSource\\IrqAndTimer\\user_irq.o" "CommonSource\\LogFile\\user_log.o" "CommonSource\\Math\\lcm_gcd.o" "CommonSource\\MulLoopQueue\\mul_loop_queues.o" "ScriptsCommandModule\\CalledByScripts.o" "ScriptsCommandModule\\HexCommand.o" main.o user_timer.o 
-Info: Nothing to build for [T]LogicLab
+gcc "-ID:\\AllApplication\\GitAll\\EclipseCode\\[T]LogicLab\\ScriptsCommandModule" -O0 -g3 -Wall -c -fmessage-length=0 -o "TB_PowerSaving\\PowerSaving.o" "..\\TB_PowerSaving\\PowerSaving.c" 
+gcc -o [T]LogicLab.exe "CommonSource\\CharStringDebug\\CharStringDebugModule.o" "CommonSource\\FileOperation\\command.o" "CommonSource\\FileOperation\\read_scripts.o" "CommonSource\\IrqAndTimer\\app_timer.o" "CommonSource\\IrqAndTimer\\user_irq.o" "CommonSource\\LogFile\\user_log.o" "CommonSource\\Math\\lcm_gcd.o" "CommonSource\\Math\\random_number.o" "CommonSource\\MulLoopQueue\\mul_loop_queues.o" "ScriptsCommandModule\\HexCommand.o" "TB_PowerSaving\\PowerSaving.o" main.o user_timer.o 
