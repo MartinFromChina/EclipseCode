@@ -24,6 +24,16 @@ STRING_DEBUG_ONCE_ENTRY_DEF(p_power_entry,0);
 
 static X_Boolean BatteryChargeStateToggle(X_Void);
 static X_Void BatteryChargeInit(X_Void);
+static X_Void PenMoveStateInit(X_Void);
+static X_Void PenMoveStateSet(X_Boolean isMove);
+static X_Void BleStateInit(X_Void);
+static X_Void BleStateSet(X_Boolean isOK);
+static X_Void MagneticStateInit(X_Void);
+static X_Void MagneticStateSet(X_Boolean isOK);
+static X_Void PowerStateInit(X_Void);
+static X_Void PowerStateSet(X_Boolean isOK);
+static X_Void UserShutDownStateInit(X_Void);
+static X_Void UserShutDownStateSet(X_Boolean isOK);
 
 static X_Boolean ScriptsFunctionInitial(X_Void * p_param)
 {
@@ -57,6 +67,11 @@ static X_Boolean ForNow(X_Void * p_param)
 	String_Debug(SCRIPT_FUNCTION_DEBUG,(30,"2 : ForNow is called \r\n"));
 
 	BatteryChargeInit();
+	PenMoveStateInit();
+	BleStateInit();
+	MagneticStateInit();
+	PowerStateInit();
+	UserShutDownStateInit();
 	return X_True;
 }
 static X_Boolean LoopSpecificTimes(X_Void * p_param)
@@ -107,10 +122,12 @@ static X_Boolean UserShutDownGenerator(X_Void * p_param)
 	{
 		String_Debug(SCRIPT_FUNCTION_DEBUG,(30,"user shut down the pen\r\n"));
 		p_SFP ->buf_8[SECOND_CONDITION_JUMP_ADDRESS] = 1;
+		UserShutDownStateSet(X_True);
 	}
 	else
 	{
 		p_SFP ->buf_8[SECOND_CONDITION_JUMP_ADDRESS] = 0;
+		UserShutDownStateSet(X_False);
 	}
 	return X_True;
 }
@@ -134,11 +151,13 @@ static X_Boolean BleStateGenerator(X_Void * p_param)
 		if(p_SFP ->buf_8[BLE_FUNCTION_PARAM_ADDRESS] > 40 && p_SFP ->buf_8[BLE_FUNCTION_PARAM_ADDRESS] < 80)
 		{
 			String_Debug_Once(SCRIPT_FUNCTION_DEBUG,p_ble_entry,1,(30,"ble connected \r\n"));
+			BleStateSet(X_True);
 		}
 		else if(p_SFP ->buf_8[BLE_FUNCTION_PARAM_ADDRESS] <= 80)
 		{
 
 			String_Debug_Once(SCRIPT_FUNCTION_DEBUG,p_ble_entry,2,(30,"ble disconnected \r\n"));
+			BleStateSet(X_False);
 		}
 		else
 		{
@@ -162,10 +181,12 @@ static X_Boolean PenMoveStateGenerator(X_Void * p_param)
 	if(random_num % 5 == 0 || random_num % 3 == 0)
 	{
 		String_Debug_Once(SCRIPT_FUNCTION_DEBUG,p_move_entry,1,(30,"pen silence\r\n"));
+		PenMoveStateSet(X_False);
 	}
 	else if(random_num % 4 == 0 || random_num % 6 == 0)
 	{
 		String_Debug_Once(SCRIPT_FUNCTION_DEBUG,p_move_entry,2,(30,"pen move\r\n"));
+		PenMoveStateSet(X_True);
 	}
 	return X_True;
 }
@@ -206,10 +227,12 @@ static X_Boolean PenDistanceFromMagneticGenerator(X_Void * p_param)
 	if(p_SFP ->buf_8[MAGNETIC_FUNCTION_PARAM_ADDRESS] >= 60 && p_SFP ->buf_8[MAGNETIC_FUNCTION_PARAM_ADDRESS] <= 100 )
 	{
 		String_Debug_Once(SCRIPT_FUNCTION_DEBUG,p_magnetic_entry,1,(30,"pen near magnetic\r\n"));
+		MagneticStateSet(X_True);
 	}
 	else if (p_SFP ->buf_8[MAGNETIC_FUNCTION_PARAM_ADDRESS] < 60 )
 	{
 		String_Debug_Once(SCRIPT_FUNCTION_DEBUG,p_magnetic_entry,2,(30,"pen far away from magnetic\r\n"));
+		MagneticStateSet(X_False);
 	}
 	else
 	{
@@ -239,10 +262,12 @@ static X_Boolean PenPowerStateGenerator(X_Void * p_param)
 	if(p_SFP ->buf_8[POWER_FUNCTION_PARAM_ADDRESS] >= 100 && p_SFP ->buf_8[POWER_FUNCTION_PARAM_ADDRESS] <= 120 )
 	{
 		String_Debug_Once(SCRIPT_FUNCTION_DEBUG,p_power_entry,1,(30,"pen power extrlow\r\n"));
+		PowerStateSet(X_True);
 	}
 	else if (p_SFP ->buf_8[POWER_FUNCTION_PARAM_ADDRESS] < 100 )
 	{
 		String_Debug_Once(SCRIPT_FUNCTION_DEBUG,p_power_entry,2,(30,"pen power normal\r\n"));
+		PowerStateSet(X_False);
 	}
 	else
 	{
@@ -352,4 +377,74 @@ static X_Boolean BatteryChargeStateToggle(X_Void)
 X_Boolean BatteryIsChargerConnected(X_Void)
 {
 	return isBatteryCharge;
+}
+
+static X_Boolean isPenMove;
+static X_Void PenMoveStateInit(X_Void)
+{
+	isPenMove = X_True;
+}
+static X_Void PenMoveStateSet(X_Boolean isMove)
+{
+	isPenMove = isMove;
+}
+X_Boolean PenMoveStateGet(X_Void)
+{
+	return isPenMove;
+}
+
+static X_Boolean isBleConnected;
+static X_Void BleStateInit(X_Void)
+{
+	isBleConnected = X_False;
+}
+static X_Void BleStateSet(X_Boolean isOK)
+{
+	isBleConnected = isOK;
+}
+X_Boolean BleStateGet(X_Void)
+{
+	return isBleConnected;
+}
+
+static X_Boolean isMagneticNear;
+static X_Void MagneticStateInit(X_Void)
+{
+	isMagneticNear = X_False;
+}
+static X_Void MagneticStateSet(X_Boolean isOK)
+{
+	isMagneticNear = isOK;
+}
+X_Boolean MagneticStateGet(X_Void)
+{
+	return isMagneticNear;
+}
+
+static X_Boolean isPowerLow;
+static X_Void PowerStateInit(X_Void)
+{
+	isPowerLow = X_False;
+}
+static X_Void PowerStateSet(X_Boolean isOK)
+{
+	isPowerLow = isOK;
+}
+X_Boolean PowerStateGet(X_Void)
+{
+	return isPowerLow;
+}
+
+static X_Boolean isUserShutDown;
+static X_Void UserShutDownStateInit(X_Void)
+{
+	isUserShutDown = X_False;
+}
+static X_Void UserShutDownStateSet(X_Boolean isOK)
+{
+	isUserShutDown = isOK;
+}
+X_Boolean UserShutDownStateGet(X_Void)
+{
+	return isUserShutDown;
 }

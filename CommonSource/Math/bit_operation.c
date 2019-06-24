@@ -51,6 +51,21 @@ uint8_t byte_bitoverturn(uint8_t source,uint8_t bitnumber)
 	
 }
 
+uint8_t ByteFactorSet(uint8_t factor,uint8_t bit_number,X_Boolean SetOrClear)
+{
+	uint8_t  value;
+	if(SetOrClear == Set)
+	{
+		value = byte_setbit(factor,bit_number);
+	}
+	else
+	{
+		value = byte_clearbit(factor,bit_number);
+}
+
+	return value;
+}
+
 
 //uint16_t operation 
 #define TwoByteMask							((uint16_t)(1u << 0))
@@ -81,5 +96,20 @@ uint16_t twobyte_bitoverturn(uint16_t source,uint8_t bitnumber)
 	source = source ^ bitmask;
 	return source;
 	
+}
+
+uint16_t TwoByteFactorSet(uint16_t factor,uint8_t bit_number,X_Boolean SetOrClear)
+{
+	uint16_t  value;
+	if(SetOrClear == Set)
+	{
+		value = twobyte_setbit(factor,bit_number);
+	}
+	else
+	{
+		value = twobyte_clearbit(factor,bit_number);
+}
+
+	return value;
 }
 

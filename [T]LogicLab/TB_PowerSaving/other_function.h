@@ -17,7 +17,7 @@ void BatteryStrengthMonitor(void);
 void BatteryLevelStateCollect(void);
 void AllEmkCharacteristicAction(void);
 void CharacteristicBatteryHandle(void);
-X_Boolean DoesChargeIn(void);
+void DoesChargeIn(void);
 X_Boolean BleSleepAndPowerSavingHandle(void);
 
 #endif

@@ -1,5 +1,6 @@
 #include "other_function.h"
 #include "PowerSaving.h"
+#include "PenState.h"
 
 void MCU_ResetHandle(void)
 {
@@ -38,7 +39,17 @@ void CapPowerHandle(void){
 
 }
 void RGB_DisplayHandle(void){}
-void MotionStateCheck(void){}
+void MotionStateCheck(void)
+{
+	if(PenMoveStateGet() == X_True)
+	{
+		PenStateFactorCollector(PenStatePenMove,1);
+	}
+	else
+	{
+		PenStateFactorCollector(PenStatePenMove,0);
+	}
+}
 void SetAdcRefreshEnable(X_Boolean isenable)
 {
 
@@ -48,9 +59,16 @@ void BatteryStrengthMonitor(void){}
 void BatteryLevelStateCollect(void){}
 void AllEmkCharacteristicAction(void){}
 void CharacteristicBatteryHandle(void){}
-X_Boolean DoesChargeIn(void)
+void DoesChargeIn(void)
 {
-	return BatteryIsChargerConnected();
+	if(BatteryIsChargerConnected() == X_True)
+	{
+		PenStateFactorCollector(PenStatePenCharge,1);
+	}
+	else
+	{
+		PenStateFactorCollector(PenStatePenCharge,0);
+	}
 }
 X_Boolean BleSleepAndPowerSavingHandle(void)
 {
