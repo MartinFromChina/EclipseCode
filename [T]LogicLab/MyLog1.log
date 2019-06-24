@@ -1,0 +1,53 @@
+2019-06-25 04:15:10.903 hello I am string debug 
+2019-06-25 04:15:11.004 --JustWakeUp
+2019-06-25 04:15:12.812 start again
+2019-06-25 04:15:14.623 pen silence
+2019-06-25 04:15:15.228 ble disconnected 
+2019-06-25 04:15:16.434 pen power normal
+2019-06-25 04:15:17.039 pen far away from magnetic
+2019-06-25 04:15:23.674 --GetGlobalState
+2019-06-25 04:15:24.278 --DisConnected
+2019-06-25 04:15:27.897 ble connected 
+2019-06-25 04:15:28.501 --Connected
+2019-06-25 04:15:31.518 pen move
+2019-06-25 04:15:48.398 pen silence
+2019-06-25 04:15:52.617 pen move
+2019-06-25 04:15:56.837 pen silence
+2019-06-25 04:15:57.444 ble disconnected 
+2019-06-25 04:15:58.047 --DisConnected
+2019-06-25 04:15:58.653 pen power extrlow
+2019-06-25 04:16:02.272 pen charge state change 1
+2019-06-25 04:16:11.317 pen power normal
+2019-06-25 04:16:14.333 ble connected 
+2019-06-25 04:16:14.936 --Connected
+2019-06-25 04:16:30.006 user shut down the pen
+2019-06-25 04:16:30.612 --GoingToShutDown
+2019-06-25 04:16:33.631 power off
+2019-06-25 04:16:40.866 start again
+2019-06-25 04:16:45.084 --JustWakeUp
+2019-06-25 04:16:45.688 power off
+2019-06-25 04:16:51.714 --GetGlobalState
+2019-06-25 04:16:52.922 start again
+2019-06-25 04:16:57.139 --JustWakeUp
+2019-06-25 04:16:59.551 ble disconnected 
+2019-06-25 04:17:01.362 pen near magnetic
+2019-06-25 04:17:03.775 --GetGlobalState
+2019-06-25 04:17:03.877 Magnetic shut down
+2019-06-25 04:17:04.382 --GoingToShutDown
+2019-06-25 04:17:06.195 power off
+2019-06-25 04:17:13.433 start again
+2019-06-25 04:17:17.653 --JustWakeUp
+2019-06-25 04:17:18.256 power off
+2019-06-25 04:17:24.283 --GetGlobalState
+2019-06-25 04:17:25.489 start again
+2019-06-25 04:17:28.507 pen charge state change 1
+2019-06-25 04:17:29.714 pen far away from magnetic
+2019-06-25 04:17:29.817 --JustWakeUp
+2019-06-25 04:17:33.337 pen power extrlow
+2019-06-25 04:17:36.350 ble connected 
+2019-06-25 04:17:36.452 --GetGlobalState
+2019-06-25 04:17:36.955 --Connected
+2019-06-25 04:17:45.999 pen power normal
+2019-06-25 04:17:52.629 pen move
+2019-06-25 04:17:53.234 ble disconnected 
+2019-06-25 04:17:53.839 --DisConnected

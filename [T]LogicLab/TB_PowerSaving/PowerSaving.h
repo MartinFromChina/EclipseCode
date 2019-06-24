@@ -11,4 +11,5 @@ X_Boolean BleStateGet(X_Void);
 X_Boolean MagneticStateGet(X_Void);
 X_Boolean PowerStateGet(X_Void);
 X_Boolean UserShutDownStateGet(X_Void);
+X_Boolean DoesUserAppLocked(X_Void);
 #endif

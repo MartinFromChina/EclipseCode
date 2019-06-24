@@ -3,5 +3,6 @@
 
 #include "..\..\CommonSource\KeilMDK.h"
 X_Void PenShutDownStateHandle(X_Void);
-
+X_Boolean DoesSureShutDown_TB(X_Void);
+X_Void ClearShutDownState_TB(X_Void);
 #endif

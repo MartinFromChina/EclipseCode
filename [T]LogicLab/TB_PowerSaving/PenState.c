@@ -167,13 +167,13 @@ static X_Boolean PenStateCollect(X_Void)
 
 static PenBasicState PenBasicStateGet(X_Void)
 {
-	if(DoesPenChargeWhenShutDown() == X_True) {return PBS_ChargeWhenShutDown;}
+	if(DoesPenChargeWhenShutDown() == X_True){return PBS_ChargeWhenShutDown;}
 
-	if(DoesPenNearMagnetic() == X_True) {return PBS_GoingToShutDown;}
+	if(DoesPenNearMagnetic() == X_True) {String_Debug(PEN_PERIPHERAL_DEBUG,(30,"Magnetic shut down\r\n"));return PBS_GoingToShutDown;}
 
-	if(DoesUserShutDown() == X_True) {return PBS_GoingToShutDown;}
+	if(DoesUserShutDown() == X_True) {String_Debug(PEN_PERIPHERAL_DEBUG,(30,"user shut down\r\n"));return PBS_GoingToShutDown;}
 
-	if(DoesPenPowerLow() == X_True && DoesPenCharge() == X_False) {return PBS_GoingToShutDown;}
+	if(DoesPenPowerLow() == X_True && DoesPenCharge() == X_False) {String_Debug(PEN_PERIPHERAL_DEBUG,(30,"power shut down\r\n"));return PBS_GoingToShutDown;}
 
 	if(DoesBleConnected() == X_True) {return PBS_Connected;}
 	else {return PBS_DisConnected;}
@@ -403,8 +403,11 @@ X_Void AllPeripheralInit(X_Void)
 }
 
 void onTick(void)
-{
-	BleAndPeripheralAction();
+{	if(DoesUserAppLocked() == X_False)
+	{
+		BleAndPeripheralAction();
+	}
+
 }
 
 

@@ -1,5 +1,6 @@
 #include "PowerSaving.h"
 #include "PenState.h"
+#include "EmarkShutDown.h"
 #include "..\ScriptsCommandModule\HexCommand.h"
 #include "..\..\CommonSource\Math\random_number.h"
 #include "..\..\CommonSource\CharStringDebug\CharStringDebugModule.h"
@@ -34,6 +35,13 @@ static X_Void PowerStateInit(X_Void);
 static X_Void PowerStateSet(X_Boolean isOK);
 static X_Void UserShutDownStateInit(X_Void);
 static X_Void UserShutDownStateSet(X_Boolean isOK);
+
+static X_Boolean isUserAppLocked;
+
+X_Boolean DoesUserAppLocked(X_Void)
+{
+	return isUserAppLocked;
+}
 
 static X_Boolean ScriptsFunctionInitial(X_Void * p_param)
 {
@@ -72,6 +80,8 @@ static X_Boolean ForNow(X_Void * p_param)
 	MagneticStateInit();
 	PowerStateInit();
 	UserShutDownStateInit();
+
+	isUserAppLocked = X_True;
 	return X_True;
 }
 static X_Boolean LoopSpecificTimes(X_Void * p_param)
@@ -118,7 +128,7 @@ static X_Boolean UserShutDownGenerator(X_Void * p_param)
 
 	// get app state
 
-	if(random_num == 20 )
+	if(random_num == 20)
 	{
 		String_Debug(SCRIPT_FUNCTION_DEBUG,(30,"user shut down the pen\r\n"));
 		p_SFP ->buf_8[SECOND_CONDITION_JUMP_ADDRESS] = 1;
@@ -140,7 +150,10 @@ static X_Boolean BleStateGenerator(X_Void * p_param)
 	random_num = p_SFP ->buf_8[CURRENT_RANDOM_NUM_ADDRESS];
 
 	// get app state
-
+	if(DoesSureShutDown_TB() == X_True)
+	{
+		return X_True;
+	}
 	if(p_SFP ->buf_8[SECOND_CONDITION_JUMP_ADDRESS] == 1)
 	{
 		String_Debug_Once(SCRIPT_FUNCTION_DEBUG,p_ble_entry,2,(30,"ble disconnected \r\n"));
@@ -177,6 +190,10 @@ static X_Boolean PenMoveStateGenerator(X_Void * p_param)
 	random_num = p_SFP ->buf_8[CURRENT_RANDOM_NUM_ADDRESS];
 
 	// get app state
+	if(DoesSureShutDown_TB() == X_True)
+	{
+		return X_True;
+	}
 
 	if(random_num % 5 == 0 || random_num % 3 == 0)
 	{
@@ -200,6 +217,10 @@ static X_Boolean PenChargeStateGenerator(X_Void * p_param)
 	random_num = p_SFP ->buf_8[CURRENT_RANDOM_NUM_ADDRESS];
 
 	// get app state
+	if(DoesSureShutDown_TB() == X_True)
+	{
+		return X_True;
+	}
 
 	if(p_SFP ->buf_8[CHARGE_FUNCTION_PARAM_ADDRESS] >= p_SFP ->param_from_script )
 	{
@@ -221,15 +242,21 @@ static X_Boolean PenDistanceFromMagneticGenerator(X_Void * p_param)
 	p_SFP = (ScriptFunctionParam *)p_param;
 	random_num = p_SFP ->buf_8[CURRENT_RANDOM_NUM_ADDRESS];
 
+	isUserAppLocked = X_False;
 	// get app state
+	if(DoesSureShutDown_TB() == X_True)
+	{
+		return X_False;
+	}
 
 	p_SFP ->buf_8[MAGNETIC_FUNCTION_PARAM_ADDRESS] = p_SFP ->buf_8[MAGNETIC_FUNCTION_PARAM_ADDRESS] + random_num;
-	if(p_SFP ->buf_8[MAGNETIC_FUNCTION_PARAM_ADDRESS] >= 60 && p_SFP ->buf_8[MAGNETIC_FUNCTION_PARAM_ADDRESS] <= 100 )
+	if(p_SFP ->buf_8[MAGNETIC_FUNCTION_PARAM_ADDRESS] >= 200 && p_SFP ->buf_8[MAGNETIC_FUNCTION_PARAM_ADDRESS] <= 210 )
 	{
 		String_Debug_Once(SCRIPT_FUNCTION_DEBUG,p_magnetic_entry,1,(30,"pen near magnetic\r\n"));
+		p_SFP ->buf_8[MAGNETIC_FUNCTION_PARAM_ADDRESS] = 0;
 		MagneticStateSet(X_True);
 	}
-	else if (p_SFP ->buf_8[MAGNETIC_FUNCTION_PARAM_ADDRESS] < 60 )
+	else if (p_SFP ->buf_8[MAGNETIC_FUNCTION_PARAM_ADDRESS] < 210 )
 	{
 		String_Debug_Once(SCRIPT_FUNCTION_DEBUG,p_magnetic_entry,2,(30,"pen far away from magnetic\r\n"));
 		MagneticStateSet(X_False);
@@ -257,6 +284,10 @@ static X_Boolean PenPowerStateGenerator(X_Void * p_param)
 	random_num = p_SFP ->buf_8[CURRENT_RANDOM_NUM_ADDRESS];
 
 	// get app state
+	if(DoesSureShutDown_TB() == X_True)
+	{
+		return X_True;
+	}
 
 	p_SFP ->buf_8[POWER_FUNCTION_PARAM_ADDRESS] = p_SFP ->buf_8[POWER_FUNCTION_PARAM_ADDRESS] + random_num;
 	if(p_SFP ->buf_8[POWER_FUNCTION_PARAM_ADDRESS] >= 100 && p_SFP ->buf_8[POWER_FUNCTION_PARAM_ADDRESS] <= 120 )
@@ -285,6 +316,8 @@ static X_Boolean PowerOff(X_Void * p_param)
     p_SFP ->buf_8[LOOP_COUNTER_THRESHOLD_ADDRESS] = p_SFP->param_from_script;
 
 	String_Debug(SCRIPT_FUNCTION_DEBUG,(30,"power off\r\n"));
+	ClearShutDownState_TB();
+	UserShutDownStateSet(X_False);
 	return X_True;
 }
 static X_Boolean StartAgain(X_Void * p_param)
@@ -344,7 +377,7 @@ X_Boolean CallFunction(uint8_t func_num,X_Void * p_param)
  *	9	:PenPowerStateGenerator 00
  *	a	:PenDistanceFromMagneticGenerator 01 04 0b
  *	b	:PowerOff 00 xx xx 0a
- *	c	:LoopSpecificTimes 01 03 0c
+ *	c	:LoopSpecificTimes 01 02 0c
  *
 1:command:07550100010100
 2:command:07550200010100
@@ -357,7 +390,7 @@ X_Boolean CallFunction(uint8_t func_num,X_Void * p_param)
 9:command:07550c00010100
 a:command:07550901040b00
 b:command:07550a0001010a
-c:command:07550301030c00
+c:command:07550301020c00
 d:end
  */
 static X_Boolean isBatteryCharge;
