@@ -52,3 +52,7 @@ X_Boolean DoesChargeIn(void)
 {
 	return BatteryIsChargerConnected();
 }
+X_Boolean BleSleepAndPowerSavingHandle(void)
+{
+
+}

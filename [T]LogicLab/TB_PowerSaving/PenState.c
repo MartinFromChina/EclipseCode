@@ -4,6 +4,8 @@
 #include "other_function.h"
 #include "..\..\CommonSource\CharStringDebug\CharStringDebugModule.h"
 
+
+
 #define PEN_PERIPHERAL_DEBUG  1
 
 static PenState ePS = DisConnected;
@@ -46,6 +48,8 @@ static X_Void DoTheAction(X_Void)
 }
 static X_Void AlwaysRunningAction(X_Void)
 {
+	X_Boolean isShutDownForSure;
+	isShutDownForSure = BleSleepAndPowerSavingHandle();
 	ButtonActionHandle();
 	MCU_ResetHandle();
 	CollectADCValueHandle();
