@@ -15,6 +15,8 @@
 #define PEN_BASIC_STATE_DEBUG  1
 STRING_DEBUG_ONCE_ENTRY_DEF(p_state_entry,100);
 
+
+#define USE_POWER_LOW_SHUTDOWN 1
 #define WAKE_UP_DELAY          3
 
 #define  FactorFlag   uint8_t
@@ -161,6 +163,18 @@ static X_Void UserShutDownCheck(X_Void)
 		PenStateFactorCollector(PenStateUserShutDown,0);
 	}
 }
+static X_Void WakeUpButtonPushedCheck(X_Void)
+{
+	if(UserWakeButtonStateGet() == X_True)
+	{
+		PenStateFactorCollector(PenStateWakeUpButtonPush,1);
+	}
+	else
+	{
+		PenStateFactorCollector(PenStateWakeUpButtonPush,0);
+	}
+}
+
 static X_Boolean PenStateCollect(X_Void)
 {
 	UserShutDownCheck();
@@ -168,6 +182,10 @@ static X_Boolean PenStateCollect(X_Void)
 	MotionStateCheck();
 	BleStataCheck();
 	MagneticStrengthCheck();
+	#if (USE_POWER_LOW_SHUTDOWN == 1)
+	BatteryLevelStateCollect();
+	#endif
+
 	return X_True;
 }
 
@@ -179,8 +197,9 @@ static PenBasicState PenBasicStateGet(X_Void)
 
 	if(DoesUserShutDown() == X_True) {String_Debug(PEN_PERIPHERAL_DEBUG,(30,"user shut down\r\n"));return PBS_GoingToShutDown;}
 
+	#if (USE_POWER_LOW_SHUTDOWN == 1)
 	if(DoesPenPowerLow() == X_True && DoesPenCharge() == X_False) {String_Debug(PEN_PERIPHERAL_DEBUG,(30,"power shut down\r\n"));return PBS_GoingToShutDown;}
-
+	#endif
 	if(DoesBleConnected() == X_True) {return PBS_Connected;}
 	else {return PBS_DisConnected;}
 }
@@ -194,7 +213,18 @@ PenBasicState PenBasicStateGetUnderCertainState(PenBasicState current_state)
 		case PBS_ChargeWhenShutDown:
 			pbs = PBS_ChargeWhenShutDown;
 			DoesChargeIn();
-//			DoesWakeUpButtonPushed();
+			WakeUpButtonPushedCheck();
+
+			if(DoesPenCharge() == X_True)
+			{
+				if(DoesWakeUpButtonPush() == X_True){pbs = PBS_DisConnected;}
+				else {pbs = PBS_ChargeWhenShutDown;}
+			}
+			else
+			{
+				if(DoesWakeUpButtonPush() == X_True){pbs = PBS_DisConnected;}
+				else {pbs = PBS_GoingToShutDown;}
+			}
 			break;
 		case PBS_DisConnected:
 			BleStataCheck();
@@ -202,14 +232,19 @@ PenBasicState PenBasicStateGetUnderCertainState(PenBasicState current_state)
 			DoesChargeIn();
 			UserShutDownCheck();
 			MotionStateCheck();
+			#if (USE_POWER_LOW_SHUTDOWN == 1)
+			BatteryLevelStateCollect();
+			#endif
 			if(DoesUserShutDown() == X_True || DoesPenNearMagnetic() == X_True)
 			{
 				pbs = PBS_GoingToShutDown;
 			}
+			#if (USE_POWER_LOW_SHUTDOWN == 1)
 			else if(DoesPenPowerLow() == X_True && DoesPenCharge() == X_False)
 			{
 				pbs = PBS_GoingToShutDown;
 			}
+			#endif
 			else if(DoesBleConnected() == X_True)
 			{
 				pbs = PBS_Connected;
@@ -228,16 +263,20 @@ PenBasicState PenBasicStateGetUnderCertainState(PenBasicState current_state)
 			MagneticStrengthCheck();
 			DoesChargeIn();
 			UserShutDownCheck();
-			MotionStateCheck();
+			#if (USE_POWER_LOW_SHUTDOWN == 1)
+			BatteryLevelStateCollect();
+			#endif
 
 			if(DoesUserShutDown() == X_True || DoesPenNearMagnetic() == X_True)
 			{
 				pbs = PBS_GoingToShutDown;
 			}
+			#if (USE_POWER_LOW_SHUTDOWN == 1)
 			else if(DoesPenPowerLow() == X_True && DoesPenCharge() == X_False)
 			{
 				pbs = PBS_GoingToShutDown;
 			}
+			#endif
 			else if(DoesBleConnected() == X_False)
 			{
 				pbs = PBS_DisConnected;
@@ -251,7 +290,12 @@ PenBasicState PenBasicStateGetUnderCertainState(PenBasicState current_state)
 			pbs = PBS_GoingToShutDown;
 			break;
 		case PBS_Quiet:
+			MotionStateCheck();
 			pbs = PBS_Quiet;
+			if(DoesPenMove() == X_True)
+			{
+				pbs = PBS_DisConnected;
+			}
 			break;
 		default:
 			break;
@@ -302,7 +346,7 @@ X_Boolean SetCurrentBasicState(PenBasicState state)
 
 static PenBasicState JustWakeUpAction(X_Void)
 {
-	String_Debug_Once(PEN_BASIC_STATE_DEBUG,p_state_entry,PBS_JustWakeUp,(30,"--JustWakeUp\r\n"));
+//	String_Debug_Once(PEN_BASIC_STATE_DEBUG,p_state_entry,PBS_JustWakeUp,(30,"--JustWakeUp\r\n"));
 
 	if(delay_counter < WAKE_UP_DELAY)
 	{
@@ -320,7 +364,7 @@ static PenBasicState JustWakeUpAction(X_Void)
 static PenBasicState GetGlobalStateAction(X_Void)
 {
 	PenBasicState state;
-	String_Debug_Once(PEN_BASIC_STATE_DEBUG,p_state_entry,PBS_GetGlobalState,(30,"--GetGlobalState\r\n"));
+//	String_Debug_Once(PEN_BASIC_STATE_DEBUG,p_state_entry,PBS_GetGlobalState,(30,"--GetGlobalState\r\n"));
 	PenStateCollect();
 	state = PenBasicStateGet();
 	SetCurrentBasicState(state);// for init

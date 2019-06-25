@@ -67,7 +67,8 @@
 #endif
 
 
-
+void OnceEntryValueInit(uint16_t * p_entry,uint16_t value);
+void CounterEntryValueInit(uint32_t * p_entry,uint32_t value);
 char *StringErrorTranslate(uint32_t error_code,char*(*error_get)(uint32_t error,char* p_cannot));
 void StringDebugProcess(void);
 void StringDebugFlush(void);

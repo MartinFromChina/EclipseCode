@@ -3735,3 +3735,18 @@ java.net.ConnectException: Connection timed out: connect
 
 !ENTRY org.eclipse.launchbar.core 2 0 2019-06-25 11:02:57.887
 !MESSAGE Enablement expression is missing for config provider for org.eclipse.cdt.debug.core.coreBuildDescriptorType
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2019-06-25 15:43:06.397
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2019-06-25 15:43:06.411
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2019-06-25 15:43:06.412
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2019-06-25 15:43:06.412
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2019-06-25 15:43:06.413
+!MESSAGE Unsupported statement type: CASTDefaultStatement.

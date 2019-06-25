@@ -36,6 +36,8 @@ static X_Void PowerStateInit(X_Void);
 static X_Void PowerStateSet(X_Boolean isOK);
 static X_Void UserShutDownStateInit(X_Void);
 static X_Void UserShutDownStateSet(X_Boolean isOK);
+static X_Void UserWakeButtonStateInit(X_Void);
+static X_Void UserWakeButtonStateSet(X_Boolean isOK);
 
 static X_Boolean isUserAppLocked;
 
@@ -91,6 +93,7 @@ static X_Boolean ForNow(X_Void * p_param)
 	MagneticStateInit();
 	PowerStateInit();
 	UserShutDownStateInit();
+	UserWakeButtonStateInit();
 
 	return X_True;
 }
@@ -140,7 +143,7 @@ static X_Boolean UserShutDownGenerator(X_Void * p_param)
 
 	if(random_num == 20)
 	{
-		String_Debug(SCRIPT_FUNCTION_DEBUG,(30,"user shut down the pen\r\n"));
+		String_Debug(SCRIPT_FUNCTION_DEBUG,(30,"user shut down the pen\r"));
 		p_SFP ->buf_8[SECOND_CONDITION_JUMP_ADDRESS] = 1;
 		UserShutDownStateSet(X_True);
 	}
@@ -149,6 +152,17 @@ static X_Boolean UserShutDownGenerator(X_Void * p_param)
 		p_SFP ->buf_8[SECOND_CONDITION_JUMP_ADDRESS] = 0;
 		UserShutDownStateSet(X_False);
 	}
+
+	if(random_num %2 == 0 && random_num >10)
+	{
+		String_Debug(SCRIPT_FUNCTION_DEBUG,(30,"wake up button pushed \r"));
+		UserWakeButtonStateSet(X_True);
+	}
+	else
+	{
+		UserWakeButtonStateSet(X_False);
+	}
+
 	return X_True;
 }
 static X_Boolean BleStateGenerator(X_Void * p_param)
@@ -164,13 +178,13 @@ static X_Boolean BleStateGenerator(X_Void * p_param)
 	p_SFP ->buf_8[BLE_FUNCTION_PARAM_ADDRESS] = p_SFP ->buf_8[BLE_FUNCTION_PARAM_ADDRESS] + random_num;
 	if(p_SFP ->buf_8[BLE_FUNCTION_PARAM_ADDRESS] > 40 && p_SFP ->buf_8[BLE_FUNCTION_PARAM_ADDRESS] < 80)
 	{
-		String_Debug_Once(SCRIPT_FUNCTION_DEBUG,p_ble_entry,1,(30,"ble connected \r\n"));
+		String_Debug_Once(SCRIPT_FUNCTION_DEBUG,p_ble_entry,1,(30,"ble connected \r"));
 		BleStateSet(X_True);
 	}
 	else if(p_SFP ->buf_8[BLE_FUNCTION_PARAM_ADDRESS] <= 80)
 	{
 
-		String_Debug_Once(SCRIPT_FUNCTION_DEBUG,p_ble_entry,2,(30,"ble disconnected \r\n"));
+		String_Debug_Once(SCRIPT_FUNCTION_DEBUG,p_ble_entry,2,(30,"ble disconnected \r"));
 		BleStateSet(X_False);
 	}
 	else
@@ -190,14 +204,14 @@ static X_Boolean PenMoveStateGenerator(X_Void * p_param)
 
 	// get app state
 
-	if(random_num % 5 == 0 || random_num % 3 == 0)
+	if(random_num % 4 == 0 || random_num % 6 == 0)
 	{
-		String_Debug_Once(SCRIPT_FUNCTION_DEBUG,p_move_entry,1,(30,"pen silence\r\n"));
+		String_Debug_Once(SCRIPT_FUNCTION_DEBUG,p_move_entry,1,(30,"pen silence\r"));
 		PenMoveStateSet(X_False);
 	}
-	else if(random_num % 4 == 0 || random_num % 6 == 0)
+	else if(random_num % 3 == 0 || random_num % 5 == 0)
 	{
-		String_Debug_Once(SCRIPT_FUNCTION_DEBUG,p_move_entry,2,(30,"pen move\r\n"));
+		String_Debug_Once(SCRIPT_FUNCTION_DEBUG,p_move_entry,2,(30,"pen move\r"));
 		PenMoveStateSet(X_True);
 	}
 	return X_True;
@@ -239,7 +253,7 @@ static X_Boolean QuickPenChargeStateGenerator(X_Void * p_param)
 	if(random_num >= p_SFP ->param_from_script )
 	{
 		isOK = BatteryChargeStateToggle();
-		String_Debug(SCRIPT_FUNCTION_DEBUG,(40,"pen charge state change %d\r\n",isOK));
+		String_Debug(SCRIPT_FUNCTION_DEBUG,(40,"pen charge state change %d --\r",isOK));
 	}
 	return X_True;
 }
@@ -256,13 +270,13 @@ static X_Boolean PenDistanceFromMagneticGenerator(X_Void * p_param)
 	p_SFP ->buf_8[MAGNETIC_FUNCTION_PARAM_ADDRESS] = p_SFP ->buf_8[MAGNETIC_FUNCTION_PARAM_ADDRESS] + random_num;
 	if(p_SFP ->buf_8[MAGNETIC_FUNCTION_PARAM_ADDRESS] >= 200 && p_SFP ->buf_8[MAGNETIC_FUNCTION_PARAM_ADDRESS] <= 210 )
 	{
-		String_Debug_Once(SCRIPT_FUNCTION_DEBUG,p_magnetic_entry,1,(30,"pen near magnetic\r\n"));
+		String_Debug_Once(SCRIPT_FUNCTION_DEBUG,p_magnetic_entry,1,(30,"pen near magnetic\r"));
 		p_SFP ->buf_8[MAGNETIC_FUNCTION_PARAM_ADDRESS] = 0;
 		MagneticStateSet(X_True);
 	}
 	else if (p_SFP ->buf_8[MAGNETIC_FUNCTION_PARAM_ADDRESS] < 210 )
 	{
-		String_Debug_Once(SCRIPT_FUNCTION_DEBUG,p_magnetic_entry,2,(30,"pen far away from magnetic\r\n"));
+		String_Debug_Once(SCRIPT_FUNCTION_DEBUG,p_magnetic_entry,2,(40,"pen far away from magnetic\r"));
 		MagneticStateSet(X_False);
 	}
 	else
@@ -283,12 +297,12 @@ static X_Boolean QuickPenDistanceFromMagneticGenerator(X_Void * p_param)
 
 	if(random_num % 4 == 0 )
 	{
-		String_Debug_Once(SCRIPT_FUNCTION_DEBUG,p_magnetic_entry,1,(30,"pen near magnetic\r\n"));
+		String_Debug_Once(SCRIPT_FUNCTION_DEBUG,p_magnetic_entry,1,(30,"pen near magnetic--\r"));
 		MagneticStateSet(X_True);
 	}
 	else
 	{
-		String_Debug_Once(SCRIPT_FUNCTION_DEBUG,p_magnetic_entry,2,(30,"pen far away from magnetic\r\n"));
+		String_Debug_Once(SCRIPT_FUNCTION_DEBUG,p_magnetic_entry,2,(40,"pen far away from magnetic--\r"));
 		MagneticStateSet(X_False);
 	}
 	return X_True;
@@ -305,12 +319,12 @@ static X_Boolean PenPowerStateGenerator(X_Void * p_param)
 
 	if(random_num <= 2 )
 	{
-		String_Debug_Once(SCRIPT_FUNCTION_DEBUG,p_power_entry,1,(30,"pen power extrlow\r\n"));
+		String_Debug_Once(SCRIPT_FUNCTION_DEBUG,p_power_entry,1,(30,"pen power extrlow\r"));
 		PowerStateSet(X_True);
 	}
 	else
 	{
-		String_Debug_Once(SCRIPT_FUNCTION_DEBUG,p_power_entry,2,(30,"pen power normal\r\n"));
+		String_Debug_Once(SCRIPT_FUNCTION_DEBUG,p_power_entry,2,(30,"pen power normal\r"));
 		PowerStateSet(X_False);
 	}
 	return X_True;
@@ -332,12 +346,12 @@ static X_Boolean QuickPenPowerStateGenerator(X_Void * p_param)
 	p_SFP ->buf_8[POWER_FUNCTION_PARAM_ADDRESS] = p_SFP ->buf_8[POWER_FUNCTION_PARAM_ADDRESS] + random_num;
 	if(p_SFP ->buf_8[POWER_FUNCTION_PARAM_ADDRESS] >= 100 && p_SFP ->buf_8[POWER_FUNCTION_PARAM_ADDRESS] <= 120 )
 	{
-		String_Debug_Once(SCRIPT_FUNCTION_DEBUG,p_power_entry,1,(30,"pen power extrlow\r\n"));
+		String_Debug_Once(SCRIPT_FUNCTION_DEBUG,p_power_entry,1,(30,"pen power extrlow-- \r"));
 		PowerStateSet(X_True);
 	}
 	else if (p_SFP ->buf_8[POWER_FUNCTION_PARAM_ADDRESS] < 100 )
 	{
-		String_Debug_Once(SCRIPT_FUNCTION_DEBUG,p_power_entry,2,(30,"pen power normal\r\n"));
+		String_Debug_Once(SCRIPT_FUNCTION_DEBUG,p_power_entry,2,(30,"pen power normal-- \r"));
 		PowerStateSet(X_False);
 	}
 	else
@@ -353,20 +367,26 @@ static X_Boolean PowerOff(X_Void * p_param)
 //
 //	p_SFP = (ScriptFunctionParam *)p_param;
 
-	String_Debug(SCRIPT_FUNCTION_DEBUG,(30,"power off\r\n"));
+	String_Debug(SCRIPT_FUNCTION_DEBUG,(30,"power off\r"));
 	ClearShutDownState_TB();
 	ClearQuietState_TB();
 	UserShutDownStateSet(X_False);
+	OnceEntryValueInit(p_magnetic_entry,100);
+	OnceEntryValueInit(p_power_entry,100);
 	return X_True;
 }
 static X_Boolean StartAgain(X_Void * p_param)
 {
-	String_Debug(SCRIPT_FUNCTION_DEBUG,(30,"start again ====\r\n"));
+	String_Debug(SCRIPT_FUNCTION_DEBUG,(30,"start again ====\r"));
 	// sent app state
 	PenMoveStateInit();
 	BleStateInit();
 	UserShutDownStateInit();
-
+	UserWakeButtonStateInit();
+//	OnceEntryValueInit(p_move_entry,100);
+//	OnceEntryValueInit(p_ble_entry,100);
+//	OnceEntryValueInit(p_magnetic_entry,100);
+//	OnceEntryValueInit(p_power_entry,100);
 
 	AllPeripheralInit();
 	return X_True;
@@ -562,4 +582,18 @@ static X_Void UserShutDownStateSet(X_Boolean isOK)
 X_Boolean UserShutDownStateGet(X_Void)
 {
 	return isUserShutDown;
+}
+
+static X_Boolean isWakeUpButtonPushed;
+static X_Void UserWakeButtonStateInit(X_Void)
+{
+	isWakeUpButtonPushed = X_False;
+}
+static X_Void UserWakeButtonStateSet(X_Boolean isOK)
+{
+	isWakeUpButtonPushed = isOK;
+}
+X_Boolean UserWakeButtonStateGet(X_Void)
+{
+	return isWakeUpButtonPushed;
 }

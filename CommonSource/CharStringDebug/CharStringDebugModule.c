@@ -165,7 +165,14 @@ APP_LOOPQUEUE_DEF(string_queue,string_queue_manager,string_queue_length,STRING_D
 		(*p_init)();
 		String_Debug(FOW_NOW_DEBUG,(30,"hello %s \r\n","I am string debug"));
 	}
-
+void OnceEntryValueInit(uint16_t * p_entry,uint16_t value)
+{
+	if(p_entry != X_Null) {*p_entry = value;}
+}
+void CounterEntryValueInit(uint32_t * p_entry,uint32_t value)
+{
+	if(p_entry != X_Null) {*p_entry = value;}
+}
 #else
 	static char Canot_Translate[2][9] = {
 			"unknow",
@@ -192,6 +199,8 @@ APP_LOOPQUEUE_DEF(string_queue,string_queue_manager,string_queue_length,STRING_D
 	{
 		(*p_init)();
 	}
+	void OnceEntryValueInit(uint16_t * p_entry,uint16_t value){}
+	void CounterEntryValueInit(uint32_t * p_entry,uint32_t value){}
 #endif
 
 
