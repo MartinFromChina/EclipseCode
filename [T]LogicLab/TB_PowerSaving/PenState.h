@@ -23,6 +23,7 @@ typedef enum
 	PBS_DisConnected,
 	PBS_Connected,
 	PBS_GoingToShutDown,
+	PBS_Quiet,// sleep caused by pen in static state for a long time
 }PenBasicState;
 
 X_Void AllPeripheralInit(X_Void);

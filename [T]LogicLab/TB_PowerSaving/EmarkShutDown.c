@@ -93,7 +93,7 @@ X_Void PenShutDownStateInit(X_Void)
 {
 	isSureShutDown = X_False;
 }
-
+/***************************************************/
 X_Boolean DoesSureShutDown_TB(X_Void)
 {
 	return isSureShutDown;

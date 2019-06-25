@@ -9,6 +9,7 @@
 #include "EmarkDisconnected.h"
 #include "EmarkShutDown.h"
 #include "EmarkChargeWhenShutDown.h"
+#include "EmarkQuiet.h"
 
 #define PEN_PERIPHERAL_DEBUG  1
 #define PEN_BASIC_STATE_DEBUG  1
@@ -114,6 +115,7 @@ static X_Void PenStateInit(X_Void)
 	PenDisconnectedStateInit();
 	PenConnectedStateInit();
 	PenShutDownStateInit();
+	PenQuietStateInit();
 	/**********
 	//mcu reset just happen and charge in,it must be charge in wake up the MCU
 	*********************/
@@ -181,8 +183,6 @@ static PenBasicState PenBasicStateGet(X_Void)
 
 	if(DoesBleConnected() == X_True) {return PBS_Connected;}
 	else {return PBS_DisConnected;}
-
-
 }
 
 PenBasicState PenBasicStateGetUnderCertainState(PenBasicState current_state)
@@ -201,6 +201,7 @@ PenBasicState PenBasicStateGetUnderCertainState(PenBasicState current_state)
 			MagneticStrengthCheck();
 			DoesChargeIn();
 			UserShutDownCheck();
+			MotionStateCheck();
 			if(DoesUserShutDown() == X_True || DoesPenNearMagnetic() == X_True)
 			{
 				pbs = PBS_GoingToShutDown;
@@ -213,6 +214,10 @@ PenBasicState PenBasicStateGetUnderCertainState(PenBasicState current_state)
 			{
 				pbs = PBS_Connected;
 			}
+			else if(DoesPenMove() == X_False)
+			{
+				pbs = PBS_Quiet;
+			}
 			else
 			{
 				pbs = PBS_DisConnected;
@@ -223,6 +228,7 @@ PenBasicState PenBasicStateGetUnderCertainState(PenBasicState current_state)
 			MagneticStrengthCheck();
 			DoesChargeIn();
 			UserShutDownCheck();
+			MotionStateCheck();
 
 			if(DoesUserShutDown() == X_True || DoesPenNearMagnetic() == X_True)
 			{
@@ -243,6 +249,9 @@ PenBasicState PenBasicStateGetUnderCertainState(PenBasicState current_state)
 			break;
 		case PBS_GoingToShutDown:
 			pbs = PBS_GoingToShutDown;
+			break;
+		case PBS_Quiet:
+			pbs = PBS_Quiet;
 			break;
 		default:
 			break;
@@ -279,6 +288,10 @@ X_Boolean SetCurrentBasicState(PenBasicState state)
 		case PBS_GoingToShutDown:
 		    PenShutDownStateInit();
 			CurrentState = PBS_GoingToShutDown;
+			break;
+		case PBS_Quiet:
+			PenQuietStateInit();
+			CurrentState = PBS_Quiet;
 			break;
 		default:
 			isOK = X_False;
@@ -339,6 +352,12 @@ static PenBasicState GoingToShutDownAction(X_Void)
 	PenShutDownStateHandle();
 	return CurrentState;
 }
+static PenBasicState QuietAction(X_Void)
+{
+	String_Debug_Once(PEN_BASIC_STATE_DEBUG,p_state_entry,PBS_Quiet,(30,"--Quiet\r\n"));
+	PenQuietStateHandle();
+	return CurrentState;
+}
 
 static struct _StateHandle{
 	PenBasicState state;
@@ -351,6 +370,7 @@ const StateHandle[]={
 	{PBS_DisConnected,DisConnectedAction},
 	{PBS_Connected,ConnectedAction},
 	{PBS_GoingToShutDown,GoingToShutDownAction},
+	{PBS_Quiet,QuietAction},
 };
 
 static X_Void PenBasicStateHandle(X_Void)
@@ -397,7 +417,7 @@ static X_Void AlwaysRunningAction(X_Void)
 	MCU_ResetHandle();
 	CollectADCValueHandle();
 	EmarkPenCommandHandle();
-	ExternalPowerHandle();
+	ExternalPowerHandle();//and PowerShutDownMonitor();
 	CapPowerHandle();
 	RGB_DisplayHandle();
 

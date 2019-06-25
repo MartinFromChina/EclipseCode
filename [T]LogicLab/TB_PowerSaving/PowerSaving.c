@@ -1,6 +1,7 @@
 #include "PowerSaving.h"
 #include "PenState.h"
 #include "EmarkShutDown.h"
+#include "EmarkQuiet.h"
 #include "..\ScriptsCommandModule\HexCommand.h"
 #include "..\..\CommonSource\Math\random_number.h"
 #include "..\..\CommonSource\CharStringDebug\CharStringDebugModule.h"
@@ -354,6 +355,7 @@ static X_Boolean PowerOff(X_Void * p_param)
 
 	String_Debug(SCRIPT_FUNCTION_DEBUG,(30,"power off\r\n"));
 	ClearShutDownState_TB();
+	ClearQuietState_TB();
 	UserShutDownStateSet(X_False);
 	return X_True;
 }
@@ -376,7 +378,11 @@ static X_Boolean BackToStart(X_Void * p_param)
 
 static X_Boolean DoesPowerOff(X_Void * p_param)
 {
-  return DoesSureShutDown_TB();
+	if(DoesSureQuiet_TB() == X_True || DoesSureShutDown_TB() == X_True)
+	{
+		return X_True;
+	}
+	return X_False;
 }
 
 static struct _ScriptsFunctionArray
