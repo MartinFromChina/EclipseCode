@@ -3,7 +3,10 @@
 #include "..\..\CommonSource\CharStringDebug\CharStringDebugModule.h"
 
 #define PEN_QUIET_DEBUG  0
+#define PEN_QUIET_WAKEUP_DEBUG  1
+
 STRING_DEBUG_ONCE_ENTRY_DEF(p_state_entry,100);
+STRING_DEBUG_ONCE_ENTRY_DEF(p_wakeup_entry,100);
 
 X_Boolean isSureQuiet;
 
@@ -48,6 +51,7 @@ static PenState GetAction(X_Void)
 static PenState ConfigAction(X_Void)
 {
 	// sleep and set motion sensor wakeup enable
+	String_Debug_Once(PEN_QUIET_WAKEUP_DEBUG,p_wakeup_entry,1,(40,"-----motion wake en\r\n"));
 	String_Debug_Once(PEN_QUIET_DEBUG,p_state_entry,PS_Config,(40,"-----PS_Config\r\n"));
 	return PS_TheEnd;
 }
@@ -95,6 +99,7 @@ X_Void PenQuietStateHandle(X_Void)
 }
 X_Void PenQuietStateInit(X_Void)
 {
+	OnceEntryValueInit(p_wakeup_entry,100);
 	isSureQuiet = X_False;
 }
 /***************************************************/

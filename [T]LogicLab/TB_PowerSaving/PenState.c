@@ -16,7 +16,7 @@
 STRING_DEBUG_ONCE_ENTRY_DEF(p_state_entry,100);
 
 
-#define USE_POWER_LOW_SHUTDOWN 1
+#define USE_POWER_LOW_SHUTDOWN 0
 #define WAKE_UP_DELAY          3
 
 #define  FactorFlag   uint8_t
@@ -193,12 +193,12 @@ static PenBasicState PenBasicStateGet(X_Void)
 {
 	if(DoesPenChargeWhenShutDown() == X_True){return PBS_ChargeWhenShutDown;}
 
-	if(DoesPenNearMagnetic() == X_True) {String_Debug(PEN_PERIPHERAL_DEBUG,(30,"Magnetic shut down\r\n"));return PBS_GoingToShutDown;}
+	if(DoesPenNearMagnetic() == X_True) {return PBS_GoingToShutDown;}
 
-	if(DoesUserShutDown() == X_True) {String_Debug(PEN_PERIPHERAL_DEBUG,(30,"user shut down\r\n"));return PBS_GoingToShutDown;}
+	if(DoesUserShutDown() == X_True) {return PBS_GoingToShutDown;}
 
 	#if (USE_POWER_LOW_SHUTDOWN == 1)
-	if(DoesPenPowerLow() == X_True && DoesPenCharge() == X_False) {String_Debug(PEN_PERIPHERAL_DEBUG,(30,"power shut down\r\n"));return PBS_GoingToShutDown;}
+	if(DoesPenPowerLow() == X_True && DoesPenCharge() == X_False) {return PBS_GoingToShutDown;}
 	#endif
 	if(DoesBleConnected() == X_True) {return PBS_Connected;}
 	else {return PBS_DisConnected;}
@@ -226,6 +226,7 @@ PenBasicState PenBasicStateGetUnderCertainState(PenBasicState current_state)
 				else {pbs = PBS_GoingToShutDown;}
 			}
 			break;
+		case PBS_Quiet:
 		case PBS_DisConnected:
 			BleStataCheck();
 			MagneticStrengthCheck();
@@ -288,14 +289,6 @@ PenBasicState PenBasicStateGetUnderCertainState(PenBasicState current_state)
 			break;
 		case PBS_GoingToShutDown:
 			pbs = PBS_GoingToShutDown;
-			break;
-		case PBS_Quiet:
-			MotionStateCheck();
-			pbs = PBS_Quiet;
-			if(DoesPenMove() == X_True)
-			{
-				pbs = PBS_DisConnected;
-			}
 			break;
 		default:
 			break;

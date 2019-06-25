@@ -143,7 +143,7 @@ static X_Boolean UserShutDownGenerator(X_Void * p_param)
 
 	if(random_num == 20)
 	{
-		String_Debug(SCRIPT_FUNCTION_DEBUG,(30,"user shut down the pen\r"));
+		String_Debug(SCRIPT_FUNCTION_DEBUG,(40,"user shut down the pen !!!\r"));
 		p_SFP ->buf_8[SECOND_CONDITION_JUMP_ADDRESS] = 1;
 		UserShutDownStateSet(X_True);
 	}
@@ -153,7 +153,7 @@ static X_Boolean UserShutDownGenerator(X_Void * p_param)
 		UserShutDownStateSet(X_False);
 	}
 
-	if(random_num %2 == 0 && random_num >10)
+	if(random_num %2 == 0 && random_num < 10)
 	{
 		String_Debug(SCRIPT_FUNCTION_DEBUG,(30,"wake up button pushed \r"));
 		UserWakeButtonStateSet(X_True);
@@ -206,7 +206,7 @@ static X_Boolean PenMoveStateGenerator(X_Void * p_param)
 
 	if(random_num % 4 == 0 || random_num % 6 == 0)
 	{
-		String_Debug_Once(SCRIPT_FUNCTION_DEBUG,p_move_entry,1,(30,"pen silence\r"));
+		String_Debug_Once(SCRIPT_FUNCTION_DEBUG,p_move_entry,1,(30,"pen silence !!!\r"));
 		PenMoveStateSet(X_False);
 	}
 	else if(random_num % 3 == 0 || random_num % 5 == 0)
@@ -231,7 +231,9 @@ static X_Boolean PenChargeStateGenerator(X_Void * p_param)
 	{
 		p_SFP ->buf_8[CHARGE_FUNCTION_PARAM_ADDRESS] = 0;
 		isOK = BatteryChargeStateToggle();
-		String_Debug(SCRIPT_FUNCTION_DEBUG,(40,"pen charge state change %d\r\n",isOK));
+		if(isOK == X_True) {String_Debug(SCRIPT_FUNCTION_DEBUG,(40,"pen charge In !!!\r\n"));}
+		else {String_Debug(SCRIPT_FUNCTION_DEBUG,(40,"pen discharge !!!\r\n"));}
+
 	}
 	else
 	{
@@ -253,7 +255,8 @@ static X_Boolean QuickPenChargeStateGenerator(X_Void * p_param)
 	if(random_num >= p_SFP ->param_from_script )
 	{
 		isOK = BatteryChargeStateToggle();
-		String_Debug(SCRIPT_FUNCTION_DEBUG,(40,"pen charge state change %d --\r",isOK));
+		if(isOK == X_True) {String_Debug(SCRIPT_FUNCTION_DEBUG,(40,"pen charge In -- !!!\r"));}
+		else {String_Debug(SCRIPT_FUNCTION_DEBUG,(40,"pen discharge -- !!!\r"));}
 	}
 	return X_True;
 }
@@ -270,7 +273,7 @@ static X_Boolean PenDistanceFromMagneticGenerator(X_Void * p_param)
 	p_SFP ->buf_8[MAGNETIC_FUNCTION_PARAM_ADDRESS] = p_SFP ->buf_8[MAGNETIC_FUNCTION_PARAM_ADDRESS] + random_num;
 	if(p_SFP ->buf_8[MAGNETIC_FUNCTION_PARAM_ADDRESS] >= 200 && p_SFP ->buf_8[MAGNETIC_FUNCTION_PARAM_ADDRESS] <= 210 )
 	{
-		String_Debug_Once(SCRIPT_FUNCTION_DEBUG,p_magnetic_entry,1,(30,"pen near magnetic\r"));
+		String_Debug_Once(SCRIPT_FUNCTION_DEBUG,p_magnetic_entry,1,(30,"pen near magnetic !!!\r"));
 		p_SFP ->buf_8[MAGNETIC_FUNCTION_PARAM_ADDRESS] = 0;
 		MagneticStateSet(X_True);
 	}
@@ -297,7 +300,7 @@ static X_Boolean QuickPenDistanceFromMagneticGenerator(X_Void * p_param)
 
 	if(random_num % 4 == 0 )
 	{
-		String_Debug_Once(SCRIPT_FUNCTION_DEBUG,p_magnetic_entry,1,(30,"pen near magnetic--\r"));
+		String_Debug_Once(SCRIPT_FUNCTION_DEBUG,p_magnetic_entry,1,(30,"pen near magnetic-- !!!\r"));
 		MagneticStateSet(X_True);
 	}
 	else
@@ -317,15 +320,20 @@ static X_Boolean PenPowerStateGenerator(X_Void * p_param)
 
 	// get app state
 
-	if(random_num <= 2 )
+	p_SFP ->buf_8[POWER_FUNCTION_PARAM_ADDRESS] = p_SFP ->buf_8[POWER_FUNCTION_PARAM_ADDRESS] + random_num;
+	if(p_SFP ->buf_8[POWER_FUNCTION_PARAM_ADDRESS] >= 100 && p_SFP ->buf_8[POWER_FUNCTION_PARAM_ADDRESS] <= 120 )
 	{
-		String_Debug_Once(SCRIPT_FUNCTION_DEBUG,p_power_entry,1,(30,"pen power extrlow\r"));
+		String_Debug_Once(SCRIPT_FUNCTION_DEBUG,p_power_entry,1,(40,"pen power extrlow !!!\r"));
 		PowerStateSet(X_True);
+	}
+	else if (p_SFP ->buf_8[POWER_FUNCTION_PARAM_ADDRESS] < 100 )
+	{
+		String_Debug_Once(SCRIPT_FUNCTION_DEBUG,p_power_entry,2,(30,"pen power normal \r"));
+		PowerStateSet(X_False);
 	}
 	else
 	{
-		String_Debug_Once(SCRIPT_FUNCTION_DEBUG,p_power_entry,2,(30,"pen power normal\r"));
-		PowerStateSet(X_False);
+		p_SFP ->buf_8[POWER_FUNCTION_PARAM_ADDRESS] = 0;
 	}
 	return X_True;
 }
@@ -338,28 +346,20 @@ static X_Boolean QuickPenPowerStateGenerator(X_Void * p_param)
 	random_num = p_SFP ->buf_8[CURRENT_RANDOM_NUM_ADDRESS];
 
 	// get app state
-	if(DoesSureShutDown_TB() == X_True)
-	{
-		return X_True;
-	}
 
-	p_SFP ->buf_8[POWER_FUNCTION_PARAM_ADDRESS] = p_SFP ->buf_8[POWER_FUNCTION_PARAM_ADDRESS] + random_num;
-	if(p_SFP ->buf_8[POWER_FUNCTION_PARAM_ADDRESS] >= 100 && p_SFP ->buf_8[POWER_FUNCTION_PARAM_ADDRESS] <= 120 )
+	if(random_num <= 2 )
 	{
-		String_Debug_Once(SCRIPT_FUNCTION_DEBUG,p_power_entry,1,(30,"pen power extrlow-- \r"));
+		String_Debug_Once(SCRIPT_FUNCTION_DEBUG,p_power_entry,1,(40,"pen power extrlow-- !!!\r"));
 		PowerStateSet(X_True);
-	}
-	else if (p_SFP ->buf_8[POWER_FUNCTION_PARAM_ADDRESS] < 100 )
-	{
-		String_Debug_Once(SCRIPT_FUNCTION_DEBUG,p_power_entry,2,(30,"pen power normal-- \r"));
-		PowerStateSet(X_False);
 	}
 	else
 	{
-		p_SFP ->buf_8[POWER_FUNCTION_PARAM_ADDRESS] = 0;
+		String_Debug_Once(SCRIPT_FUNCTION_DEBUG,p_power_entry,2,(30,"pen power normal--\r"));
+		PowerStateSet(X_False);
 	}
 	return X_True;
 }
+
 static X_Boolean PowerOff(X_Void * p_param)
 {
 
@@ -466,7 +466,7 @@ X_Boolean CallFunction(uint8_t func_num,X_Void * p_param)
  *	e	:UserAppLock							(0d) 00010100
  *	f	:PowerOff								(0a) 00010100
  *	10	:RandomNumberGenerator					(4)  0001010a
- *	11	:QuickPenChargeStateGenerator			(10) 00010107
+ *	11	:QuickPenChargeStateGenerator			(10) 00010108
  *	12	:QuickPenDistanceFromMagneticGenerator	(11) 00010100
  *	13	:QuickPenPowerStateGenerator			(12) 00010100
  *	14	:LoopSpecificTimes						(3)  01151405
@@ -487,8 +487,8 @@ c:command:075513010e0d00
 d:command:07550e01050d00
 e:command:07550d00010100
 f:command:07550a00010100
-10:command:07550400010107
-11:command:07551000010100
+10:command:0755040001010a
+11:command:07551000010108
 12:command:07551100010100
 13:command:07551200010100
 14:command:07550301151405
