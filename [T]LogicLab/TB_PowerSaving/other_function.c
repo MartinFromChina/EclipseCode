@@ -82,5 +82,5 @@ void DoesChargeIn(void)
 }
 X_Boolean BleSleepAndPowerSavingHandle(void)
 {
-
+	return X_False;
 }

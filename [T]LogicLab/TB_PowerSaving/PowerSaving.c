@@ -38,6 +38,16 @@ static X_Void UserShutDownStateSet(X_Boolean isOK);
 
 static X_Boolean isUserAppLocked;
 
+static X_Boolean UserAppLock(X_Void * p_param)
+{
+	isUserAppLocked = X_True;
+	return X_True;
+}
+static X_Boolean UserAppUnlock(X_Void * p_param)
+{
+	isUserAppLocked = X_False;
+	return X_True;
+}
 X_Boolean DoesUserAppLocked(X_Void)
 {
 	return isUserAppLocked;
@@ -81,7 +91,6 @@ static X_Boolean ForNow(X_Void * p_param)
 	PowerStateInit();
 	UserShutDownStateInit();
 
-	isUserAppLocked = X_True;
 	return X_True;
 }
 static X_Boolean LoopSpecificTimes(X_Void * p_param)
@@ -91,7 +100,7 @@ static X_Boolean LoopSpecificTimes(X_Void * p_param)
 
 //	String_Debug(SCRIPT_FUNCTION_DEBUG,(30,"3 : Loop is called : %d\r\n",p_SFP ->buf_8[0]));
 	p_SFP ->isParamValid = X_True;
-	if(p_SFP ->buf_8[LOOP_COUNTER_ADDRESS]+1 >= p_SFP ->buf_8[LOOP_COUNTER_THRESHOLD_ADDRESS])
+	if(p_SFP ->buf_8[LOOP_COUNTER_ADDRESS]+1 >= p_SFP ->param_from_script)
 	{
 		p_SFP ->buf_8[LOOP_COUNTER_ADDRESS] = 0;
 		return X_True;
@@ -150,34 +159,23 @@ static X_Boolean BleStateGenerator(X_Void * p_param)
 	random_num = p_SFP ->buf_8[CURRENT_RANDOM_NUM_ADDRESS];
 
 	// get app state
-	if(DoesSureShutDown_TB() == X_True)
+
+	p_SFP ->buf_8[BLE_FUNCTION_PARAM_ADDRESS] = p_SFP ->buf_8[BLE_FUNCTION_PARAM_ADDRESS] + random_num;
+	if(p_SFP ->buf_8[BLE_FUNCTION_PARAM_ADDRESS] > 40 && p_SFP ->buf_8[BLE_FUNCTION_PARAM_ADDRESS] < 80)
 	{
-		return X_True;
+		String_Debug_Once(SCRIPT_FUNCTION_DEBUG,p_ble_entry,1,(30,"ble connected \r\n"));
+		BleStateSet(X_True);
 	}
-	if(p_SFP ->buf_8[SECOND_CONDITION_JUMP_ADDRESS] == 1)
+	else if(p_SFP ->buf_8[BLE_FUNCTION_PARAM_ADDRESS] <= 80)
 	{
+
 		String_Debug_Once(SCRIPT_FUNCTION_DEBUG,p_ble_entry,2,(30,"ble disconnected \r\n"));
+		BleStateSet(X_False);
 	}
 	else
 	{
-		p_SFP ->buf_8[BLE_FUNCTION_PARAM_ADDRESS] = p_SFP ->buf_8[BLE_FUNCTION_PARAM_ADDRESS] + random_num;
-		if(p_SFP ->buf_8[BLE_FUNCTION_PARAM_ADDRESS] > 40 && p_SFP ->buf_8[BLE_FUNCTION_PARAM_ADDRESS] < 80)
-		{
-			String_Debug_Once(SCRIPT_FUNCTION_DEBUG,p_ble_entry,1,(30,"ble connected \r\n"));
-			BleStateSet(X_True);
-		}
-		else if(p_SFP ->buf_8[BLE_FUNCTION_PARAM_ADDRESS] <= 80)
-		{
-
-			String_Debug_Once(SCRIPT_FUNCTION_DEBUG,p_ble_entry,2,(30,"ble disconnected \r\n"));
-			BleStateSet(X_False);
-		}
-		else
-		{
-			p_SFP ->buf_8[BLE_FUNCTION_PARAM_ADDRESS] = 0;
-		}
+		p_SFP ->buf_8[BLE_FUNCTION_PARAM_ADDRESS] = 0;
 	}
-
 
 	return X_True;
 }
@@ -190,10 +188,6 @@ static X_Boolean PenMoveStateGenerator(X_Void * p_param)
 	random_num = p_SFP ->buf_8[CURRENT_RANDOM_NUM_ADDRESS];
 
 	// get app state
-	if(DoesSureShutDown_TB() == X_True)
-	{
-		return X_True;
-	}
 
 	if(random_num % 5 == 0 || random_num % 3 == 0)
 	{
@@ -217,10 +211,6 @@ static X_Boolean PenChargeStateGenerator(X_Void * p_param)
 	random_num = p_SFP ->buf_8[CURRENT_RANDOM_NUM_ADDRESS];
 
 	// get app state
-	if(DoesSureShutDown_TB() == X_True)
-	{
-		return X_True;
-	}
 
 	if(p_SFP ->buf_8[CHARGE_FUNCTION_PARAM_ADDRESS] >= p_SFP ->param_from_script )
 	{
@@ -234,6 +224,24 @@ static X_Boolean PenChargeStateGenerator(X_Void * p_param)
 	}
 	return X_True;
 }
+static X_Boolean QuickPenChargeStateGenerator(X_Void * p_param)
+{
+	uint8_t random_num;
+	X_Boolean isOK;
+	ScriptFunctionParam * p_SFP;
+
+	p_SFP = (ScriptFunctionParam *)p_param;
+	random_num = p_SFP ->buf_8[CURRENT_RANDOM_NUM_ADDRESS];
+
+	// get app state
+
+	if(random_num >= p_SFP ->param_from_script )
+	{
+		isOK = BatteryChargeStateToggle();
+		String_Debug(SCRIPT_FUNCTION_DEBUG,(40,"pen charge state change %d\r\n",isOK));
+	}
+	return X_True;
+}
 static X_Boolean PenDistanceFromMagneticGenerator(X_Void * p_param)
 {
 	uint8_t random_num;
@@ -242,12 +250,7 @@ static X_Boolean PenDistanceFromMagneticGenerator(X_Void * p_param)
 	p_SFP = (ScriptFunctionParam *)p_param;
 	random_num = p_SFP ->buf_8[CURRENT_RANDOM_NUM_ADDRESS];
 
-	isUserAppLocked = X_False;
 	// get app state
-	if(DoesSureShutDown_TB() == X_True)
-	{
-		return X_False;
-	}
 
 	p_SFP ->buf_8[MAGNETIC_FUNCTION_PARAM_ADDRESS] = p_SFP ->buf_8[MAGNETIC_FUNCTION_PARAM_ADDRESS] + random_num;
 	if(p_SFP ->buf_8[MAGNETIC_FUNCTION_PARAM_ADDRESS] >= 200 && p_SFP ->buf_8[MAGNETIC_FUNCTION_PARAM_ADDRESS] <= 210 )
@@ -265,17 +268,53 @@ static X_Boolean PenDistanceFromMagneticGenerator(X_Void * p_param)
 	{
 		p_SFP ->buf_8[MAGNETIC_FUNCTION_PARAM_ADDRESS] = 0;
 	}
+	return X_True;
+}
+static X_Boolean QuickPenDistanceFromMagneticGenerator(X_Void * p_param)
+{
+	uint8_t random_num;
+	ScriptFunctionParam * p_SFP;
 
-	if(p_SFP ->buf_8[SECOND_CONDITION_JUMP_ADDRESS] == 1)
+	p_SFP = (ScriptFunctionParam *)p_param;
+	random_num = p_SFP ->buf_8[CURRENT_RANDOM_NUM_ADDRESS];
+
+	// get app state
+
+	if(random_num % 4 == 0 )
 	{
-		return X_False;
+		String_Debug_Once(SCRIPT_FUNCTION_DEBUG,p_magnetic_entry,1,(30,"pen near magnetic\r\n"));
+		MagneticStateSet(X_True);
 	}
 	else
 	{
-		return X_True;
+		String_Debug_Once(SCRIPT_FUNCTION_DEBUG,p_magnetic_entry,2,(30,"pen far away from magnetic\r\n"));
+		MagneticStateSet(X_False);
 	}
+	return X_True;
 }
 static X_Boolean PenPowerStateGenerator(X_Void * p_param)
+{
+	uint8_t random_num;
+	ScriptFunctionParam * p_SFP;
+
+	p_SFP = (ScriptFunctionParam *)p_param;
+	random_num = p_SFP ->buf_8[CURRENT_RANDOM_NUM_ADDRESS];
+
+	// get app state
+
+	if(random_num <= 2 )
+	{
+		String_Debug_Once(SCRIPT_FUNCTION_DEBUG,p_power_entry,1,(30,"pen power extrlow\r\n"));
+		PowerStateSet(X_True);
+	}
+	else
+	{
+		String_Debug_Once(SCRIPT_FUNCTION_DEBUG,p_power_entry,2,(30,"pen power normal\r\n"));
+		PowerStateSet(X_False);
+	}
+	return X_True;
+}
+static X_Boolean QuickPenPowerStateGenerator(X_Void * p_param)
 {
 	uint8_t random_num;
 	ScriptFunctionParam * p_SFP;
@@ -306,14 +345,12 @@ static X_Boolean PenPowerStateGenerator(X_Void * p_param)
 	}
 	return X_True;
 }
-
 static X_Boolean PowerOff(X_Void * p_param)
 {
 
-	ScriptFunctionParam * p_SFP;
-
-	p_SFP = (ScriptFunctionParam *)p_param;
-    p_SFP ->buf_8[LOOP_COUNTER_THRESHOLD_ADDRESS] = p_SFP->param_from_script;
+//	ScriptFunctionParam * p_SFP;
+//
+//	p_SFP = (ScriptFunctionParam *)p_param;
 
 	String_Debug(SCRIPT_FUNCTION_DEBUG,(30,"power off\r\n"));
 	ClearShutDownState_TB();
@@ -322,10 +359,24 @@ static X_Boolean PowerOff(X_Void * p_param)
 }
 static X_Boolean StartAgain(X_Void * p_param)
 {
-	String_Debug(SCRIPT_FUNCTION_DEBUG,(30,"start again\r\n"));
+	String_Debug(SCRIPT_FUNCTION_DEBUG,(30,"start again ====\r\n"));
 	// sent app state
+	PenMoveStateInit();
+	BleStateInit();
+	UserShutDownStateInit();
+
+
 	AllPeripheralInit();
 	return X_True;
+}
+static X_Boolean BackToStart(X_Void * p_param)
+{
+	return X_True;
+}
+
+static X_Boolean DoesPowerOff(X_Void * p_param)
+{
+  return DoesSureShutDown_TB();
 }
 
 static struct _ScriptsFunctionArray
@@ -346,6 +397,13 @@ const ScriptsFunctionArray[] = {
 	  {0x0a,PowerOff},
 	  {0x0b,StartAgain},
 	  {0x0c,PenPowerStateGenerator},
+	  {0x0d,UserAppLock},
+	  {0x0e,UserAppUnlock},
+	  {0x0f,BackToStart},
+	  {0x10,QuickPenChargeStateGenerator},
+	  {0x11,QuickPenDistanceFromMagneticGenerator},
+	  {0x12,QuickPenPowerStateGenerator},
+	  {0x13,DoesPowerOff},
 };
 
 X_Boolean CallFunction(uint8_t func_num,X_Void * p_param)
@@ -366,32 +424,50 @@ X_Boolean CallFunction(uint8_t func_num,X_Void * p_param)
 }
 
 /*
- *	1	:ScriptsFunctionInitial  00
- *	2	:ForNow 00
- *	3	:StartAgain 00
- *	4	:RandomNumberGenerator 00
- *	5	:UserShutDownGenerator 00
- *	6	:PenMoveStateGenerator 00
- *	7	:BleStateGenerator 00
- *	8	:PenChargeStateGenerator 00 xx xx 64
- *	9	:PenPowerStateGenerator 00
- *	a	:PenDistanceFromMagneticGenerator 01 04 0b
- *	b	:PowerOff 00 xx xx 0a
- *	c	:LoopSpecificTimes 01 02 0c
+ *	1	:ScriptsFunctionInitial					(1)  00010100
+ *	2	:ForNow									(2)  00010100
+ *	3	:UserAppLock							(0d) 00010100
+ *	4	:StartAgain								(0b) 00010100
+ *	5	:RandomNumberGenerator					(4)  00010114
+ *	6	:UserShutDownGenerator					(5)  00010100
+ *	7	:PenMoveStateGenerator					(7)  00010100
+ *	8	:BleStateGenerator						(6)  00010100
+ *	9	:PenChargeStateGenerator				(8)  00010164
+ *	a	:PenPowerStateGenerator					(0c) 00010100
+ *	b	:PenDistanceFromMagneticGenerator		(9)  00010100
+ *	c	:DoesPowerOff							(13) 010e0d00
+ *	d	:UserAppUnlock							(0e) 01050d00
+ *	e	:UserAppLock							(0d) 00010100
+ *	f	:PowerOff								(0a) 00010100
+ *	10	:RandomNumberGenerator					(4)  0001010a
+ *	11	:QuickPenChargeStateGenerator			(10) 00010107
+ *	12	:QuickPenDistanceFromMagneticGenerator	(11) 00010100
+ *	13	:QuickPenPowerStateGenerator			(12) 00010100
+ *	14	:LoopSpecificTimes						(3)  01151405
+ *	15	:UserAppUnlock							(0e) 01041500
  *
 1:command:07550100010100
 2:command:07550200010100
-3:command:07550b00010100
-4:command:07550400010114
-5:command:07550500010100
-6:command:07550700010100
-7:command:07550600010100
-8:command:07550800010164
-9:command:07550c00010100
-a:command:07550901040b00
-b:command:07550a0001010a
-c:command:07550301020c00
-d:end
+3:command:07550d00010100
+4:command:07550b00010100
+5:command:07550400010114
+6:command:07550500010100
+7:command:07550700010100
+8:command:07550600010100
+9:command:07550800010164
+a:command:07550c00010100
+b:command:07550900010100
+c:command:075513010e0d00
+d:command:07550e01050d00
+e:command:07550d00010100
+f:command:07550a00010100
+10:command:07550400010107
+11:command:07551000010100
+12:command:07551100010100
+13:command:07551200010100
+14:command:07550301151405
+15:command:07550e01041500
+16:end
  */
 static X_Boolean isBatteryCharge;
 

@@ -70,3 +70,8 @@ X_Void PenConnectedStateHandle(X_Void)
 	}
 
 }
+
+X_Void PenConnectedStateInit(X_Void)
+{
+
+}

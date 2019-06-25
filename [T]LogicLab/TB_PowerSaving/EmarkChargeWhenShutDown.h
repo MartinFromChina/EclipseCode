@@ -3,4 +3,5 @@
 
 #include "..\..\CommonSource\KeilMDK.h"
 X_Void PenChargeWhenShutDownStateHandle(X_Void);
+X_Void PenChargeWhenShutDownStateInit(X_Void);
 #endif

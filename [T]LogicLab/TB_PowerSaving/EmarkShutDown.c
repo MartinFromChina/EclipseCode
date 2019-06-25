@@ -2,9 +2,10 @@
 #include "PenState.h"
 #include "..\..\CommonSource\CharStringDebug\CharStringDebugModule.h"
 
-#define PEN_CONNECTED_DEBUG  1
+#define PEN_SHUTDOWN_DEBUG  0
+STRING_DEBUG_ONCE_ENTRY_DEF(p_state_entry,100);
 
-static X_Boolean isSureShutDown = X_False;
+static X_Boolean isSureShutDown;
 
 typedef enum
 {
@@ -20,6 +21,9 @@ static PenState CurrentState;
 static PenState StateJumpDetectedAction(X_Void)
 {
 	PenBasicState pbs;
+
+	String_Debug_Once(PEN_SHUTDOWN_DEBUG,p_state_entry,StateJumpDetected,(40,"-----StateJumpDetected\r\n"));
+
 	pbs = PenBasicStateGetUnderCertainState(PBS_GoingToShutDown);
 	if( pbs == PBS_GoingToShutDown)
 	{
@@ -33,11 +37,12 @@ static PenState StateJumpDetectedAction(X_Void)
 }
 static PenState InitAction(X_Void)
 {
-	isSureShutDown = X_False;
+	String_Debug_Once(PEN_SHUTDOWN_DEBUG,p_state_entry,Init,(40,"-----Init\r\n"));
 	return SureShutDown;
 }
 static PenState SureShutDownAction(X_Void)
 {
+	String_Debug_Once(PEN_SHUTDOWN_DEBUG,p_state_entry,SureShutDown,(40,"-----SureShutDown\r\n"));
 	isSureShutDown = X_True;// set a shut down message to TBmodule
 	return TheEnd;
 }
@@ -60,6 +65,10 @@ X_Void PenShutDownStateHandle(X_Void)
 
 	state_number = (sizeof(StateHandle) / sizeof(StateHandle[0]));
 	CurrentState = StateJumpDetected;
+	if(isSureShutDown == X_True)
+	{
+		CurrentState = SureShutDown;
+	}
 	for(i=0;i< state_number ;i++)
 	{
 		if(StateHandle[i].state == CurrentState)
@@ -74,10 +83,15 @@ X_Void PenShutDownStateHandle(X_Void)
 
 	if(i >= state_number)
 	{
-		String_Debug(PEN_CONNECTED_DEBUG,(30,"unknow state\r\n"));
+		String_Debug(PEN_SHUTDOWN_DEBUG,(30,"unknow state\r\n"));
 		CurrentState = StateJumpDetected;
 	}
 
+}
+
+X_Void PenShutDownStateInit(X_Void)
+{
+	isSureShutDown = X_False;
 }
 
 X_Boolean DoesSureShutDown_TB(X_Void)

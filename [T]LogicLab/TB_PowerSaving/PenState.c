@@ -14,7 +14,7 @@
 #define PEN_BASIC_STATE_DEBUG  1
 STRING_DEBUG_ONCE_ENTRY_DEF(p_state_entry,100);
 
-#define WAKE_UP_DELAY          10
+#define WAKE_UP_DELAY          3
 
 #define  FactorFlag   uint8_t
 #define  MaxBitNumber   8
@@ -110,6 +110,10 @@ static uint16_t time_stamp,delay_counter;
 
 static X_Void PenStateInit(X_Void)
 {
+	PenChargeWhenShutDownStateInit();
+	PenDisconnectedStateInit();
+	PenConnectedStateInit();
+	PenShutDownStateInit();
 	/**********
 	//mcu reset just happen and charge in,it must be charge in wake up the MCU
 	*********************/
@@ -254,18 +258,26 @@ X_Boolean SetCurrentBasicState(PenBasicState state)
 	X_Boolean isOK;
 
 	isOK = X_True;
+	if(state == CurrentState)
+	{
+		return isOK;
+	}
 	switch(state)
 	{
 		case PBS_ChargeWhenShutDown:
+			PenChargeWhenShutDownStateInit();
 			CurrentState = PBS_ChargeWhenShutDown;
 			break;
 		case PBS_DisConnected:
+			PenDisconnectedStateInit();
 			CurrentState = PBS_DisConnected;
 			break;
 		case PBS_Connected:
+			PenConnectedStateInit();
 			CurrentState = PBS_Connected;
 			break;
 		case PBS_GoingToShutDown:
+		    PenShutDownStateInit();
 			CurrentState = PBS_GoingToShutDown;
 			break;
 		default:
@@ -294,9 +306,14 @@ static PenBasicState JustWakeUpAction(X_Void)
 }
 static PenBasicState GetGlobalStateAction(X_Void)
 {
+	PenBasicState state;
 	String_Debug_Once(PEN_BASIC_STATE_DEBUG,p_state_entry,PBS_GetGlobalState,(30,"--GetGlobalState\r\n"));
 	PenStateCollect();
-	return PenBasicStateGet();
+	state = PenBasicStateGet();
+	SetCurrentBasicState(state);// for init
+	return state;
+
+
 }
 static PenBasicState ChargeWhenShutDownAction(X_Void)
 {
@@ -403,7 +420,8 @@ X_Void AllPeripheralInit(X_Void)
 }
 
 void onTick(void)
-{	if(DoesUserAppLocked() == X_False)
+{
+	if(DoesUserAppLocked() == X_False)
 	{
 		BleAndPeripheralAction();
 	}
