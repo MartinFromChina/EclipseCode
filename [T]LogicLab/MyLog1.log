@@ -1,34 +1,15 @@
-2019-06-25 20:35:31.841 hello I am string debug 
-2019-06-25 20:35:34.351 start again ====2019-06-25 20:35:36.766 ble disconnected 2019-06-25 20:35:37.973 pen power normal 2019-06-25 20:35:38.578 pen far away from magnetic2019-06-25 20:35:41.591 pen silence !!!2019-06-25 20:35:42.797 --DisConnected
-2019-06-25 20:35:43.400 --Quiet
-2019-06-25 20:35:43.503 -----motion wake en
-2019-06-25 20:35:45.819 power off2019-06-25 20:35:47.628 pen far away from magnetic--2019-06-25 20:35:48.231 pen power normal--2019-06-25 20:35:52.453 start again ====2019-06-25 20:35:54.262 pen move2019-06-25 20:35:54.867 ble connected 2019-06-25 20:35:55.471 --Connected
-2019-06-25 20:36:16.561 ble disconnected 2019-06-25 20:36:17.165 --DisConnected
-2019-06-25 20:36:28.617 pen power extrlow !!!2019-06-25 20:36:31.632 user shut down the pen !!!2019-06-25 20:36:32.237 pen silence !!!2019-06-25 20:36:32.340 --GoingToShutDown
-2019-06-25 20:36:33.445 pen charge In !!!
-2019-06-25 20:36:36.461 power off2019-06-25 20:36:37.668 pen discharge -- !!!2019-06-25 20:36:38.273 pen far away from magnetic--2019-06-25 20:36:38.876 pen power normal--2019-06-25 20:36:43.098 start again ====2019-06-25 20:36:44.305 wake up button pushed 2019-06-25 20:36:46.114 --DisConnected
-2019-06-25 20:36:49.734 wake up button pushed 2019-06-25 20:36:50.943 ble connected 2019-06-25 20:36:51.546 --Connected
-2019-06-25 20:37:12.040 pen move2019-06-25 20:37:12.644 ble disconnected 2019-06-25 20:37:13.249 --DisConnected
-2019-06-25 20:37:22.306 wake up button pushed 2019-06-25 20:37:22.910 pen silence !!!2019-06-25 20:37:23.514 --Quiet
-2019-06-25 20:37:23.617 -----motion wake en
-2019-06-25 20:37:27.134 power off2019-06-25 20:37:28.943 pen far away from magnetic--2019-06-25 20:37:29.545 pen power normal--2019-06-25 20:37:33.767 start again ====2019-06-25 20:37:35.575 pen move2019-06-25 20:37:36.782 --DisConnected
-2019-06-25 20:37:37.989 pen near magnetic !!!2019-06-25 20:37:38.594 --GoingToShutDown
-2019-06-25 20:37:43.416 pen far away from magnetic2019-06-25 20:37:45.225 power off2019-06-25 20:37:47.034 pen far away from magnetic--2019-06-25 20:37:47.639 pen power normal--2019-06-25 20:37:51.856 start again ====2019-06-25 20:37:54.268 ble connected 2019-06-25 20:37:54.873 --Connected
-2019-06-25 20:37:58.493 wake up button pushed 2019-06-25 20:37:59.098 pen silence !!!2019-06-25 20:38:00.905 pen power extrlow !!!2019-06-25 20:38:04.519 pen move2019-06-25 20:38:05.727 pen charge In !!!
-2019-06-25 20:38:09.352 user shut down the pen !!!2019-06-25 20:38:09.954 pen silence !!!2019-06-25 20:38:10.056 --GoingToShutDown
-2019-06-25 20:38:14.175 power off2019-06-25 20:38:15.379 pen discharge -- !!!2019-06-25 20:38:15.984 pen far away from magnetic--2019-06-25 20:38:16.590 pen power normal--2019-06-25 20:38:20.809 start again ====2019-06-25 20:38:22.015 wake up button pushed 2019-06-25 20:38:23.826 --Connected
-2019-06-25 20:38:34.070 ble disconnected 2019-06-25 20:38:34.673 --DisConnected
-2019-06-25 20:38:35.278 --Quiet
-2019-06-25 20:38:35.381 -----motion wake en
-2019-06-25 20:38:37.692 power off2019-06-25 20:38:38.897 pen charge In -- !!!2019-06-25 20:38:39.500 pen near magnetic-- !!!2019-06-25 20:38:40.106 pen power normal--2019-06-25 20:38:44.327 start again ====2019-06-25 20:38:47.341 --ChargeWhenShutDown
-2019-06-25 20:38:48.548 pen far away from magnetic2019-06-25 20:38:52.165 ble connected 2019-06-25 20:39:03.621 pen discharge !!!
-2019-06-25 20:39:04.225 --GoingToShutDown
-2019-06-25 20:39:06.639 power off2019-06-25 20:39:08.449 pen far away from magnetic--2019-06-25 20:39:09.054 pen power extrlow-- !!!2019-06-25 20:39:13.273 start again ====2019-06-25 20:39:16.288 --DisConnected
-2019-06-25 20:39:16.892 --Quiet
-2019-06-25 20:39:16.994 -----motion wake en
-2019-06-25 20:39:19.307 power off2019-06-25 20:39:21.117 pen far away from magnetic--2019-06-25 20:39:21.720 pen power extrlow-- !!!2019-06-25 20:39:25.940 start again ====2019-06-25 20:39:28.352 ble disconnected 2019-06-25 20:39:28.955 --DisConnected
-2019-06-25 20:39:34.986 pen power normal 2019-06-25 20:39:38.603 pen move2019-06-25 20:39:44.635 ble connected 2019-06-25 20:39:45.239 --Connected
-2019-06-25 20:39:48.856 wake up button pushed 2019-06-25 20:39:49.460 pen silence !!!2019-06-25 20:39:54.887 pen move2019-06-25 20:39:57.297 pen near magnetic !!!2019-06-25 20:39:57.900 --GoingToShutDown
-2019-06-25 20:39:59.709 wake up button pushed 2019-06-25 20:40:02.724 pen far away from magnetic2019-06-25 20:40:04.534 power off2019-06-25 20:40:06.343 pen far away from magnetic--2019-06-25 20:40:06.948 pen power extrlow-- !!!2019-06-25 20:40:11.168 start again ====2019-06-25 20:40:14.182 --Connected
-2019-06-25 20:40:14.788 pen power normal 2019-06-25 20:40:35.294 ble disconnected 2019-06-25 20:40:35.899 --DisConnected
-2019-06-25 20:40:41.322 pen charge In !!!
+2019-06-25 23:17:50.808 hello I am string debug 
+2019-06-25 23:17:53.320 start again ====2019-06-25 23:17:55.131 pen silence !!!2019-06-25 23:17:55.736 ble disconnected 2019-06-25 23:17:56.942 pen power normal 2019-06-25 23:17:57.547 pen far away from magnetic2019-06-25 23:18:01.766 --DisConnected
+2019-06-25 23:18:02.370 --Quiet
+2019-06-25 23:18:02.471 -----motion wake en
+2019-06-25 23:18:04.786 power off2019-06-25 23:18:06.595 pen far away from magnetic--2019-06-25 23:18:07.199 pen power extrlow-- !!!2019-06-25 23:18:11.418 start again ====2019-06-25 23:18:14.434 --DisConnected
+2019-06-25 23:18:15.037 pen power normal 2019-06-25 23:18:19.256 ble connected 2019-06-25 23:18:19.859 --Connected
+2019-06-25 23:18:28.904 wake up button pushed 2019-06-25 23:18:34.930 pen move2019-06-25 23:18:39.754 wake up button pushed 2019-06-25 23:18:51.809 ble disconnected 2019-06-25 23:18:52.414 --DisConnected
+2019-06-25 23:18:58.444 pen power extrlow !!!2019-06-25 23:19:02.662 ble connected 2019-06-25 23:19:03.266 pen charge In !!!
+2019-06-25 23:19:03.368 --Connected
+2019-06-25 23:19:09.299 pen power normal 2019-06-25 23:19:35.220 ble disconnected 2019-06-25 23:19:35.825 --DisConnected
+2019-06-25 23:19:42.456 pen near magnetic !!!2019-06-25 23:19:43.062 --GoingToShutDown
+2019-06-25 23:19:46.075 ble connected 2019-06-25 23:19:47.885 pen far away from magnetic2019-06-25 23:19:49.697 power off2019-06-25 23:19:51.504 pen near magnetic-- !!!2019-06-25 23:19:52.109 pen power normal--2019-06-25 23:19:56.331 start again ====2019-06-25 23:19:59.347 --ChargeWhenShutDown
+2019-06-25 23:19:59.952 pen power extrlow !!!2019-06-25 23:20:00.556 pen far away from magnetic2019-06-25 23:20:04.802 pen discharge !!!
+2019-06-25 23:20:05.407 --GoingToShutDown
+2019-06-25 23:20:07.819 power off2019-06-25 23:20:09.629 pen far away from magnetic--2019-06-25 23:20:10.232 pen power normal--2019-06-25 23:20:14.452 start again ====2019-06-25 23:20:17.466 --DisConnected

@@ -457,6 +457,7 @@ static X_Void AlwaysRunningAction(X_Void)
 	ExternalPowerHandle();//and PowerShutDownMonitor();
 	CapPowerHandle();
 	RGB_DisplayHandle();
+//	ChargeIncheckHandle();
 
 }
 

@@ -4,15 +4,11 @@
 
 #define PEN_CONNECTED_DEBUG  1
 
-static X_Void ExternalPowerHandle(X_Void)
+static X_Void ExternalPowerConfig(X_Void)
 {
+	// SetNormalPowerState(X_False);
 	//	PowerOnNoLongerUsed(PowerModuleEmark);
 	//	PowerOnNoLongerUsed(PowerModulePressure);
-}
-static X_Void TestModeConfigClear(X_Void)
-{
-//	SetMode(ModeProduct);
-//	SetCurrentAirMouse(X_True);
 }
 
 typedef enum
@@ -42,7 +38,6 @@ static PenState StateJumpDetectedAction(X_Void)
 }
 static PenState SetAction(X_Void)
 {
-	TestModeConfigClear();
 	// start advertising
 	return PS_Get;
 }
@@ -53,10 +48,11 @@ static PenState GetAction(X_Void)
 static PenState ConfigAction(X_Void)
 {
 	//RGB_StateCommanderWhenDisconnected();
-	//AdcStateCommanderWhenDisconnect();
+	//AdcStateCommanderWhenDisconnect();//adc ,adc sum, battery strength monitor enable
 	//TimeStampRefresh(X_False);
-	//FastAdjustPressureInit(false);
-	ExternalPowerHandle();
+	ExternalPowerConfig();
+	// charge in check
+	//
 	return PS_TheEnd;
 }
 

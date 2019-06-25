@@ -9,11 +9,11 @@ static X_Boolean isSureShutDown;
 
 typedef enum
 {
-	StateJumpDetected,
-	Init,
-	SureShutDown,
-	TheEnd,
-
+	PS_StateJumpDetected,
+	PS_Set,
+	PS_Get,
+	PS_Config,
+	PS_TheEnd,
 }PenState;
 
 static PenState CurrentState;
@@ -22,41 +22,41 @@ static PenState StateJumpDetectedAction(X_Void)
 {
 	PenBasicState pbs;
 
-	String_Debug_Once(PEN_SHUTDOWN_DEBUG,p_state_entry,StateJumpDetected,(40,"-----StateJumpDetected\r\n"));
-
 	pbs = PenBasicStateGetUnderCertainState(PBS_GoingToShutDown);
 	if( pbs == PBS_GoingToShutDown)
 	{
-		return Init;
+		return PS_Set;
 	}
 	else
 	{
 		SetCurrentBasicState(pbs);
-		return TheEnd;
+		return PS_TheEnd;
 	}
 }
-static PenState InitAction(X_Void)
+
+static PenState SetAction(X_Void)
 {
-	String_Debug_Once(PEN_SHUTDOWN_DEBUG,p_state_entry,Init,(40,"-----Init\r\n"));
-	return SureShutDown;
+	return PS_Get;
 }
-static PenState SureShutDownAction(X_Void)
+static PenState GetAction(X_Void)
 {
-	String_Debug_Once(PEN_SHUTDOWN_DEBUG,p_state_entry,SureShutDown,(40,"-----SureShutDown\r\n"));
-	isSureShutDown = X_True;// set a shut down message to TBmodule
-	return TheEnd;
+	isSureShutDown = X_True;
+	return PS_Config;
+}
+static PenState ConfigAction(X_Void)
+{
+	return PS_TheEnd;
 }
 static struct _StateHandle{
 	PenState state;
 	PenState (*Action)(X_Void);
 }
 const StateHandle[]={
-	{StateJumpDetected,StateJumpDetectedAction},
-	{Init,InitAction},
-	{SureShutDown,SureShutDownAction},
-//	{DisConnected,DisConnectedAction},
-//	{Connected,ConnectedAction},
-	{TheEnd,X_Null},
+	{PS_StateJumpDetected,StateJumpDetectedAction},
+	{PS_Set,SetAction},
+	{PS_Get,GetAction},
+	{PS_Config,ConfigAction},
+	{PS_TheEnd,X_Null},
 };
 
 X_Void PenShutDownStateHandle(X_Void)
@@ -64,10 +64,10 @@ X_Void PenShutDownStateHandle(X_Void)
 	uint8_t i, state_number;
 
 	state_number = (sizeof(StateHandle) / sizeof(StateHandle[0]));
-	CurrentState = StateJumpDetected;
+	CurrentState = PS_StateJumpDetected;
 	if(isSureShutDown == X_True)
 	{
-		CurrentState = SureShutDown;
+		CurrentState = PS_Config;
 	}
 	for(i=0;i< state_number ;i++)
 	{
@@ -77,14 +77,14 @@ X_Void PenShutDownStateHandle(X_Void)
 			{
 				CurrentState = StateHandle[i].Action();
 			}
-			if(CurrentState == TheEnd){break;}
+			if(CurrentState == PS_TheEnd){break;}
 		}
 	}
 
 	if(i >= state_number)
 	{
 		String_Debug(PEN_SHUTDOWN_DEBUG,(30,"unknow state\r\n"));
-		CurrentState = StateJumpDetected;
+		CurrentState = PS_StateJumpDetected;
 	}
 
 }
