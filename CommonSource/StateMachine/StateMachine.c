@@ -1,4 +1,5 @@
 #include "StateMachine.h"
+//#include "stdio.h"
 
 uint8_t StateMachineRun(StateBasicParam *p_sbp
 						,X_Boolean isNullEventForbid
@@ -30,7 +31,6 @@ uint8_t StateMachineRun(StateBasicParam *p_sbp
 			previous_state = current_state;
 			current_state = p_sbp ->p_Handle[current_state].SAction[i].Action(current_state);
 			Counter ++;
-
 			if((current_state+1) > p_sbp->AllStateNum)
 			{
 				current_state = 0;
@@ -39,6 +39,7 @@ uint8_t StateMachineRun(StateBasicParam *p_sbp
 			}
 			if(previous_state != current_state)
 			{
+				i = 0; // !!!
 				if(StateRecorder != X_Null) {StateRecorder(current_state);}
 			}
 		}
@@ -46,6 +47,7 @@ uint8_t StateMachineRun(StateBasicParam *p_sbp
 		{
 			if(isNullEventForbid == X_True)
 			{
+				current_state = 0;
 				isReachNullEvent = X_True;
 				break;
 			}

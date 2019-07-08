@@ -4,7 +4,6 @@
 #include "..\KeilMDK.h"
 #include "..\AppError.h"
 
-
 #define MAX_STATE_NUMBER    		8
 #define MAX_STATE_EVENT_NUMBER    	6
 #define DEFAULT_STATE_NUMBER        0
@@ -36,18 +35,13 @@ uint8_t StateMachineRun(StateBasicParam *p_sbp
 
 /*
  static const StateHandle ExampleStateHandle[2][3] = {
-		{
+
 		{{{X_Null},{X_Null},{X_Null},{X_Null},{X_Null},{X_Null}}},
 		{{{X_Null},{X_Null},{X_Null},{X_Null},{X_Null},{X_Null}}},
-		},
-		{
-		{{{X_Null},{X_Null},{X_Null},{X_Null},{X_Null},{X_Null}}},
-		{{{X_Null},{X_Null},{X_Null},{X_Null},{X_Null},{X_Null}}},
-		},
 };
 
 
-APP_STATE_MACHINE_DEF(example_state,2,3,&ExampleStateHandle[0][0]);
+APP_STATE_MACHINE_DEF(example_state,2,3,&ExampleStateHandle[0]);
 
 
 static X_Boolean DoesStop(StateBasicParam *p_sbp,StateNumber nextstate,uint16_t loop_counter)
@@ -58,9 +52,9 @@ static X_Boolean DoesStop(StateBasicParam *p_sbp,StateNumber nextstate,uint16_t 
 }
 StateMachineRun(&example_state,X_True,DoesStop,X_Null);
 
-X_Void StateJumpRecorder(StateNumber state)
+X_Void StateJumpRecorder(StateNumber state_num)
 {
-	// current state number is state and latest state number != state
+	// going to jump new state:state_num
 }
 
 StateMachineRun(&example_state,X_False,DoesStop,StateJumpRecorder);
