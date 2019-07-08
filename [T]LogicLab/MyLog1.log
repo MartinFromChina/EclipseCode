@@ -1,15 +1,2 @@
-2019-06-25 23:17:50.808 hello I am string debug 
-2019-06-25 23:17:53.320 start again ====2019-06-25 23:17:55.131 pen silence !!!2019-06-25 23:17:55.736 ble disconnected 2019-06-25 23:17:56.942 pen power normal 2019-06-25 23:17:57.547 pen far away from magnetic2019-06-25 23:18:01.766 --DisConnected
-2019-06-25 23:18:02.370 --Quiet
-2019-06-25 23:18:02.471 -----motion wake en
-2019-06-25 23:18:04.786 power off2019-06-25 23:18:06.595 pen far away from magnetic--2019-06-25 23:18:07.199 pen power extrlow-- !!!2019-06-25 23:18:11.418 start again ====2019-06-25 23:18:14.434 --DisConnected
-2019-06-25 23:18:15.037 pen power normal 2019-06-25 23:18:19.256 ble connected 2019-06-25 23:18:19.859 --Connected
-2019-06-25 23:18:28.904 wake up button pushed 2019-06-25 23:18:34.930 pen move2019-06-25 23:18:39.754 wake up button pushed 2019-06-25 23:18:51.809 ble disconnected 2019-06-25 23:18:52.414 --DisConnected
-2019-06-25 23:18:58.444 pen power extrlow !!!2019-06-25 23:19:02.662 ble connected 2019-06-25 23:19:03.266 pen charge In !!!
-2019-06-25 23:19:03.368 --Connected
-2019-06-25 23:19:09.299 pen power normal 2019-06-25 23:19:35.220 ble disconnected 2019-06-25 23:19:35.825 --DisConnected
-2019-06-25 23:19:42.456 pen near magnetic !!!2019-06-25 23:19:43.062 --GoingToShutDown
-2019-06-25 23:19:46.075 ble connected 2019-06-25 23:19:47.885 pen far away from magnetic2019-06-25 23:19:49.697 power off2019-06-25 23:19:51.504 pen near magnetic-- !!!2019-06-25 23:19:52.109 pen power normal--2019-06-25 23:19:56.331 start again ====2019-06-25 23:19:59.347 --ChargeWhenShutDown
-2019-06-25 23:19:59.952 pen power extrlow !!!2019-06-25 23:20:00.556 pen far away from magnetic2019-06-25 23:20:04.802 pen discharge !!!
-2019-06-25 23:20:05.407 --GoingToShutDown
-2019-06-25 23:20:07.819 power off2019-06-25 23:20:09.629 pen far away from magnetic--2019-06-25 23:20:10.232 pen power normal--2019-06-25 23:20:14.452 start again ====2019-06-25 23:20:17.466 --DisConnected
+2019-07-09 00:52:48.487 hello I am string debug 
+2019-07-09 00:52:48.597 APP_POINTER_NULL

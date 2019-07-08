@@ -10,6 +10,7 @@
 #include "EmarkShutDown.h"
 #include "EmarkChargeWhenShutDown.h"
 #include "EmarkQuiet.h"
+#include "NewPenState.h"
 
 #define PEN_PERIPHERAL_DEBUG  1
 #define PEN_BASIC_STATE_DEBUG  1
@@ -464,7 +465,8 @@ static X_Void AlwaysRunningAction(X_Void)
 static X_Void BleAndPeripheralAction(X_Void)
 {
 	time_stamp ++;
-	PenBasicStateHandle();
+//	PenBasicStateHandle();
+	AllStateAndEventAction();
 	DoTheAction();
 	AlwaysRunningAction();
 }
