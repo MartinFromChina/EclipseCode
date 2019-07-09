@@ -1,5 +1,11 @@
 #include "StateMachine.h"
 //#include "stdio.h"
+static X_Boolean DoesBreakDefault(StateBasicParam *p_sbp,StateNumber nextstate,uint16_t loop_counter)
+{
+	if(loop_counter > MAX_STATE_EVENT_NUMBER) {return X_True;}
+	if(p_sbp->CurrentStateNum != nextstate){return X_True;}
+	return X_False;
+}
 
 uint8_t StateMachineRun(StateBasicParam *p_sbp
 						,X_Boolean isNullEventForbid
@@ -26,6 +32,7 @@ uint8_t StateMachineRun(StateBasicParam *p_sbp
 
 	for(i = 0; i<p_sbp->MaxEventNum ; i++)
 	{
+		if(i >= p_sbp ->p_Handle[current_state].current_max_event_number) {return APP_BEYOND_SCOPE;}
 		if(p_sbp ->p_Handle[current_state].SAction[i].Action != X_Null)
 		{
 			previous_state = current_state;
@@ -53,8 +60,15 @@ uint8_t StateMachineRun(StateBasicParam *p_sbp
 			}
 		}
 
-		if(DoesBreak == X_Null) {break;}
-		if(DoesBreak(p_sbp,current_state,Counter) == X_True) {break;}
+		if(DoesBreak == X_Null)
+		{
+			if(DoesBreakDefault(p_sbp,current_state,Counter) == X_True) {break;}
+		}
+		else
+		{
+			if(DoesBreak(p_sbp,current_state,Counter) == X_True) {break;}
+		}
+
 	}
 	p_sbp->CurrentStateNum = current_state;
 

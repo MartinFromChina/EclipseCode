@@ -14,6 +14,7 @@ typedef  struct {
 	StateNumber (*Action)(StateNumber current_state);
 }StateAction;
 typedef struct {
+	uint8_t     current_max_event_number;
 	StateAction SAction[MAX_STATE_EVENT_NUMBER];
 }StateHandle;
 typedef struct
@@ -34,9 +35,9 @@ uint8_t StateMachineRun(StateBasicParam *p_sbp
 
 
 /*
- static const StateHandle ExampleStateHandle[2][3] = {
+ static const StateHandle ExampleStateHandle[2] = {
 
-		{{{X_Null},{X_Null},{X_Null},{X_Null},{X_Null},{X_Null}}},
+		{{{X_Null},{X_Null},{X_Null},{X_Null},{X_Null},{X_Null}}},  // if the position is empty , the pointer's init value is X_Null?
 		{{{X_Null},{X_Null},{X_Null},{X_Null},{X_Null},{X_Null}}},
 };
 

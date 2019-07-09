@@ -10,11 +10,11 @@ STRING_DEBUG_ONCE_ENTRY_DEF(state_entry,100);
 
 typedef enum
 {
-	Idle = 0,
-	WakeUp = 1,
-	NormalProcess =2,
-	Sleepy = 3,
-	ShutDown = 4,
+	Idle 				= 0,
+	WakeUp 				= 1,
+	NormalProcess 		= 2,
+	Sleepy 				= 3,
+	ShutDown 			= 4,
 }PenState;
 
 static StateNumber IdleAction(StateNumber current_state)
@@ -46,15 +46,30 @@ static StateNumber test3(StateNumber current_state)
 }
 static const StateHandle PenStateHandle[5] = {
 
-		{{{IdleAction},{test1},{test1},{test1},{test1},{test1}}}, // Idle
+		{
+		1,
+		{{IdleAction}},
+		}, // Idle
 
-		{{{WakeUpRoutineAction},{test1},{test1},{test1},{test1},{test1}}},//WakeUp
+		{
+		3,
+		{{WakeUpRoutineAction},{test1},{test1}},
+		},//WakeUp
 
-		{{{test2},{test2},{test2},{test2},{test2},{test2}}},
+		{
+		2,
+		{{test2},{test2},{test2},{test2},{test2},{test2}}
+		},
 
-		{{{test2},{test2},{test2},{test2},{test2},{test2}}},
+		{
+		4,
+		{{test2},{test2},{test2},{test2}},
+		},
 
-		{{{test3},{test3},{test3},{test3},{test3},{test3}}},
+		{
+		3,
+		{{test3},{test3},{test3},{test3},{test3},{test3}},
+		},
 
 };
 
