@@ -17,6 +17,7 @@ uint8_t StateMachineRun(StateBasicParam *p_sbp
 	X_Boolean isStateJumpWrong,isReachNullEvent;
 
 	if(p_sbp == X_Null) {return APP_POINTER_NULL;}
+	if(p_sbp->p_Handle == X_Null){return APP_POINTER_NULL;}
 	if(p_sbp->AllStateNum > MAX_STATE_NUMBER || p_sbp->AllStateNum == 0) {return APP_BEYOND_SCOPE;}
 	if(p_sbp->MaxEventNum > MAX_STATE_EVENT_NUMBER || p_sbp->MaxEventNum == 0) {return APP_BEYOND_SCOPE;}
 	if(p_sbp->CurrentStateNum > MAX_STATE_NUMBER)

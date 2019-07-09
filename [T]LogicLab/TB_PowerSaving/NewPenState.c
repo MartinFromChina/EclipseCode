@@ -45,9 +45,13 @@ static StateNumber test3(StateNumber current_state)
 	return Sleepy;
 }
 static const StateHandle PenStateHandle[5] = {
-
 		{
-		{{IdleAction},{X_Null},{X_Null},{X_Null},{X_Null},{X_Null}},
+		{{IdleAction},
+		{X_Null},
+		{X_Null},
+		{X_Null},
+		{X_Null},
+		{X_Null},},
 		}, // Idle
 
 		{
