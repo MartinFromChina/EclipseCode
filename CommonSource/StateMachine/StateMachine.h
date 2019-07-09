@@ -14,7 +14,6 @@ typedef  struct {
 	StateNumber (*Action)(StateNumber current_state);
 }StateAction;
 typedef struct {
-	uint8_t     current_max_event_number;
 	StateAction SAction[MAX_STATE_EVENT_NUMBER];
 }StateHandle;
 typedef struct

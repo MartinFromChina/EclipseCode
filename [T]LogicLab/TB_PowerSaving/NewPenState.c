@@ -47,27 +47,22 @@ static StateNumber test3(StateNumber current_state)
 static const StateHandle PenStateHandle[5] = {
 
 		{
-		1,
-		{{IdleAction}},
+		{{IdleAction},{X_Null},{X_Null},{X_Null},{X_Null},{X_Null}},
 		}, // Idle
 
 		{
-		3,
-		{{WakeUpRoutineAction},{test1},{test1}},
+		{{WakeUpRoutineAction},{test1},{test1},{X_Null},{X_Null},{X_Null}},
 		},//WakeUp
 
 		{
-		2,
 		{{test2},{test2},{test2},{test2},{test2},{test2}}
 		},
 
 		{
-		4,
-		{{test2},{test2},{test2},{test2}},
+		{{test2},{test2},{test2},{test2},{X_Null},{X_Null}},
 		},
 
 		{
-		3,
 		{{test3},{test3},{test3},{test3},{test3},{test3}},
 		},
 
@@ -76,12 +71,6 @@ static const StateHandle PenStateHandle[5] = {
 
 APP_STATE_MACHINE_DEF(pen_state,5,4,&PenStateHandle[0]);
 
-static X_Boolean DoesStop(StateBasicParam *p_sbp,StateNumber nextstate,uint16_t loop_counter)
-{
-	if(loop_counter > MAX_STATE_EVENT_NUMBER) {return X_True;}
-	if(p_sbp->CurrentStateNum != nextstate){return X_True;}
-	return X_False;
-}
 X_Void StateJumpRecorder(StateNumber state)
 {
 	// current state number is state and latest state number != state
@@ -91,7 +80,7 @@ X_Void AllStateAndEventAction(X_Void)
 {
 	uint8_t error_code;
 
-	error_code = StateMachineRun(&pen_state,X_True,DoesStop,StateJumpRecorder);
+	error_code = StateMachineRun(&pen_state,X_True,X_Null,StateJumpRecorder);
 	String_Debug_Once(STATE_ERROR_DEBUG,error_entry,error_code,(30,"%s\r\n",StringErrorTranslate(error_code,AppErrorGet)));
 }
 

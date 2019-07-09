@@ -32,7 +32,6 @@ uint8_t StateMachineRun(StateBasicParam *p_sbp
 
 	for(i = 0; i<p_sbp->MaxEventNum ; i++)
 	{
-		if(i >= p_sbp ->p_Handle[current_state].current_max_event_number) {return APP_BEYOND_SCOPE;}
 		if(p_sbp ->p_Handle[current_state].SAction[i].Action != X_Null)
 		{
 			previous_state = current_state;
