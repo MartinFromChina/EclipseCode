@@ -16,9 +16,10 @@ X_Boolean DoAsCommand(uint8_t* p_command,uint8_t length)
 }
 
 /***********
- * 0x0655xxyyaabb	:	call number xx function
- * 					yy : 00   pointer to next line
- * 					yy : 01   if xx function return true , pointer to aa line ; else pointer to bb line
+ * 0755xxccaabbpp	   :	call number xx function
+ * 					cc : 00   pointer to next line
+ * 					cc : 01   if xx function return true , pointer to aa line ; else pointer to bb line
+ *					pp : parameter to number xx function
  */
 uint32_t ConditionalDoAsCommand(uint8_t* p_command,uint8_t length,uint32_t current_command_line)
 {
