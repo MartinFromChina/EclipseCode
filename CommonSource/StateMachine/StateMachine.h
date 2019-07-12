@@ -32,7 +32,21 @@ uint8_t StateMachineRun(StateBasicParam *p_sbp
 						,X_Boolean (*DoesBreak)(StateBasicParam *p_sbp,StateNumber nextstate,uint16_t loop_counter)
 						,X_Void(*StateRecorder)(StateNumber state));
 
+typedef struct
+{
+	StateNumber CurrentStateNum;
+	StateNumber AllStateNum;
+	uint16_t MaxStateHopTimesInSignalProcess;
+	StateAction const *p_Action;
+}StateSimpleParam;
 
+#define APP_SIMPLE_STATE_MACHINE_DEF(id,state_number,max_signal_loop_times,p_action)                \
+static StateSimpleParam id = {DEFAULT_STATE_NUMBER,state_number,max_signal_loop_times,p_action}
+
+
+uint8_t SimpleStateMachineRun(StateSimpleParam *p_ssp
+						,X_Boolean (*DoesBreak)(StateSimpleParam *p_sbp,StateNumber nextstate,uint16_t loop_counter)
+						,X_Void(*StateRecorder)(StateNumber state));
 /*
  static const StateHandle ExampleStateHandle[2] = {
 
