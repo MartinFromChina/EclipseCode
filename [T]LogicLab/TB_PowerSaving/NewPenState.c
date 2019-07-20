@@ -2,6 +2,7 @@
 #include "..\..\CommonSource\StateMachine\StateMachine.h"
 #include "..\..\CommonSource\CharStringDebug\CharStringDebugModule.h"
 #include "..\..\CommonSource\AppError.h"
+#include "..\..\CommonSource\IrqAndTimer\TimeManager.h"
 
 #define STATE_ERROR_DEBUG  1
 #define BASIC_STATE_DEBUG  1
@@ -86,11 +87,44 @@ typedef enum
 	SimpleShutDown 			= 4,
 }PenSimpleState;
 
+static PenSimpleState NextState = SimpleIdle;
+static uint32_t counter;
+static TimeManagerID mTM_ID = TM_MAX;
 
+static X_Void CounterInit(X_Void)
+{
+	counter = 1000;
+}
+
+static X_Void CounterDrease(X_Void)
+{
+	if(counter > 0) {counter--;}
+}
+
+static X_Boolean isCounterAction(X_Void)
+{
+	if(NextState == SimpleWakeUp) {return X_True;}
+	else {return X_False;}
+}
 
 static StateNumber SimpleIdleAction(StateNumber current_state)
 {
+	uint8_t errorcode;
 	String_Debug_Once(BASIC_STATE_DEBUG,state_entry,SimpleIdle,(30,"--SimpleIdle\r\n"));
+	if(TimeManagerAdd(&mTM_ID,isCounterAction,CounterDrease) != X_True)
+	{
+		String_Debug(BASIC_STATE_DEBUG,(40,"going to release ID %d\r\n",TM_ten));
+		errorcode = TimeManagerRelease(TM_ten);
+		if(errorcode != APP_SUCCESSED)
+		{
+			String_Debug(BASIC_STATE_DEBUG,(40,"error: %s\r\n",AppErrorGet(errorcode,X_Null)));
+		}
+	}
+	else
+	{
+		CounterInit();
+		String_Debug(BASIC_STATE_DEBUG,(40," TimeManagerAdd ID %d\r\n",mTM_ID));
+	}
 	return SimpleWakeUp;
 }
 static StateNumber SimpleWakeUpAction(StateNumber current_state)
@@ -106,12 +140,15 @@ static StateNumber SimpleNormalProcessAction(StateNumber current_state)
 static StateNumber SimpleSleepyAction(StateNumber current_state)
 {
 	String_Debug_Once(BASIC_STATE_DEBUG,state_entry,SimpleSleepy,(30,"--SimpleSleepy\r\n"));
+	String_Debug(BASIC_STATE_DEBUG,(30," counter %d\r\n",counter));
 	return SimpleShutDown;
 }
 static StateNumber SimpleShutDownAction(StateNumber current_state)
 {
 	String_Debug_Once(BASIC_STATE_DEBUG,state_entry,SimpleShutDown,(30,"--SimpleShutDown\r\n"));
-	return SimpleIdle;
+
+	if(counter == 994) {TimeManagerRelease(mTM_ID);}
+	return SimpleWakeUp;
 }
 
 
@@ -128,13 +165,14 @@ APP_SIMPLE_STATE_MACHINE_DEF(pen_simple_state,5,2,&PenStateAction[0]);
 
 X_Void StateJumpRecorder(StateNumber state)
 {
+	NextState = (PenSimpleState)state;
 	// current state number is state and latest state number != state
 //	String_Debug(STATE_ERROR_DEBUG,(30,"new state number %d\r\n",state));
 }
 
 static X_Boolean DoesBreakSimple(StateSimpleParam *p_sbp,StateNumber nextstate,uint16_t loop_counter)
 {
-	if(loop_counter > 2) {return X_True;}
+	if(loop_counter > 0) {return X_True;}
 	return X_False;
 }
 
