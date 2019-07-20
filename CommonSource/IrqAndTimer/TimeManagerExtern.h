@@ -34,4 +34,56 @@ X_Void TimeManagerSetBasicValue(TimeManagerID id,uint32_t value);
 X_Void TimeManagerExternInit(X_Void);
 X_Void TimeManagerExternHandle(X_Void);
 
+/*************************************************
+ * use this module two ways below:
+ *
+ *
+ *if (just use one counter value)
+  {
+	 static TimeManagerID mTM_ID = TM_MAX;
+	 static sTimeManagerBasic my_sTMB;
+
+	 TimeManagerExternAdd(&mTM_ID,&my_sTMB,X_Null);
+	 TimeManagerSetBasicValue(mTM_ID,1000);
+	 TimeManagerGetBasicValue(mTM_ID);
+	 TimeManagerExternRelease(mTM_ID);
+  }
+
+ *
+ *
+  else if (use extern time manager function)
+  {
+
+	typedef struct  s_TimerManagerExtern sTimerManagerExtern;
+	struct s_TimerManagerExtern
+	{
+		sTimeManagerBasic base;
+		uint32_t counterExtern;
+	};
+
+	static TimeManagerID mTM_ID = TM_MAX;
+	static sTimerManagerExtern sTME;
+	static uint32_t externvalue;
+
+	static X_Void ManagerAction(sTimerManagerExtern *p_This)
+	{
+		sTimerManagerExtern *s_mte_copy  = (sTimerManagerExtern*)(p_this);
+		if(p_this->counter > 0) {p_this->counter--;}
+		s_mte_copy->counterExtern ++;
+	}
+
+	static uint32_t GetExternCounter(sTimerManagerExtern *p_This)
+	{
+		return p_This->counterExtern;
+	}
+
+	TimeManagerExternAdd(&mTM_ID,&sTME.base,ManagerAction);
+	TimeManagerExternRelease(mTM_ID);
+	TimeManagerGetBasicValue(mTM_ID);
+	TimeManagerSetBasicValue(mTM_ID,1000);
+	externvalue = GetExternCounter(&sTME);
+
+  }
+ */
+
 #endif

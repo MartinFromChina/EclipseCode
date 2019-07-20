@@ -11,9 +11,10 @@ X_Boolean TimeManagerExternAdd(TimeManagerID *id,sTimeManagerBasic *p_This,X_Voi
 	*id  = TM_MAX;
 	for(i=0;i<TM_MAX;i++)
 	{
-		if(p_sTMB[i] != X_Null)
+		if(p_sTMB[i] == X_Null)
 		{
 			*id = (TimeManagerID)i;
+			p_sTMB[i] = p_This;
 			p_sTMB[i]->counter = 0;
 			p_sTMB[i]->ToDo = ToDo;
 			isOK = X_True;
@@ -60,10 +61,13 @@ X_Void TimeManagerExternHandle(X_Void)
 	{
 		if(p_sTMB[i] != X_Null)
 		{
-			if(p_sTMB[i]->counter > 0) {p_sTMB[i]->counter --;}
 			if(p_sTMB[i]->ToDo != X_Null)
 			{
 				p_sTMB[i]->ToDo(p_sTMB[i]);
+			}
+			else
+			{
+				if(p_sTMB[i]->counter > 0) {p_sTMB[i]->counter --;}
 			}
 		}
 	}

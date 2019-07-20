@@ -91,21 +91,32 @@ static PenSimpleState NextState = SimpleIdle;
 static TimeManagerID mTM_ID = TM_MAX;
 static sTimeManagerBasic my_sTMB;
 
-static X_Void CounterInit(X_Void)
+typedef struct  sMyTMB_Extern sMTE;
+struct sMyTMB_Extern
 {
+	sTimeManagerBasic base;
+	uint32_t counter;
+	X_Void (*CounterUp)(sMTE *p_This);
+};
 
-}
+static sMTE s_mte;
 
 static X_Void CounterDrease(sTimeManagerBasic *p_this)
 {
-
+	sMTE *s_mte_copy  = (sMTE*)(p_this);
+	if(p_this->counter > 0) {p_this->counter--;}
+	s_mte_copy->CounterUp(s_mte_copy);
+}
+static X_Void CounterIncrease(sMTE *p_this)
+{
+	if(p_this != X_Null){p_this->counter ++;}
 }
 
 static StateNumber SimpleIdleAction(StateNumber current_state)
 {
 	uint8_t errorcode;
 	String_Debug_Once(BASIC_STATE_DEBUG,state_entry,SimpleIdle,(30,"--SimpleIdle\r\n"));
-	if(TimeManagerExternAdd(&mTM_ID,&my_sTMB,X_Null) != X_True)
+	if(TimeManagerExternAdd(&mTM_ID,&s_mte.base,CounterDrease) != X_True)
 	{
 		String_Debug(BASIC_STATE_DEBUG,(40,"going to release ID %d\r\n",TM_ten));
 		errorcode = TimeManagerExternRelease(TM_ten);
@@ -117,6 +128,8 @@ static StateNumber SimpleIdleAction(StateNumber current_state)
 	else
 	{
 		TimeManagerSetBasicValue(mTM_ID,1000);
+		s_mte.counter = 0;
+		s_mte.CounterUp = CounterIncrease;
 		String_Debug(BASIC_STATE_DEBUG,(40," TimeManagerAdd ID %d\r\n",mTM_ID));
 	}
 	return SimpleWakeUp;
@@ -134,14 +147,14 @@ static StateNumber SimpleNormalProcessAction(StateNumber current_state)
 static StateNumber SimpleSleepyAction(StateNumber current_state)
 {
 	String_Debug_Once(BASIC_STATE_DEBUG,state_entry,SimpleSleepy,(30,"--SimpleSleepy\r\n"));
-	String_Debug(BASIC_STATE_DEBUG,(30," counter %d\r\n",TimeManagerGetBasicValue(mTM_ID)));
+	String_Debug(BASIC_STATE_DEBUG,(40," counter %d ;counter extern %d\r\n",TimeManagerGetBasicValue(mTM_ID),s_mte.counter));
 	return SimpleShutDown;
 }
 static StateNumber SimpleShutDownAction(StateNumber current_state)
 {
 	String_Debug_Once(BASIC_STATE_DEBUG,state_entry,SimpleShutDown,(30,"--SimpleShutDown\r\n"));
 
-	if(TimeManagerGetBasicValue(mTM_ID) == 994) {TimeManagerExternRelease(mTM_ID);}
+	if(s_mte.counter > 30) {TimeManagerExternRelease(mTM_ID);}
 	return SimpleWakeUp;
 }
 

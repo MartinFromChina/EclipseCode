@@ -1602,3 +1602,284 @@
 2019-07-21 01:08:33.530 --SimpleShutDown
 2019-07-21 01:08:34.142 --SimpleWakeUp
 2019-07-21 01:08:34.745 --SimpleNormalProcess
+2019-07-21 02:34:45.306 hello I am string debug 
+2019-07-21 02:34:45.410 --SimpleIdle
+2019-07-21 02:34:45.511 going to release ID 9
+2019-07-21 02:34:45.613 APP_SUCCESSED
+2019-07-21 02:34:46.025 --SimpleWakeUp
+2019-07-21 02:34:46.630 --SimpleNormalProcess
+2019-07-21 02:34:53.299 --SimpleSleepy
+2019-07-21 02:34:53.400  counter 0
+2019-07-21 02:34:53.907 --SimpleShutDown
+2019-07-21 02:34:54.526 --SimpleWakeUp
+2019-07-21 02:34:55.138 --SimpleNormalProcess
+2019-07-21 02:34:55.745 --SimpleSleepy
+2019-07-21 02:34:55.848  counter 0
+2019-07-21 02:34:56.357 --SimpleShutDown
+2019-07-21 02:34:56.974 --SimpleWakeUp
+2019-07-21 02:34:57.590 --SimpleNormalProcess
+2019-07-21 02:34:58.194 --SimpleSleepy
+2019-07-21 02:34:58.295  counter 0
+2019-07-21 02:34:58.805 --SimpleShutDown
+2019-07-21 02:34:59.409 --SimpleWakeUp
+2019-07-21 02:35:00.027 --SimpleNormalProcess
+2019-07-21 02:35:00.639 --SimpleSleepy
+2019-07-21 02:35:00.740  counter 0
+2019-07-21 02:35:01.245 --SimpleShutDown
+2019-07-21 02:35:01.849 --SimpleWakeUp
+2019-07-21 02:35:02.455 --SimpleNormalProcess
+2019-07-21 02:35:03.060 --SimpleSleepy
+2019-07-21 02:35:03.162  counter 0
+2019-07-21 02:35:03.665 --SimpleShutDown
+2019-07-21 02:35:04.274 --SimpleWakeUp
+2019-07-21 02:35:04.889 --SimpleNormalProcess
+2019-07-21 02:35:05.505 --SimpleSleepy
+2019-07-21 02:35:05.607  counter 0
+2019-07-21 02:35:06.118 --SimpleShutDown
+2019-07-21 02:35:06.735 --SimpleWakeUp
+2019-07-21 02:35:07.340 --SimpleNormalProcess
+2019-07-21 02:35:07.946 --SimpleSleepy
+2019-07-21 02:35:08.049  counter 0
+2019-07-21 02:35:08.552 --SimpleShutDown
+2019-07-21 02:35:09.155 --SimpleWakeUp
+2019-07-21 02:36:48.188 hello I am string debug 
+2019-07-21 02:36:48.290 --SimpleIdle
+2019-07-21 02:36:48.391  TimeManagerAdd ID 0
+2019-07-21 02:36:48.494 APP_SUCCESSED
+2019-07-21 02:36:48.896 --SimpleWakeUp
+2019-07-21 02:36:49.500 --SimpleIdle
+2019-07-21 02:36:49.603  TimeManagerAdd ID 1
+2019-07-21 02:36:56.183 --SimpleWakeUp
+2019-07-21 02:36:56.791 --SimpleIdle
+2019-07-21 02:36:56.894  TimeManagerAdd ID 2
+2019-07-21 02:36:57.400 --SimpleWakeUp
+2019-07-21 02:36:58.007 --SimpleIdle
+2019-07-21 02:36:58.110  TimeManagerAdd ID 3
+2019-07-21 02:36:58.612 --SimpleWakeUp
+2019-07-21 02:36:59.239 --SimpleIdle
+2019-07-21 02:36:59.340  TimeManagerAdd ID 4
+2019-07-21 02:36:59.849 --SimpleWakeUp
+2019-07-21 02:37:00.457 --SimpleIdle
+2019-07-21 02:37:00.560  TimeManagerAdd ID 5
+2019-07-21 02:37:01.067 --SimpleWakeUp
+2019-07-21 02:37:01.673 --SimpleIdle
+2019-07-21 02:37:01.775  TimeManagerAdd ID 6
+2019-07-21 02:37:02.278 --SimpleWakeUp
+2019-07-21 02:37:02.882 --SimpleIdle
+2019-07-21 02:37:02.983  TimeManagerAdd ID 7
+2019-07-21 02:37:03.487 --SimpleWakeUp
+2019-07-21 02:37:04.093 --SimpleIdle
+2019-07-21 02:37:04.195  TimeManagerAdd ID 8
+2019-07-21 02:37:04.699 --SimpleWakeUp
+2019-07-21 02:37:05.305 --SimpleIdle
+2019-07-21 02:37:05.408  TimeManagerAdd ID 9
+2019-07-21 02:37:05.923 --SimpleWakeUp
+2019-07-21 02:37:06.538 --SimpleIdle
+2019-07-21 02:37:06.642 going to release ID 9
+2019-07-21 02:37:07.147 --SimpleWakeUp
+2019-07-21 02:37:07.756 --SimpleIdle
+2019-07-21 02:37:07.856  TimeManagerAdd ID 9
+2019-07-21 02:37:08.358 --SimpleWakeUp
+2019-07-21 02:37:08.971 --SimpleIdle
+2019-07-21 02:37:09.072 going to release ID 9
+2019-07-21 02:37:09.583 --SimpleWakeUp
+2019-07-21 02:37:10.191 --SimpleIdle
+2019-07-21 02:37:10.294  TimeManagerAdd ID 9
+2019-07-21 02:37:10.806 --SimpleWakeUp
+2019-07-21 02:37:11.416 --SimpleIdle
+2019-07-21 02:37:11.517 going to release ID 9
+2019-07-21 02:37:12.020 --SimpleWakeUp
+2019-07-21 02:37:12.623 --SimpleIdle
+2019-07-21 02:37:12.724  TimeManagerAdd ID 9
+2019-07-21 02:37:13.234 --SimpleWakeUp
+2019-07-21 02:37:29.602 hello I am string debug 
+2019-07-21 02:37:29.703 --SimpleIdle
+2019-07-21 02:37:29.805  TimeManagerAdd ID 0
+2019-07-21 02:37:29.907 APP_SUCCESSED
+2019-07-21 02:37:30.318 --SimpleWakeUp
+2019-07-21 02:37:30.932 --SimpleNormalProcess
+2019-07-21 02:37:37.609 --SimpleSleepy
+2019-07-21 02:37:37.711  counter 987
+2019-07-21 02:37:38.214 --SimpleShutDown
+2019-07-21 02:37:38.818 --SimpleWakeUp
+2019-07-21 02:37:39.428 --SimpleNormalProcess
+2019-07-21 02:37:40.038 --SimpleSleepy
+2019-07-21 02:37:40.151  counter 983
+2019-07-21 02:37:40.664 --SimpleShutDown
+2019-07-21 02:37:41.268 --SimpleWakeUp
+2019-07-21 02:37:41.874 --SimpleNormalProcess
+2019-07-21 02:37:42.479 --SimpleSleepy
+2019-07-21 02:37:42.582  counter 979
+2019-07-21 02:37:43.084 --SimpleShutDown
+2019-07-21 02:37:43.688 --SimpleWakeUp
+2019-07-21 02:37:44.295 --SimpleNormalProcess
+2019-07-21 02:37:44.901 --SimpleSleepy
+2019-07-21 02:37:45.004  counter 975
+2019-07-21 02:37:45.510 --SimpleShutDown
+2019-07-21 02:37:46.114 --SimpleWakeUp
+2019-07-21 02:37:46.729 --SimpleNormalProcess
+2019-07-21 02:37:47.340 --SimpleSleepy
+2019-07-21 02:37:47.441  counter 971
+2019-07-21 02:37:47.950 --SimpleShutDown
+2019-07-21 02:37:48.557 --SimpleWakeUp
+2019-07-21 02:37:49.162 --SimpleNormalProcess
+2019-07-21 02:37:49.768 --SimpleSleepy
+2019-07-21 02:37:49.869  counter 967
+2019-07-21 02:37:50.378 --SimpleShutDown
+2019-07-21 02:37:50.983 --SimpleWakeUp
+2019-07-21 02:37:51.596 --SimpleNormalProcess
+2019-07-21 02:37:52.201 --SimpleSleepy
+2019-07-21 02:37:52.304  counter 963
+2019-07-21 02:37:52.823 --SimpleShutDown
+2019-07-21 02:37:53.442 --SimpleWakeUp
+2019-07-21 02:37:54.047 --SimpleNormalProcess
+2019-07-21 02:37:54.653 --SimpleSleepy
+2019-07-21 02:37:54.755  counter 959
+2019-07-21 02:37:55.277 --SimpleShutDown
+2019-07-21 02:37:55.892 --SimpleWakeUp
+2019-07-21 02:37:56.510 --SimpleNormalProcess
+2019-07-21 02:37:57.116 --SimpleSleepy
+2019-07-21 02:37:57.218  counter 955
+2019-07-21 02:37:57.728 --SimpleShutDown
+2019-07-21 02:37:58.334 --SimpleWakeUp
+2019-07-21 02:37:58.938 --SimpleNormalProcess
+2019-07-21 02:37:59.541 --SimpleSleepy
+2019-07-21 02:37:59.644  counter 951
+2019-07-21 02:38:00.148 --SimpleShutDown
+2019-07-21 02:38:00.752 --SimpleWakeUp
+2019-07-21 02:38:01.356 --SimpleNormalProcess
+2019-07-21 02:38:01.975 --SimpleSleepy
+2019-07-21 02:38:02.077  counter 947
+2019-07-21 02:38:02.591 --SimpleShutDown
+2019-07-21 02:38:03.196 --SimpleWakeUp
+2019-07-21 02:38:03.801 --SimpleNormalProcess
+2019-07-21 02:38:04.406 --SimpleSleepy
+2019-07-21 02:38:04.507  counter 943
+2019-07-21 02:38:05.016 --SimpleShutDown
+2019-07-21 02:38:05.628 --SimpleWakeUp
+2019-07-21 02:40:56.870 hello I am string debug 
+2019-07-21 02:40:56.971 --SimpleIdle
+2019-07-21 02:40:57.073  TimeManagerAdd ID 0
+2019-07-21 02:40:57.174 APP_SUCCESSED
+2019-07-21 02:40:57.576 --SimpleWakeUp
+2019-07-21 02:40:58.181 --SimpleNormalProcess
+2019-07-21 02:41:04.860 --SimpleSleepy
+2019-07-21 02:41:04.961  counter 987
+2019-07-21 02:41:05.476 --SimpleShutDown
+2019-07-21 02:41:06.089 --SimpleWakeUp
+2019-07-21 02:41:06.696 --SimpleNormalProcess
+2019-07-21 02:41:07.301 --SimpleSleepy
+2019-07-21 02:41:07.402  counter 983
+2019-07-21 02:41:07.907 --SimpleShutDown
+2019-07-21 02:41:08.518 --SimpleWakeUp
+2019-07-21 02:41:09.126 --SimpleNormalProcess
+2019-07-21 02:41:09.731 --SimpleSleepy
+2019-07-21 02:41:09.833  counter 979
+2019-07-21 02:41:10.334 --SimpleShutDown
+2019-07-21 02:41:10.941 --SimpleWakeUp
+2019-07-21 02:41:11.547 --SimpleNormalProcess
+2019-07-21 02:41:12.154 --SimpleSleepy
+2019-07-21 02:41:12.255  counter 975
+2019-07-21 02:41:12.759 --SimpleShutDown
+2019-07-21 02:41:13.365 --SimpleWakeUp
+2019-07-21 02:41:13.978 --SimpleNormalProcess
+2019-07-21 02:41:14.582 --SimpleSleepy
+2019-07-21 02:41:14.691  counter 971
+2019-07-21 02:41:15.203 --SimpleShutDown
+2019-07-21 02:41:15.808 --SimpleWakeUp
+2019-07-21 02:41:16.412 --SimpleNormalProcess
+2019-07-21 02:41:17.035 --SimpleSleepy
+2019-07-21 02:41:17.140  counter 967
+2019-07-21 02:41:17.644 --SimpleShutDown
+2019-07-21 02:41:18.247 --SimpleWakeUp
+2019-07-21 02:41:18.850 --SimpleNormalProcess
+2019-07-21 02:54:57.970 hello I am string debug 
+2019-07-21 02:54:58.074 --SimpleIdle
+2019-07-21 02:54:58.175  TimeManagerAdd ID 0
+2019-07-21 02:54:58.277 APP_SUCCESSED
+2019-07-21 02:54:58.681 --SimpleWakeUp
+2019-07-21 02:54:59.285 --SimpleNormalProcess
+2019-07-21 02:55:05.969 --SimpleSleepy
+2019-07-21 02:55:06.071  counter 987 ;counter extern 13
+2019-07-21 02:55:06.575 --SimpleShutDown
+2019-07-21 02:55:07.194 --SimpleWakeUp
+2019-07-21 02:55:07.811 --SimpleNormalProcess
+2019-07-21 02:55:08.414 --SimpleSleepy
+2019-07-21 02:55:08.516  counter 983 ;counter extern 17
+2019-07-21 02:55:09.020 --SimpleShutDown
+2019-07-21 02:55:09.624 --SimpleWakeUp
+2019-07-21 02:55:10.229 --SimpleNormalProcess
+2019-07-21 02:55:10.832 --SimpleSleepy
+2019-07-21 02:55:10.934  counter 979 ;counter extern 21
+2019-07-21 02:55:11.438 --SimpleShutDown
+2019-07-21 02:55:12.053 --SimpleWakeUp
+2019-07-21 02:55:12.671 --SimpleNormalProcess
+2019-07-21 02:55:13.278 --SimpleSleepy
+2019-07-21 02:55:13.379  counter 975 ;counter extern 25
+2019-07-21 02:55:13.883 --SimpleShutDown
+2019-07-21 02:55:14.488 --SimpleWakeUp
+2019-07-21 02:55:15.101 --SimpleNormalProcess
+2019-07-21 02:55:15.706 --SimpleSleepy
+2019-07-21 02:55:15.809  counter 971 ;counter extern 29
+2019-07-21 02:55:16.320 --SimpleShutDown
+2019-07-21 02:55:42.939 hello I am string debug 
+2019-07-21 02:55:43.040 --SimpleIdle
+2019-07-21 02:55:43.141  TimeManagerAdd ID 0
+2019-07-21 02:55:43.244 APP_SUCCESSED
+2019-07-21 02:55:43.647 --SimpleWakeUp
+2019-07-21 02:55:44.258 --SimpleNormalProcess
+2019-07-21 02:55:50.911 --SimpleSleepy
+2019-07-21 02:55:51.015  counter 987 ;counter extern 13
+2019-07-21 02:55:51.533 --SimpleShutDown
+2019-07-21 02:55:52.135 --SimpleWakeUp
+2019-07-21 02:55:52.738 --SimpleNormalProcess
+2019-07-21 02:55:53.343 --SimpleSleepy
+2019-07-21 02:55:53.444  counter 983 ;counter extern 17
+2019-07-21 02:55:53.955 --SimpleShutDown
+2019-07-21 02:55:54.565 --SimpleWakeUp
+2019-07-21 02:55:55.174 --SimpleNormalProcess
+2019-07-21 02:55:55.778 --SimpleSleepy
+2019-07-21 02:55:55.879  counter 979 ;counter extern 21
+2019-07-21 02:55:56.381 --SimpleShutDown
+2019-07-21 02:55:56.994 --SimpleWakeUp
+2019-07-21 02:55:57.613 --SimpleNormalProcess
+2019-07-21 02:55:58.222 --SimpleSleepy
+2019-07-21 02:55:58.322  counter 975 ;counter extern 25
+2019-07-21 02:55:58.830 --SimpleShutDown
+2019-07-21 02:55:59.444 --SimpleWakeUp
+2019-07-21 02:56:00.054 --SimpleNormalProcess
+2019-07-21 02:56:00.657 --SimpleSleepy
+2019-07-21 02:56:00.760  counter 971 ;counter extern 29
+2019-07-21 02:56:01.263 --SimpleShutDown
+2019-07-21 02:56:01.867 --SimpleWakeUp
+2019-07-21 02:56:02.473 --SimpleNormalProcess
+2019-07-21 02:56:03.082 --SimpleSleepy
+2019-07-21 02:56:03.183  counter 967 ;counter extern 33
+2019-07-21 02:56:03.695 --SimpleShutDown
+2019-07-21 02:56:04.300 --SimpleWakeUp
+2019-07-21 02:56:04.916 --SimpleNormalProcess
+2019-07-21 02:56:05.532 --SimpleSleepy
+2019-07-21 02:56:05.633  counter 0 ;counter extern 34
+2019-07-21 02:56:06.143 --SimpleShutDown
+2019-07-21 02:56:06.755 --SimpleWakeUp
+2019-07-21 02:56:07.362 --SimpleNormalProcess
+2019-07-21 02:56:07.965 --SimpleSleepy
+2019-07-21 02:56:08.066  counter 0 ;counter extern 34
+2019-07-21 02:56:08.578 --SimpleShutDown
+2019-07-21 02:56:09.194 --SimpleWakeUp
+2019-07-21 02:56:09.804 --SimpleNormalProcess
+2019-07-21 02:56:10.411 --SimpleSleepy
+2019-07-21 02:56:10.512  counter 0 ;counter extern 34
+2019-07-21 02:56:11.028 --SimpleShutDown
+2019-07-21 02:56:11.633 --SimpleWakeUp
+2019-07-21 02:56:12.238 --SimpleNormalProcess
+2019-07-21 02:56:12.843 --SimpleSleepy
+2019-07-21 02:56:12.945  counter 0 ;counter extern 34
+2019-07-21 02:56:13.451 --SimpleShutDown
+2019-07-21 02:56:14.061 --SimpleWakeUp
+2019-07-21 02:56:14.664 --SimpleNormalProcess
+2019-07-21 02:56:15.272 --SimpleSleepy
+2019-07-21 02:56:15.373  counter 0 ;counter extern 34
+2019-07-21 02:56:15.883 --SimpleShutDown
+2019-07-21 02:56:16.488 --SimpleWakeUp
+2019-07-21 02:56:17.092 --SimpleNormalProcess
