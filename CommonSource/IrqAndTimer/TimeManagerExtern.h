@@ -19,13 +19,13 @@ typedef enum
 	TM_MAX,
 }TimeManagerID;
 
-typedef struct sTimeManagerBasic s_TimeManagerBasic;
+typedef struct s_TimeManagerBasic sTimeManagerBasic;
 
-typedef struct
+struct s_TimeManagerBasic
 {
 	uint32_t counter;
-	X_Void(* ToDo)(s_TimeManagerBasic *p_This);
-}sTimeManagerBasic;
+	X_Void(* ToDo)(sTimeManagerBasic *p_This);
+};
 
 X_Boolean TimeManagerExternAdd(TimeManagerID *id,sTimeManagerBasic *p_This,X_Void(*ToDo)(sTimeManagerBasic *p_This));
 uint8_t TimeManagerExternRelease(TimeManagerID id);
