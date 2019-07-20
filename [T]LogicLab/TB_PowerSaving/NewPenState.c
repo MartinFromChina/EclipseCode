@@ -2,7 +2,7 @@
 #include "..\..\CommonSource\StateMachine\StateMachine.h"
 #include "..\..\CommonSource\CharStringDebug\CharStringDebugModule.h"
 #include "..\..\CommonSource\AppError.h"
-#include "..\..\CommonSource\IrqAndTimer\TimeManager.h"
+#include "..\..\CommonSource\IrqAndTimer\TimeManagerExtern.h"
 
 #define STATE_ERROR_DEBUG  1
 #define BASIC_STATE_DEBUG  1
@@ -88,33 +88,27 @@ typedef enum
 }PenSimpleState;
 
 static PenSimpleState NextState = SimpleIdle;
-static uint32_t counter;
 static TimeManagerID mTM_ID = TM_MAX;
+static sTimeManagerBasic my_sTMB;
 
 static X_Void CounterInit(X_Void)
 {
-	counter = 1000;
+
 }
 
-static X_Void CounterDrease(X_Void)
+static X_Void CounterDrease(sTimeManagerBasic *p_this)
 {
-	if(counter > 0) {counter--;}
-}
 
-static X_Boolean isCounterAction(X_Void)
-{
-	if(NextState == SimpleWakeUp) {return X_True;}
-	else {return X_False;}
 }
 
 static StateNumber SimpleIdleAction(StateNumber current_state)
 {
 	uint8_t errorcode;
 	String_Debug_Once(BASIC_STATE_DEBUG,state_entry,SimpleIdle,(30,"--SimpleIdle\r\n"));
-	if(TimeManagerAdd(&mTM_ID,isCounterAction,CounterDrease) != X_True)
+	if(TimeManagerExternAdd(&mTM_ID,&my_sTMB,X_Null) != X_True)
 	{
 		String_Debug(BASIC_STATE_DEBUG,(40,"going to release ID %d\r\n",TM_ten));
-		errorcode = TimeManagerRelease(TM_ten);
+		errorcode = TimeManagerExternRelease(TM_ten);
 		if(errorcode != APP_SUCCESSED)
 		{
 			String_Debug(BASIC_STATE_DEBUG,(40,"error: %s\r\n",AppErrorGet(errorcode,X_Null)));
@@ -122,7 +116,7 @@ static StateNumber SimpleIdleAction(StateNumber current_state)
 	}
 	else
 	{
-		CounterInit();
+		TimeManagerSetBasicValue(mTM_ID,1000);
 		String_Debug(BASIC_STATE_DEBUG,(40," TimeManagerAdd ID %d\r\n",mTM_ID));
 	}
 	return SimpleWakeUp;
@@ -140,14 +134,14 @@ static StateNumber SimpleNormalProcessAction(StateNumber current_state)
 static StateNumber SimpleSleepyAction(StateNumber current_state)
 {
 	String_Debug_Once(BASIC_STATE_DEBUG,state_entry,SimpleSleepy,(30,"--SimpleSleepy\r\n"));
-	String_Debug(BASIC_STATE_DEBUG,(30," counter %d\r\n",counter));
+	String_Debug(BASIC_STATE_DEBUG,(30," counter %d\r\n",TimeManagerGetBasicValue(mTM_ID)));
 	return SimpleShutDown;
 }
 static StateNumber SimpleShutDownAction(StateNumber current_state)
 {
 	String_Debug_Once(BASIC_STATE_DEBUG,state_entry,SimpleShutDown,(30,"--SimpleShutDown\r\n"));
 
-	if(counter == 994) {TimeManagerRelease(mTM_ID);}
+	if(TimeManagerGetBasicValue(mTM_ID) == 994) {TimeManagerExternRelease(mTM_ID);}
 	return SimpleWakeUp;
 }
 
