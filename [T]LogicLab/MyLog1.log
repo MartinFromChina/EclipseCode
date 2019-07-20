@@ -1,0 +1,648 @@
+<<<<<<< HEAD
+=======
+2019-07-09 01:56:44.031 hello I am string debug 
+2019-07-09 01:56:44.141 --Idle
+2019-07-09 01:56:44.252 APP_SUCCESSED
+2019-07-09 01:56:44.802 --WakeUpRoutine
+2019-07-09 02:01:55.495 hello I am string debug 
+2019-07-09 02:01:55.597 --Idle
+2019-07-09 02:01:55.698 new state number 1
+2019-07-09 02:01:55.801 APP_SUCCESSED
+2019-07-09 02:01:56.204 --WakeUpRoutine
+2019-07-09 02:01:56.307 --test1
+2019-07-09 02:01:56.409 new state number 4
+2019-07-09 02:01:56.813 --test3
+2019-07-09 02:01:56.915 new state number 3
+2019-07-09 02:02:03.445 --test2
+2019-07-09 02:02:03.548 new state number 0
+2019-07-09 02:02:04.052 --Idle
+2019-07-09 02:02:04.155 new state number 1
+2019-07-09 02:02:04.659 --WakeUpRoutine
+2019-07-09 02:02:04.762 --test1
+2019-07-09 02:02:04.863 new state number 4
+2019-07-09 02:02:05.267 --test3
+2019-07-09 02:02:05.369 new state number 3
+2019-07-09 02:02:05.874 --test2
+2019-07-09 02:02:05.977 new state number 0
+2019-07-09 02:02:06.480 --Idle
+2019-07-09 02:02:06.583 new state number 1
+2019-07-09 02:02:07.088 --WakeUpRoutine
+2019-07-09 02:02:07.190 --test1
+2019-07-09 02:02:07.293 new state number 4
+2019-07-09 02:02:07.697 --test3
+2019-07-09 02:02:07.797 new state number 3
+2019-07-09 02:02:08.299 --test2
+2019-07-09 02:02:08.402 new state number 0
+2019-07-09 02:02:08.906 --Idle
+2019-07-09 02:02:09.008 new state number 1
+2019-07-09 02:02:09.513 --WakeUpRoutine
+2019-07-09 02:02:09.616 --test1
+2019-07-09 02:02:09.717 new state number 4
+2019-07-09 02:02:10.120 --test3
+2019-07-09 02:02:10.222 new state number 3
+2019-07-09 02:02:10.726 --test2
+2019-07-09 02:02:10.828 new state number 0
+2019-07-09 02:02:11.334 --Idle
+2019-07-09 02:02:11.437 new state number 1
+2019-07-09 02:02:11.941 --WakeUpRoutine
+2019-07-09 02:02:12.043 --test1
+2019-07-09 02:02:12.145 new state number 4
+2019-07-09 02:02:12.548 --test3
+2019-07-09 02:02:12.651 new state number 3
+2019-07-09 02:02:13.154 --test2
+2019-07-09 02:02:13.256 new state number 0
+2019-07-09 02:02:13.760 --Idle
+2019-07-09 02:02:13.862 new state number 1
+2019-07-09 02:02:14.367 --WakeUpRoutine
+2019-07-09 02:02:14.469 --test1
+2019-07-09 02:02:14.570 new state number 4
+2019-07-09 02:02:14.974 --test3
+2019-07-09 02:02:15.076 new state number 3
+2019-07-09 02:02:15.583 --test2
+2019-07-09 02:02:15.685 new state number 0
+2019-07-09 02:02:16.190 --Idle
+2019-07-09 02:02:16.290 new state number 1
+2019-07-09 02:02:16.796 --WakeUpRoutine
+2019-07-09 02:02:16.898 --test1
+2019-07-09 02:02:17.001 new state number 4
+2019-07-09 11:05:04.098 hello I am string debug 
+2019-07-09 11:05:04.206 --Idle
+2019-07-09 11:05:04.308 new state number 1
+2019-07-09 11:05:04.410 APP_SUCCESSED
+2019-07-09 11:05:04.813 --WakeUpRoutine
+2019-07-09 11:05:04.915 --test1
+2019-07-09 11:05:05.016 new state number 4
+2019-07-09 11:05:05.419 --test3
+2019-07-09 11:05:05.522 new state number 3
+2019-07-09 11:05:12.055 --test2
+2019-07-09 11:05:12.157 new state number 0
+2019-07-09 11:05:12.659 --Idle
+2019-07-09 11:05:12.762 new state number 1
+2019-07-09 11:05:13.266 --WakeUpRoutine
+2019-07-09 11:05:13.368 --test1
+2019-07-09 11:05:13.470 new state number 4
+2019-07-09 11:05:13.874 --test3
+2019-07-09 11:05:13.976 new state number 3
+2019-07-09 11:05:14.479 --test2
+2019-07-09 11:05:14.581 new state number 0
+2019-07-09 11:05:15.085 --Idle
+2019-07-09 11:05:15.187 new state number 1
+2019-07-09 11:05:15.691 --WakeUpRoutine
+2019-07-09 11:05:15.793 --test1
+2019-07-09 11:05:15.895 new state number 4
+2019-07-09 11:05:16.298 --test3
+2019-07-09 11:05:16.401 new state number 3
+2019-07-09 11:05:16.904 --test2
+2019-07-09 11:05:17.005 new state number 0
+2019-07-09 11:16:22.400 hello I am string debug 
+2019-07-09 11:16:22.502 --Idle
+2019-07-09 11:16:22.604 new state number 1
+2019-07-09 11:16:22.707 APP_SUCCESSED
+2019-07-09 11:16:23.110 --WakeUpRoutine
+2019-07-09 11:16:23.213 --test1
+2019-07-09 11:16:23.315 new state number 4
+2019-07-09 11:16:23.719 --test3
+2019-07-09 11:16:23.821 new state number 3
+2019-07-09 11:16:30.351 --test2
+2019-07-09 11:16:30.453 new state number 0
+2019-07-09 11:16:30.957 --Idle
+2019-07-09 11:16:31.059 new state number 1
+2019-07-09 11:16:31.564 --WakeUpRoutine
+2019-07-09 11:16:31.666 --test1
+2019-07-09 11:16:31.768 new state number 4
+2019-07-09 11:16:32.171 --test3
+2019-07-09 11:16:32.274 new state number 3
+2019-07-09 11:16:32.779 --test2
+2019-07-09 11:16:32.881 new state number 0
+2019-07-09 11:16:33.385 --Idle
+2019-07-09 11:16:33.487 new state number 1
+2019-07-09 11:16:33.991 --WakeUpRoutine
+2019-07-09 11:16:34.093 --test1
+2019-07-09 11:16:34.194 new state number 4
+2019-07-09 11:16:34.597 --test3
+2019-07-09 11:16:34.699 new state number 3
+2019-07-09 11:16:35.204 --test2
+2019-07-09 11:16:35.306 new state number 0
+2019-07-09 11:16:35.810 --Idle
+2019-07-09 11:16:35.911 new state number 1
+2019-07-09 11:16:36.416 --WakeUpRoutine
+2019-07-09 11:16:36.518 --test1
+2019-07-09 11:16:36.621 new state number 4
+2019-07-09 11:16:37.024 --test3
+2019-07-09 11:16:37.126 new state number 3
+2019-07-09 11:16:37.632 --test2
+2019-07-09 11:16:37.734 new state number 0
+2019-07-09 11:16:38.238 --Idle
+2019-07-09 11:16:38.340 new state number 1
+2019-07-09 11:16:38.845 --WakeUpRoutine
+2019-07-09 11:16:38.947 --test1
+2019-07-09 11:16:39.050 new state number 4
+2019-07-13 00:02:03.520 hello I am string debug 
+2019-07-13 00:02:03.628 --SimpleIdle
+2019-07-13 00:02:03.734 new state number 1
+2019-07-13 00:02:03.844 APP_SUCCESSED
+2019-07-13 00:02:04.264 --SimpleWakeUp
+2019-07-13 00:02:04.374 new state number 2
+2019-07-13 00:02:04.911 --SimpleNormalProcess
+2019-07-13 00:02:05.016 new state number 3
+2019-07-13 00:02:11.910 --SimpleSleepy
+2019-07-13 00:02:12.022 new state number 4
+2019-07-13 00:02:12.547 --SimpleShutDown
+2019-07-13 00:02:12.659 new state number 0
+2019-07-13 00:02:13.189 --SimpleIdle
+2019-07-13 00:02:13.296 new state number 1
+2019-07-13 00:02:13.832 --SimpleWakeUp
+2019-07-13 00:02:13.948 new state number 2
+2019-07-13 00:02:14.473 --SimpleNormalProcess
+2019-07-13 00:02:14.580 new state number 3
+2019-07-13 00:02:15.094 --SimpleSleepy
+2019-07-13 00:02:15.201 new state number 4
+2019-07-13 00:02:15.713 --SimpleShutDown
+2019-07-13 00:02:15.821 new state number 0
+2019-07-13 00:02:16.346 --SimpleIdle
+2019-07-13 00:02:16.454 new state number 1
+2019-07-13 00:02:16.989 --SimpleWakeUp
+2019-07-13 00:02:17.098 new state number 2
+2019-07-13 00:02:17.640 --SimpleNormalProcess
+2019-07-13 00:02:17.752 new state number 3
+2019-07-13 00:02:18.289 --SimpleSleepy
+2019-07-13 00:02:18.394 new state number 4
+2019-07-13 00:02:18.928 --SimpleShutDown
+2019-07-13 00:02:19.037 new state number 0
+2019-07-13 00:02:19.584 --SimpleIdle
+2019-07-13 00:02:19.694 new state number 1
+2019-07-13 00:02:20.228 --SimpleWakeUp
+2019-07-13 00:02:20.338 new state number 2
+2019-07-13 00:02:20.864 --SimpleNormalProcess
+2019-07-13 00:02:20.971 new state number 3
+2019-07-13 00:02:21.510 --SimpleSleepy
+2019-07-13 00:02:21.616 new state number 4
+2019-07-13 00:02:22.144 --SimpleShutDown
+2019-07-13 00:02:22.255 new state number 0
+2019-07-13 00:02:22.788 --SimpleIdle
+2019-07-13 00:02:22.906 new state number 1
+2019-07-13 00:02:23.430 --SimpleWakeUp
+2019-07-13 00:02:23.543 new state number 2
+2019-07-13 00:02:24.078 --SimpleNormalProcess
+2019-07-13 00:02:24.183 new state number 3
+2019-07-13 00:02:24.720 --SimpleSleepy
+2019-07-13 00:02:24.835 new state number 4
+2019-07-13 00:02:25.375 --SimpleShutDown
+2019-07-13 00:02:25.480 new state number 0
+2019-07-13 00:02:26.010 --SimpleIdle
+2019-07-13 00:02:26.125 new state number 1
+2019-07-13 00:04:18.541 hello I am string debug 
+2019-07-13 00:04:18.656 --SimpleIdle
+2019-07-13 00:04:18.766 --SimpleWakeUp
+2019-07-13 00:04:18.874 --SimpleNormalProcess
+2019-07-13 00:04:18.985 --SimpleSleepy
+2019-07-13 00:04:19.095 --SimpleShutDown
+2019-07-13 00:04:19.204 --SimpleIdle
+2019-07-13 00:04:19.312 APP_SUCCESSED
+2019-07-13 00:04:19.424 --SimpleWakeUp
+2019-07-13 00:04:19.532 --SimpleNormalProcess
+2019-07-13 00:04:19.642 --SimpleSleepy
+2019-07-13 00:04:19.750 --SimpleShutDown
+2019-07-13 00:04:19.862 --SimpleIdle
+2019-07-13 00:04:19.964 --SimpleWakeUp
+2019-07-13 00:04:20.075 --SimpleNormalProcess
+2019-07-13 00:04:20.183 --SimpleSleepy
+2019-07-13 00:04:20.295 --SimpleShutDown
+2019-07-13 00:04:20.399 --SimpleIdle
+2019-07-13 00:04:20.509 --SimpleWakeUp
+2019-07-13 00:04:20.612 --SimpleNormalProcess
+2019-07-13 00:04:26.977 --SimpleSleepy
+2019-07-13 00:04:27.089 --SimpleShutDown
+2019-07-13 00:04:27.203 --SimpleIdle
+2019-07-13 00:04:27.312 --SimpleWakeUp
+2019-07-13 00:04:27.423 --SimpleNormalProcess
+2019-07-13 00:04:27.532 --SimpleSleepy
+2019-07-13 00:04:27.635 --SimpleShutDown
+2019-07-13 00:04:27.744 --SimpleIdle
+2019-07-13 00:04:27.848 --SimpleWakeUp
+2019-07-13 00:04:27.955 --SimpleNormalProcess
+2019-07-13 00:04:28.057 --SimpleSleepy
+2019-07-13 00:04:28.165 --SimpleShutDown
+2019-07-13 00:04:28.273 --SimpleIdle
+2019-07-13 00:04:28.382 --SimpleWakeUp
+2019-07-13 00:04:28.494 --SimpleNormalProcess
+2019-07-13 00:04:28.598 --SimpleSleepy
+2019-07-13 00:04:28.705 --SimpleShutDown
+2019-07-13 00:04:28.821 --SimpleIdle
+2019-07-13 00:04:28.929 --SimpleWakeUp
+2019-07-13 00:04:29.048 --SimpleNormalProcess
+2019-07-13 00:04:29.158 --SimpleSleepy
+2019-07-13 00:04:29.261 --SimpleShutDown
+2019-07-13 00:04:29.371 --SimpleIdle
+2019-07-13 00:04:29.483 --SimpleWakeUp
+2019-07-13 00:04:29.587 --SimpleNormalProcess
+2019-07-13 00:04:29.693 --SimpleSleepy
+2019-07-13 00:04:29.800 --SimpleShutDown
+2019-07-13 00:04:29.912 --SimpleIdle
+2019-07-13 00:04:30.018 --SimpleWakeUp
+2019-07-13 00:04:30.130 --SimpleNormalProcess
+2019-07-13 00:04:30.240 --SimpleSleepy
+2019-07-13 00:04:30.353 --SimpleShutDown
+2019-07-13 00:04:30.470 --SimpleIdle
+2019-07-13 00:04:30.587 --SimpleWakeUp
+2019-07-13 00:04:30.694 --SimpleNormalProcess
+2019-07-13 00:04:30.805 --SimpleSleepy
+2019-07-13 00:04:30.909 --SimpleShutDown
+2019-07-13 00:04:31.013 --SimpleIdle
+2019-07-13 00:04:31.124 --SimpleWakeUp
+2019-07-13 00:04:31.232 --SimpleNormalProcess
+2019-07-13 00:04:31.341 --SimpleSleepy
+2019-07-13 00:04:31.450 --SimpleShutDown
+2019-07-13 00:04:31.561 --SimpleIdle
+2019-07-13 00:04:31.671 --SimpleWakeUp
+2019-07-13 00:04:31.777 --SimpleNormalProcess
+2019-07-13 00:04:31.894 --SimpleSleepy
+2019-07-13 00:04:31.999 --SimpleShutDown
+2019-07-13 00:04:32.108 --SimpleIdle
+2019-07-13 00:04:32.217 --SimpleWakeUp
+2019-07-13 00:04:32.327 --SimpleNormalProcess
+2019-07-13 00:04:32.437 --SimpleSleepy
+2019-07-13 00:04:32.548 --SimpleShutDown
+2019-07-13 00:04:32.651 --SimpleIdle
+2019-07-13 00:04:32.761 --SimpleWakeUp
+2019-07-13 00:04:32.864 --SimpleNormalProcess
+2019-07-13 00:04:32.971 --SimpleSleepy
+2019-07-13 00:04:33.081 --SimpleShutDown
+2019-07-13 00:04:33.188 --SimpleIdle
+2019-07-13 00:04:33.297 --SimpleWakeUp
+2019-07-13 00:04:33.404 --SimpleNormalProcess
+2019-07-13 00:04:33.512 --SimpleSleepy
+2019-07-13 00:04:33.627 --SimpleShutDown
+2019-07-13 00:04:33.740 --SimpleIdle
+2019-07-13 00:04:33.857 --SimpleWakeUp
+2019-07-13 00:04:33.969 --SimpleNormalProcess
+2019-07-13 00:04:34.083 --SimpleSleepy
+2019-07-13 00:04:34.194 --SimpleShutDown
+2019-07-13 00:04:34.306 --SimpleIdle
+2019-07-13 00:04:34.414 --SimpleWakeUp
+2019-07-13 00:04:34.521 --SimpleNormalProcess
+2019-07-13 00:04:34.631 --SimpleSleepy
+2019-07-13 00:04:34.743 --SimpleShutDown
+2019-07-13 00:04:34.856 --SimpleIdle
+2019-07-13 00:04:34.964 --SimpleWakeUp
+2019-07-13 00:04:35.071 --SimpleNormalProcess
+2019-07-13 00:04:35.181 --SimpleSleepy
+2019-07-13 00:04:35.293 --SimpleShutDown
+2019-07-13 00:04:35.397 --SimpleIdle
+2019-07-13 00:04:35.504 --SimpleWakeUp
+2019-07-13 00:04:35.610 --SimpleNormalProcess
+2019-07-13 00:04:35.725 --SimpleSleepy
+2019-07-13 00:04:35.827 --SimpleShutDown
+2019-07-13 00:04:35.944 --SimpleIdle
+2019-07-13 00:04:36.048 --SimpleWakeUp
+2019-07-13 00:04:36.155 --SimpleNormalProcess
+2019-07-13 00:04:36.271 --SimpleSleepy
+2019-07-13 00:04:36.376 --SimpleShutDown
+2019-07-13 00:04:36.481 --SimpleIdle
+2019-07-13 00:04:36.593 --SimpleWakeUp
+2019-07-13 00:04:36.697 --SimpleNormalProcess
+2019-07-13 00:04:36.807 --SimpleSleepy
+2019-07-13 00:04:36.912 --SimpleShutDown
+2019-07-13 00:04:37.026 --SimpleIdle
+2019-07-13 00:04:37.136 --SimpleWakeUp
+2019-07-13 00:04:37.238 --SimpleNormalProcess
+2019-07-13 00:04:37.342 --SimpleSleepy
+2019-07-13 00:04:37.445 --SimpleShutDown
+2019-07-13 00:04:37.557 --SimpleIdle
+2019-07-13 00:04:37.664 --SimpleWakeUp
+2019-07-13 00:04:37.773 --SimpleNormalProcess
+2019-07-13 00:04:37.888 --SimpleSleepy
+2019-07-13 00:04:37.991 --SimpleShutDown
+2019-07-13 00:04:38.101 --SimpleIdle
+2019-07-13 00:04:38.209 --SimpleWakeUp
+2019-07-13 00:04:38.313 --SimpleNormalProcess
+2019-07-13 00:04:38.426 --SimpleSleepy
+2019-07-13 00:04:38.533 --SimpleShutDown
+2019-07-13 00:04:38.643 --SimpleIdle
+2019-07-13 00:04:38.753 --SimpleWakeUp
+2019-07-13 00:04:38.861 --SimpleNormalProcess
+2019-07-13 00:04:38.963 --SimpleSleepy
+2019-07-13 00:04:39.070 --SimpleShutDown
+2019-07-13 00:04:39.183 --SimpleIdle
+2019-07-13 00:04:39.289 --SimpleWakeUp
+2019-07-13 00:04:39.404 --SimpleNormalProcess
+2019-07-13 00:04:39.513 --SimpleSleepy
+2019-07-13 00:04:39.624 --SimpleShutDown
+2019-07-13 00:04:39.730 --SimpleIdle
+2019-07-13 00:04:39.841 --SimpleWakeUp
+2019-07-13 00:04:39.954 --SimpleNormalProcess
+2019-07-13 00:04:40.062 --SimpleSleepy
+2019-07-13 00:04:40.172 --SimpleShutDown
+2019-07-13 00:04:40.275 --SimpleIdle
+2019-07-13 00:04:40.387 --SimpleWakeUp
+2019-07-13 00:04:40.497 --SimpleNormalProcess
+2019-07-13 00:04:40.605 --SimpleSleepy
+2019-07-13 00:04:40.719 --SimpleShutDown
+2019-07-13 00:04:40.834 --SimpleIdle
+2019-07-13 00:04:40.947 --SimpleWakeUp
+2019-07-13 00:04:41.057 --SimpleNormalProcess
+2019-07-13 00:04:41.165 --SimpleSleepy
+2019-07-13 00:04:41.274 --SimpleShutDown
+2019-07-13 00:04:41.381 --SimpleIdle
+2019-07-13 00:04:41.486 --SimpleWakeUp
+2019-07-13 00:04:41.593 --SimpleNormalProcess
+2019-07-13 00:04:41.696 --SimpleSleepy
+2019-07-13 00:04:41.805 --SimpleShutDown
+2019-07-13 00:04:41.909 --SimpleIdle
+2019-07-13 00:04:42.019 --SimpleWakeUp
+2019-07-13 00:04:42.134 --SimpleNormalProcess
+2019-07-13 00:04:42.246 --SimpleSleepy
+2019-07-13 00:04:42.350 --SimpleShutDown
+2019-07-13 00:04:42.461 --SimpleIdle
+2019-07-13 00:04:42.580 --SimpleWakeUp
+2019-07-13 00:04:42.689 --SimpleNormalProcess
+2019-07-13 00:04:42.799 --SimpleSleepy
+2019-07-13 00:04:42.909 --SimpleShutDown
+2019-07-13 00:04:43.013 --SimpleIdle
+2019-07-13 00:04:43.119 --SimpleWakeUp
+2019-07-13 00:04:43.231 --SimpleNormalProcess
+2019-07-13 00:04:43.344 --SimpleSleepy
+2019-07-13 00:04:43.447 --SimpleShutDown
+2019-07-13 00:04:43.556 --SimpleIdle
+2019-07-13 00:04:43.663 --SimpleWakeUp
+2019-07-13 00:04:43.775 --SimpleNormalProcess
+2019-07-13 00:04:43.883 --SimpleSleepy
+2019-07-13 00:04:43.991 --SimpleShutDown
+2019-07-13 00:04:44.094 --SimpleIdle
+2019-07-13 00:05:17.068 hello I am string debug 
+2019-07-13 00:05:17.170 --SimpleIdle
+2019-07-13 00:05:17.282 --SimpleWakeUp
+2019-07-13 00:05:17.392 --SimpleNormalProcess
+2019-07-13 00:05:17.505 APP_SUCCESSED
+2019-07-13 00:05:17.831 --SimpleSleepy
+2019-07-13 00:05:17.934 --SimpleShutDown
+2019-07-13 00:05:18.042 --SimpleIdle
+2019-07-13 00:05:18.468 --SimpleWakeUp
+2019-07-13 00:05:18.575 --SimpleNormalProcess
+2019-07-13 00:05:18.684 --SimpleSleepy
+2019-07-13 00:05:25.505 --SimpleShutDown
+2019-07-13 00:05:25.617 --SimpleIdle
+2019-07-13 00:05:25.726 --SimpleWakeUp
+2019-07-13 00:05:26.160 --SimpleNormalProcess
+2019-07-13 00:05:26.270 --SimpleSleepy
+2019-07-13 00:05:26.374 --SimpleShutDown
+2019-07-13 00:05:26.795 --SimpleIdle
+2019-07-13 00:05:26.908 --SimpleWakeUp
+2019-07-13 00:05:27.013 --SimpleNormalProcess
+2019-07-13 00:05:27.436 --SimpleSleepy
+2019-07-13 00:05:27.540 --SimpleShutDown
+2019-07-13 00:05:27.650 --SimpleIdle
+2019-07-13 00:05:28.062 --SimpleWakeUp
+2019-07-13 00:05:28.174 --SimpleNormalProcess
+2019-07-13 00:05:28.280 --SimpleSleepy
+2019-07-13 00:05:28.696 --SimpleShutDown
+2019-07-13 00:05:28.805 --SimpleIdle
+2019-07-13 00:05:28.915 --SimpleWakeUp
+2019-07-13 00:05:29.334 --SimpleNormalProcess
+2019-07-13 00:05:29.440 --SimpleSleepy
+2019-07-13 00:05:29.553 --SimpleShutDown
+2019-07-13 00:05:29.978 --SimpleIdle
+2019-07-13 00:05:30.092 --SimpleWakeUp
+2019-07-13 00:05:30.197 --SimpleNormalProcess
+2019-07-13 00:05:30.620 --SimpleSleepy
+2019-07-13 00:05:30.733 --SimpleShutDown
+2019-07-13 00:05:30.840 --SimpleIdle
+2019-07-13 00:05:31.260 --SimpleWakeUp
+2019-07-13 00:05:31.362 --SimpleNormalProcess
+2019-07-13 00:05:31.480 --SimpleSleepy
+2019-07-13 00:05:31.917 --SimpleShutDown
+2019-07-13 00:05:32.023 --SimpleIdle
+2019-07-13 00:05:32.141 --SimpleWakeUp
+2019-07-13 00:05:32.561 --SimpleNormalProcess
+2019-07-13 00:05:32.674 --SimpleSleepy
+2019-07-13 00:05:32.780 --SimpleShutDown
+2019-07-13 00:05:33.203 --SimpleIdle
+2019-07-13 00:05:33.314 --SimpleWakeUp
+2019-07-13 00:05:33.423 --SimpleNormalProcess
+2019-07-13 00:05:33.866 --SimpleSleepy
+2019-07-13 00:05:33.980 --SimpleShutDown
+2019-07-13 00:05:34.090 --SimpleIdle
+2019-07-13 00:05:34.510 --SimpleWakeUp
+2019-07-13 00:05:34.619 --SimpleNormalProcess
+2019-07-13 00:05:34.731 --SimpleSleepy
+2019-07-13 00:05:35.168 --SimpleShutDown
+2019-07-13 00:05:35.277 --SimpleIdle
+2019-07-13 00:05:35.379 --SimpleWakeUp
+2019-07-13 00:05:35.799 --SimpleNormalProcess
+2019-07-13 00:05:35.903 --SimpleSleepy
+2019-07-13 00:05:36.015 --SimpleShutDown
+2019-07-13 00:05:36.459 --SimpleIdle
+2019-07-13 00:05:36.573 --SimpleWakeUp
+2019-07-13 00:05:36.677 --SimpleNormalProcess
+2019-07-13 00:05:37.111 --SimpleSleepy
+2019-07-13 00:05:37.217 --SimpleShutDown
+2019-07-13 00:05:37.321 --SimpleIdle
+2019-07-13 00:05:55.542 hello I am string debug 
+2019-07-13 00:05:55.648 --SimpleIdle
+2019-07-13 00:05:55.753 --SimpleWakeUp
+2019-07-13 00:05:55.862 APP_SUCCESSED
+2019-07-13 00:05:56.285 --SimpleNormalProcess
+2019-07-13 00:05:56.399 --SimpleSleepy
+2019-07-13 00:05:56.926 --SimpleShutDown
+2019-07-13 00:05:57.039 --SimpleIdle
+2019-07-13 00:06:03.961 --SimpleWakeUp
+2019-07-13 00:06:04.069 --SimpleNormalProcess
+2019-07-13 00:06:04.601 --SimpleSleepy
+2019-07-13 00:06:04.707 --SimpleShutDown
+2019-07-13 00:06:05.249 --SimpleIdle
+2019-07-13 00:06:05.365 --SimpleWakeUp
+2019-07-13 00:06:05.887 --SimpleNormalProcess
+2019-07-13 00:06:05.989 --SimpleSleepy
+2019-07-13 00:06:06.525 --SimpleShutDown
+2019-07-13 00:06:06.627 --SimpleIdle
+2019-07-13 00:06:07.156 --SimpleWakeUp
+2019-07-13 00:06:07.258 --SimpleNormalProcess
+2019-07-13 00:06:07.789 --SimpleSleepy
+2019-07-13 00:06:07.901 --SimpleShutDown
+2019-07-13 00:06:08.437 --SimpleIdle
+2019-07-13 00:06:08.549 --SimpleWakeUp
+2019-07-13 00:06:09.086 --SimpleNormalProcess
+2019-07-13 00:06:09.198 --SimpleSleepy
+2019-07-13 00:06:09.730 --SimpleShutDown
+2019-07-13 00:06:09.840 --SimpleIdle
+2019-07-13 00:06:10.371 --SimpleWakeUp
+2019-07-13 00:06:10.484 --SimpleNormalProcess
+2019-07-13 00:06:11.014 --SimpleSleepy
+2019-07-13 00:06:11.127 --SimpleShutDown
+2019-07-13 00:06:11.660 --SimpleIdle
+2019-07-13 00:06:11.770 --SimpleWakeUp
+2019-07-13 00:06:12.287 --SimpleNormalProcess
+2019-07-13 00:06:12.391 --SimpleSleepy
+2019-07-13 00:06:12.923 --SimpleShutDown
+2019-07-13 00:06:13.036 --SimpleIdle
+2019-07-13 00:06:13.567 --SimpleWakeUp
+2019-07-13 00:06:13.677 --SimpleNormalProcess
+2019-07-13 00:06:14.216 --SimpleSleepy
+2019-07-13 00:06:14.319 --SimpleShutDown
+2019-07-13 00:06:14.849 --SimpleIdle
+2019-07-13 00:06:14.961 --SimpleWakeUp
+2019-07-13 00:06:15.488 --SimpleNormalProcess
+2019-07-13 00:06:15.591 --SimpleSleepy
+2019-07-13 00:06:16.114 --SimpleShutDown
+2019-07-13 00:06:16.217 --SimpleIdle
+2019-07-13 00:06:16.749 --SimpleWakeUp
+2019-07-13 00:06:16.863 --SimpleNormalProcess
+2019-07-13 00:06:17.388 --SimpleSleepy
+2019-07-13 00:06:17.497 --SimpleShutDown
+2019-07-13 00:06:18.020 --SimpleIdle
+2019-07-13 00:06:18.134 --SimpleWakeUp
+2019-07-13 00:06:18.655 --SimpleNormalProcess
+2019-07-13 00:06:18.764 --SimpleSleepy
+2019-07-13 00:06:19.300 --SimpleShutDown
+2019-07-13 00:06:19.413 --SimpleIdle
+2019-07-13 00:06:19.956 --SimpleWakeUp
+2019-07-13 00:06:20.058 --SimpleNormalProcess
+2019-07-13 00:06:20.581 --SimpleSleepy
+2019-07-13 00:06:20.683 --SimpleShutDown
+2019-07-13 00:06:21.212 --SimpleIdle
+2019-07-13 00:06:21.325 --SimpleWakeUp
+2019-07-13 00:06:21.863 --SimpleNormalProcess
+2019-07-13 00:06:21.973 --SimpleSleepy
+2019-07-13 00:06:22.519 --SimpleShutDown
+2019-07-13 00:06:22.629 --SimpleIdle
+2019-07-13 00:06:23.174 --SimpleWakeUp
+2019-07-13 00:06:23.283 --SimpleNormalProcess
+2019-07-13 00:06:23.823 --SimpleSleepy
+2019-07-13 00:06:23.941 --SimpleShutDown
+2019-07-13 00:06:24.484 --SimpleIdle
+2019-07-13 00:06:24.594 --SimpleWakeUp
+2019-07-13 00:06:25.132 --SimpleNormalProcess
+2019-07-13 00:06:25.241 --SimpleSleepy
+2019-07-13 00:06:25.774 --SimpleShutDown
+2019-07-13 00:06:25.883 --SimpleIdle
+2019-07-13 00:06:26.418 --SimpleWakeUp
+2019-07-13 00:06:26.528 --SimpleNormalProcess
+2019-07-13 00:06:27.072 --SimpleSleepy
+2019-07-13 00:06:27.182 --SimpleShutDown
+2019-07-13 00:06:27.728 --SimpleIdle
+2019-07-13 00:06:27.833 --SimpleWakeUp
+2019-07-13 00:06:28.364 --SimpleNormalProcess
+2019-07-13 00:06:28.477 --SimpleSleepy
+2019-07-13 00:06:28.998 --SimpleShutDown
+2019-07-13 00:06:29.112 --SimpleIdle
+2019-07-13 00:06:29.655 --SimpleWakeUp
+2019-07-13 00:06:29.767 --SimpleNormalProcess
+2019-07-13 00:06:30.303 --SimpleSleepy
+2019-07-13 00:06:30.416 --SimpleShutDown
+2019-07-13 00:06:30.957 --SimpleIdle
+2019-07-13 00:06:31.069 --SimpleWakeUp
+2019-07-13 00:06:31.587 --SimpleNormalProcess
+2019-07-13 00:06:31.696 --SimpleSleepy
+2019-07-13 00:06:32.241 --SimpleShutDown
+2019-07-13 00:06:32.350 --SimpleIdle
+2019-07-13 00:06:32.883 --SimpleWakeUp
+2019-07-13 00:06:32.995 --SimpleNormalProcess
+2019-07-13 00:06:33.523 --SimpleSleepy
+2019-07-13 00:06:33.632 --SimpleShutDown
+2019-07-13 00:06:34.160 --SimpleIdle
+2019-07-13 00:06:34.266 --SimpleWakeUp
+2019-07-13 00:06:34.804 --SimpleNormalProcess
+2019-07-13 00:06:34.917 --SimpleSleepy
+2019-07-13 00:06:35.441 --SimpleShutDown
+2019-07-13 00:06:35.558 --SimpleIdle
+2019-07-13 00:06:36.093 --SimpleWakeUp
+2019-07-13 00:06:36.195 --SimpleNormalProcess
+2019-07-13 00:06:36.730 --SimpleSleepy
+2019-07-13 00:06:36.837 --SimpleShutDown
+2019-07-13 00:06:37.370 --SimpleIdle
+2019-07-13 00:06:37.483 --SimpleWakeUp
+2019-07-13 00:06:38.006 --SimpleNormalProcess
+2019-07-13 00:06:38.118 --SimpleSleepy
+2019-07-13 00:06:38.641 --SimpleShutDown
+2019-07-13 00:06:38.748 --SimpleIdle
+2019-07-13 00:06:39.287 --SimpleWakeUp
+2019-07-13 00:06:39.397 --SimpleNormalProcess
+2019-07-13 00:06:39.938 --SimpleSleepy
+2019-07-13 00:06:40.044 --SimpleShutDown
+2019-07-13 00:06:40.589 --SimpleIdle
+2019-07-13 00:06:40.702 --SimpleWakeUp
+2019-07-13 00:06:41.213 --SimpleNormalProcess
+2019-07-13 00:06:41.322 --SimpleSleepy
+2019-07-13 00:06:41.868 --SimpleShutDown
+2019-07-13 00:06:41.978 --SimpleIdle
+2019-07-13 00:06:42.507 --SimpleWakeUp
+2019-07-13 00:06:42.611 --SimpleNormalProcess
+2019-07-13 00:06:43.145 --SimpleSleepy
+2019-07-13 00:06:43.257 --SimpleShutDown
+2019-07-13 00:06:43.799 --SimpleIdle
+2019-07-13 00:06:43.909 --SimpleWakeUp
+2019-07-13 00:06:44.445 --SimpleNormalProcess
+2019-07-13 00:06:44.553 --SimpleSleepy
+2019-07-13 00:06:45.090 --SimpleShutDown
+2019-07-13 00:06:45.197 --SimpleIdle
+2019-07-13 00:06:45.736 --SimpleWakeUp
+2019-07-13 00:06:45.848 --SimpleNormalProcess
+2019-07-13 00:06:46.383 --SimpleSleepy
+2019-07-13 00:06:46.489 --SimpleShutDown
+2019-07-13 00:06:47.012 --SimpleIdle
+2019-07-13 00:06:47.130 --SimpleWakeUp
+2019-07-13 00:06:47.678 --SimpleNormalProcess
+2019-07-13 00:06:47.782 --SimpleSleepy
+2019-07-13 00:06:48.307 --SimpleShutDown
+2019-07-13 00:06:48.417 --SimpleIdle
+2019-07-13 00:06:48.945 --SimpleWakeUp
+2019-07-13 00:06:49.059 --SimpleNormalProcess
+2019-07-13 00:06:49.598 --SimpleSleepy
+2019-07-13 00:06:49.708 --SimpleShutDown
+2019-07-13 00:06:50.248 --SimpleIdle
+2019-07-13 00:06:50.361 --SimpleWakeUp
+2019-07-13 00:06:50.897 --SimpleNormalProcess
+2019-07-13 00:06:51.009 --SimpleSleepy
+2019-07-13 00:06:51.536 --SimpleShutDown
+2019-07-13 00:06:51.648 --SimpleIdle
+2019-07-13 00:06:52.185 --SimpleWakeUp
+2019-07-13 00:06:52.294 --SimpleNormalProcess
+2019-07-13 00:06:52.810 --SimpleSleepy
+2019-07-13 00:06:52.913 --SimpleShutDown
+2019-07-13 00:06:53.451 --SimpleIdle
+2019-07-13 00:06:53.556 --SimpleWakeUp
+2019-07-13 00:06:54.083 --SimpleNormalProcess
+2019-07-13 00:06:54.195 --SimpleSleepy
+2019-07-13 00:06:54.729 --SimpleShutDown
+2019-07-13 00:06:54.841 --SimpleIdle
+2019-07-13 00:06:55.372 --SimpleWakeUp
+2019-07-13 00:06:55.474 --SimpleNormalProcess
+2019-07-13 00:06:56.011 --SimpleSleepy
+2019-07-13 00:06:56.121 --SimpleShutDown
+2019-07-13 00:06:56.659 --SimpleIdle
+2019-07-13 00:06:56.775 --SimpleWakeUp
+2019-07-13 00:06:57.316 --SimpleNormalProcess
+2019-07-13 00:06:57.425 --SimpleSleepy
+2019-07-13 00:06:57.976 --SimpleShutDown
+2019-07-13 00:06:58.080 --SimpleIdle
+2019-07-13 00:06:58.604 --SimpleWakeUp
+2019-07-13 00:06:58.711 --SimpleNormalProcess
+2019-07-13 00:06:59.254 --SimpleSleepy
+2019-07-13 00:06:59.359 --SimpleShutDown
+2019-07-13 00:06:59.895 --SimpleIdle
+2019-07-13 00:07:00.008 --SimpleWakeUp
+2019-07-13 00:07:00.533 --SimpleNormalProcess
+2019-07-13 00:07:00.646 --SimpleSleepy
+2019-07-13 00:07:01.192 --SimpleShutDown
+2019-07-13 00:07:01.308 --SimpleIdle
+2019-07-13 00:07:01.829 --SimpleWakeUp
+2019-07-13 00:07:01.931 --SimpleNormalProcess
+2019-07-13 00:07:02.466 --SimpleSleepy
+2019-07-13 00:07:02.580 --SimpleShutDown
+2019-07-13 00:07:03.116 --SimpleIdle
+2019-07-13 00:07:03.219 --SimpleWakeUp
+2019-07-13 00:07:03.757 --SimpleNormalProcess
+2019-07-13 00:07:03.871 --SimpleSleepy
+2019-07-13 00:07:04.402 --SimpleShutDown
+2019-07-13 00:07:04.511 --SimpleIdle
+2019-07-13 00:07:05.058 --SimpleWakeUp
+2019-07-13 00:07:05.168 --SimpleNormalProcess
+2019-07-13 00:07:05.705 --SimpleSleepy
+2019-07-13 00:07:05.811 --SimpleShutDown
+2019-07-13 00:07:06.350 --SimpleIdle
+2019-07-13 00:07:06.457 --SimpleWakeUp
+2019-07-13 00:07:06.998 --SimpleNormalProcess
+2019-07-13 00:07:07.103 --SimpleSleepy
+2019-07-13 00:07:07.643 --SimpleShutDown
+2019-07-13 00:07:07.756 --SimpleIdle
+>>>>>>> 286297492c5016cf74d5d2eef5387359132c5976
