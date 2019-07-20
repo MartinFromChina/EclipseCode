@@ -27,12 +27,13 @@ struct s_TimeManagerBasic
 	X_Void(* ToDo)(sTimeManagerBasic *p_This);
 };
 
-X_Boolean TimeManagerExternAdd(TimeManagerID *id,sTimeManagerBasic *p_This,X_Void(*ToDo)(sTimeManagerBasic *p_This));
+uint8_t TimeManagerExternAdd(TimeManagerID *id,sTimeManagerBasic *p_This,X_Void(*ToDo)(sTimeManagerBasic *p_This));
 uint8_t TimeManagerExternRelease(TimeManagerID id);
 uint32_t TimeManagerGetBasicValue(TimeManagerID id);
 X_Void TimeManagerSetBasicValue(TimeManagerID id,uint32_t value);
 X_Void TimeManagerExternInit(X_Void);
 X_Void TimeManagerExternHandle(X_Void);
+uint8_t GetTimeManagerNumber(X_Void);
 
 /*************************************************
  * use this module two ways below:

@@ -115,14 +115,19 @@ static X_Void CounterIncrease(sMTE *p_this)
 static StateNumber SimpleIdleAction(StateNumber current_state)
 {
 	uint8_t errorcode;
+	TimeManagerID release_id;
 	String_Debug_Once(BASIC_STATE_DEBUG,state_entry,SimpleIdle,(30,"--SimpleIdle\r\n"));
-	if(TimeManagerExternAdd(&mTM_ID,&s_mte.base,CounterDrease) != X_True)
+
+	errorcode = TimeManagerExternAdd(&mTM_ID,&s_mte.base,CounterDrease) ;
+	if(errorcode != APP_SUCCESSED)
 	{
-		String_Debug(BASIC_STATE_DEBUG,(40,"going to release ID %d\r\n",TM_ten));
-		errorcode = TimeManagerExternRelease(TM_ten);
+		String_Debug(BASIC_STATE_DEBUG,(USER_MAX_STRING_LENGTH,"add : %s\r\n",AppErrorGet(errorcode,X_Null)));
+		release_id = TM_two;
+		String_Debug(BASIC_STATE_DEBUG,(40,"going to release ID %d\r\n",release_id));
+		errorcode = TimeManagerExternRelease(release_id);
 		if(errorcode != APP_SUCCESSED)
 		{
-			String_Debug(BASIC_STATE_DEBUG,(40,"error: %s\r\n",AppErrorGet(errorcode,X_Null)));
+			String_Debug(BASIC_STATE_DEBUG,(USER_MAX_STRING_LENGTH,"release: %s\r\n",AppErrorGet(errorcode,X_Null)));
 		}
 	}
 	else
@@ -136,7 +141,8 @@ static StateNumber SimpleIdleAction(StateNumber current_state)
 }
 static StateNumber SimpleWakeUpAction(StateNumber current_state)
 {
-	String_Debug_Once(BASIC_STATE_DEBUG,state_entry,SimpleWakeUp,(30,"--SimpleWakeUp\r\n"));
+	String_Debug_Once(BASIC_STATE_DEBUG,state_entry,SimpleWakeUp,(30,"--SimpleWakeUp %d\r\n"));
+	return SimpleIdle;
 	return SimpleNormalProcess;
 }
 static StateNumber SimpleNormalProcessAction(StateNumber current_state)
