@@ -4,6 +4,7 @@
 #include "..\CommonSource\IrqAndTimer\app_timer.h"
 #include "ScriptsCommandModule\HexCommand.h"
 #include "TB_PowerSaving\PenState.h"
+#include "..\CommonSource\IrqAndTimer\TimeManagerExtern.h"
 
 static uint32_t timer1_counter,timer2_counter;
 
@@ -20,6 +21,7 @@ static void timer1_callback(void)
 {
 	ConditionalScriptCommandHandle(ConditionalDoAsCommand);
 	onTick();
+	TimeManagerExternHandle();
 }
 static void timer2_callback(void)
 {
@@ -37,4 +39,6 @@ void AllTimerConfig(void)
 	AppTimerStart(DebugTimer);
 	AppTimerStart(timer1);
 //	AppTimerStart(timer2);
+
+	TimeManagerExternInit();
 }

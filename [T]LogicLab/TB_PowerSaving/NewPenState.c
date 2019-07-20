@@ -2,6 +2,7 @@
 #include "..\..\CommonSource\StateMachine\StateMachine.h"
 #include "..\..\CommonSource\CharStringDebug\CharStringDebugModule.h"
 #include "..\..\CommonSource\AppError.h"
+#include "..\..\CommonSource\IrqAndTimer\TimeManagerExtern.h"
 
 #define STATE_ERROR_DEBUG  1
 #define BASIC_STATE_DEBUG  1
@@ -86,11 +87,51 @@ typedef enum
 	SimpleShutDown 			= 4,
 }PenSimpleState;
 
+static PenSimpleState NextState = SimpleIdle;
+static TimeManagerID mTM_ID = TM_MAX;
+static sTimeManagerBasic my_sTMB;
 
+typedef struct  sMyTMB_Extern sMTE;
+struct sMyTMB_Extern
+{
+	sTimeManagerBasic base;
+	uint32_t counter;
+	X_Void (*CounterUp)(sMTE *p_This);
+};
+
+static sMTE s_mte;
+
+static X_Void CounterDrease(sTimeManagerBasic *p_this)
+{
+	sMTE *s_mte_copy  = (sMTE*)(p_this);
+	if(p_this->counter > 0) {p_this->counter--;}
+	s_mte_copy->CounterUp(s_mte_copy);
+}
+static X_Void CounterIncrease(sMTE *p_this)
+{
+	if(p_this != X_Null){p_this->counter ++;}
+}
 
 static StateNumber SimpleIdleAction(StateNumber current_state)
 {
+	uint8_t errorcode;
 	String_Debug_Once(BASIC_STATE_DEBUG,state_entry,SimpleIdle,(30,"--SimpleIdle\r\n"));
+	if(TimeManagerExternAdd(&mTM_ID,&s_mte.base,CounterDrease) != X_True)
+	{
+		String_Debug(BASIC_STATE_DEBUG,(40,"going to release ID %d\r\n",TM_ten));
+		errorcode = TimeManagerExternRelease(TM_ten);
+		if(errorcode != APP_SUCCESSED)
+		{
+			String_Debug(BASIC_STATE_DEBUG,(40,"error: %s\r\n",AppErrorGet(errorcode,X_Null)));
+		}
+	}
+	else
+	{
+		TimeManagerSetBasicValue(mTM_ID,1000);
+		s_mte.counter = 0;
+		s_mte.CounterUp = CounterIncrease;
+		String_Debug(BASIC_STATE_DEBUG,(40," TimeManagerAdd ID %d\r\n",mTM_ID));
+	}
 	return SimpleWakeUp;
 }
 static StateNumber SimpleWakeUpAction(StateNumber current_state)
@@ -106,12 +147,15 @@ static StateNumber SimpleNormalProcessAction(StateNumber current_state)
 static StateNumber SimpleSleepyAction(StateNumber current_state)
 {
 	String_Debug_Once(BASIC_STATE_DEBUG,state_entry,SimpleSleepy,(30,"--SimpleSleepy\r\n"));
+	String_Debug(BASIC_STATE_DEBUG,(40," counter %d ;counter extern %d\r\n",TimeManagerGetBasicValue(mTM_ID),s_mte.counter));
 	return SimpleShutDown;
 }
 static StateNumber SimpleShutDownAction(StateNumber current_state)
 {
 	String_Debug_Once(BASIC_STATE_DEBUG,state_entry,SimpleShutDown,(30,"--SimpleShutDown\r\n"));
-	return SimpleIdle;
+
+	if(s_mte.counter > 30) {TimeManagerExternRelease(mTM_ID);}
+	return SimpleWakeUp;
 }
 
 
@@ -128,13 +172,14 @@ APP_SIMPLE_STATE_MACHINE_DEF(pen_simple_state,5,2,&PenStateAction[0]);
 
 X_Void StateJumpRecorder(StateNumber state)
 {
+	NextState = (PenSimpleState)state;
 	// current state number is state and latest state number != state
 //	String_Debug(STATE_ERROR_DEBUG,(30,"new state number %d\r\n",state));
 }
 
 static X_Boolean DoesBreakSimple(StateSimpleParam *p_sbp,StateNumber nextstate,uint16_t loop_counter)
 {
-	if(loop_counter > 2) {return X_True;}
+	if(loop_counter > 0) {return X_True;}
 	return X_False;
 }
 

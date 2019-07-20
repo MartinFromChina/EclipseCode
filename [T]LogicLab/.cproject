@@ -45,7 +45,7 @@
 					</folderInfo>
 					<sourceEntries>
 						<entry excluding="ScriptsCommandModule/CalledByScripts.c|ScriptCommandModule|CommonSource" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="CommonSource"/>
+						<entry excluding="IrqAndTimer/TimeManager.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="CommonSource"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -90,7 +90,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="ScriptsCommandModule/CalledByScripts.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="CommonSource/IrqAndTimer/TimeManager.c|ScriptsCommandModule/CalledByScripts.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>

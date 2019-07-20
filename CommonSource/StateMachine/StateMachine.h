@@ -57,21 +57,27 @@ uint8_t SimpleStateMachineRun(StateSimpleParam *p_ssp
 
 APP_STATE_MACHINE_DEF(example_state,2,3,&ExampleStateHandle[0]);
 
-
-static X_Boolean DoesStop(StateBasicParam *p_sbp,StateNumber nextstate,uint16_t loop_counter)
-{
-	if(loop_counter > MAX_STATE_EVENT_NUMBER) {return X_True;}
-	if(p_sbp->CurrentStateNum != nextstate){return X_True;}
-	return X_False;
-}
-StateMachineRun(&example_state,X_True,DoesStop,X_Null);
-
 X_Void StateJumpRecorder(StateNumber state_num)
 {
 	// going to jump new state:state_num
 }
 
-StateMachineRun(&example_state,X_False,DoesStop,StateJumpRecorder);
+StateMachineRun(&example_state,X_False,X_Null,StateJumpRecorder);
+
+ */
+
+/*
+static const StateAction SimpleStateAction[5] = {
+		{X_Null},
+		{X_Null},
+		{X_Null},
+		{X_Null},
+		{X_Null},
+};
+
+APP_SIMPLE_STATE_MACHINE_DEF(simple_state,5,2,&SimpleStateAction[0]);
+
+error_code = SimpleStateMachineRun(&simple_state,DoesBreakSimple,StateJumpRecorder);
  */
 
 #endif

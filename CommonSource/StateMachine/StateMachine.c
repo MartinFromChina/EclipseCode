@@ -76,7 +76,6 @@ uint8_t StateMachineRun(StateBasicParam *p_sbp
 	return APP_SUCCESSED;
 }
 
-
 uint8_t SimpleStateMachineRun(StateSimpleParam *p_ssp
 						,X_Boolean (*DoesBreak)(StateSimpleParam *p_sbp,StateNumber nextstate,uint16_t loop_counter)
 						,X_Void(*StateRecorder)(StateNumber state))
