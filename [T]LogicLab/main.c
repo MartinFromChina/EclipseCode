@@ -5,7 +5,7 @@
 #include "user_timer.h"
 
 #define COUNTER_LIMIT  3
-//STRING_DEBUG_COUNTER_ENTRY_DEF(p_counter);
+//STRING_DEBUG_COUNTER_ENTRY_DEF(p_counter,0);
 STRING_DEBUG_ONCE_ENTRY_DEF(p_entry,0);
 
 

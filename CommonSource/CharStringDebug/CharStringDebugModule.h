@@ -20,8 +20,8 @@
 					static uint16_t    CONCAT_2(p_entry_name,_whole) = init_value;				\
 					static uint16_t*   p_entry_name = &CONCAT_2(p_entry_name,_whole) ;
 
-	#define STRING_DEBUG_COUNTER_ENTRY_DEF(p_entry_name)            							\
-					static uint32_t    CONCAT_2(p_entry_name,_whole) = 0;									\
+	#define STRING_DEBUG_COUNTER_ENTRY_DEF(p_entry_name,init_value)            							\
+					static uint32_t    CONCAT_2(p_entry_name,_whole) = init_value;									\
 					static uint32_t*   p_entry_name = &CONCAT_2(p_entry_name,_whole) ;
 #else
 	#define STRING_DEBUG_ONCE_ENTRY_DEF(p_entry_name,init_value)            			\
