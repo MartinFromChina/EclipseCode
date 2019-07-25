@@ -23,16 +23,17 @@ typedef struct
 	const StateNumber 	AllStateNum;
 	const uint8_t     	MaxEventNum;
 	StateHandle const 	*p_Handle;
-	StateNumber 		CurrentStateNum;
+	StateNumber 		*p_CurrentStateNum;
 }StateBasicParam;
 
 #define APP_STATE_MACHINE_DEF(id,state_number,event_number,p_handle)                \
-static StateBasicParam    CONCAT_2(id, _entry) = {state_number,event_number,p_handle,DEFAULT_STATE_NUMBER}; \
-static StateBasicParam* id = &CONCAT_2(id, _entry)
+static StateNumber CONCAT_2(id, _current_state_number) = DEFAULT_STATE_NUMBER;						\
+static const StateBasicParam    CONCAT_2(id, _entry) = {state_number,event_number,p_handle,&CONCAT_2(id, _current_state_number)}; \
+static const StateBasicParam* id = &CONCAT_2(id, _entry)
 
-uint8_t StateMachineRun( StateBasicParam *p_sbp
+uint8_t StateMachineRun( const StateBasicParam *p_sbp
 						,X_Boolean isNullEventForbid
-						,X_Boolean (*DoesBreak)(StateBasicParam *p_sbp,StateNumber nextstate,uint16_t loop_counter)
+						,X_Boolean (*DoesBreak)(const StateBasicParam *p_sbp,StateNumber nextstate,uint16_t loop_counter)
 						,X_Void(*StateRecorder)(StateNumber state));
 
 typedef struct
@@ -40,16 +41,17 @@ typedef struct
 	const StateNumber 	AllStateNum;
 	const uint16_t 		MaxStateHopTimesInSignalProcess;
 	StateAction const 	*p_Action;
-	StateNumber 		CurrentStateNum;
+    StateNumber         *p_CurrentStateNum;
 }StateSimpleParam;
 
 #define APP_SIMPLE_STATE_MACHINE_DEF(id,state_number,max_signal_loop_times,p_action)                \
-static StateSimpleParam CONCAT_2(id, _entry) = {state_number,max_signal_loop_times,p_action,DEFAULT_STATE_NUMBER}; \
-static StateSimpleParam* id = &CONCAT_2(id, _entry)
+static StateNumber CONCAT_2(id, _current_state_number) = DEFAULT_STATE_NUMBER;						\
+static const StateSimpleParam CONCAT_2(id, _entry) = {state_number,max_signal_loop_times,p_action,&CONCAT_2(id, _current_state_number)}; \
+static const StateSimpleParam* id = &CONCAT_2(id, _entry)
 
 
-uint8_t SimpleStateMachineRun( StateSimpleParam *p_ssp
-						,X_Boolean (*DoesBreak)(StateSimpleParam *p_sbp,StateNumber nextstate,uint16_t loop_counter)
+uint8_t SimpleStateMachineRun( const StateSimpleParam *p_ssp
+						,X_Boolean (*DoesBreak)(const StateSimpleParam *p_sbp,StateNumber nextstate,uint16_t loop_counter)
 						,X_Void(*StateRecorder)(StateNumber state));
 /*
  static const StateHandle ExampleStateHandle[2] = {

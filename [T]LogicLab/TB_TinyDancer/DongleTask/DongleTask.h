@@ -1,8 +1,7 @@
 #ifndef __DONGLETASK_H
 #define __DONGLETASK_H
 
-
-#include "UserDebug.h"
+#include "..\..\..\CommonSource\KeilMDK.h"
 
 #define DONGLE_TASK_INTERVAL_IN_MS       7
 

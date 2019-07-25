@@ -1,15 +1,15 @@
 #include "StateMachine.h"
 
-static X_Boolean DoesBreakDefault(StateBasicParam *p_sbp,StateNumber nextstate,uint16_t loop_counter)
+static X_Boolean DoesBreakDefault(const StateBasicParam *p_sbp,StateNumber nextstate,uint16_t loop_counter)
 {
 	if(loop_counter > MAX_STATE_EVENT_NUMBER) {return X_True;}
-	if(p_sbp->CurrentStateNum != nextstate){return X_True;}
+	if((*p_sbp->p_CurrentStateNum) != nextstate){return X_True;}
 	return X_False;
 }
 
-uint8_t StateMachineRun( StateBasicParam *p_sbp
+uint8_t StateMachineRun( const StateBasicParam *p_sbp
 						,X_Boolean isNullEventForbid
-						,X_Boolean (*DoesBreak)(StateBasicParam *p_sbp,StateNumber nextstate,uint16_t loop_counter)
+						,X_Boolean (*DoesBreak)(const StateBasicParam *p_sbp,StateNumber nextstate,uint16_t loop_counter)
 						,X_Void(*StateRecorder)(StateNumber state))
 {
 	uint16_t Counter;
@@ -20,14 +20,14 @@ uint8_t StateMachineRun( StateBasicParam *p_sbp
 	if(p_sbp->p_Handle == X_Null){return APP_POINTER_NULL;}
 	if(p_sbp->AllStateNum > MAX_STATE_NUMBER || p_sbp->AllStateNum == 0) {return APP_BEYOND_SCOPE;}
 	if(p_sbp->MaxEventNum > MAX_STATE_EVENT_NUMBER || p_sbp->MaxEventNum == 0) {return APP_BEYOND_SCOPE;}
-	if(p_sbp->CurrentStateNum > MAX_STATE_NUMBER)
+	if((*p_sbp->p_CurrentStateNum) > MAX_STATE_NUMBER)
 	{
-		p_sbp->CurrentStateNum = DEFAULT_STATE_NUMBER;
+		(*p_sbp->p_CurrentStateNum) = DEFAULT_STATE_NUMBER;
 		return APP_BEYOND_SCOPE;
 	}
 
 	Counter = 0;
-	current_state = p_sbp->CurrentStateNum;
+	current_state = (*p_sbp->p_CurrentStateNum);
 	isStateJumpWrong = X_False;
 	isReachNullEvent = X_False;
 
@@ -70,14 +70,14 @@ uint8_t StateMachineRun( StateBasicParam *p_sbp
 		}
 
 	}
-	p_sbp->CurrentStateNum = current_state;
+	(*p_sbp->p_CurrentStateNum) = current_state;
 
 	if(isStateJumpWrong == X_True || isReachNullEvent == X_True) {return APP_ERROR;}
 	return APP_SUCCESSED;
 }
 
-uint8_t SimpleStateMachineRun(StateSimpleParam *p_ssp
-						,X_Boolean (*DoesBreak)(StateSimpleParam *p_sbp,StateNumber nextstate,uint16_t loop_counter)
+uint8_t SimpleStateMachineRun(const StateSimpleParam *p_ssp
+						,X_Boolean (*DoesBreak)(const StateSimpleParam *p_sbp,StateNumber nextstate,uint16_t loop_counter)
 						,X_Void(*StateRecorder)(StateNumber state))
 {
 	uint16_t Counter;
@@ -87,14 +87,14 @@ uint8_t SimpleStateMachineRun(StateSimpleParam *p_ssp
 	if(p_ssp == X_Null) {return APP_POINTER_NULL;}
 	if(p_ssp->p_Action == X_Null){return APP_POINTER_NULL;}
 	if(p_ssp->AllStateNum > MAX_STATE_NUMBER || p_ssp->AllStateNum == 0) {return APP_BEYOND_SCOPE;}
-	if(p_ssp->CurrentStateNum > MAX_STATE_NUMBER)
+	if((*p_ssp->p_CurrentStateNum) > MAX_STATE_NUMBER)
 	{
-		p_ssp->CurrentStateNum = DEFAULT_STATE_NUMBER;
+		(*p_ssp->p_CurrentStateNum) = DEFAULT_STATE_NUMBER;
 		return APP_BEYOND_SCOPE;
 	}
 
 	Counter = 0;
-	current_state = p_ssp->CurrentStateNum;
+	current_state = (*p_ssp->p_CurrentStateNum);
 	isStateJumpWrong = X_False;
 
 	for(i = 0; i<p_ssp->MaxStateHopTimesInSignalProcess ; i++)
@@ -126,7 +126,7 @@ uint8_t SimpleStateMachineRun(StateSimpleParam *p_ssp
 		}
 
 	}
-	p_ssp->CurrentStateNum = current_state;
+	(*p_ssp->p_CurrentStateNum) = current_state;
 
 	if(isStateJumpWrong == X_True ) {return APP_ERROR;}
 	return APP_SUCCESSED;

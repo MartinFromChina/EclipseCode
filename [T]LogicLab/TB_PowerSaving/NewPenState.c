@@ -183,7 +183,7 @@ X_Void StateJumpRecorder(StateNumber state)
 //	String_Debug(STATE_ERROR_DEBUG,(30,"new state number %d\r\n",state));
 }
 
-static X_Boolean DoesBreakSimple(StateSimpleParam *p_sbp,StateNumber nextstate,uint16_t loop_counter)
+static X_Boolean DoesBreakSimple(const StateSimpleParam *p_sbp,StateNumber nextstate,uint16_t loop_counter)
 {
 	if(loop_counter > 0) {return X_True;}
 	return X_False;

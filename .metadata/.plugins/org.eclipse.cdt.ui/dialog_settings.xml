@@ -27,6 +27,11 @@
 	<section name="org.eclipse.cdt.ui.text.hover.CMacroExpansionExploration">
 	</section>
 	<section name="PDOMSearchPage">
+		<item value="false" key="caseSensitive"/>
+		<item value="227191" key="searchFlags"/>
+		<list key="previousPatterns">
+			<item value="mul_loop_queues"/>
+		</list>
 	</section>
 	<section name="NewClassWizardPage">
 	</section>

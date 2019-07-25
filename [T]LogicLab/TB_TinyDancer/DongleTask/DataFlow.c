@@ -1,7 +1,6 @@
 #include "DataFlow.h"
 
-
-#include "mul_loop_queues.h"
+#include "..\..\..\CommonSource\MulLoopQueue\mul_loop_queues.h"
 
 #define MAX_DATA_LENGTH   30
 #define BUF_NUM_DEFAULT   10
@@ -23,7 +22,7 @@ X_Boolean AirMouseNotityDataPush(const uint8_t * p_data,uint8_t length)
 	buf_number = QueueFirstIn(p_airmouse_manager,&isOK,X_False);
 	if(isOK == X_False) {return X_False;}
 	
-	CopyBuffer(p_data,&airmouse_buf[buf_number][0],length);
+//	CopyBuffer(p_data,&airmouse_buf[buf_number][0],length);
 	 airmouse_buf[buf_number][MAX_DATA_LENGTH]= length;
 	return X_True;
 }
