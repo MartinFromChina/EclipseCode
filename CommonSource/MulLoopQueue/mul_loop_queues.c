@@ -1,6 +1,6 @@
 #include "mul_loop_queues.h"
 
-static X_Boolean ConfigListNode(data_list *dlist)
+static X_Boolean ListNodeInit(const data_list *dlist)
 {
 	if(dlist == X_Null) {return X_False;}
 
@@ -24,7 +24,7 @@ static uint8_t GetListLength(data_list *p_list)
 	return (i-1);
 }
 */
-static X_Void GetListState(List_Manager *p_manager)
+static X_Void GetListState(const List_Manager *p_manager)
 {
 	if(p_manager->FilledBufNum == 0)
 	{
@@ -38,7 +38,7 @@ static X_Void GetListState(List_Manager *p_manager)
 	}
 	p_manager->l_state = normal;
 }
-X_Void queueInitialize(data_list * p_list,List_Manager *p_manager,uint8_t length)
+X_Void queueInitialize(const data_list * p_list,const List_Manager *p_manager,const uint8_t length)
 {
 	uint8_t i;
 	X_Boolean isOkFlag;
@@ -48,7 +48,7 @@ X_Void queueInitialize(data_list * p_list,List_Manager *p_manager,uint8_t length
 	for(i=0;i<p_manager->MaxBufNumber;i++)
 	{
 
-		isOkFlag = ConfigListNode(&p_list[i]);
+		isOkFlag = ListNodeInit(&p_list[i]);
 		p_list[i].list_number = i ;
 		if(isOkFlag == X_False)
 		{
@@ -75,7 +75,7 @@ X_Void queueInitialize(data_list * p_list,List_Manager *p_manager,uint8_t length
 	p_manager->isEmpty = X_True;
 }
 
-uint16_t QueueFirstIn(List_Manager *p_manager,X_Boolean *isOK,X_Boolean is_OccupyPermit)
+uint16_t QueueFirstIn(const List_Manager *p_manager,X_Boolean *isOK,X_Boolean is_OccupyPermit)
 {
 	uint16_t buf_number;
 	data_list *FI;
@@ -137,7 +137,7 @@ uint16_t QueueFirstIn(List_Manager *p_manager,X_Boolean *isOK,X_Boolean is_Occup
 
 	return buf_number;
 }
-uint16_t QueueFirstOut(List_Manager *p_manager,X_Boolean *isOK)
+uint16_t QueueFirstOut(const List_Manager *p_manager,X_Boolean *isOK)
 {
 	uint16_t buf_number;
 	data_list *FO;
@@ -180,7 +180,7 @@ uint16_t QueueFirstOut(List_Manager *p_manager,X_Boolean *isOK)
 
 	return buf_number;
 }
-X_Boolean DoesQueueEmpty(List_Manager *p_manager)
+X_Boolean DoesQueueEmpty(const List_Manager *p_manager)
 {
 	return p_manager->isEmpty ;
 }
