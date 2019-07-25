@@ -1,7 +1,7 @@
-16:19:26 **** Rebuild of configuration Debug for project Hello World ****
+07:36:34 **** Rebuild of configuration Debug for project Hello World ****
 Info: Internal Builder is used for build
 gcc -O0 -g3 -Wall -c -fmessage-length=0 -o main.o "..\\main.c" 
 gcc -o "Hello World.exe" main.o 
 
-16:19:26 Build Finished (took 569ms)
+07:36:35 Build Finished (took 590ms)
 

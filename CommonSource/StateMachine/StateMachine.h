@@ -63,7 +63,7 @@ uint8_t SimpleStateMachineRun( const StateSimpleParam *p_ssp
 
 APP_STATE_MACHINE_DEF(p_example_state,2,3,&ExampleStateHandle[0]);
 
-X_Void StateJumpRecorder(StateNumber state_num)
+static X_Void StateJumpRecorder(StateNumber state_num)
 {
 	// going to jump new state:state_num
 }
@@ -80,6 +80,12 @@ static const StateAction SimpleStateAction[5] = {
 		{X_Null},
 		{X_Null},
 };
+
+static X_Boolean DoesBreakSimple(const StateSimpleParam *p_sbp,StateNumber nextstate,uint16_t loop_counter)
+{
+	if(loop_counter > 3) {return X_True;}
+	return X_False;
+}
 
 APP_SIMPLE_STATE_MACHINE_DEF(p_simple_state,5,2,&SimpleStateAction[0]);
 
