@@ -1,5 +1,5 @@
 #include "StateMachine.h"
-//#include "stdio.h"
+
 static X_Boolean DoesBreakDefault(StateBasicParam *p_sbp,StateNumber nextstate,uint16_t loop_counter)
 {
 	if(loop_counter > MAX_STATE_EVENT_NUMBER) {return X_True;}
@@ -7,7 +7,7 @@ static X_Boolean DoesBreakDefault(StateBasicParam *p_sbp,StateNumber nextstate,u
 	return X_False;
 }
 
-uint8_t StateMachineRun(StateBasicParam *p_sbp
+uint8_t StateMachineRun( StateBasicParam *p_sbp
 						,X_Boolean isNullEventForbid
 						,X_Boolean (*DoesBreak)(StateBasicParam *p_sbp,StateNumber nextstate,uint16_t loop_counter)
 						,X_Void(*StateRecorder)(StateNumber state))

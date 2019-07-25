@@ -74,7 +74,7 @@ static const StateHandle PenStateHandle[5] = {
 };
 
 
-APP_STATE_MACHINE_DEF(pen_state,5,4,&PenStateHandle[0]);
+APP_STATE_MACHINE_DEF(p_pen_state,5,4,&PenStateHandle[0]);
 
 
 
@@ -174,7 +174,7 @@ static const StateAction PenStateAction[5] = {
 		{SimpleShutDownAction},
 };
 
-APP_SIMPLE_STATE_MACHINE_DEF(pen_simple_state,5,2,&PenStateAction[0]);
+APP_SIMPLE_STATE_MACHINE_DEF(p_pen_simple_state,5,2,&PenStateAction[0]);
 
 X_Void StateJumpRecorder(StateNumber state)
 {
@@ -193,7 +193,7 @@ X_Void AllStateAndEventAction(X_Void)
 {
 	uint8_t error_code;
 
-//	error_code = StateMachineRun(&pen_state,X_True,X_Null,StateJumpRecorder);
-	error_code = SimpleStateMachineRun(&pen_simple_state,DoesBreakSimple,StateJumpRecorder);
+//	error_code = StateMachineRun(p_pen_state,X_True,X_Null,StateJumpRecorder);
+	error_code = SimpleStateMachineRun(p_pen_simple_state,DoesBreakSimple,StateJumpRecorder);
 	String_Debug_Once(STATE_ERROR_DEBUG,error_entry,error_code,(30,"%s\r\n",StringErrorTranslate(error_code,AppErrorGet)));
 }
