@@ -133,6 +133,10 @@ void ReadScriptsInit(FILE* (*open_file)(void))
 	{
 		isOpenFileSucessed = X_True;
 	}
+	else
+	{
+		String_Debug(SCRIPTS_COMMAND_CONTEXT_DEBUG,(30,"open file failed\r\n"));
+	}
 	if(isOpenFileSucessed == X_True)
 	{
 		commandLineNum = 0;

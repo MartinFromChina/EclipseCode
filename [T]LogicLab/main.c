@@ -3,6 +3,7 @@
 #include "..\CommonSource\FileOperation\read_scripts.h"
 
 #include "user_timer.h"
+#include "TB_TinyDancer\DongleTask\TB\DongleTaskTB.h"
 
 #define COUNTER_LIMIT  3
 //STRING_DEBUG_COUNTER_ENTRY_DEF(p_counter,0);
@@ -14,16 +15,15 @@ static void PrintfInit(void)
 	setbuf(stdout,NULL);
 }
 
-static FILE * UserOpenFile(void)
-{
-	return fopen(".//ScriptsCommandModule//command.txt", "r");
-}
-
+//static FILE * UserOpenFile(void)
+//{
+//	return fopen(".//ScriptsCommandModule//command.txt", "r");
+//}
 int main(void)
 {
 	StringDebugInit(PrintfInit);
 
-	ReadScriptsInit(UserOpenFile);
+	ReadScriptsInit(DongleTaskOpenFile);
 
 	UserIrqCreated();
 	AppTimerModuleStart(AllTimerConfig);

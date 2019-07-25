@@ -1,0 +1,7 @@
+#ifndef __DONGLETASKDEBUGSWITCH_H
+#define __DONGLETASKDEBUGSWITCH_H
+
+#define DONGLE_SCRIPT_DEBUG   1
+
+
+#endif

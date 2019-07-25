@@ -3,6 +3,7 @@
 //
 #include "DongleTask.h"
 #include "DataFlow.h"
+#include "..\..\UserDebug.h"
 //#include "button.h"
 //#include "user_usb.h"
 //
