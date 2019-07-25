@@ -43,13 +43,13 @@ typedef struct
 #define APP_LOOPQUEUE_DEF(id,id_manager,id_length,buf_num)            					\
 		static const  uint16_t    id_length = buf_num;										\
 		static data_list   CONCAT_2(id,_list)[buf_num];								\
-		static const data_list 	* id =   &CONCAT_2(id,_list)[0];								\
+		static data_list 	* id =   &CONCAT_2(id,_list)[0];								\
 		static List_Manager CONCAT_2(id,_listmanager) ;      		\
-		static const List_Manager * id_manager = &CONCAT_2(id,_listmanager)
+		static List_Manager * id_manager = &CONCAT_2(id,_listmanager)
 
-X_Void queueInitialize( const data_list * p_list,const List_Manager *p_manager,const uint8_t length);
-uint16_t QueueFirstIn( const List_Manager *p_manager,X_Boolean *isOK,X_Boolean is_OccupyPermit);
-uint16_t QueueFirstOut( const List_Manager *p_manager,X_Boolean *isOK);
-X_Boolean DoesQueueEmpty(const List_Manager *p_manager);
+X_Void queueInitialize(  data_list * p_list, List_Manager *p_manager,const uint8_t length);
+uint16_t QueueFirstIn(  List_Manager *p_manager,X_Boolean *isOK,X_Boolean is_OccupyPermit);
+uint16_t QueueFirstOut(  List_Manager *p_manager,X_Boolean *isOK);
+X_Boolean DoesQueueEmpty( List_Manager *p_manager);
 
 #endif

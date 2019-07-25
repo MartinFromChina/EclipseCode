@@ -21,6 +21,10 @@ typedef struct
 
 void ReadScriptsInit(FILE* (*open_file)(void));
 void ScriptCommandHandle(X_Boolean(*doAsCommand)(uint8_t* p_command,uint8_t length));
-void ConditionalScriptCommandHandle(uint32_t (*ExecuCommandAndGetNextOne)(uint8_t* p_command,uint8_t length,uint32_t current_command_line));
+void ConditionalScriptCommandHandle(
+									uint32_t (*ExecuCommandAndGetNextOne)(uint8_t* p_command,uint8_t length,uint32_t current_command_line
+											,X_Boolean (*CallFunction)(uint8_t func_num,X_Void * p_param))
+									,X_Boolean (*CallFunction_Entry)(uint8_t func_num,X_Void * p_param)
+									);
 
 #endif

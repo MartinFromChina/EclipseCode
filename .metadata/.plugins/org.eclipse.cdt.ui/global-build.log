@@ -1,15 +1,5 @@
-21:15:10 **** Incremental Build of configuration Debug for project [T]LogicLab ****
+21:54:46 **** Incremental Build of configuration Debug for project [T]LogicLab ****
 Info: Internal Builder is used for build
-gcc "-ID:\\AllApplication\\GitAll\\EclipseCode\\[T]LogicLab\\ScriptsCommandModule" -O0 -g3 -Wall -c -fmessage-length=0 -o "TB_PowerSaving\\NewPenState.o" "..\\TB_PowerSaving\\NewPenState.c" 
-..\TB_PowerSaving\NewPenState.c:92:26: warning: 'my_sTMB' defined but not used [-Wunused-variable]
- static sTimeManagerBasic my_sTMB;
-                          ^~~~~~~
-In file included from ..\TB_PowerSaving\NewPenState.c:2:0:
-..\TB_PowerSaving\NewPenState.c:77:23: warning: 'p_pen_state' defined but not used [-Wunused-variable]
- APP_STATE_MACHINE_DEF(p_pen_state,5,4,&PenStateHandle[0]);
-                       ^
-..\TB_PowerSaving\..\..\CommonSource\StateMachine\StateMachine.h:32:31: note: in definition of macro 'APP_STATE_MACHINE_DEF'
- static const StateBasicParam* id = &CONCAT_2(id, _entry)
-                               ^~
-gcc -o [T]LogicLab.exe "CommonSource\\AppError.o" "CommonSource\\CharStringDebug\\CharStringDebugModule.o" "CommonSource\\FileOperation\\command.o" "CommonSource\\FileOperation\\read_scripts.o" "CommonSource\\IrqAndTimer\\TimeManagerExtern.o" "CommonSource\\IrqAndTimer\\app_timer.o" "CommonSource\\IrqAndTimer\\user_irq.o" "CommonSource\\LogFile\\user_log.o" "CommonSource\\Math\\bit_operation.o" "CommonSource\\Math\\lcm_gcd.o" "CommonSource\\Math\\random_number.o" "CommonSource\\MulLoopQueue\\mul_loop_queues.o" "CommonSource\\StateMachine\\StateMachine.o" "ScriptsCommandModule\\HexCommand.o" "TB_PowerSaving\\EmarkChargeWhenShutDown.o" "TB_PowerSaving\\EmarkConnected.o" "TB_PowerSaving\\EmarkDisconnected.o" "TB_PowerSaving\\EmarkQuiet.o" "TB_PowerSaving\\EmarkShutDown.o" "TB_PowerSaving\\NewPenState.o" "TB_PowerSaving\\PenState.o" "TB_PowerSaving\\PowerSaving.o" "TB_PowerSaving\\other_function.o" "TB_PowerSaving\\pen_button.o" "TB_TinyDancer\\DongleTask\\DataFlow.o" "TB_TinyDancer\\DongleTask\\DongleTask.o" "TB_TinyDancer\\UsartCommunication\\UsartCommunication.o" main.o user_timer.o 
+gcc "-ID:\\AllApplication\\GitAll\\EclipseCode\\[T]LogicLab\\ScriptsCommandModule" -O0 -g3 -Wall -c -fmessage-length=0 -o user_timer.o "..\\user_timer.c" 
+gcc -o [T]LogicLab.exe "CommonSource\\AppError.o" "CommonSource\\CharStringDebug\\CharStringDebugModule.o" "CommonSource\\FileOperation\\command.o" "CommonSource\\FileOperation\\read_scripts.o" "CommonSource\\IrqAndTimer\\TimeManagerExtern.o" "CommonSource\\IrqAndTimer\\app_timer.o" "CommonSource\\IrqAndTimer\\user_irq.o" "CommonSource\\LogFile\\user_log.o" "CommonSource\\Math\\bit_operation.o" "CommonSource\\Math\\lcm_gcd.o" "CommonSource\\Math\\random_number.o" "CommonSource\\MulLoopQueue\\mul_loop_queues.o" "CommonSource\\StateMachine\\StateMachine.o" "ScriptsCommandModule\\HexCommand.o" "TB_TinyDancer\\DongleTask\\DataFlow.o" "TB_TinyDancer\\DongleTask\\DongleTask.o" "TB_TinyDancer\\UsartCommunication\\UsartCommunication.o" main.o user_timer.o 
 Info: Nothing to build for [T]LogicLab

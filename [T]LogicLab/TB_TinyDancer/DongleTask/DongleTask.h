@@ -5,8 +5,9 @@
 
 #define DONGLE_TASK_INTERVAL_IN_MS       7
 
-X_Void timer_init(X_Void);
-X_Void StartTaskTimer(X_Void);
+//X_Void timer_init(X_Void);
+//X_Void StartTaskTimer(X_Void);
 X_Void DongleTaskInit(X_Void);
+X_Void onTick(X_Void);
 
 #endif

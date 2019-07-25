@@ -1,8 +1,8 @@
 
 //#include "app_timer.h"
 //
-//#include "DongleTask.h"
-//#include "DataFlow.h"
+#include "DongleTask.h"
+#include "DataFlow.h"
 //#include "button.h"
 //#include "user_usb.h"
 //
@@ -31,10 +31,15 @@
 //{
 //	app_timer_start(main_tick, APP_TIMER_TICKS(DONGLE_TASK_INTERVAL_IN_MS),X_Null);
 //}
-//X_Void DongleTaskInit(X_Void)
-//{
+
+X_Void DongleTaskInit(X_Void)
+{
 //	ButtonInitialize();
-//	DataFlowInit();
+	DataFlowInit();
 //	BasicUsbInit();
 //	app_timer_create(&main_tick, APP_TIMER_MODE_REPEATED, onTick);
-//}
+}
+X_Void onTick(X_Void)
+{
+
+}

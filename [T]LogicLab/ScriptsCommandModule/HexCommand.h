@@ -16,6 +16,7 @@ typedef struct
 }ScriptFunctionParam;
 
 X_Boolean DoAsCommand(uint8_t* p_command,uint8_t length);
-uint32_t ConditionalDoAsCommand(uint8_t* p_command,uint8_t length,uint32_t current_command_line);
+uint32_t ConditionalDoAsCommand(uint8_t* p_command,uint8_t length,uint32_t current_command_line
+								,X_Boolean (*CallFunction)(uint8_t func_num,X_Void * p_param));
 
 #endif

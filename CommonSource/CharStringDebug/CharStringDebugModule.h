@@ -17,18 +17,18 @@
 
 #if (USE_STRING_DEBUG == 1)
 	#define STRING_DEBUG_ONCE_ENTRY_DEF(p_entry_name,init_value)            			\
-					static uint16_t    CONCAT_2(p_entry_name,_whole) = init_value;				\
-					static uint16_t*   p_entry_name = &CONCAT_2(p_entry_name,_whole) ;
+					static uint16_t    CONCAT_2(p_entry_name, _whole) = init_value;				\
+					static uint16_t*   p_entry_name = &CONCAT_2(p_entry_name,_whole)
 
 	#define STRING_DEBUG_COUNTER_ENTRY_DEF(p_entry_name,init_value)            							\
 					static uint32_t    CONCAT_2(p_entry_name,_whole) = init_value;									\
-					static uint32_t*   p_entry_name = &CONCAT_2(p_entry_name,_whole) ;
+					static uint32_t*   p_entry_name = &CONCAT_2(p_entry_name,_whole)
 #else
 	#define STRING_DEBUG_ONCE_ENTRY_DEF(p_entry_name,init_value)            			\
-					static uint8_t*   p_entry_name = X_Null ;
+					static uint8_t*   p_entry_name = X_Null
 
 	#define STRING_DEBUG_COUNTER_ENTRY_DEF(p_entry_name)            							\
-					static uint8_t*   p_entry_name = X_Null ;
+					static uint8_t*   p_entry_name = X_Null
 #endif
 
 
