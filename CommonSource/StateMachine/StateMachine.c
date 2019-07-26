@@ -3,14 +3,14 @@
 static X_Boolean DoesBreakDefault(const StateBasicParam *p_sbp,StateNumber nextstate,uint16_t loop_counter)
 {
 	if(loop_counter > MAX_STATE_EVENT_NUMBER) {return X_True;}
-	if((*p_sbp->p_CurrentStateNum) != nextstate){return X_True;}
+	if((*p_sbp->p_CurrentStateNum) != nextstate){return X_True;} // current != next
 	return X_False;
 }
 
 uint8_t StateMachineRun( const StateBasicParam *p_sbp
 						,X_Boolean isNullEventForbid
 						,X_Boolean (*DoesBreak)(const StateBasicParam *p_sbp,StateNumber nextstate,uint16_t loop_counter)
-						,X_Void(*StateRecorder)(StateNumber state))
+						,X_Void(*StateRecorder)(StateNumber current_state,StateNumber next_state))
 {
 	uint16_t Counter;
 	StateNumber i,current_state,previous_state;
@@ -47,7 +47,7 @@ uint8_t StateMachineRun( const StateBasicParam *p_sbp
 			if(previous_state != current_state)
 			{
 				i = 0; // !!!
-				if(StateRecorder != X_Null) {StateRecorder(current_state);}
+				if(StateRecorder != X_Null) {StateRecorder(previous_state,current_state);}
 			}
 		}
 		else
@@ -78,7 +78,7 @@ uint8_t StateMachineRun( const StateBasicParam *p_sbp
 
 uint8_t SimpleStateMachineRun(const StateSimpleParam *p_ssp
 						,X_Boolean (*DoesBreak)(const StateSimpleParam *p_sbp,StateNumber nextstate,uint16_t loop_counter)
-						,X_Void(*StateRecorder)(StateNumber state))
+						,X_Void(*StateRecorder)(StateNumber current_state,StateNumber next_state))
 {
 	uint16_t Counter;
 	StateNumber i,current_state,previous_state;
@@ -102,6 +102,7 @@ uint8_t SimpleStateMachineRun(const StateSimpleParam *p_ssp
 		if(p_ssp ->p_Action[current_state].Action != X_Null)
 		{
 			previous_state = current_state;
+			(*p_ssp->p_CurrentStateNum) = current_state;
 			current_state = p_ssp ->p_Action[current_state].Action(current_state);
 			Counter ++;
 			if((current_state+1) > p_ssp->AllStateNum)
@@ -112,7 +113,7 @@ uint8_t SimpleStateMachineRun(const StateSimpleParam *p_ssp
 			}
 			if(previous_state != current_state)
 			{
-				if(StateRecorder != X_Null) {StateRecorder(current_state);}
+				if(StateRecorder != X_Null) {StateRecorder(previous_state,current_state);}
 			}
 		}
 

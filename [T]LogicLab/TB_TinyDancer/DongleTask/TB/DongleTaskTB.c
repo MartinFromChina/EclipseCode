@@ -1,14 +1,17 @@
 #include "DongleTaskTB.h"
 #include "..\..\..\UserDebug.h"
 #include "..\..\..\..\CommonSource\StateMachine\StateMachine.h"
+#include "..\..\..\ScriptsCommandModule\HexCommand.h"
+#include "..\..\..\..\CommonSource\Math\random_number.h"
 
 RTT_DEBUG_ONCE_ENTRY_DEF(p_script_func_num,100);
+
+static uint32_t current_random_num = 0;
 
 FILE * DongleTaskOpenFile(void)
 {
 	return fopen(".//TB_TinyDancer//DongleTask//TB//command.txt", "r");
 }
-
 /***********
  * 0755xxccaabbpp	   :	call number xx function
  * 					cc : 00   pointer to next line
@@ -27,6 +30,7 @@ FILE * DongleTaskOpenFile(void)
 static X_Boolean ScriptsFunctionInitial(X_Void * p_param)
 {
 	SEGGER_RTT_Debug_Once(DONGLE_SCRIPT_DEBUG,p_script_func_num,1,(30,"ScriptsFunctionInitial \r\n"));
+	current_random_num = 0;
 	return X_True;
 }
 
@@ -40,6 +44,7 @@ typedef enum
 
 static StateNumber GetRandomNumAction(StateNumber current_state)
 {
+	current_random_num = GetRandomNumber(1,100);
 	return GetRandomEvent;
 }
 static StateNumber GetRandomEventAction(StateNumber current_state)
@@ -52,7 +57,7 @@ static StateNumber RandomEventReportAction(StateNumber current_state)
 }
 static StateNumber RandomEventActionAction(StateNumber current_state)
 {
-	return GetRandomNum;
+	return GetRandomEvent;
 }
 
 static const StateAction SimpleStateAction[4] = {
@@ -65,20 +70,25 @@ static const StateAction SimpleStateAction[4] = {
 
 APP_SIMPLE_STATE_MACHINE_DEF(p_simple_state,4,4,&SimpleStateAction[0]);
 
-static X_Void StateJumpRecorder(StateNumber state_num)
+static X_Void StateJumpRecorder(StateNumber current_state,StateNumber next_state)
 {
 	// going to jump new state:state_num
-//	SEGGER_RTT_Debug(DONGLE_SCRIPT_DEBUG,(USER_MAX_STRING_LENGTH,"jump to new state:%d\r\n",state_num));
+	SEGGER_RTT_Debug(DONGLE_SCRIPT_DEBUG,(USER_MAX_STRING_LENGTH,"current:%d \r\n",current_state));
 }
 static X_Boolean DoesBreakSimple(const StateSimpleParam *p_sbp,StateNumber nextstate,uint16_t loop_counter)
 {
+//	SEGGER_RTT_Debug(DONGLE_SCRIPT_DEBUG,(USER_MAX_STRING_LENGTH,"DoesBreak:current:%d;next:%d\r\n",(*p_sbp->p_CurrentStateNum),nextstate));
+	if((*p_sbp->p_CurrentStateNum) == RandomEventAction) // reach the last state
+	{
+		return X_True;
+	}
 	return X_False;
 }
 
 static X_Boolean EventGenerator(X_Void * p_param)
 {
-//	SEGGER_RTT_Debug(DONGLE_SCRIPT_DEBUG,(30,"EventGenerator \r\n"));
-	SEGGER_RTT_Debug_Once(DONGLE_SCRIPT_DEBUG,p_script_func_num,2,(30,"EventGenerator \r\n"));
+	SEGGER_RTT_Debug(DONGLE_SCRIPT_DEBUG,(30,"EventGenerator \r\n"));
+//	SEGGER_RTT_Debug_Once(DONGLE_SCRIPT_DEBUG,p_script_func_num,2,(30,"EventGenerator \r\n"));
 	SimpleStateMachineRun(p_simple_state,DoesBreakSimple,StateJumpRecorder);
 	return X_True;
 }

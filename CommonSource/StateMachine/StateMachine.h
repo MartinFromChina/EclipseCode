@@ -34,7 +34,7 @@ static const StateBasicParam* id = &CONCAT_2(id, _entry)
 uint8_t StateMachineRun( const StateBasicParam *p_sbp
 						,X_Boolean isNullEventForbid
 						,X_Boolean (*DoesBreak)(const StateBasicParam *p_sbp,StateNumber nextstate,uint16_t loop_counter)
-						,X_Void(*StateRecorder)(StateNumber state));
+						,X_Void(*StateRecorder)(StateNumber current_state,StateNumber next_state));
 
 typedef struct
 {
@@ -52,7 +52,7 @@ static const StateSimpleParam* id = &CONCAT_2(id, _entry)
 
 uint8_t SimpleStateMachineRun( const StateSimpleParam *p_ssp
 						,X_Boolean (*DoesBreak)(const StateSimpleParam *p_sbp,StateNumber nextstate,uint16_t loop_counter)
-						,X_Void(*StateRecorder)(StateNumber state));
+						,X_Void(*StateRecorder)(StateNumber current_state,StateNumber next_state));
 /*
  static const StateHandle ExampleStateHandle[2] = {
 
@@ -63,9 +63,9 @@ uint8_t SimpleStateMachineRun( const StateSimpleParam *p_ssp
 
 APP_STATE_MACHINE_DEF(p_example_state,2,3,&ExampleStateHandle[0]);
 
-static X_Void StateJumpRecorder(StateNumber state_num)
+static X_Void StateJumpRecorder(StateNumber current_state,StateNumber next_state)
 {
-	// going to jump new state:state_num
+	// going to jump new state:next_state
 }
 
 StateMachineRun(p_example_state,X_False,X_Null,StateJumpRecorder);
@@ -81,7 +81,7 @@ static const StateAction SimpleStateAction[5] = {
 		{X_Null},
 };
 
-static X_Boolean DoesBreakSimple(const StateSimpleParam *p_sbp,StateNumber nextstate,uint16_t loop_counter)
+static X_Boolean DoesBreakSimple(const StateSimpleParam *p_sbp,StateNumber current_state,StateNumber nextstate,uint16_t loop_counter)
 {
 	if(loop_counter > 3) {return X_True;}
 	return X_False;
