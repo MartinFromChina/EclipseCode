@@ -3,7 +3,6 @@
 #include "..\..\..\..\CommonSource\StateMachine\StateMachine.h"
 #include "..\..\..\ScriptsCommandModule\HexCommand.h"
 #include "..\..\..\..\CommonSource\Math\random_number.h"
-#include "..\..\..\..\CommonSource\Math\bit_operation.h"
 
 #include "UsbFeatureTB.h"
 #include "UserEventTB.h"

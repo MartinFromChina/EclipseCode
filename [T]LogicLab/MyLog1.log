@@ -1,101 +1,37 @@
-2019-07-26 17:51:30.954 hello I am string debug 
-2019-07-26 17:51:32.261 ----UserEventInit
-2019-07-26 17:51:32.362 ----BleConditionInit
-2019-07-26 17:51:32.465 ----NotityEventInit
-2019-07-26 17:51:32.868 !!! isBleConnected: 0
-2019-07-26 17:51:32.971 !!! no notify
-2019-07-26 17:51:33.473 ResetConditionDetected:1
-2019-07-26 17:51:34.077 ResetConditionDetected:2
-2019-07-26 17:51:34.681 !!! isBleConnected: 1
-2019-07-26 17:51:34.784 !!!  notify
-2019-07-26 17:51:39.504 ResetConditionDetected:3
-2019-07-26 17:51:45.534 ResetConditionDetected:4
-2019-07-26 17:51:51.559 ResetConditionDetected:5
-2019-07-26 17:51:57.584 ResetConditionDetected:6
-2019-07-26 17:52:03.611 ResetConditionDetected:7
-2019-07-26 17:52:03.713 !!! isBleConnected: 0
-2019-07-26 17:52:03.816 !!! no notify
-2019-07-26 17:52:04.218 !!! isBleConnected: 1
-2019-07-26 17:52:04.321 !!!  notify
-2019-07-26 17:52:09.648 ResetConditionDetected:8
-2019-07-26 17:52:10.252 ResetConditionDetected:9
-2019-07-26 17:52:10.857 ResetConditionDetected:10
-2019-07-26 17:52:15.681 ResetConditionDetected:11
-2019-07-26 17:52:16.286 ResetConditionDetected:12
-2019-07-26 17:52:16.891 ResetConditionDetected:13
-2019-07-26 17:52:22.319 ResetConditionDetected:14
-2019-07-26 17:52:22.421 !!! isBleConnected: 0
-2019-07-26 17:52:22.522 !!! no notify
-2019-07-26 17:52:22.925 ResetConditionDetected:15
-2019-07-26 17:52:23.530 !!! isBleConnected: 1
-2019-07-26 17:52:23.632 !!!  notify
-2019-07-26 17:52:28.359 ResetConditionDetected:16
-2019-07-26 17:52:28.963 ResetConditionDetected:17
-2019-07-26 17:52:34.391 ResetConditionDetected:18
-2019-07-26 17:52:34.997 ResetConditionDetected:19
-2019-07-26 17:52:40.421 ResetConditionDetected:20
-2019-07-26 17:52:40.524 Reset: ResetByUser
-2019-07-26 17:52:40.626 !!! isBleConnected: 0
-2019-07-26 17:52:40.728 !!! no notify
-2019-07-26 17:52:41.635 ----UserEventInit
-2019-07-26 17:52:41.738 ----BleConditionInit
-2019-07-26 17:52:41.840 ----NotityEventInit
-2019-07-26 17:52:46.463 ResetConditionDetected:1
-2019-07-26 17:52:47.068 ResetConditionDetected:2
-2019-07-26 17:52:47.670 !!! isBleConnected: 1
-2019-07-26 17:52:47.773 !!!  notify
-2019-07-26 17:52:52.495 ResetConditionDetected:3
-2019-07-26 17:52:53.100 ResetConditionDetected:4
-2019-07-26 17:52:58.527 ResetConditionDetected:5
-2019-07-26 17:52:59.132 ResetConditionDetected:6
-2019-07-26 17:52:59.737 ResetConditionDetected:7
-2019-07-26 17:53:04.560 ResetConditionDetected:8
-2019-07-26 17:53:05.165 ResetConditionDetected:9
-2019-07-26 17:53:05.266 !!! isBleConnected: 0
-2019-07-26 17:53:05.369 !!! no notify
-2019-07-26 17:53:05.771 ResetConditionDetected:10
-2019-07-26 17:53:06.375 !!! isBleConnected: 1
-2019-07-26 17:53:06.478 !!!  notify
-2019-07-26 17:53:11.201 ResetConditionDetected:11
-2019-07-26 17:53:11.805 ResetConditionDetected:12
-2019-07-26 17:53:17.228 ResetConditionDetected:13
-2019-07-26 17:53:17.832 ResetConditionDetected:14
-2019-07-26 17:53:23.254 ResetConditionDetected:15
-2019-07-26 17:53:23.356 !!! isBleConnected: 0
-2019-07-26 17:53:23.458 !!! no notify
-2019-07-26 17:53:23.862 ResetConditionDetected:16
-2019-07-26 17:53:24.467 !!! isBleConnected: 1
-2019-07-26 17:53:24.569 !!!  notify
-2019-07-26 17:53:29.292 ResetConditionDetected:17
-2019-07-26 17:53:29.895 ResetConditionDetected:18
-2019-07-26 17:53:35.320 ResetConditionDetected:19
-2019-07-26 17:53:35.923 ResetConditionDetected:20
-2019-07-26 17:53:36.026 Reset: ResetByUser
-2019-07-26 17:53:37.132 ----UserEventInit
-2019-07-26 17:53:37.234 ----BleConditionInit
-2019-07-26 17:53:37.336 ----NotityEventInit
-2019-07-26 17:53:37.741 !!! isBleConnected: 0
-2019-07-26 17:53:37.843 !!! no notify
-2019-07-26 17:53:41.360 ResetConditionDetected:1
-2019-07-26 17:53:41.964 ResetConditionDetected:2
-2019-07-26 17:53:42.570 !!! isBleConnected: 1
-2019-07-26 17:53:42.671 !!!  notify
-2019-07-26 18:06:46.971 hello I am string debug 
-2019-07-26 18:06:48.280 ----UserEventInit
-2019-07-26 18:06:48.383 ----BleConditionInit
-2019-07-26 18:06:48.483 ----NotityEventInit
-2019-07-26 18:06:48.887 !!! isBleConnected: 0
-2019-07-26 18:06:48.989 !!! no notify
-2019-07-26 18:06:51.301 ResetConditionDetected:1
-2019-07-26 18:06:51.907 ResetConditionDetected:2
-2019-07-26 18:06:52.511 !!! isBleConnected: 1
-2019-07-26 18:06:52.613 !!!  notify
-2019-07-26 18:06:52.715 !!!  key_notify 0
-2019-07-26 18:06:52.818 !!!  AirMouse_notify 0
-2019-07-26 18:06:52.921 !!!  PenTip_notify 0
-2019-07-26 18:06:53.023 !!!  Color_notify 0
-2019-07-26 18:06:53.125 !!!  PenType_notify 0
-2019-07-26 18:06:53.227 !!!  Battery_notify 0
-2019-07-26 18:06:57.349 ResetConditionDetected:3
-2019-07-26 18:06:57.954 ResetConditionDetected:4
-2019-07-26 18:06:58.558 ResetConditionDetected:5
+2019-07-26 22:04:49.815 hello I am string debug 
+2019-07-26 22:04:51.124 ----NotityEventInit
+2019-07-26 22:04:51.728 !!! isBleConnected: 0
+2019-07-26 22:04:51.831 !!! no notify
+2019-07-26 22:05:00.175 !!! isBleConnected: 1
+2019-07-26 22:05:00.778 --------------  notify 1e
+2019-07-26 22:05:00.881 !!!  AirMouse_notify 1
+2019-07-26 22:05:00.984 !!!  PenTip_notify 1
+2019-07-26 22:05:01.085 !!!  Color_notify 1
+2019-07-26 22:05:01.187 !!!  PenType_notify 1
+2019-07-26 22:05:06.207 !!!  PenTip_notify 0
+2019-07-26 22:05:06.308 !!!  Color_notify 0
+2019-07-26 22:05:06.410 !!!  Battery_notify 1
+2019-07-26 22:05:11.635 !!!  PenType_notify 0
+2019-07-26 22:05:11.738 !!!  Battery_notify 0
+2019-07-26 22:05:17.062 !!!  PenType_notify 1
+2019-07-26 22:05:22.883 !!!  PenTip_notify 1
+2019-07-26 22:05:22.985 !!!  PenType_notify 0
+2019-07-26 22:05:23.095 !!!  Battery_notify 1
+2019-07-26 22:05:28.747 !!!  PenTip_notify 0
+2019-07-26 22:05:28.849 !!!  Color_notify 1
+2019-07-26 22:05:28.959 !!!  PenType_notify 1
+2019-07-26 22:05:29.399 !!! isBleConnected: 0
+2019-07-26 22:05:29.509 !!! no notify
+2019-07-26 22:05:30.719 !!! isBleConnected: 1
+2019-07-26 22:05:31.381 --------------  notify  3
+2019-07-26 22:05:31.491 !!!  key_notify 1
+2019-07-26 22:05:31.601 !!!  AirMouse_notify 1
+2019-07-26 22:05:37.321 !!!  PenTip_notify 1
+2019-07-26 22:05:37.433 !!!  PenType_notify 1
+2019-07-26 22:05:43.263 !!!  PenTip_notify 0
+2019-07-26 22:05:43.375 !!!  Color_notify 1
+2019-07-26 22:05:43.485 !!!  PenType_notify 0
+2019-07-26 22:05:43.595 !!!  Battery_notify 1
+2019-07-26 22:05:49.845 ----NotityEventInit
+2019-07-26 22:05:50.497 !!! isBleConnected: 0
+2019-07-26 22:05:50.607 !!! no notify
