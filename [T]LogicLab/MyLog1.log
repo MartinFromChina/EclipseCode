@@ -1,848 +1,279 @@
-2019-07-25 23:17:30.817 hello I am string debug 
-2019-07-25 23:17:31.578 ScriptsFunctionInitial 
-2019-07-25 23:17:32.238 EventGenerator 
-2019-07-25 23:17:32.890 EventGenerator 
-2019-07-25 23:17:33.530 EventGenerator 
-2019-07-25 23:17:34.182 EventGenerator 
-2019-07-25 23:17:56.620 hello I am string debug 
-2019-07-25 23:18:14.316 hello I am string debug 
-2019-07-25 23:18:37.620 hello I am string debug 
-2019-07-25 23:18:59.914 hello I am string debug 
-2019-07-25 23:19:15.632 hello I am string debug 
-2019-07-25 23:19:16.382 ScriptsFunctionInitial 
-2019-07-25 23:19:17.042 EventGenerator 
-2019-07-25 23:19:17.684 EventGenerator 
-2019-07-25 23:19:18.344 EventGenerator 
-2019-07-25 23:21:40.447 hello I am string debug 
-2019-07-25 23:21:41.201 ScriptsFunctionInitial 
-2019-07-25 23:21:41.861 EventGenerator 
-2019-07-26 07:37:58.920 hello I am string debug 
-2019-07-26 07:37:59.680 ScriptsFunctionInitial 
-2019-07-26 07:38:00.320 EventGenerator 
-2019-07-26 07:38:00.422 jump to new state:1
-2019-07-26 07:38:00.972 jump to new state:2
-2019-07-26 07:38:01.632 jump to new state:3
-2019-07-26 07:38:02.285 jump to new state:0
-2019-07-26 07:38:02.935 jump to new state:1
-2019-07-26 07:38:03.587 jump to new state:2
-2019-07-26 07:38:04.227 jump to new state:3
-2019-07-26 07:38:04.878 jump to new state:0
-2019-07-26 07:38:05.539 jump to new state:1
-2019-07-26 07:38:06.191 jump to new state:2
-2019-07-26 07:38:06.841 jump to new state:3
-2019-07-26 07:38:07.493 jump to new state:0
-2019-07-26 07:38:08.143 jump to new state:1
-2019-07-26 07:38:08.785 jump to new state:2
-2019-07-26 07:38:09.435 jump to new state:3
-2019-07-26 07:38:10.087 jump to new state:0
-2019-07-26 07:38:10.747 jump to new state:1
-2019-07-26 07:38:11.399 jump to new state:2
-2019-07-26 07:38:12.059 jump to new state:3
-2019-07-26 07:38:12.721 jump to new state:0
-2019-07-26 07:39:19.981 hello I am string debug 
-2019-07-26 07:39:20.732 ScriptsFunctionInitial 
-2019-07-26 07:39:21.392 EventGenerator 
-2019-07-26 07:39:21.504 jump to new state:1
-2019-07-26 07:39:21.614 jump to new state:2
-2019-07-26 07:39:21.724 jump to new state:3
-2019-07-26 07:39:21.834 jump to new state:0
-2019-07-26 07:39:22.054 jump to new state:1
-2019-07-26 07:39:22.164 jump to new state:2
-2019-07-26 07:39:22.274 jump to new state:3
-2019-07-26 07:39:22.384 jump to new state:0
-2019-07-26 07:39:22.714 jump to new state:1
-2019-07-26 07:39:22.826 jump to new state:2
-2019-07-26 07:39:22.936 jump to new state:3
-2019-07-26 07:39:23.046 jump to new state:0
-2019-07-26 07:39:23.376 jump to new state:1
-2019-07-26 07:39:23.486 jump to new state:2
-2019-07-26 07:39:23.596 jump to new state:3
-2019-07-26 07:39:23.706 jump to new state:0
-2019-07-26 07:39:24.036 jump to new state:1
-2019-07-26 07:39:24.147 jump to new state:2
-2019-07-26 07:39:24.257 jump to new state:3
-2019-07-26 07:39:24.367 jump to new state:0
-2019-07-26 07:39:24.697 jump to new state:1
-2019-07-26 07:39:24.808 jump to new state:2
-2019-07-26 07:39:24.917 jump to new state:3
-2019-07-26 07:39:25.028 jump to new state:0
-2019-07-26 07:39:25.348 jump to new state:1
-2019-07-26 07:39:25.450 jump to new state:2
-2019-07-26 07:39:25.560 jump to new state:3
-2019-07-26 07:39:25.670 jump to new state:0
-2019-07-26 07:39:26.000 jump to new state:1
-2019-07-26 07:39:26.110 jump to new state:2
-2019-07-26 07:39:26.220 jump to new state:3
-2019-07-26 07:39:26.330 jump to new state:0
-2019-07-26 07:39:26.660 jump to new state:1
-2019-07-26 07:39:26.772 jump to new state:2
-2019-07-26 07:39:26.882 jump to new state:3
-2019-07-26 07:39:26.992 jump to new state:0
-2019-07-26 07:39:27.322 jump to new state:1
-2019-07-26 07:39:27.432 jump to new state:2
-2019-07-26 07:39:27.542 jump to new state:3
-2019-07-26 07:39:27.652 jump to new state:0
-2019-07-26 07:39:27.982 jump to new state:1
-2019-07-26 07:39:28.084 jump to new state:2
-2019-07-26 07:40:05.393 hello I am string debug 
-2019-07-26 07:40:06.143 ScriptsFunctionInitial 
-2019-07-26 07:40:06.804 EventGenerator 
-2019-07-26 07:40:06.905 jump to new state:1
-2019-07-26 07:40:07.015 jump to new state:2
-2019-07-26 07:40:07.125 jump to new state:3
-2019-07-26 07:40:07.235 jump to new state:0
-2019-07-26 07:40:07.455 jump to new state:1
-2019-07-26 07:40:07.565 jump to new state:2
-2019-07-26 07:40:07.675 jump to new state:3
-2019-07-26 07:40:07.785 jump to new state:0
-2019-07-26 07:40:08.115 jump to new state:1
-2019-07-26 07:40:08.217 jump to new state:2
-2019-07-26 07:40:08.327 jump to new state:3
-2019-07-26 07:40:08.437 jump to new state:0
-2019-07-26 07:40:08.757 jump to new state:1
-2019-07-26 07:40:08.867 jump to new state:2
-2019-07-26 07:40:08.977 jump to new state:3
-2019-07-26 07:40:09.087 jump to new state:0
-2019-07-26 07:40:09.407 jump to new state:1
-2019-07-26 07:40:09.519 jump to new state:2
-2019-07-26 07:40:09.629 jump to new state:3
-2019-07-26 07:40:09.739 jump to new state:0
-2019-07-26 07:40:10.069 jump to new state:1
-2019-07-26 07:40:10.179 jump to new state:2
-2019-07-26 07:40:10.289 jump to new state:3
-2019-07-26 07:40:10.399 jump to new state:0
-2019-07-26 07:40:10.729 jump to new state:1
-2019-07-26 07:40:10.831 jump to new state:2
-2019-07-26 07:40:10.941 jump to new state:3
-2019-07-26 07:40:11.051 jump to new state:0
-2019-07-26 07:40:11.381 jump to new state:1
-2019-07-26 07:40:11.491 jump to new state:2
-2019-07-26 07:40:11.601 jump to new state:3
-2019-07-26 07:40:11.711 jump to new state:0
-2019-07-26 07:40:12.041 jump to new state:1
-2019-07-26 07:40:12.143 jump to new state:2
-2019-07-26 07:40:12.253 jump to new state:3
-2019-07-26 07:40:12.363 jump to new state:0
-2019-07-26 07:40:12.693 jump to new state:1
-2019-07-26 07:40:12.803 jump to new state:2
-2019-07-26 07:40:12.913 jump to new state:3
-2019-07-26 07:40:13.023 jump to new state:0
-2019-07-26 07:40:13.353 jump to new state:1
-2019-07-26 07:40:13.465 jump to new state:2
-2019-07-26 07:40:13.575 jump to new state:3
-2019-07-26 07:40:13.685 jump to new state:0
-2019-07-26 07:40:14.006 jump to new state:1
-2019-07-26 07:40:14.116 jump to new state:2
-2019-07-26 07:40:14.225 jump to new state:3
-2019-07-26 07:40:14.336 jump to new state:0
-2019-07-26 07:40:14.666 jump to new state:1
-2019-07-26 07:40:14.768 jump to new state:2
-2019-07-26 07:40:14.878 jump to new state:3
-2019-07-26 07:40:14.988 jump to new state:0
-2019-07-26 07:40:15.318 jump to new state:1
-2019-07-26 07:40:15.428 jump to new state:2
-2019-07-26 07:40:15.538 jump to new state:3
-2019-07-26 07:40:15.648 jump to new state:0
-2019-07-26 07:40:15.978 jump to new state:1
-2019-07-26 07:40:16.089 jump to new state:2
-2019-07-26 07:40:16.200 jump to new state:3
-2019-07-26 07:40:16.310 jump to new state:0
-2019-07-26 07:40:16.630 jump to new state:1
-2019-07-26 07:40:16.740 jump to new state:2
-2019-07-26 07:40:16.850 jump to new state:3
-2019-07-26 07:40:16.960 jump to new state:0
-2019-07-26 07:40:17.289 jump to new state:1
-2019-07-26 07:40:17.401 jump to new state:2
-2019-07-26 07:40:17.511 jump to new state:3
-2019-07-26 07:40:17.622 jump to new state:0
-2019-07-26 09:27:12.940 hello I am string debug 
-2019-07-26 09:27:13.720 ScriptsFunctionInitial 
-2019-07-26 09:27:14.370 EventGenerator 
-2019-07-26 09:27:34.701 hello I am string debug 
-2019-07-26 09:27:35.452 ScriptsFunctionInitial 
-2019-07-26 09:27:36.112 EventGenerator 
-2019-07-26 09:27:36.215 jump to new state:1
-2019-07-26 09:27:36.325 jump to new state:2
-2019-07-26 09:27:36.435 jump to new state:3
-2019-07-26 09:27:36.545 jump to new state:2
-2019-07-26 09:27:36.765 jump to new state:3
-2019-07-26 09:27:36.875 jump to new state:2
-2019-07-26 09:27:36.985 jump to new state:3
-2019-07-26 09:27:37.095 jump to new state:2
-2019-07-26 09:27:37.415 jump to new state:3
-2019-07-26 09:27:37.527 jump to new state:2
-2019-07-26 09:27:37.637 jump to new state:3
-2019-07-26 09:27:37.747 jump to new state:2
-2019-07-26 09:27:38.067 jump to new state:3
-2019-07-26 09:27:38.177 jump to new state:2
-2019-07-26 09:27:38.287 jump to new state:3
-2019-07-26 09:27:38.397 jump to new state:2
-2019-07-26 09:27:38.727 jump to new state:3
-2019-07-26 09:27:38.828 jump to new state:2
-2019-07-26 09:27:38.938 jump to new state:3
-2019-07-26 09:27:39.048 jump to new state:2
-2019-07-26 09:27:39.378 jump to new state:3
-2019-07-26 09:27:39.488 jump to new state:2
-2019-07-26 09:27:39.598 jump to new state:3
-2019-07-26 09:27:39.708 jump to new state:2
-2019-07-26 09:27:40.028 jump to new state:3
-2019-07-26 09:27:40.130 jump to new state:2
-2019-07-26 09:27:40.240 jump to new state:3
-2019-07-26 09:27:40.350 jump to new state:2
-2019-07-26 09:27:40.661 jump to new state:3
-2019-07-26 09:27:40.770 jump to new state:2
-2019-07-26 09:27:40.881 jump to new state:3
-2019-07-26 09:27:40.991 jump to new state:2
-2019-07-26 09:27:41.321 jump to new state:3
-2019-07-26 09:27:41.422 jump to new state:2
-2019-07-26 09:27:41.532 jump to new state:3
-2019-07-26 09:27:41.642 jump to new state:2
-2019-07-26 09:27:41.972 jump to new state:3
-2019-07-26 09:27:42.082 jump to new state:2
-2019-07-26 09:27:42.192 jump to new state:3
-2019-07-26 09:27:42.302 jump to new state:2
-2019-07-26 09:27:42.612 jump to new state:3
-2019-07-26 09:27:42.724 jump to new state:2
-2019-07-26 09:27:42.834 jump to new state:3
-2019-07-26 09:27:42.944 jump to new state:2
-2019-07-26 09:27:43.274 jump to new state:3
-2019-07-26 09:27:43.384 jump to new state:2
-2019-07-26 09:27:43.494 jump to new state:3
-2019-07-26 09:27:43.604 jump to new state:2
-2019-07-26 09:27:43.924 jump to new state:3
-2019-07-26 09:27:44.026 jump to new state:2
-2019-07-26 09:27:44.136 jump to new state:3
-2019-07-26 09:27:44.246 jump to new state:2
-2019-07-26 09:27:44.576 jump to new state:3
-2019-07-26 09:27:44.686 jump to new state:2
-2019-07-26 09:27:44.796 jump to new state:3
-2019-07-26 09:27:44.906 jump to new state:2
-2019-07-26 09:27:45.226 jump to new state:3
-2019-07-26 09:27:45.328 jump to new state:2
-2019-07-26 09:27:45.438 jump to new state:3
-2019-07-26 09:27:45.548 jump to new state:2
-2019-07-26 09:27:45.868 jump to new state:3
-2019-07-26 09:27:45.978 jump to new state:2
-2019-07-26 09:29:08.286 hello I am string debug 
-2019-07-26 09:29:09.056 ScriptsFunctionInitial 
-2019-07-26 09:29:09.716 EventGenerator 
-2019-07-26 09:29:09.818 jump to new state:1
-2019-07-26 09:29:09.928 jump to new state:2
-2019-07-26 09:29:10.038 jump to new state:3
-2019-07-26 09:29:10.148 jump to new state:1
-2019-07-26 09:29:10.368 jump to new state:2
-2019-07-26 09:29:10.478 jump to new state:3
-2019-07-26 09:29:10.588 jump to new state:1
-2019-07-26 09:29:10.698 jump to new state:2
-2019-07-26 09:29:11.028 jump to new state:3
-2019-07-26 09:29:11.130 jump to new state:1
-2019-07-26 09:29:11.241 jump to new state:2
-2019-07-26 09:29:11.351 jump to new state:3
-2019-07-26 09:29:11.681 jump to new state:1
-2019-07-26 09:29:11.791 jump to new state:2
-2019-07-26 09:29:11.900 jump to new state:3
-2019-07-26 09:29:12.011 jump to new state:1
-2019-07-26 09:29:12.341 jump to new state:2
-2019-07-26 09:29:12.443 jump to new state:3
-2019-07-26 09:29:12.553 jump to new state:1
-2019-07-26 09:29:12.663 jump to new state:2
-2019-07-26 09:29:12.993 jump to new state:3
-2019-07-26 09:29:13.103 jump to new state:1
-2019-07-26 09:29:13.213 jump to new state:2
-2019-07-26 09:29:13.323 jump to new state:3
-2019-07-26 09:29:13.653 jump to new state:1
-2019-07-26 09:29:13.765 jump to new state:2
-2019-07-26 09:29:13.875 jump to new state:3
-2019-07-26 09:29:13.984 jump to new state:1
-2019-07-26 09:29:14.315 jump to new state:2
-2019-07-26 09:29:14.424 jump to new state:3
-2019-07-26 09:29:14.535 jump to new state:1
-2019-07-26 09:29:14.645 jump to new state:2
-2019-07-26 09:29:14.975 jump to new state:3
-2019-07-26 09:29:15.077 jump to new state:1
-2019-07-26 09:29:15.186 jump to new state:2
-2019-07-26 09:29:15.297 jump to new state:3
-2019-07-26 09:29:15.627 jump to new state:1
-2019-07-26 09:29:15.737 jump to new state:2
-2019-07-26 09:29:15.847 jump to new state:3
-2019-07-26 09:29:15.957 jump to new state:1
-2019-07-26 09:29:16.287 jump to new state:2
-2019-07-26 09:29:16.398 jump to new state:3
-2019-07-26 09:29:16.509 jump to new state:1
-2019-07-26 09:29:16.619 jump to new state:2
-2019-07-26 09:29:16.949 jump to new state:3
-2019-07-26 09:29:17.059 jump to new state:1
-2019-07-26 09:29:17.169 jump to new state:2
-2019-07-26 09:29:17.279 jump to new state:3
-2019-07-26 09:29:17.609 jump to new state:1
-2019-07-26 09:29:17.711 jump to new state:2
-2019-07-26 09:29:17.821 jump to new state:3
-2019-07-26 09:29:17.931 jump to new state:1
-2019-07-26 09:29:18.261 jump to new state:2
-2019-07-26 09:29:18.371 jump to new state:3
-2019-07-26 09:29:18.481 jump to new state:1
-2019-07-26 09:29:18.591 jump to new state:2
-2019-07-26 09:29:18.921 jump to new state:3
-2019-07-26 09:29:19.023 jump to new state:1
-2019-07-26 09:29:19.133 jump to new state:2
-2019-07-26 09:29:19.243 jump to new state:3
-2019-07-26 09:29:19.573 jump to new state:1
-2019-07-26 09:29:19.683 jump to new state:2
-2019-07-26 09:29:19.793 jump to new state:3
-2019-07-26 09:29:19.903 jump to new state:1
-2019-07-26 09:29:20.233 jump to new state:2
-2019-07-26 09:29:20.335 jump to new state:3
-2019-07-26 09:29:20.445 jump to new state:1
-2019-07-26 09:29:20.555 jump to new state:2
-2019-07-26 09:29:20.885 jump to new state:3
-2019-07-26 09:29:20.995 jump to new state:1
-2019-07-26 09:29:21.105 jump to new state:2
-2019-07-26 09:29:21.215 jump to new state:3
-2019-07-26 09:29:21.545 jump to new state:1
-2019-07-26 09:29:21.657 jump to new state:2
-2019-07-26 09:29:21.767 jump to new state:3
-2019-07-26 09:29:21.877 jump to new state:1
-2019-07-26 09:29:22.187 jump to new state:2
-2019-07-26 09:29:22.297 jump to new state:3
-2019-07-26 09:29:22.407 jump to new state:1
-2019-07-26 09:29:22.517 jump to new state:2
-2019-07-26 09:29:22.847 jump to new state:3
-2019-07-26 09:30:32.171 hello I am string debug 
-2019-07-26 09:30:32.931 ScriptsFunctionInitial 
-2019-07-26 09:30:33.571 EventGenerator 
-2019-07-26 09:30:33.674 jump to new state:1
-2019-07-26 09:30:33.784 jump to new state:2
-2019-07-26 09:30:33.894 jump to new state:3
-2019-07-26 09:30:34.004 jump to new state:1
-2019-07-26 09:30:34.224 EventGenerator 
-2019-07-26 09:30:34.334 jump to new state:2
-2019-07-26 09:30:34.444 jump to new state:3
-2019-07-26 09:30:34.554 jump to new state:1
-2019-07-26 09:30:34.664 jump to new state:2
-2019-07-26 09:30:34.875 EventGenerator 
-2019-07-26 09:30:34.985 jump to new state:3
-2019-07-26 09:30:35.095 jump to new state:1
-2019-07-26 09:30:35.205 jump to new state:2
-2019-07-26 09:30:35.315 jump to new state:3
-2019-07-26 09:30:35.525 EventGenerator 
-2019-07-26 09:30:35.635 jump to new state:1
-2019-07-26 09:30:35.745 jump to new state:2
-2019-07-26 09:30:35.847 jump to new state:3
-2019-07-26 09:30:35.957 jump to new state:1
-2019-07-26 09:30:36.167 EventGenerator 
-2019-07-26 09:30:36.277 jump to new state:2
-2019-07-26 10:01:44.461 hello I am string debug 
-2019-07-26 10:01:45.232 ScriptsFunctionInitial 
-2019-07-26 10:01:45.892 EventGenerator 
-2019-07-26 10:01:45.994 current_state:0
-2019-07-26 10:01:46.544 EventGenerator 
-2019-07-26 10:01:46.653 current_state:1
-2019-07-26 10:01:47.204 EventGenerator 
-2019-07-26 10:01:47.316 current_state:2
-2019-07-26 10:01:47.866 EventGenerator 
-2019-07-26 10:01:47.976 current_state:3
-2019-07-26 10:01:48.086 current_state:1
-2019-07-26 10:01:48.196 current_state:2
-2019-07-26 10:01:48.306 current_state:3
-2019-07-26 10:01:48.518 EventGenerator 
-2019-07-26 10:01:48.628 current_state:1
-2019-07-26 10:01:49.178 EventGenerator 
-2019-07-26 10:01:49.288 current_state:2
-2019-07-26 10:01:49.828 EventGenerator 
-2019-07-26 10:01:49.931 current_state:3
-2019-07-26 10:01:50.041 current_state:1
-2019-07-26 10:01:50.151 current_state:2
-2019-07-26 10:01:50.261 current_state:3
-2019-07-26 10:01:50.481 EventGenerator 
-2019-07-26 10:01:50.591 current_state:1
-2019-07-26 10:01:51.141 EventGenerator 
-2019-07-26 10:01:51.243 current_state:2
-2019-07-26 10:01:51.793 EventGenerator 
-2019-07-26 10:01:51.903 current_state:3
-2019-07-26 10:01:52.013 current_state:1
-2019-07-26 10:01:52.123 current_state:2
-2019-07-26 10:01:52.233 current_state:3
-2019-07-26 10:01:52.445 EventGenerator 
-2019-07-26 10:01:52.555 current_state:1
-2019-07-26 10:01:53.105 EventGenerator 
-2019-07-26 10:01:53.215 current_state:2
-2019-07-26 10:01:53.765 EventGenerator 
-2019-07-26 10:01:53.877 current_state:3
-2019-07-26 10:01:53.987 current_state:1
-2019-07-26 10:01:54.097 current_state:2
-2019-07-26 10:01:54.207 current_state:3
-2019-07-26 10:01:54.427 EventGenerator 
-2019-07-26 10:01:54.537 current_state:1
-2019-07-26 10:01:55.078 EventGenerator 
-2019-07-26 10:01:55.179 current_state:2
-2019-07-26 10:01:55.729 EventGenerator 
-2019-07-26 10:01:55.839 current_state:3
-2019-07-26 10:01:55.949 current_state:1
-2019-07-26 10:01:56.059 current_state:2
-2019-07-26 10:01:56.169 current_state:3
-2019-07-26 10:01:56.381 EventGenerator 
-2019-07-26 10:01:56.491 current_state:1
-2019-07-26 10:01:57.021 EventGenerator 
-2019-07-26 10:01:57.131 current_state:2
-2019-07-26 10:01:57.671 EventGenerator 
-2019-07-26 10:02:42.772 hello I am string debug 
-2019-07-26 10:02:43.542 ScriptsFunctionInitial 
-2019-07-26 10:02:44.202 EventGenerator 
-2019-07-26 10:02:44.314 current_state:0
-2019-07-26 10:02:44.424 current_state:1
-2019-07-26 10:02:44.534 current_state:2
-2019-07-26 10:02:44.644 current_state:3
-2019-07-26 10:02:44.864 EventGenerator 
-2019-07-26 10:02:44.974 current_state:1
-2019-07-26 10:02:45.084 current_state:2
-2019-07-26 10:02:45.194 current_state:3
-2019-07-26 10:02:45.304 current_state:1
-2019-07-26 10:02:45.526 EventGenerator 
-2019-07-26 10:02:45.635 current_state:2
-2019-07-26 10:02:45.746 current_state:3
-2019-07-26 10:02:45.856 current_state:1
-2019-07-26 10:02:45.966 current_state:2
-2019-07-26 10:02:46.186 EventGenerator 
-2019-07-26 10:02:46.295 current_state:3
-2019-07-26 10:02:46.846 EventGenerator 
-2019-07-26 10:02:46.958 current_state:1
-2019-07-26 10:02:47.068 current_state:2
-2019-07-26 10:02:47.178 current_state:3
-2019-07-26 10:02:47.288 current_state:1
-2019-07-26 10:02:47.508 EventGenerator 
-2019-07-26 10:02:47.618 current_state:2
-2019-07-26 10:02:47.728 current_state:3
-2019-07-26 10:02:47.838 current_state:1
-2019-07-26 10:02:47.943 current_state:2
-2019-07-26 10:02:48.163 EventGenerator 
-2019-07-26 10:02:48.273 current_state:3
-2019-07-26 10:02:48.823 EventGenerator 
-2019-07-26 10:02:48.933 current_state:1
-2019-07-26 10:02:49.035 current_state:2
-2019-07-26 10:02:49.145 current_state:3
-2019-07-26 10:02:49.255 current_state:1
-2019-07-26 10:02:49.475 EventGenerator 
-2019-07-26 10:02:49.585 current_state:2
-2019-07-26 10:02:49.695 current_state:3
-2019-07-26 10:02:49.805 current_state:1
-2019-07-26 10:02:49.915 current_state:2
-2019-07-26 10:02:50.135 EventGenerator 
-2019-07-26 10:02:50.238 current_state:3
-2019-07-26 10:02:50.788 EventGenerator 
-2019-07-26 10:02:50.898 current_state:1
-2019-07-26 10:02:51.008 current_state:2
-2019-07-26 10:02:51.118 current_state:3
-2019-07-26 10:02:51.228 current_state:1
-2019-07-26 10:02:51.450 EventGenerator 
-2019-07-26 10:02:51.559 current_state:2
-2019-07-26 10:02:51.670 current_state:3
-2019-07-26 10:02:51.779 current_state:1
-2019-07-26 10:02:51.889 current_state:2
-2019-07-26 10:02:52.109 EventGenerator 
-2019-07-26 10:02:52.220 current_state:3
-2019-07-26 10:11:34.112 hello I am string debug 
-2019-07-26 10:11:34.873 ScriptsFunctionInitial 
-2019-07-26 10:11:35.513 EventGenerator 
-2019-07-26 10:11:35.615 current:0;next:1
-2019-07-26 10:11:35.725 DoesBreak:current:0;next:1
-2019-07-26 10:11:35.835 current:1;next:2
-2019-07-26 10:11:35.945 DoesBreak:current:0;next:2
-2019-07-26 10:11:36.055 current:2;next:3
-2019-07-26 10:11:36.165 DoesBreak:current:0;next:3
-2019-07-26 10:11:36.275 current:3;next:1
-2019-07-26 10:11:36.385 DoesBreak:current:0;next:1
-2019-07-26 10:11:36.495 EventGenerator 
-2019-07-26 10:11:36.605 current:1;next:2
-2019-07-26 10:11:36.708 DoesBreak:current:1;next:2
-2019-07-26 10:11:36.818 current:2;next:3
-2019-07-26 10:11:36.928 DoesBreak:current:1;next:3
-2019-07-26 10:11:37.038 current:3;next:1
-2019-07-26 10:11:37.148 DoesBreak:current:1;next:1
-2019-07-26 10:11:37.258 current:1;next:2
-2019-07-26 10:11:37.368 DoesBreak:current:1;next:2
-2019-07-26 10:11:37.478 EventGenerator 
-2019-07-26 10:11:37.588 current:2;next:3
-2019-07-26 10:11:37.698 DoesBreak:current:2;next:3
-2019-07-26 10:11:37.800 current:3;next:1
-2019-07-26 10:11:37.910 DoesBreak:current:2;next:1
-2019-07-26 10:11:38.020 current:1;next:2
-2019-07-26 10:11:38.129 DoesBreak:current:2;next:2
-2019-07-26 10:11:38.240 current:2;next:3
-2019-07-26 10:11:38.350 DoesBreak:current:2;next:3
-2019-07-26 10:11:38.460 EventGenerator 
-2019-07-26 10:11:38.570 current:3;next:1
-2019-07-26 10:11:38.680 DoesBreak:current:3;next:1
-2019-07-26 10:11:38.789 EventGenerator 
-2019-07-26 10:11:38.901 current:1;next:2
-2019-07-26 10:11:39.011 DoesBreak:current:1;next:2
-2019-07-26 10:11:39.121 current:2;next:3
-2019-07-26 10:11:39.231 DoesBreak:current:1;next:3
-2019-07-26 10:11:39.341 current:3;next:1
-2019-07-26 10:11:39.451 DoesBreak:current:1;next:1
-2019-07-26 10:11:39.561 current:1;next:2
-2019-07-26 10:11:39.671 DoesBreak:current:1;next:2
-2019-07-26 10:11:39.781 EventGenerator 
-2019-07-26 10:11:39.891 current:2;next:3
-2019-07-26 10:11:40.003 DoesBreak:current:2;next:3
-2019-07-26 10:11:40.113 current:3;next:1
-2019-07-26 10:11:40.223 DoesBreak:current:2;next:1
-2019-07-26 10:11:40.333 current:1;next:2
-2019-07-26 10:11:40.443 DoesBreak:current:2;next:2
-2019-07-26 10:11:40.553 current:2;next:3
-2019-07-26 10:11:40.663 DoesBreak:current:2;next:3
-2019-07-26 10:11:40.773 EventGenerator 
-2019-07-26 10:11:40.883 current:3;next:1
-2019-07-26 10:11:40.993 DoesBreak:current:3;next:1
-2019-07-26 10:11:41.095 EventGenerator 
-2019-07-26 10:11:41.205 current:1;next:2
-2019-07-26 10:11:41.315 DoesBreak:current:1;next:2
-2019-07-26 10:11:41.425 current:2;next:3
-2019-07-26 10:11:41.535 DoesBreak:current:1;next:3
-2019-07-26 10:11:41.645 current:3;next:1
-2019-07-26 10:11:41.755 DoesBreak:current:1;next:1
-2019-07-26 10:11:41.865 current:1;next:2
-2019-07-26 10:11:41.975 DoesBreak:current:1;next:2
-2019-07-26 10:11:42.085 EventGenerator 
-2019-07-26 10:11:42.187 current:2;next:3
-2019-07-26 10:11:42.297 DoesBreak:current:2;next:3
-2019-07-26 10:11:42.407 current:3;next:1
-2019-07-26 10:11:42.517 DoesBreak:current:2;next:1
-2019-07-26 10:11:42.627 current:1;next:2
-2019-07-26 10:11:42.737 DoesBreak:current:2;next:2
-2019-07-26 10:11:42.847 current:2;next:3
-2019-07-26 10:11:42.957 EventGenerator 
-2019-07-26 10:11:43.067 current:3;next:1
-2019-07-26 10:11:43.177 DoesBreak:current:3;next:1
-2019-07-26 10:11:43.279 EventGenerator 
-2019-07-26 10:11:43.389 current:1;next:2
-2019-07-26 10:21:58.945 hello I am string debug 
-2019-07-26 10:21:59.706 ScriptsFunctionInitial 
-2019-07-26 10:22:00.356 EventGenerator 
-2019-07-26 10:22:00.458 current:0;next:1
-2019-07-26 10:22:00.568 DoesBreak:current:0;next:1
-2019-07-26 10:22:00.678 current:1;next:2
-2019-07-26 10:22:00.788 DoesBreak:current:1;next:2
-2019-07-26 10:22:00.898 current:2;next:3
-2019-07-26 10:22:01.008 DoesBreak:current:2;next:3
-2019-07-26 10:22:01.118 current:3;next:1
-2019-07-26 10:22:01.228 DoesBreak:current:3;next:1
-2019-07-26 10:22:01.338 EventGenerator 
-2019-07-26 10:22:01.448 current:1;next:2
-2019-07-26 10:22:01.549 DoesBreak:current:1;next:2
-2019-07-26 10:22:01.659 current:2;next:3
-2019-07-26 10:22:01.769 DoesBreak:current:2;next:3
-2019-07-26 10:22:01.879 current:3;next:1
-2019-07-26 10:22:01.989 DoesBreak:current:3;next:1
-2019-07-26 10:22:02.099 EventGenerator 
-2019-07-26 10:22:02.209 current:1;next:2
-2019-07-26 10:22:02.319 DoesBreak:current:1;next:2
-2019-07-26 10:22:02.429 current:2;next:3
-2019-07-26 10:22:02.539 DoesBreak:current:2;next:3
-2019-07-26 10:22:02.651 current:3;next:1
-2019-07-26 10:22:02.761 DoesBreak:current:3;next:1
-2019-07-26 10:22:02.871 EventGenerator 
-2019-07-26 10:22:02.981 current:1;next:2
-2019-07-26 10:22:03.091 DoesBreak:current:1;next:2
-2019-07-26 10:22:03.201 current:2;next:3
-2019-07-26 10:22:03.311 DoesBreak:current:2;next:3
-2019-07-26 10:22:03.421 current:3;next:1
-2019-07-26 10:22:03.531 DoesBreak:current:3;next:1
-2019-07-26 10:22:03.641 EventGenerator 
-2019-07-26 10:22:03.743 current:1;next:2
-2019-07-26 10:22:03.853 DoesBreak:current:1;next:2
-2019-07-26 10:22:03.963 current:2;next:3
-2019-07-26 10:22:04.073 DoesBreak:current:2;next:3
-2019-07-26 10:22:04.183 current:3;next:1
-2019-07-26 10:22:04.293 DoesBreak:current:3;next:1
-2019-07-26 10:22:04.403 EventGenerator 
-2019-07-26 10:22:04.513 current:1;next:2
-2019-07-26 10:22:04.623 DoesBreak:current:1;next:2
-2019-07-26 10:22:53.357 hello I am string debug 
-2019-07-26 10:22:54.108 ScriptsFunctionInitial 
-2019-07-26 10:22:54.767 EventGenerator 
-2019-07-26 10:22:55.429 EventGenerator 
-2019-07-26 10:22:56.089 EventGenerator 
-2019-07-26 10:22:56.751 EventGenerator 
-2019-07-26 10:22:57.401 EventGenerator 
-2019-07-26 10:23:07.649 hello I am string debug 
-2019-07-26 10:23:08.419 ScriptsFunctionInitial 
-2019-07-26 10:23:09.079 EventGenerator 
-2019-07-26 10:23:09.182 current:0;next:1
-2019-07-26 10:23:09.292 current:1;next:2
-2019-07-26 10:23:09.402 current:2;next:3
-2019-07-26 10:23:09.512 current:3;next:1
-2019-07-26 10:23:09.732 EventGenerator 
-2019-07-26 10:23:09.842 current:1;next:2
-2019-07-26 10:23:09.952 current:2;next:3
-2019-07-26 10:23:10.062 current:3;next:1
-2019-07-26 10:23:10.392 EventGenerator 
-2019-07-26 10:23:10.504 current:1;next:2
-2019-07-26 10:23:10.614 current:2;next:3
-2019-07-26 10:23:10.724 current:3;next:1
-2019-07-26 10:23:11.044 EventGenerator 
-2019-07-26 10:23:11.154 current:1;next:2
-2019-07-26 10:23:11.264 current:2;next:3
-2019-07-26 10:23:11.374 current:3;next:1
-2019-07-26 10:23:11.704 EventGenerator 
-2019-07-26 10:23:11.816 current:1;next:2
-2019-07-26 10:23:11.926 current:2;next:3
-2019-07-26 10:23:12.036 current:3;next:1
-2019-07-26 10:23:12.366 EventGenerator 
-2019-07-26 10:23:12.476 current:1;next:2
-2019-07-26 10:23:12.586 current:2;next:3
-2019-07-26 10:23:12.696 current:3;next:1
-2019-07-26 10:23:41.996 hello I am string debug 
-2019-07-26 10:23:42.747 ScriptsFunctionInitial 
-2019-07-26 10:23:43.407 EventGenerator 
-2019-07-26 10:23:43.518 current:0 
-2019-07-26 10:23:43.628 current:1 
-2019-07-26 10:23:43.738 current:2 
-2019-07-26 10:23:43.848 current:3 
-2019-07-26 10:23:44.058 EventGenerator 
-2019-07-26 10:23:44.168 current:1 
-2019-07-26 10:23:44.278 current:2 
-2019-07-26 10:23:44.388 current:3 
-2019-07-26 10:23:44.718 EventGenerator 
-2019-07-26 10:23:44.820 current:1 
-2019-07-26 10:23:44.930 current:2 
-2019-07-26 10:23:45.040 current:3 
-2019-07-26 10:23:45.370 EventGenerator 
-2019-07-26 10:23:45.480 current:1 
-2019-07-26 10:23:45.590 current:2 
-2019-07-26 10:23:45.700 current:3 
-2019-07-26 10:23:46.030 EventGenerator 
-2019-07-26 10:23:46.132 current:1 
-2019-07-26 10:23:46.243 current:2 
-2019-07-26 10:23:46.353 current:3 
-2019-07-26 10:23:46.683 EventGenerator 
-2019-07-26 10:23:46.793 current:1 
-2019-07-26 10:23:46.903 current:2 
-2019-07-26 10:23:47.013 current:3 
-2019-07-26 10:23:47.343 EventGenerator 
-2019-07-26 10:23:47.444 current:1 
-2019-07-26 10:23:47.554 current:2 
-2019-07-26 10:23:47.664 current:3 
-2019-07-26 10:23:47.994 EventGenerator 
-2019-07-26 10:23:48.104 current:1 
-2019-07-26 10:23:48.215 current:2 
-2019-07-26 10:23:48.324 current:3 
-2019-07-26 10:23:48.655 EventGenerator 
-2019-07-26 10:23:48.766 current:1 
-2019-07-26 10:23:48.876 current:2 
-2019-07-26 10:23:48.986 current:3 
-2019-07-26 10:23:49.307 EventGenerator 
-2019-07-26 10:23:49.416 current:1 
-2019-07-26 10:23:49.526 current:2 
-2019-07-26 10:23:49.636 current:3 
-2019-07-26 10:23:49.966 EventGenerator 
-2019-07-26 10:23:50.068 current:1 
-2019-07-26 10:23:50.178 current:2 
-2019-07-26 10:23:50.288 current:3 
-2019-07-26 10:23:50.618 EventGenerator 
-2019-07-26 10:23:50.728 current:1 
-2019-07-26 10:23:50.838 current:2 
-2019-07-26 10:23:50.948 current:3 
-2019-07-26 10:23:51.278 EventGenerator 
-2019-07-26 10:23:51.390 current:1 
-2019-07-26 10:23:51.500 current:2 
-2019-07-26 10:23:51.610 current:3 
-2019-07-26 10:23:51.930 EventGenerator 
-2019-07-26 10:23:52.040 current:1 
-2019-07-26 10:23:52.150 current:2 
-2019-07-26 10:23:52.260 current:3 
-2019-07-26 10:23:52.590 EventGenerator 
-2019-07-26 10:23:52.702 current:1 
-2019-07-26 10:23:52.812 current:2 
-2019-07-26 10:23:52.922 current:3 
-2019-07-26 10:23:53.252 EventGenerator 
-2019-07-26 10:23:53.362 current:1 
-2019-07-26 10:23:53.472 current:2 
-2019-07-26 10:23:53.582 current:3 
-2019-07-26 10:23:53.912 EventGenerator 
-2019-07-26 10:23:54.024 current:1 
-2019-07-26 10:23:54.134 current:2 
-2019-07-26 10:23:54.244 current:3 
-2019-07-26 10:23:54.574 EventGenerator 
-2019-07-26 10:23:54.684 current:1 
-2019-07-26 10:23:54.794 current:2 
-2019-07-26 10:23:54.904 current:3 
-2019-07-26 10:23:55.224 EventGenerator 
-2019-07-26 10:23:55.336 current:1 
-2019-07-26 10:23:55.446 current:2 
-2019-07-26 10:23:55.556 current:3 
-2019-07-26 10:23:55.886 EventGenerator 
-2019-07-26 10:23:55.996 current:1 
-2019-07-26 10:23:56.106 current:2 
-2019-07-26 10:23:56.216 current:3 
-2019-07-26 10:23:56.546 EventGenerator 
-2019-07-26 10:23:56.658 current:1 
-2019-07-26 10:23:56.768 current:2 
-2019-07-26 10:23:56.878 current:3 
-2019-07-26 10:23:57.208 EventGenerator 
-2019-07-26 10:23:57.318 current:1 
-2019-07-26 10:23:57.428 current:2 
-2019-07-26 10:23:57.538 current:3 
-2019-07-26 10:23:57.868 EventGenerator 
-2019-07-26 10:23:57.980 current:1 
-2019-07-26 10:23:58.090 current:2 
-2019-07-26 10:23:58.200 current:3 
-2019-07-26 10:23:58.520 EventGenerator 
-2019-07-26 10:23:58.630 current:1 
-2019-07-26 10:23:58.740 current:2 
-2019-07-26 10:23:58.850 current:3 
-2019-07-26 10:23:59.180 EventGenerator 
-2019-07-26 10:23:59.282 current:1 
-2019-07-26 10:23:59.392 current:2 
-2019-07-26 10:23:59.502 current:3 
-2019-07-26 10:23:59.832 EventGenerator 
-2019-07-26 10:23:59.942 current:1 
-2019-07-26 10:24:00.052 current:2 
-2019-07-26 10:24:00.162 current:3 
-2019-07-26 10:24:00.492 EventGenerator 
-2019-07-26 10:24:00.594 current:1 
-2019-07-26 10:24:00.704 current:2 
-2019-07-26 10:24:00.814 current:3 
-2019-07-26 10:24:01.144 EventGenerator 
-2019-07-26 10:24:01.254 current:1 
-2019-07-26 10:24:01.364 current:2 
-2019-07-26 10:24:01.474 current:3 
-2019-07-26 10:24:01.804 EventGenerator 
-2019-07-26 10:24:01.906 current:1 
-2019-07-26 10:24:02.016 current:2 
-2019-07-26 10:24:02.126 current:3 
-2019-07-26 10:24:02.456 EventGenerator 
-2019-07-26 10:24:02.566 current:1 
-2019-07-26 10:24:02.676 current:2 
-2019-07-26 10:24:02.786 current:3 
-2019-07-26 10:24:03.116 EventGenerator 
-2019-07-26 10:24:03.218 current:1 
-2019-07-26 10:24:03.328 current:2 
-2019-07-26 10:24:03.438 current:3 
-2019-07-26 10:24:03.768 EventGenerator 
-2019-07-26 10:24:03.878 current:1 
-2019-07-26 10:24:03.988 current:2 
-2019-07-26 10:24:04.098 current:3 
-2019-07-26 10:24:04.428 EventGenerator 
-2019-07-26 10:24:04.531 current:1 
-2019-07-26 10:24:04.641 current:2 
-2019-07-26 10:24:04.751 current:3 
-2019-07-26 10:24:05.071 EventGenerator 
-2019-07-26 10:24:05.181 current:1 
-2019-07-26 10:24:05.291 current:2 
-2019-07-26 10:24:05.401 current:3 
-2019-07-26 10:24:05.731 EventGenerator 
-2019-07-26 10:24:05.833 current:1 
-2019-07-26 10:24:05.943 current:2 
-2019-07-26 10:24:06.053 current:3 
-2019-07-26 10:24:06.383 EventGenerator 
-2019-07-26 10:24:06.493 current:1 
-2019-07-26 10:24:06.603 current:2 
-2019-07-26 10:24:06.713 current:3 
-2019-07-26 10:24:07.043 EventGenerator 
-2019-07-26 10:24:07.145 current:1 
-2019-07-26 10:24:07.255 current:2 
-2019-07-26 10:24:07.365 current:3 
-2019-07-26 10:24:07.685 EventGenerator 
-2019-07-26 10:24:07.795 current:1 
-2019-07-26 10:24:07.905 current:2 
-2019-07-26 10:24:08.015 current:3 
-2019-07-26 10:24:08.335 EventGenerator 
-2019-07-26 10:24:08.437 current:1 
-2019-07-26 10:24:08.547 current:2 
-2019-07-26 10:24:08.657 current:3 
-2019-07-26 10:24:08.987 EventGenerator 
-2019-07-26 10:24:09.097 current:1 
-2019-07-26 10:24:09.207 current:2 
-2019-07-26 10:24:09.317 current:3 
-2019-07-26 10:24:09.647 EventGenerator 
-2019-07-26 10:24:09.749 current:1 
-2019-07-26 10:24:09.859 current:2 
-2019-07-26 10:24:09.969 current:3 
-2019-07-26 10:24:10.299 EventGenerator 
-2019-07-26 10:24:10.409 current:1 
-2019-07-26 10:24:10.519 current:2 
-2019-07-26 10:24:10.629 current:3 
-2019-07-26 10:24:10.959 EventGenerator 
-2019-07-26 10:24:11.071 current:1 
-2019-07-26 10:24:11.181 current:2 
-2019-07-26 10:24:11.291 current:3 
-2019-07-26 10:24:11.621 EventGenerator 
-2019-07-26 10:24:11.731 current:1 
-2019-07-26 10:24:11.841 current:2 
-2019-07-26 10:24:11.951 current:3 
-2019-07-26 10:24:12.271 EventGenerator 
-2019-07-26 10:24:12.373 current:1 
-2019-07-26 10:24:12.483 current:2 
-2019-07-26 10:24:12.593 current:3 
-2019-07-26 10:24:12.923 EventGenerator 
-2019-07-26 10:24:13.033 current:1 
-2019-07-26 10:24:13.143 current:2 
-2019-07-26 10:24:13.253 current:3 
-2019-07-26 10:24:13.583 EventGenerator 
-2019-07-26 10:24:13.685 current:1 
-2019-07-26 10:24:13.795 current:2 
-2019-07-26 10:24:13.905 current:3 
-2019-07-26 10:24:14.235 EventGenerator 
-2019-07-26 10:24:14.345 current:1 
-2019-07-26 10:24:14.455 current:2 
-2019-07-26 10:24:14.565 current:3 
-2019-07-26 10:24:14.895 EventGenerator 
-2019-07-26 10:24:14.997 current:1 
-2019-07-26 10:24:15.107 current:2 
-2019-07-26 10:24:15.217 current:3 
-2019-07-26 10:24:15.547 EventGenerator 
-2019-07-26 10:24:15.657 current:1 
-2019-07-26 10:24:15.767 current:2 
-2019-07-26 10:24:15.877 current:3 
-2019-07-26 10:24:16.197 EventGenerator 
-2019-07-26 10:24:16.299 current:1 
-2019-07-26 10:24:16.409 current:2 
-2019-07-26 10:24:16.519 current:3 
-2019-07-26 10:24:16.849 EventGenerator 
-2019-07-26 10:24:16.959 current:1 
-2019-07-26 10:24:17.069 current:2 
-2019-07-26 10:24:17.179 current:3 
-2019-07-26 10:24:17.509 EventGenerator 
-2019-07-26 10:24:17.621 current:1 
-2019-07-26 10:24:17.731 current:2 
-2019-07-26 10:24:17.841 current:3 
-2019-07-26 10:24:18.171 EventGenerator 
-2019-07-26 10:24:18.281 current:1 
-2019-07-26 10:24:18.391 current:2 
-2019-07-26 10:24:18.501 current:3 
-2019-07-26 10:24:18.831 EventGenerator 
-2019-07-26 10:24:18.933 current:1 
-2019-07-26 10:24:19.043 current:2 
-2019-07-26 10:24:19.153 current:3 
-2019-07-26 10:24:19.483 EventGenerator 
-2019-07-26 10:24:19.593 current:1 
-2019-07-26 10:24:19.703 current:2 
-2019-07-26 10:24:19.813 current:3 
-2019-07-26 10:24:20.143 EventGenerator 
-2019-07-26 10:24:20.244 current:1 
-2019-07-26 10:24:20.354 current:2 
-2019-07-26 10:24:20.464 current:3 
-2019-07-26 10:24:20.794 EventGenerator 
-2019-07-26 10:24:20.904 current:1 
-2019-07-26 10:24:21.014 current:2 
-2019-07-26 10:24:21.124 current:3 
-2019-07-26 10:24:21.454 EventGenerator 
-2019-07-26 10:24:21.557 current:1 
-2019-07-26 10:24:21.667 current:2 
-2019-07-26 10:24:21.777 current:3 
-2019-07-26 10:24:22.107 EventGenerator 
-2019-07-26 10:24:22.217 current:1 
-2019-07-26 10:24:22.327 current:2 
-2019-07-26 10:24:22.437 current:3 
-2019-07-26 10:24:22.757 EventGenerator 
-2019-07-26 10:24:22.859 current:1 
-2019-07-26 10:24:22.969 current:2 
-2019-07-26 10:24:23.079 current:3 
-2019-07-26 10:24:23.399 EventGenerator 
-2019-07-26 10:24:23.509 current:1 
-2019-07-26 10:24:23.619 current:2 
-2019-07-26 10:24:23.729 current:3 
-2019-07-26 10:24:24.049 EventGenerator 
-2019-07-26 10:24:24.150 current:1 
-2019-07-26 10:24:24.261 current:2 
-2019-07-26 10:24:24.371 current:3 
+2019-07-26 15:28:20.308 hello I am string debug 
+2019-07-26 15:28:21.012 ScriptsFunctionInitial 
+2019-07-26 15:28:21.616 EventGenerator 
+2019-07-26 15:28:21.718 random number : 2
+2019-07-26 15:28:22.222 random number : 5
+2019-07-26 15:28:22.825 random number : 5
+2019-07-26 15:28:23.428 random number : 8
+2019-07-26 15:28:24.034 random number : 8
+2019-07-26 15:28:24.640 random number : 11
+2019-07-26 15:28:25.244 random number : 15
+2019-07-26 15:28:25.346 SetFeatureAction SetReportBleState
+2019-07-26 15:28:25.851 random number : 15
+2019-07-26 15:28:26.456 random number : 18
+2019-07-26 15:28:26.557 GetFeatureAction
+2019-07-26 15:28:27.061 random number : 18
+2019-07-26 15:28:27.164 SetFeatureAction SetReportBleState
+2019-07-26 15:28:27.669 random number : 1
+2019-07-26 15:28:28.273 random number : 5
+2019-07-26 15:28:28.877 random number : 5
+2019-07-26 15:28:29.481 random number : 8
+2019-07-26 15:28:30.086 random number : 8
+2019-07-26 15:28:30.188 GetFeatureAction
+2019-07-26 15:28:30.692 random number : 11
+2019-07-26 15:28:31.295 random number : 14
+2019-07-26 15:28:31.902 random number : 14
+2019-07-26 15:33:11.052 hello I am string debug 
+2019-07-26 15:33:11.756 ScriptsFunctionInitial 
+2019-07-26 15:33:12.359 EventGenerator 
+2019-07-26 15:33:12.462 random number : 12
+2019-07-26 15:33:12.564 SetFeatureAction SetReportProductType
+2019-07-26 15:33:12.968 random number : 12
+2019-07-26 15:33:13.071 GetFeatureAction
+2019-07-26 15:33:13.575 random number : 15
+2019-07-26 15:33:13.676 SetFeatureAction SetClearWhiteList
+2019-07-26 15:33:14.180 random number : 19
+2019-07-26 15:33:14.783 random number : 19
+2019-07-26 15:33:14.885 GetFeatureAction
+2019-07-26 15:33:15.387 random number : 2
+2019-07-26 15:33:15.992 random number : 2
+2019-07-26 15:33:16.598 random number : 5
+2019-07-26 15:33:17.202 random number : 8
+2019-07-26 15:33:17.805 random number : 8
+2019-07-26 15:33:18.410 random number : 12
+2019-07-26 15:33:18.512 SetFeatureAction SetReportProductType
+2019-07-26 15:33:19.016 random number : 12
+2019-07-26 15:33:19.118 GetFeatureAction
+2019-07-26 15:33:19.623 random number : 15
+2019-07-26 15:33:19.726 SetFeatureAction SetClearWhiteList
+2019-07-26 15:33:20.230 random number : 18
+2019-07-26 15:33:20.834 random number : 18
+2019-07-26 15:33:20.936 GetFeatureAction
+2019-07-26 15:33:21.440 random number : 1
+2019-07-26 15:33:22.044 random number : 1
+2019-07-26 15:33:22.649 random number : 5
+2019-07-26 15:33:23.252 random number : 8
+2019-07-26 15:33:23.857 random number : 8
+2019-07-26 15:33:24.461 random number : 11
+2019-07-26 15:33:25.065 random number : 11
+2019-07-26 15:33:25.669 random number : 14
+2019-07-26 15:33:26.274 random number : 18
+2019-07-26 15:33:26.374 SetFeatureAction SetColor
+2019-07-26 15:33:26.878 random number : 18
+2019-07-26 15:33:27.483 random number : 1
+2019-07-26 15:33:28.087 random number : 1
+2019-07-26 15:33:28.690 random number : 4
+2019-07-26 15:33:29.295 random number : 7
+2019-07-26 15:33:29.398 GetFeatureAction
+2019-07-26 15:33:29.901 random number : 7
+2019-07-26 15:33:30.507 random number : 11
+2019-07-26 15:33:31.110 random number : 14
+2019-07-26 15:33:31.715 random number : 14
+2019-07-26 15:33:32.319 random number : 17
+2019-07-26 15:33:32.924 random number : 17
+2019-07-26 15:33:33.528 random number : 1
+2019-07-26 15:33:34.133 random number : 4
+2019-07-26 15:33:34.738 random number : 4
+2019-07-26 15:33:35.343 random number : 7
+2019-07-26 15:33:35.947 random number : 7
+2019-07-26 15:33:36.552 random number : 10
+2019-07-26 15:33:37.156 random number : 14
+2019-07-26 15:33:37.762 random number : 14
+2019-07-26 15:33:38.367 random number : 17
+2019-07-26 15:33:38.970 random number : 17
+2019-07-26 15:33:39.574 random number : 20
+2019-07-26 15:33:40.178 random number : 3
+2019-07-26 15:33:40.280 SetFeatureAction SetReportInformation
+2019-07-26 15:33:40.784 random number : 3
+2019-07-26 15:33:40.887 GetFeatureAction
+2019-07-26 15:33:41.390 random number : 7
+2019-07-26 15:33:41.995 random number : 7
+2019-07-26 15:33:42.599 random number : 10
+2019-07-26 15:33:43.205 random number : 13
+2019-07-26 15:33:43.810 random number : 13
+2019-07-26 15:33:44.414 random number : 16
+2019-07-26 15:33:45.020 random number : 16
+2019-07-26 15:33:45.624 random number : 20
+2019-07-26 15:33:46.230 random number : 3
+2019-07-26 15:33:46.332 SetFeatureAction SetReportInformation
+2019-07-26 15:33:46.838 random number : 3
+2019-07-26 15:33:46.940 GetFeatureAction
+2019-07-26 15:33:47.444 random number : 6
+2019-07-26 15:33:47.546 SetFeatureAction SetUserID
+2019-07-26 15:33:48.050 random number : 6
+2019-07-26 15:33:48.152 GetFeatureAction
+2019-07-26 15:33:48.657 random number : 10
+2019-07-26 15:33:49.261 random number : 13
+2019-07-26 15:33:49.865 random number : 13
+2019-07-26 15:33:50.470 random number : 16
+2019-07-26 15:33:51.074 random number : 16
+2019-07-26 15:33:51.677 random number : 19
+2019-07-26 15:33:52.281 random number : 3
+2019-07-26 15:33:52.382 SetFeatureAction SetReportInformation
+2019-07-26 15:33:52.928 random number : 3
+2019-07-26 15:33:53.030 GetFeatureAction
+2019-07-26 15:33:53.534 random number : 6
+2019-07-26 15:33:53.636 SetFeatureAction SetUserID
+2019-07-26 15:33:54.140 random number : 9
+2019-07-26 15:33:54.242 GetFeatureAction
+2019-07-26 15:33:54.746 random number : 9
+2019-07-26 15:33:54.849 SetFeatureAction SetEnableHidDevice
+2019-07-26 15:33:55.353 random number : 12
+2019-07-26 15:33:55.454 GetFeatureAction
+2019-07-26 15:33:55.958 random number : 12
+2019-07-26 15:33:56.060 SetFeatureAction SetReportProductType
+2019-07-26 15:33:56.564 random number : 16
+2019-07-26 15:33:56.667 GetFeatureAction
+2019-07-26 15:33:57.170 random number : 19
+2019-07-26 15:33:57.774 random number : 19
+2019-07-26 15:33:58.378 random number : 2
+2019-07-26 15:33:58.983 random number : 2
+2019-07-26 15:33:59.588 random number : 5
+2019-07-26 15:34:00.192 random number : 9
+2019-07-26 15:34:00.294 SetFeatureAction SetEnableHidDevice
+2019-07-26 15:34:00.799 random number : 9
+2019-07-26 15:34:00.901 GetFeatureAction
+2019-07-26 15:34:01.404 random number : 12
+2019-07-26 15:34:01.507 SetFeatureAction SetReportProductType
+2019-07-26 15:34:02.009 random number : 12
+2019-07-26 15:34:02.112 GetFeatureAction
+2019-07-26 15:34:02.614 random number : 15
+2019-07-26 15:34:02.716 SetFeatureAction SetClearWhiteList
+2019-07-26 15:34:03.219 random number : 19
+2019-07-26 15:34:03.824 random number : 19
+2019-07-26 15:34:03.925 GetFeatureAction
+2019-07-26 15:34:04.430 random number : 2
+2019-07-26 15:34:05.033 random number : 2
+2019-07-26 15:34:05.637 random number : 5
+2019-07-26 15:34:06.240 random number : 8
+2019-07-26 15:34:06.843 random number : 8
+2019-07-26 15:34:07.447 random number : 12
+2019-07-26 15:34:07.550 SetFeatureAction SetReportProductType
+2019-07-26 15:34:08.053 random number : 12
+2019-07-26 15:34:08.156 GetFeatureAction
+2019-07-26 15:34:08.660 random number : 15
+2019-07-26 15:34:08.762 SetFeatureAction SetClearWhiteList
+2019-07-26 15:34:09.266 random number : 18
+2019-07-26 15:34:09.872 random number : 18
+2019-07-26 15:34:09.974 GetFeatureAction
+2019-07-26 15:34:10.478 random number : 1
+2019-07-26 15:34:11.081 random number : 1
+2019-07-26 15:34:11.687 random number : 5
+2019-07-26 15:34:12.291 random number : 8
+2019-07-26 15:34:12.895 random number : 8
+2019-07-26 15:34:13.500 random number : 11
+2019-07-26 15:34:14.103 random number : 14
+2019-07-26 15:34:14.707 random number : 14
+2019-07-26 15:34:15.313 random number : 18
+2019-07-26 15:34:15.416 SetFeatureAction SetColor
+2019-07-26 15:34:15.921 random number : 18
+2019-07-26 15:34:16.526 random number : 1
+2019-07-26 15:34:17.132 random number : 4
+2019-07-26 15:34:17.735 random number : 4
+2019-07-26 15:34:18.340 random number : 7
+2019-07-26 15:34:18.443 GetFeatureAction
+2019-07-26 15:34:18.946 random number : 7
+2019-07-26 15:34:19.551 random number : 11
+2019-07-26 15:34:20.155 random number : 14
+2019-07-26 15:34:20.761 random number : 14
+2019-07-26 15:34:21.366 random number : 17
+2019-07-26 15:34:21.971 random number : 17
+2019-07-26 15:34:22.575 random number : 1
+2019-07-26 15:34:23.180 random number : 4
+2019-07-26 15:34:23.783 random number : 4
+2019-07-26 15:34:24.387 random number : 7
+2019-07-26 15:34:24.993 random number : 7
+2019-07-26 15:34:25.596 random number : 10
+2019-07-26 15:34:26.199 random number : 14
+2019-07-26 15:34:26.804 random number : 14
+2019-07-26 15:34:27.409 random number : 17
+2019-07-26 15:34:28.013 random number : 17
+2019-07-26 15:34:28.617 random number : 20
+2019-07-26 15:34:29.223 random number : 3
+2019-07-26 15:34:29.325 SetFeatureAction SetReportInformation
+2019-07-26 15:34:29.830 random number : 3
+2019-07-26 15:34:29.931 GetFeatureAction
+2019-07-26 15:34:30.434 random number : 7
+2019-07-26 15:34:31.038 random number : 7
+2019-07-26 15:34:31.643 random number : 10
+2019-07-26 15:34:32.248 random number : 13
+2019-07-26 15:34:32.854 random number : 13
+2019-07-26 15:34:33.458 random number : 16
+2019-07-26 15:34:34.062 random number : 16
+2019-07-26 15:34:34.664 random number : 20
+2019-07-26 15:34:35.272 random number : 3
+2019-07-26 15:34:35.373 SetFeatureAction SetReportInformation
+2019-07-26 15:34:35.878 random number : 3
+2019-07-26 15:34:35.981 GetFeatureAction
+2019-07-26 15:34:36.485 random number : 6
+2019-07-26 15:34:36.587 SetFeatureAction SetUserID
+2019-07-26 15:34:37.090 random number : 6
+2019-07-26 15:34:37.192 GetFeatureAction
+2019-07-26 15:34:37.696 random number : 10
+2019-07-26 15:34:38.300 random number : 13
+2019-07-26 15:34:38.905 random number : 13
+2019-07-26 15:34:39.510 random number : 16
+2019-07-26 15:34:40.115 random number : 19
+2019-07-26 15:34:40.721 random number : 19
+2019-07-26 15:34:41.324 random number : 3
+2019-07-26 15:34:41.426 SetFeatureAction SetReportInformation
+2019-07-26 15:34:41.929 random number : 3
+2019-07-26 15:34:42.031 GetFeatureAction
+2019-07-26 15:34:42.534 random number : 6
+2019-07-26 15:34:42.635 SetFeatureAction SetUserID
+2019-07-26 15:34:43.139 random number : 9
+2019-07-26 15:34:43.241 GetFeatureAction
+2019-07-26 15:34:43.745 random number : 9
+2019-07-26 15:34:43.848 SetFeatureAction SetEnableHidDevice
+2019-07-26 15:34:44.352 random number : 12
+2019-07-26 15:34:44.453 GetFeatureAction
+2019-07-26 15:34:44.956 random number : 12
+2019-07-26 15:34:45.059 SetFeatureAction SetReportProductType
+2019-07-26 15:34:45.564 random number : 16
+2019-07-26 15:34:45.666 GetFeatureAction
+2019-07-26 15:34:46.169 random number : 19
+2019-07-26 15:34:46.772 random number : 19
+2019-07-26 15:34:47.377 random number : 2
+2019-07-26 15:34:47.981 random number : 2
+2019-07-26 15:34:48.587 random number : 5
+2019-07-26 15:34:49.190 random number : 9
+2019-07-26 15:34:49.292 SetFeatureAction SetEnableHidDevice
+2019-07-26 15:34:49.796 random number : 9
+2019-07-26 15:34:49.899 GetFeatureAction
+2019-07-26 15:34:50.404 random number : 12
+2019-07-26 15:34:50.506 SetFeatureAction SetReportProductType
+2019-07-26 15:34:51.009 random number : 12
+2019-07-26 15:34:51.112 GetFeatureAction
+2019-07-26 15:34:51.617 random number : 15
+2019-07-26 15:34:51.719 SetFeatureAction SetClearWhiteList
+2019-07-26 15:34:52.222 random number : 19
+2019-07-26 15:34:52.826 random number : 19
+2019-07-26 15:34:52.928 GetFeatureAction
+2019-07-26 15:34:53.431 random number : 2
+2019-07-26 15:34:54.034 random number : 2
+2019-07-26 15:34:54.638 random number : 5
+2019-07-26 15:34:55.242 random number : 8
+2019-07-26 15:34:55.848 random number : 8
+2019-07-26 15:34:56.452 random number : 12
+2019-07-26 15:34:56.554 SetFeatureAction SetReportProductType
+2019-07-26 15:34:57.059 random number : 12
+2019-07-26 15:34:57.161 GetFeatureAction
+2019-07-26 15:34:57.664 random number : 15
+2019-07-26 15:34:57.766 SetFeatureAction SetClearWhiteList
+2019-07-26 15:34:58.270 random number : 18
+2019-07-26 15:34:58.874 random number : 18
+2019-07-26 15:34:58.978 GetFeatureAction
+2019-07-26 15:34:59.483 random number : 1
+2019-07-26 15:35:00.089 random number : 1
+2019-07-26 15:35:00.693 random number : 5
+2019-07-26 15:35:01.296 random number : 8
+2019-07-26 15:35:01.901 random number : 8
+2019-07-26 15:35:02.507 random number : 11
+2019-07-26 15:35:03.111 random number : 14
+2019-07-26 15:35:03.716 random number : 14
+2019-07-26 15:35:04.319 random number : 18
+2019-07-26 15:35:04.421 SetFeatureAction SetColor
+2019-07-26 15:35:04.926 random number : 18
+2019-07-26 15:35:05.531 random number : 1
+2019-07-26 15:35:06.135 random number : 4
+2019-07-26 15:35:06.739 random number : 4

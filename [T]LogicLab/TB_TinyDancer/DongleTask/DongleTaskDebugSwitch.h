@@ -2,6 +2,6 @@
 #define __DONGLETASKDEBUGSWITCH_H
 
 #define DONGLE_SCRIPT_DEBUG   1
-
+#define USB_FEATURE_DEBUG     0
 
 #endif
