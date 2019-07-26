@@ -1,279 +1,177 @@
-2019-07-26 15:28:20.308 hello I am string debug 
-2019-07-26 15:28:21.012 ScriptsFunctionInitial 
-2019-07-26 15:28:21.616 EventGenerator 
-2019-07-26 15:28:21.718 random number : 2
-2019-07-26 15:28:22.222 random number : 5
-2019-07-26 15:28:22.825 random number : 5
-2019-07-26 15:28:23.428 random number : 8
-2019-07-26 15:28:24.034 random number : 8
-2019-07-26 15:28:24.640 random number : 11
-2019-07-26 15:28:25.244 random number : 15
-2019-07-26 15:28:25.346 SetFeatureAction SetReportBleState
-2019-07-26 15:28:25.851 random number : 15
-2019-07-26 15:28:26.456 random number : 18
-2019-07-26 15:28:26.557 GetFeatureAction
-2019-07-26 15:28:27.061 random number : 18
-2019-07-26 15:28:27.164 SetFeatureAction SetReportBleState
-2019-07-26 15:28:27.669 random number : 1
-2019-07-26 15:28:28.273 random number : 5
-2019-07-26 15:28:28.877 random number : 5
-2019-07-26 15:28:29.481 random number : 8
-2019-07-26 15:28:30.086 random number : 8
-2019-07-26 15:28:30.188 GetFeatureAction
-2019-07-26 15:28:30.692 random number : 11
-2019-07-26 15:28:31.295 random number : 14
-2019-07-26 15:28:31.902 random number : 14
-2019-07-26 15:33:11.052 hello I am string debug 
-2019-07-26 15:33:11.756 ScriptsFunctionInitial 
-2019-07-26 15:33:12.359 EventGenerator 
-2019-07-26 15:33:12.462 random number : 12
-2019-07-26 15:33:12.564 SetFeatureAction SetReportProductType
-2019-07-26 15:33:12.968 random number : 12
-2019-07-26 15:33:13.071 GetFeatureAction
-2019-07-26 15:33:13.575 random number : 15
-2019-07-26 15:33:13.676 SetFeatureAction SetClearWhiteList
-2019-07-26 15:33:14.180 random number : 19
-2019-07-26 15:33:14.783 random number : 19
-2019-07-26 15:33:14.885 GetFeatureAction
-2019-07-26 15:33:15.387 random number : 2
-2019-07-26 15:33:15.992 random number : 2
-2019-07-26 15:33:16.598 random number : 5
-2019-07-26 15:33:17.202 random number : 8
-2019-07-26 15:33:17.805 random number : 8
-2019-07-26 15:33:18.410 random number : 12
-2019-07-26 15:33:18.512 SetFeatureAction SetReportProductType
-2019-07-26 15:33:19.016 random number : 12
-2019-07-26 15:33:19.118 GetFeatureAction
-2019-07-26 15:33:19.623 random number : 15
-2019-07-26 15:33:19.726 SetFeatureAction SetClearWhiteList
-2019-07-26 15:33:20.230 random number : 18
-2019-07-26 15:33:20.834 random number : 18
-2019-07-26 15:33:20.936 GetFeatureAction
-2019-07-26 15:33:21.440 random number : 1
-2019-07-26 15:33:22.044 random number : 1
-2019-07-26 15:33:22.649 random number : 5
-2019-07-26 15:33:23.252 random number : 8
-2019-07-26 15:33:23.857 random number : 8
-2019-07-26 15:33:24.461 random number : 11
-2019-07-26 15:33:25.065 random number : 11
-2019-07-26 15:33:25.669 random number : 14
-2019-07-26 15:33:26.274 random number : 18
-2019-07-26 15:33:26.374 SetFeatureAction SetColor
-2019-07-26 15:33:26.878 random number : 18
-2019-07-26 15:33:27.483 random number : 1
-2019-07-26 15:33:28.087 random number : 1
-2019-07-26 15:33:28.690 random number : 4
-2019-07-26 15:33:29.295 random number : 7
-2019-07-26 15:33:29.398 GetFeatureAction
-2019-07-26 15:33:29.901 random number : 7
-2019-07-26 15:33:30.507 random number : 11
-2019-07-26 15:33:31.110 random number : 14
-2019-07-26 15:33:31.715 random number : 14
-2019-07-26 15:33:32.319 random number : 17
-2019-07-26 15:33:32.924 random number : 17
-2019-07-26 15:33:33.528 random number : 1
-2019-07-26 15:33:34.133 random number : 4
-2019-07-26 15:33:34.738 random number : 4
-2019-07-26 15:33:35.343 random number : 7
-2019-07-26 15:33:35.947 random number : 7
-2019-07-26 15:33:36.552 random number : 10
-2019-07-26 15:33:37.156 random number : 14
-2019-07-26 15:33:37.762 random number : 14
-2019-07-26 15:33:38.367 random number : 17
-2019-07-26 15:33:38.970 random number : 17
-2019-07-26 15:33:39.574 random number : 20
-2019-07-26 15:33:40.178 random number : 3
-2019-07-26 15:33:40.280 SetFeatureAction SetReportInformation
-2019-07-26 15:33:40.784 random number : 3
-2019-07-26 15:33:40.887 GetFeatureAction
-2019-07-26 15:33:41.390 random number : 7
-2019-07-26 15:33:41.995 random number : 7
-2019-07-26 15:33:42.599 random number : 10
-2019-07-26 15:33:43.205 random number : 13
-2019-07-26 15:33:43.810 random number : 13
-2019-07-26 15:33:44.414 random number : 16
-2019-07-26 15:33:45.020 random number : 16
-2019-07-26 15:33:45.624 random number : 20
-2019-07-26 15:33:46.230 random number : 3
-2019-07-26 15:33:46.332 SetFeatureAction SetReportInformation
-2019-07-26 15:33:46.838 random number : 3
-2019-07-26 15:33:46.940 GetFeatureAction
-2019-07-26 15:33:47.444 random number : 6
-2019-07-26 15:33:47.546 SetFeatureAction SetUserID
-2019-07-26 15:33:48.050 random number : 6
-2019-07-26 15:33:48.152 GetFeatureAction
-2019-07-26 15:33:48.657 random number : 10
-2019-07-26 15:33:49.261 random number : 13
-2019-07-26 15:33:49.865 random number : 13
-2019-07-26 15:33:50.470 random number : 16
-2019-07-26 15:33:51.074 random number : 16
-2019-07-26 15:33:51.677 random number : 19
-2019-07-26 15:33:52.281 random number : 3
-2019-07-26 15:33:52.382 SetFeatureAction SetReportInformation
-2019-07-26 15:33:52.928 random number : 3
-2019-07-26 15:33:53.030 GetFeatureAction
-2019-07-26 15:33:53.534 random number : 6
-2019-07-26 15:33:53.636 SetFeatureAction SetUserID
-2019-07-26 15:33:54.140 random number : 9
-2019-07-26 15:33:54.242 GetFeatureAction
-2019-07-26 15:33:54.746 random number : 9
-2019-07-26 15:33:54.849 SetFeatureAction SetEnableHidDevice
-2019-07-26 15:33:55.353 random number : 12
-2019-07-26 15:33:55.454 GetFeatureAction
-2019-07-26 15:33:55.958 random number : 12
-2019-07-26 15:33:56.060 SetFeatureAction SetReportProductType
-2019-07-26 15:33:56.564 random number : 16
-2019-07-26 15:33:56.667 GetFeatureAction
-2019-07-26 15:33:57.170 random number : 19
-2019-07-26 15:33:57.774 random number : 19
-2019-07-26 15:33:58.378 random number : 2
-2019-07-26 15:33:58.983 random number : 2
-2019-07-26 15:33:59.588 random number : 5
-2019-07-26 15:34:00.192 random number : 9
-2019-07-26 15:34:00.294 SetFeatureAction SetEnableHidDevice
-2019-07-26 15:34:00.799 random number : 9
-2019-07-26 15:34:00.901 GetFeatureAction
-2019-07-26 15:34:01.404 random number : 12
-2019-07-26 15:34:01.507 SetFeatureAction SetReportProductType
-2019-07-26 15:34:02.009 random number : 12
-2019-07-26 15:34:02.112 GetFeatureAction
-2019-07-26 15:34:02.614 random number : 15
-2019-07-26 15:34:02.716 SetFeatureAction SetClearWhiteList
-2019-07-26 15:34:03.219 random number : 19
-2019-07-26 15:34:03.824 random number : 19
-2019-07-26 15:34:03.925 GetFeatureAction
-2019-07-26 15:34:04.430 random number : 2
-2019-07-26 15:34:05.033 random number : 2
-2019-07-26 15:34:05.637 random number : 5
-2019-07-26 15:34:06.240 random number : 8
-2019-07-26 15:34:06.843 random number : 8
-2019-07-26 15:34:07.447 random number : 12
-2019-07-26 15:34:07.550 SetFeatureAction SetReportProductType
-2019-07-26 15:34:08.053 random number : 12
-2019-07-26 15:34:08.156 GetFeatureAction
-2019-07-26 15:34:08.660 random number : 15
-2019-07-26 15:34:08.762 SetFeatureAction SetClearWhiteList
-2019-07-26 15:34:09.266 random number : 18
-2019-07-26 15:34:09.872 random number : 18
-2019-07-26 15:34:09.974 GetFeatureAction
-2019-07-26 15:34:10.478 random number : 1
-2019-07-26 15:34:11.081 random number : 1
-2019-07-26 15:34:11.687 random number : 5
-2019-07-26 15:34:12.291 random number : 8
-2019-07-26 15:34:12.895 random number : 8
-2019-07-26 15:34:13.500 random number : 11
-2019-07-26 15:34:14.103 random number : 14
-2019-07-26 15:34:14.707 random number : 14
-2019-07-26 15:34:15.313 random number : 18
-2019-07-26 15:34:15.416 SetFeatureAction SetColor
-2019-07-26 15:34:15.921 random number : 18
-2019-07-26 15:34:16.526 random number : 1
-2019-07-26 15:34:17.132 random number : 4
-2019-07-26 15:34:17.735 random number : 4
-2019-07-26 15:34:18.340 random number : 7
-2019-07-26 15:34:18.443 GetFeatureAction
-2019-07-26 15:34:18.946 random number : 7
-2019-07-26 15:34:19.551 random number : 11
-2019-07-26 15:34:20.155 random number : 14
-2019-07-26 15:34:20.761 random number : 14
-2019-07-26 15:34:21.366 random number : 17
-2019-07-26 15:34:21.971 random number : 17
-2019-07-26 15:34:22.575 random number : 1
-2019-07-26 15:34:23.180 random number : 4
-2019-07-26 15:34:23.783 random number : 4
-2019-07-26 15:34:24.387 random number : 7
-2019-07-26 15:34:24.993 random number : 7
-2019-07-26 15:34:25.596 random number : 10
-2019-07-26 15:34:26.199 random number : 14
-2019-07-26 15:34:26.804 random number : 14
-2019-07-26 15:34:27.409 random number : 17
-2019-07-26 15:34:28.013 random number : 17
-2019-07-26 15:34:28.617 random number : 20
-2019-07-26 15:34:29.223 random number : 3
-2019-07-26 15:34:29.325 SetFeatureAction SetReportInformation
-2019-07-26 15:34:29.830 random number : 3
-2019-07-26 15:34:29.931 GetFeatureAction
-2019-07-26 15:34:30.434 random number : 7
-2019-07-26 15:34:31.038 random number : 7
-2019-07-26 15:34:31.643 random number : 10
-2019-07-26 15:34:32.248 random number : 13
-2019-07-26 15:34:32.854 random number : 13
-2019-07-26 15:34:33.458 random number : 16
-2019-07-26 15:34:34.062 random number : 16
-2019-07-26 15:34:34.664 random number : 20
-2019-07-26 15:34:35.272 random number : 3
-2019-07-26 15:34:35.373 SetFeatureAction SetReportInformation
-2019-07-26 15:34:35.878 random number : 3
-2019-07-26 15:34:35.981 GetFeatureAction
-2019-07-26 15:34:36.485 random number : 6
-2019-07-26 15:34:36.587 SetFeatureAction SetUserID
-2019-07-26 15:34:37.090 random number : 6
-2019-07-26 15:34:37.192 GetFeatureAction
-2019-07-26 15:34:37.696 random number : 10
-2019-07-26 15:34:38.300 random number : 13
-2019-07-26 15:34:38.905 random number : 13
-2019-07-26 15:34:39.510 random number : 16
-2019-07-26 15:34:40.115 random number : 19
-2019-07-26 15:34:40.721 random number : 19
-2019-07-26 15:34:41.324 random number : 3
-2019-07-26 15:34:41.426 SetFeatureAction SetReportInformation
-2019-07-26 15:34:41.929 random number : 3
-2019-07-26 15:34:42.031 GetFeatureAction
-2019-07-26 15:34:42.534 random number : 6
-2019-07-26 15:34:42.635 SetFeatureAction SetUserID
-2019-07-26 15:34:43.139 random number : 9
-2019-07-26 15:34:43.241 GetFeatureAction
-2019-07-26 15:34:43.745 random number : 9
-2019-07-26 15:34:43.848 SetFeatureAction SetEnableHidDevice
-2019-07-26 15:34:44.352 random number : 12
-2019-07-26 15:34:44.453 GetFeatureAction
-2019-07-26 15:34:44.956 random number : 12
-2019-07-26 15:34:45.059 SetFeatureAction SetReportProductType
-2019-07-26 15:34:45.564 random number : 16
-2019-07-26 15:34:45.666 GetFeatureAction
-2019-07-26 15:34:46.169 random number : 19
-2019-07-26 15:34:46.772 random number : 19
-2019-07-26 15:34:47.377 random number : 2
-2019-07-26 15:34:47.981 random number : 2
-2019-07-26 15:34:48.587 random number : 5
-2019-07-26 15:34:49.190 random number : 9
-2019-07-26 15:34:49.292 SetFeatureAction SetEnableHidDevice
-2019-07-26 15:34:49.796 random number : 9
-2019-07-26 15:34:49.899 GetFeatureAction
-2019-07-26 15:34:50.404 random number : 12
-2019-07-26 15:34:50.506 SetFeatureAction SetReportProductType
-2019-07-26 15:34:51.009 random number : 12
-2019-07-26 15:34:51.112 GetFeatureAction
-2019-07-26 15:34:51.617 random number : 15
-2019-07-26 15:34:51.719 SetFeatureAction SetClearWhiteList
-2019-07-26 15:34:52.222 random number : 19
-2019-07-26 15:34:52.826 random number : 19
-2019-07-26 15:34:52.928 GetFeatureAction
-2019-07-26 15:34:53.431 random number : 2
-2019-07-26 15:34:54.034 random number : 2
-2019-07-26 15:34:54.638 random number : 5
-2019-07-26 15:34:55.242 random number : 8
-2019-07-26 15:34:55.848 random number : 8
-2019-07-26 15:34:56.452 random number : 12
-2019-07-26 15:34:56.554 SetFeatureAction SetReportProductType
-2019-07-26 15:34:57.059 random number : 12
-2019-07-26 15:34:57.161 GetFeatureAction
-2019-07-26 15:34:57.664 random number : 15
-2019-07-26 15:34:57.766 SetFeatureAction SetClearWhiteList
-2019-07-26 15:34:58.270 random number : 18
-2019-07-26 15:34:58.874 random number : 18
-2019-07-26 15:34:58.978 GetFeatureAction
-2019-07-26 15:34:59.483 random number : 1
-2019-07-26 15:35:00.089 random number : 1
-2019-07-26 15:35:00.693 random number : 5
-2019-07-26 15:35:01.296 random number : 8
-2019-07-26 15:35:01.901 random number : 8
-2019-07-26 15:35:02.507 random number : 11
-2019-07-26 15:35:03.111 random number : 14
-2019-07-26 15:35:03.716 random number : 14
-2019-07-26 15:35:04.319 random number : 18
-2019-07-26 15:35:04.421 SetFeatureAction SetColor
-2019-07-26 15:35:04.926 random number : 18
-2019-07-26 15:35:05.531 random number : 1
-2019-07-26 15:35:06.135 random number : 4
-2019-07-26 15:35:06.739 random number : 4
+2019-07-26 16:10:59.230 hello I am string debug 
+2019-07-26 16:10:59.934 ScriptsFunctionInitial 
+2019-07-26 16:11:00.538 EventGenerator 
+2019-07-26 16:11:00.641 random number : 18
+2019-07-26 16:11:00.743 UserEventInit
+2019-07-26 16:11:00.846 SetFeatureAction SetColor
+2019-07-26 16:11:01.149 random number : 2
+2019-07-26 16:11:01.753 random number : 2
+2019-07-26 16:11:02.357 random number : 5
+2019-07-26 16:11:02.961 random number : 5
+2019-07-26 16:11:03.566 random number : 8
+2019-07-26 16:11:03.668 GetFeatureAction
+2019-07-26 16:11:04.170 random number : 11
+2019-07-26 16:11:04.776 random number : 11
+2019-07-26 16:11:05.380 random number : 15
+2019-07-26 16:11:05.482 SetFeatureAction SetClearWhiteList
+2019-07-26 16:11:05.987 random number : 15
+2019-07-26 16:11:06.593 random number : 18
+2019-07-26 16:11:06.693 ResetConditionDetected:1
+2019-07-26 16:11:06.796 GetFeatureAction
+2019-07-26 16:11:07.201 random number : 1
+2019-07-26 16:11:07.805 random number : 1
+2019-07-26 16:11:08.409 random number : 4
+2019-07-26 16:11:09.015 random number : 4
+2019-07-26 16:11:09.620 random number : 8
+2019-07-26 16:11:10.225 random number : 11
+2019-07-26 16:11:10.829 random number : 11
+2019-07-26 16:11:11.434 random number : 14
+2019-07-26 16:11:12.038 random number : 14
+2019-07-26 16:11:12.643 random number : 17
+2019-07-26 16:11:12.745 ResetConditionDetected:2
+2019-07-26 16:11:13.250 random number : 1
+2019-07-26 16:11:13.855 random number : 1
+2019-07-26 16:11:14.461 random number : 4
+2019-07-26 16:11:15.065 random number : 4
+2019-07-26 16:11:15.670 random number : 7
+2019-07-26 16:11:16.273 random number : 11
+2019-07-26 16:11:16.879 random number : 11
+2019-07-26 16:11:17.482 random number : 14
+2019-07-26 16:11:18.088 random number : 14
+2019-07-26 16:11:18.692 random number : 17
+2019-07-26 16:11:18.793 ResetConditionDetected:3
+2019-07-26 16:11:18.897 Reset: HardFault
+2019-07-26 16:11:19.299 ScriptsFunctionInitial 
+2019-07-26 16:11:19.903 EventGenerator 
+2019-07-26 16:11:20.005 random number : 20
+2019-07-26 16:11:20.108 ResetConditionDetected:4
+2019-07-26 16:11:20.210 Reset: SuddenlyPowerOff
+2019-07-26 16:11:20.513 ScriptsFunctionInitial 
+2019-07-26 16:11:21.119 EventGenerator 
+2019-07-26 16:11:21.221 random number : 7
+2019-07-26 16:11:21.324 Reset: (null)
+2019-07-26 16:11:21.727 ScriptsFunctionInitial 
+2019-07-26 16:11:22.332 EventGenerator 
+2019-07-26 16:11:22.434 random number : 10
+2019-07-26 16:11:22.536 Reset: 
+2019-07-26 16:11:22.938 ScriptsFunctionInitial 
+2019-07-26 16:13:36.233 hello I am string debug 
+2019-07-26 16:13:36.938 ScriptsFunctionInitial 
+2019-07-26 16:13:37.543 EventGenerator 
+2019-07-26 16:13:37.644 random number : 11
+2019-07-26 16:13:37.746 UserEventInit
+2019-07-26 16:13:38.148 random number : 14
+2019-07-26 16:13:38.754 random number : 14
+2019-07-26 16:13:39.357 random number : 18
+2019-07-26 16:13:39.459 ResetConditionDetected:1
+2019-07-26 16:13:39.964 random number : 18
+2019-07-26 16:13:40.065 ResetConditionDetected:2
+2019-07-26 16:13:40.568 random number : 1
+2019-07-26 16:13:41.173 random number : 4
+2019-07-26 16:13:41.777 random number : 4
+2019-07-26 16:13:42.381 random number : 7
+2019-07-26 16:13:42.987 random number : 7
+2019-07-26 16:13:43.592 random number : 11
+2019-07-26 16:13:44.196 random number : 14
+2019-07-26 16:13:44.801 random number : 14
+2019-07-26 16:13:45.406 random number : 17
+2019-07-26 16:13:45.507 ResetConditionDetected:3
+2019-07-26 16:13:45.608 Reset: HardFault
+2019-07-26 16:13:46.013 ScriptsFunctionInitial 
+2019-07-26 16:13:46.618 EventGenerator 
+2019-07-26 16:13:46.719 random number : 20
+2019-07-26 16:13:46.821 ResetConditionDetected:1
+2019-07-26 16:13:47.224 random number : 4
+2019-07-26 16:13:47.828 random number : 4
+2019-07-26 16:13:48.431 random number : 7
+2019-07-26 16:13:49.035 random number : 7
+2019-07-26 16:13:49.638 random number : 10
+2019-07-26 16:13:50.243 random number : 13
+2019-07-26 16:13:50.847 random number : 13
+2019-07-26 16:13:51.451 random number : 17
+2019-07-26 16:13:51.552 ResetConditionDetected:2
+2019-07-26 16:13:52.058 random number : 17
+2019-07-26 16:13:52.161 ResetConditionDetected:3
+2019-07-26 16:13:52.263 Reset: HardFault
+2019-07-26 16:13:52.666 ScriptsFunctionInitial 
+2019-07-26 16:13:53.269 EventGenerator 
+2019-07-26 16:13:53.371 random number : 3
+2019-07-26 16:13:53.875 random number : 3
+2019-07-26 16:13:54.480 random number : 7
+2019-07-26 16:13:55.083 random number : 7
+2019-07-26 16:13:55.687 random number : 10
+2019-07-26 16:13:56.293 random number : 13
+2019-07-26 16:13:56.898 random number : 13
+2019-07-26 16:13:57.503 random number : 16
+2019-07-26 16:13:58.108 random number : 20
+2019-07-26 16:13:58.210 ResetConditionDetected:1
+2019-07-26 16:13:58.713 random number : 20
+2019-07-26 16:13:58.816 ResetConditionDetected:2
+2019-07-26 16:13:59.321 random number : 3
+2019-07-26 16:13:59.925 random number : 3
+2019-07-26 16:14:00.530 random number : 6
+2019-07-26 16:14:01.133 random number : 9
+2019-07-26 16:14:01.739 random number : 9
+2019-07-26 16:14:02.342 random number : 13
+2019-07-26 16:14:02.949 random number : 13
+2019-07-26 16:14:03.554 random number : 16
+2019-07-26 16:14:04.159 random number : 19
+2019-07-26 16:14:04.262 ResetConditionDetected:3
+2019-07-26 16:14:04.364 Reset: ResetByWatchDog
+2019-07-26 16:14:04.768 ScriptsFunctionInitial 
+2019-07-26 16:14:05.371 EventGenerator 
+2019-07-26 16:14:05.474 random number : 2
+2019-07-26 16:14:05.979 random number : 2
+2019-07-26 16:14:06.583 random number : 6
+2019-07-26 16:14:07.189 random number : 9
+2019-07-26 16:14:07.793 random number : 9
+2019-07-26 16:14:08.399 random number : 12
+2019-07-26 16:14:09.002 random number : 12
+2019-07-26 16:14:09.607 random number : 15
+2019-07-26 16:14:10.210 random number : 19
+2019-07-26 16:14:10.312 ResetConditionDetected:1
+2019-07-26 16:14:10.817 random number : 19
+2019-07-26 16:14:10.919 ResetConditionDetected:2
+2019-07-26 16:14:11.423 random number : 2
+2019-07-26 16:14:12.027 random number : 2
+2019-07-26 16:14:12.631 random number : 5
+2019-07-26 16:14:13.237 random number : 9
+2019-07-26 16:14:13.841 random number : 9
+2019-07-26 16:14:14.444 random number : 12
+2019-07-26 16:14:15.048 random number : 12
+2019-07-26 16:14:15.653 random number : 15
+2019-07-26 16:14:16.258 random number : 18
+2019-07-26 16:14:16.360 ResetConditionDetected:3
+2019-07-26 16:14:16.463 Reset: ResetByUser
+2019-07-26 16:14:16.865 ScriptsFunctionInitial 
+2019-07-26 16:14:17.469 EventGenerator 
+2019-07-26 16:14:17.570 random number : 2
+2019-07-26 16:14:18.075 random number : 2
+2019-07-26 16:14:18.679 random number : 5
+2019-07-26 16:14:19.283 random number : 8
+2019-07-26 16:14:19.888 random number : 8
+2019-07-26 16:14:20.492 random number : 11
+2019-07-26 16:14:21.097 random number : 11
+2019-07-26 16:14:21.701 random number : 15
+2019-07-26 16:14:22.305 random number : 18
+2019-07-26 16:14:22.406 ResetConditionDetected:1
+2019-07-26 16:14:22.909 random number : 18
+2019-07-26 16:14:23.011 ResetConditionDetected:2
+2019-07-26 16:14:23.516 random number : 1
+2019-07-26 16:14:24.122 random number : 4
+2019-07-26 16:14:24.725 random number : 4
+2019-07-26 16:14:25.329 random number : 8
+2019-07-26 16:14:25.933 random number : 8
+2019-07-26 16:14:26.539 random number : 11
+2019-07-26 16:14:27.142 random number : 14
+2019-07-26 16:14:27.747 random number : 14
+2019-07-26 16:14:28.351 random number : 18
+2019-07-26 16:14:28.454 ResetConditionDetected:3
+2019-07-26 16:14:28.556 Reset: ResetByUser
+2019-07-26 16:14:28.960 ScriptsFunctionInitial 
+2019-07-26 16:14:29.563 EventGenerator 
+2019-07-26 16:14:29.666 random number : 1
+2019-07-26 16:14:30.167 random number : 4
+2019-07-26 16:14:30.772 random number : 4
+2019-07-26 16:14:31.377 random number : 7
+2019-07-26 16:14:31.981 random number : 7

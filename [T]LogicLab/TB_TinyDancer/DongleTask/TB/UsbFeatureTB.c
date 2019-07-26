@@ -50,7 +50,7 @@ static StateNumber FeatureDelayAction(StateNumber current_state)
 }
 static StateNumber GetFeatureAction(StateNumber current_state)
 {
-	SEGGER_RTT_Debug(DONGLE_SCRIPT_DEBUG,(30,"GetFeatureAction\r\n"));
+	SEGGER_RTT_Debug(USB_FEATURE_DEBUG,(30,"GetFeatureAction\r\n"));
 	return SetFeature;
 }
 

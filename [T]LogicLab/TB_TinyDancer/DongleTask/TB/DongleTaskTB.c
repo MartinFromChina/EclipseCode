@@ -6,6 +6,7 @@
 #include "..\..\..\..\CommonSource\Math\bit_operation.h"
 
 #include "UsbFeatureTB.h"
+#include "UserEventTB.h"
 
 #define FRAME_STATE_MACHINE      1
 #define FRAME_SCRIPT_FUNCTION    1
@@ -72,14 +73,6 @@ typedef struct
 	uint16_t	isGetResult				:1;
 }sUseEvent;
 
-typedef enum
-{
-	SuddenlyPowerOff,
-	ResetByWatchDog,
-	ResetByUser,
-	HardFault,
-}EventUser;
-
 typedef struct
 {
 	EventUser ResetEvent 		;
@@ -104,6 +97,7 @@ static StateNumber GetRandomNumAction(StateNumber current_state)
 }
 static StateNumber UserEventHandleAction(StateNumber current_state)
 {
+	isResetHappen = DoesResetHappen();
 	return (current_state+1);
 }
 static StateNumber UsbEventHandleAction(StateNumber current_state)
@@ -117,7 +111,7 @@ static StateNumber BleEventHandleAction(StateNumber current_state)
 }
 static StateNumber NotityEventHandleAction(StateNumber current_state)
 {
-	return GetRandomNum;
+	return 0;
 }
 
 static const StateAction SimpleStateAction[5] = {
