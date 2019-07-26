@@ -4,5 +4,6 @@
 #define DONGLE_SCRIPT_DEBUG   1
 #define USB_FEATURE_DEBUG     0
 #define USER_EVENT_DEBUG      1
+#define BLE_CONDITION_DEBUG   1
 
 #endif

@@ -133,3 +133,21 @@ uint8_t SimpleStateMachineRun(const StateSimpleParam *p_ssp
 	return APP_SUCCESSED;
 
 }
+
+uint8_t StateMachineSetState(X_Boolean isSimpleMachine,StateNumber state,const X_Void *p_This)
+{
+	if(isSimpleMachine == X_True)
+	{
+		const StateSimpleParam *p_entry = (StateSimpleParam *)p_This;
+		if( (state+1) >=  p_entry->AllStateNum ) {return APP_BEYOND_SCOPE;}
+		(*p_entry->p_CurrentStateNum) = state;
+	}
+	else
+	{
+		const StateBasicParam *p_entry = (StateBasicParam *)p_This;
+		if( (state+1) >=  p_entry->AllStateNum ) {return APP_BEYOND_SCOPE;}
+		(*p_entry->p_CurrentStateNum) = state;
+	}
+	return APP_SUCCESSED;
+
+}

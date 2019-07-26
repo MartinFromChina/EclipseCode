@@ -12,5 +12,6 @@ typedef enum
 }EventUser;
 
 X_Boolean DoesResetHappen(X_Void);
+uint8_t ResetUserEventState(X_Void);
 
 #endif

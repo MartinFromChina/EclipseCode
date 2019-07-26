@@ -7,6 +7,7 @@
 
 #include "UsbFeatureTB.h"
 #include "UserEventTB.h"
+#include "BleConnectConditionTB.h"
 
 #define FRAME_STATE_MACHINE      1
 #define FRAME_SCRIPT_FUNCTION    1
@@ -14,7 +15,7 @@
 RTT_DEBUG_ONCE_ENTRY_DEF(p_script_func_num,100);
 
 static uint32_t current_random_num = 0;
-static X_Boolean isResetHappen = X_False;
+static X_Boolean isResetHappen = X_False,isBleConnected = X_False;
 
 uint32_t GetCurrentRandomNumber(X_Void)
 {
@@ -47,37 +48,6 @@ typedef struct
 	uint8_t	isBatteryNotify		:1;
 }sNotifyEvent;
 
-typedef enum
-{
-  BleConnected,
-  BleDisConnected,
-}EventBLE;
-
-typedef struct
-{
-	X_Boolean isBleConnected 		;
-}sBleEvent;
-
-typedef struct
-{
-	uint16_t 	isSetTestMode			:1;
-	uint16_t	isSetReportBleState		:1;
-	uint16_t	isSetReportProductType	:1;
-	uint16_t	isSetReportInformation	:1;
-	uint16_t	isSetKeyValueMap		:1;
-	uint16_t	isSetClearWhiteList		:1;
-	uint16_t	isSetUserID				:1;
-	uint16_t	isSetPenType			:1;
-	uint16_t	isSetColor				:1;
-	uint16_t	isSetEnableHidDevice	:1;
-	uint16_t	isGetResult				:1;
-}sUseEvent;
-
-typedef struct
-{
-	EventUser ResetEvent 		;
-}sResetReason;
-
 /***********************************************************************************************************************/
 #if (FRAME_STATE_MACHINE == 1)
 typedef enum
@@ -86,7 +56,7 @@ typedef enum
 	UserEventHandle,
 	UsbEventHandle,
 	BleEventHandle,
-	NotityEventHandle,
+	NotifyEventHandle,
 }EventGeneratorState;
 
 static StateNumber GetRandomNumAction(StateNumber current_state)
@@ -107,10 +77,12 @@ static StateNumber UsbEventHandleAction(StateNumber current_state)
 }
 static StateNumber BleEventHandleAction(StateNumber current_state)
 {
+	isBleConnected = BleConditionHandle();
 	return (current_state+1);
 }
-static StateNumber NotityEventHandleAction(StateNumber current_state)
+static StateNumber NotifyEventHandleAction(StateNumber current_state)
 {
+//	CharacteristicNotifyEventHandle(isBleConnected);
 	return 0;
 }
 
@@ -119,7 +91,7 @@ static const StateAction SimpleStateAction[5] = {
 		{UserEventHandleAction},
 		{UsbEventHandleAction},
 		{BleEventHandleAction},
-		{NotityEventHandleAction},
+		{NotifyEventHandleAction},
 };
 
 
@@ -133,7 +105,7 @@ static X_Void StateJumpRecorder(StateNumber current_state,StateNumber next_state
 static X_Boolean DoesBreakSimple(const StateSimpleParam *p_sbp,StateNumber nextstate,uint16_t loop_counter)
 {
 //	SEGGER_RTT_Debug(DONGLE_SCRIPT_DEBUG,(USER_MAX_STRING_LENGTH,"DoesBreak:current:%d;next:%d\r\n",(*p_sbp->p_CurrentStateNum),nextstate));
-	if((*p_sbp->p_CurrentStateNum) == NotityEventHandle) // reach the last state
+	if((*p_sbp->p_CurrentStateNum) == NotifyEventHandle) // reach the last state
 	{
 		return X_True;
 	}
@@ -159,9 +131,12 @@ static X_Boolean DoesBreakSimple(const StateSimpleParam *p_sbp,StateNumber nexts
 
 static X_Boolean ScriptsFunctionInitial(X_Void * p_param)
 {
-	SEGGER_RTT_Debug_Once(DONGLE_SCRIPT_DEBUG,p_script_func_num,1,(30,"ScriptsFunctionInitial \r\n"));
+	SEGGER_RTT_Debug_Once(DONGLE_SCRIPT_DEBUG,p_script_func_num,1,(30,"--ScriptsFunctionInitial \r\n"));
 	current_random_num = 0;
 	isResetHappen = X_False;
+	isBleConnected = X_False;
+	ResetUserEventState();
+	ResetBleConditionState();
 	return X_True;
 }
 static X_Boolean EventGenerator(X_Void * p_param)

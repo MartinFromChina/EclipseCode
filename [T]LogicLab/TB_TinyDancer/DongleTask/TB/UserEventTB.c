@@ -23,7 +23,7 @@ typedef enum
 
 static StateNumber IdleAction(StateNumber current_state)
 {
-	SEGGER_RTT_Debug(USER_EVENT_DEBUG,(30,"UserEventInit\r\n"));
+	SEGGER_RTT_Debug(USER_EVENT_DEBUG,(30,"----UserEventInit\r\n"));
 	isReset = X_False;
 	ResetConditionDetectedTimes = 0;
 	current_num = 0;
@@ -40,7 +40,7 @@ static StateNumber ResetConditionDetectedAction(StateNumber current_state)
 		SEGGER_RTT_Debug(USER_EVENT_DEBUG,(43,"ResetConditionDetected:%d\r\n",ResetConditionDetectedTimes));
 	}
 
-	if(ResetConditionDetectedTimes >= 3)
+	if(ResetConditionDetectedTimes >= 20)
 	{
 		ResetConditionDetectedTimes = 0;
 		SEGGER_RTT_Debug(USER_EVENT_DEBUG,(43,"Reset: %s\r\n",CommandMap[20-current_num].p_char));
@@ -64,4 +64,9 @@ X_Boolean DoesResetHappen(X_Void)
 {
 	SimpleStateMachineRun(p_state,X_Null,X_Null);
 	return isReset;
+}
+
+uint8_t ResetUserEventState(X_Void)
+{
+	return StateMachineSetState(X_True,Idle,p_state);
 }

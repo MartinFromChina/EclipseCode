@@ -53,6 +53,9 @@ static const StateSimpleParam* id = &CONCAT_2(id, _entry)
 uint8_t SimpleStateMachineRun( const StateSimpleParam *p_ssp
 						,X_Boolean (*DoesBreak)(const StateSimpleParam *p_sbp,StateNumber nextstate,uint16_t loop_counter)
 						,X_Void(*StateRecorder)(StateNumber current_state,StateNumber next_state));
+
+uint8_t StateMachineSetState(X_Boolean isSimpleMachine,StateNumber state,const X_Void *p_This);
+
 /*
  static const StateHandle ExampleStateHandle[2] = {
 
