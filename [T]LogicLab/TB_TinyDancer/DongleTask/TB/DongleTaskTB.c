@@ -8,6 +8,7 @@
 #include "UsbFeatureTB.h"
 #include "UserEventTB.h"
 #include "BleConnectConditionTB.h"
+#include "NotifyEventTB.h"
 
 #define FRAME_STATE_MACHINE      1
 #define FRAME_SCRIPT_FUNCTION    1
@@ -27,26 +28,6 @@ FILE * DongleTaskOpenFile(void)
 	return fopen(".//TB_TinyDancer//DongleTask//TB//command.txt", "r");
 }
 /***********************************************************************************************************************/
-
-typedef enum
-{
-	KeyNotify,
-	AirMouseNotify,
-	PenTipNotify,
-	ColorNotify,
-	PenTypeNotify,
-	BatteryNotify,
-}EventCharacteristic;
-
-typedef struct
-{
-	uint8_t isKeyNotify 		:1;
-	uint8_t isAirMouseNotify	:1;
-	uint8_t	isPenTipNotify		:1;
-	uint8_t	isColorNotify		:1;
-	uint8_t	isPenTypeNotify		:1;
-	uint8_t	isBatteryNotify		:1;
-}sNotifyEvent;
 
 /***********************************************************************************************************************/
 #if (FRAME_STATE_MACHINE == 1)
@@ -82,7 +63,7 @@ static StateNumber BleEventHandleAction(StateNumber current_state)
 }
 static StateNumber NotifyEventHandleAction(StateNumber current_state)
 {
-//	CharacteristicNotifyEventHandle(isBleConnected);
+	CharacteristicNotifyEventHandle(isBleConnected);
 	return 0;
 }
 
@@ -137,6 +118,7 @@ static X_Boolean ScriptsFunctionInitial(X_Void * p_param)
 	isBleConnected = X_False;
 	ResetUserEventState();
 	ResetBleConditionState();
+	ResetNotifyEventState();
 	return X_True;
 }
 static X_Boolean EventGenerator(X_Void * p_param)

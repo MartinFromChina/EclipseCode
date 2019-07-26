@@ -66,7 +66,7 @@ X_Boolean DoesResetHappen(X_Void)
 	return isReset;
 }
 
-uint8_t ResetUserEventState(X_Void)
+X_Void ResetUserEventState(X_Void)
 {
-	return StateMachineSetState(X_True,Idle,p_state);
+	(*p_state->p_CurrentStateNum) = Idle;
 }

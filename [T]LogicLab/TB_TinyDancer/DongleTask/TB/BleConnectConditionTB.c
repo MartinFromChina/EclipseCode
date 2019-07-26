@@ -72,7 +72,7 @@ X_Boolean BleConditionHandle(X_Void)
 	SimpleStateMachineRun(p_state,X_Null,X_Null);
 	return isBleConnected;
 }
-uint8_t ResetBleConditionState(X_Void)
+X_Void ResetBleConditionState(X_Void)
 {
-	return StateMachineSetState(X_True,Idle,p_state);
+	(*p_state->p_CurrentStateNum) = Idle;
 }

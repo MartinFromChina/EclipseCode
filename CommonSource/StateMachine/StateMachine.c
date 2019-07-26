@@ -133,9 +133,10 @@ uint8_t SimpleStateMachineRun(const StateSimpleParam *p_ssp
 	return APP_SUCCESSED;
 
 }
-
+/*
 uint8_t StateMachineSetState(X_Boolean isSimpleMachine,StateNumber state,const X_Void *p_This)
 {
+	if(p_This == X_Null) {return APP_POINTER_NULL;}
 	if(isSimpleMachine == X_True)
 	{
 		const StateSimpleParam *p_entry = (StateSimpleParam *)p_This;
@@ -151,3 +152,4 @@ uint8_t StateMachineSetState(X_Boolean isSimpleMachine,StateNumber state,const X
 	return APP_SUCCESSED;
 
 }
+*/

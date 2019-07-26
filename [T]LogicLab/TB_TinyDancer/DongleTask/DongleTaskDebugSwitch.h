@@ -1,9 +1,10 @@
 #ifndef __DONGLETASKDEBUGSWITCH_H
 #define __DONGLETASKDEBUGSWITCH_H
 
-#define DONGLE_SCRIPT_DEBUG   1
+#define DONGLE_SCRIPT_DEBUG   0
 #define USB_FEATURE_DEBUG     0
 #define USER_EVENT_DEBUG      1
 #define BLE_CONDITION_DEBUG   1
+#define NOTITY_DEBUG   		  1
 
 #endif

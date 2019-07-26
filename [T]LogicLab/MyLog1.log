@@ -1,300 +1,101 @@
-2019-07-26 17:19:22.473 hello I am string debug 
-2019-07-26 17:19:23.179 --ScriptsFunctionInitial 
-2019-07-26 17:19:23.783 EventGenerator 
-2019-07-26 17:19:23.885 random number : 17
-2019-07-26 17:19:23.987 ----UserEventInit
-2019-07-26 17:19:24.089 ----BleConditionInit
-2019-07-26 17:19:24.391 random number : 20
-2019-07-26 17:19:24.493 ResetConditionDetected:1
-2019-07-26 17:19:24.595 !!! isBleConnected: 0
-2019-07-26 17:19:24.999 random number : 20
-2019-07-26 17:19:25.101 ResetConditionDetected:2
-2019-07-26 17:19:25.606 random number : 4
-2019-07-26 17:19:25.708 !!! isBleConnected: 1
-2019-07-26 17:19:26.210 random number : 7
-2019-07-26 17:19:26.814 random number : 7
-2019-07-26 17:19:27.419 random number : 10
-2019-07-26 17:19:28.023 random number : 10
-2019-07-26 17:19:28.627 random number : 13
-2019-07-26 17:19:29.232 random number : 17
-2019-07-26 17:19:29.333 ResetConditionDetected:3
-2019-07-26 17:19:29.837 random number : 17
-2019-07-26 17:19:29.939 ResetConditionDetected:4
-2019-07-26 17:19:30.443 random number : 20
-2019-07-26 17:19:30.545 ResetConditionDetected:5
-2019-07-26 17:19:31.048 random number : 20
-2019-07-26 17:19:31.150 ResetConditionDetected:6
-2019-07-26 17:19:31.655 random number : 3
-2019-07-26 17:19:32.258 random number : 6
-2019-07-26 17:19:32.864 random number : 6
-2019-07-26 17:19:33.468 random number : 10
-2019-07-26 17:19:34.071 random number : 10
-2019-07-26 17:19:34.675 random number : 13
-2019-07-26 17:19:35.280 random number : 16
-2019-07-26 17:19:35.884 random number : 16
-2019-07-26 17:19:36.489 random number : 19
-2019-07-26 17:19:36.590 ResetConditionDetected:7
-2019-07-26 17:19:37.094 random number : 19
-2019-07-26 17:19:37.196 ResetConditionDetected:8
-2019-07-26 17:19:37.701 random number : 3
-2019-07-26 17:19:38.306 random number : 6
-2019-07-26 17:19:38.910 random number : 6
-2019-07-26 17:19:39.514 random number : 9
-2019-07-26 17:19:40.119 random number : 12
-2019-07-26 17:19:40.724 random number : 12
-2019-07-26 17:19:41.328 random number : 16
-2019-07-26 17:19:41.934 random number : 16
-2019-07-26 17:19:42.540 random number : 19
-2019-07-26 17:19:42.642 ResetConditionDetected:9
-2019-07-26 17:19:42.745 !!! isBleConnected: 0
-2019-07-26 17:19:43.149 random number : 2
-2019-07-26 17:19:43.251 !!! isBleConnected: 1
-2019-07-26 17:19:43.754 random number : 2
-2019-07-26 17:19:44.360 random number : 6
-2019-07-26 17:19:44.963 random number : 6
-2019-07-26 17:19:45.568 random number : 9
-2019-07-26 17:19:46.175 random number : 12
-2019-07-26 17:19:46.778 random number : 12
-2019-07-26 17:19:47.383 random number : 15
-2019-07-26 17:19:47.988 random number : 15
-2019-07-26 17:19:48.591 random number : 19
-2019-07-26 17:19:48.694 ResetConditionDetected:10
-2019-07-26 17:19:49.198 random number : 2
-2019-07-26 17:19:49.803 random number : 2
-2019-07-26 17:19:50.406 random number : 5
-2019-07-26 17:19:51.009 random number : 5
-2019-07-26 17:19:51.613 random number : 8
-2019-07-26 17:19:52.218 random number : 12
-2019-07-26 17:19:52.821 random number : 12
-2019-07-26 17:19:53.425 random number : 15
-2019-07-26 17:19:54.029 random number : 15
-2019-07-26 17:19:54.633 random number : 18
-2019-07-26 17:19:54.735 ResetConditionDetected:11
-2019-07-26 17:19:55.240 random number : 1
-2019-07-26 17:19:55.844 random number : 1
-2019-07-26 17:19:56.447 random number : 5
-2019-07-26 17:19:57.051 random number : 5
-2019-07-26 17:19:57.657 random number : 8
-2019-07-26 17:19:58.261 random number : 11
-2019-07-26 17:19:58.866 random number : 11
-2019-07-26 17:19:59.471 random number : 15
-2019-07-26 17:20:00.076 random number : 15
-2019-07-26 17:20:00.680 random number : 18
-2019-07-26 17:20:00.783 ResetConditionDetected:12
-2019-07-26 17:20:01.287 random number : 1
-2019-07-26 17:20:01.891 random number : 1
-2019-07-26 17:20:02.495 random number : 4
-2019-07-26 17:20:03.100 random number : 8
-2019-07-26 17:20:03.703 random number : 8
-2019-07-26 17:20:04.308 random number : 11
-2019-07-26 17:20:04.911 random number : 11
-2019-07-26 17:20:05.515 random number : 14
-2019-07-26 17:20:06.120 random number : 17
-2019-07-26 17:20:06.222 ResetConditionDetected:13
-2019-07-26 17:20:06.728 random number : 17
-2019-07-26 17:20:06.830 ResetConditionDetected:14
-2019-07-26 17:20:07.334 random number : 1
-2019-07-26 17:20:07.937 random number : 1
-2019-07-26 17:20:08.543 random number : 4
-2019-07-26 17:20:09.147 random number : 7
-2019-07-26 17:20:09.751 random number : 7
-2019-07-26 17:20:10.357 random number : 10
-2019-07-26 17:20:10.959 random number : 10
-2019-07-26 17:20:11.563 random number : 14
-2019-07-26 17:20:12.168 random number : 17
-2019-07-26 17:20:12.268 ResetConditionDetected:15
-2019-07-26 17:20:12.772 random number : 17
-2019-07-26 17:20:12.875 ResetConditionDetected:16
-2019-07-26 17:20:13.378 random number : 20
-2019-07-26 17:20:13.480 ResetConditionDetected:17
-2019-07-26 17:20:13.985 random number : 20
-2019-07-26 17:20:14.087 ResetConditionDetected:18
-2019-07-26 17:20:14.188 !!! isBleConnected: 0
-2019-07-26 17:20:14.590 random number : 4
-2019-07-26 17:20:14.692 !!! isBleConnected: 1
-2019-07-26 17:20:15.197 random number : 7
-2019-07-26 17:20:15.800 random number : 7
-2019-07-26 17:20:16.404 random number : 10
-2019-07-26 17:20:17.009 random number : 10
-2019-07-26 17:20:17.613 random number : 13
-2019-07-26 17:20:18.219 random number : 17
-2019-07-26 17:20:18.321 ResetConditionDetected:19
-2019-07-26 17:20:18.825 random number : 17
-2019-07-26 17:20:18.928 ResetConditionDetected:20
-2019-07-26 17:20:19.029 Reset: HardFault
-2019-07-26 17:20:19.433 --ScriptsFunctionInitial 
-2019-07-26 17:20:20.037 EventGenerator 
-2019-07-26 17:20:20.139 random number : 20
-2019-07-26 17:20:20.242 ----UserEventInit
-2019-07-26 17:20:20.344 ----BleConditionInit
-2019-07-26 17:20:20.648 random number : 3
-2019-07-26 17:20:21.252 random number : 6
-2019-07-26 17:20:21.857 random number : 6
-2019-07-26 17:20:22.462 random number : 10
-2019-07-26 17:20:23.066 random number : 10
-2019-07-26 17:20:23.670 random number : 13
-2019-07-26 17:20:24.274 random number : 16
-2019-07-26 17:20:24.880 random number : 16
-2019-07-26 17:20:25.485 random number : 19
-2019-07-26 17:20:25.586 ResetConditionDetected:1
-2019-07-26 17:20:26.091 random number : 19
-2019-07-26 17:20:26.193 ResetConditionDetected:2
-2019-07-26 17:20:26.697 random number : 3
-2019-07-26 17:20:27.301 random number : 6
-2019-07-26 17:20:27.905 random number : 6
-2019-07-26 17:20:28.511 random number : 9
-2019-07-26 17:20:29.114 random number : 13
-2019-07-26 17:20:29.718 random number : 13
-2019-07-26 17:20:30.322 random number : 16
-2019-07-26 17:20:30.927 random number : 16
-2019-07-26 17:20:31.530 random number : 19
-2019-07-26 17:20:31.632 ResetConditionDetected:3
-2019-07-26 17:20:32.136 random number : 2
-2019-07-26 17:20:32.741 random number : 2
-2019-07-26 17:20:33.345 random number : 6
-2019-07-26 17:20:33.949 random number : 6
-2019-07-26 17:20:34.555 random number : 9
-2019-07-26 17:20:35.159 random number : 12
-2019-07-26 17:20:35.764 random number : 12
-2019-07-26 17:20:36.369 random number : 15
-2019-07-26 17:20:36.974 random number : 15
-2019-07-26 17:20:37.579 random number : 19
-2019-07-26 17:20:37.682 ResetConditionDetected:4
-2019-07-26 17:20:38.186 random number : 2
-2019-07-26 17:20:38.789 random number : 2
-2019-07-26 17:20:39.393 random number : 5
-2019-07-26 17:20:39.998 random number : 5
-2019-07-26 17:20:40.602 random number : 8
-2019-07-26 17:20:41.206 random number : 12
-2019-07-26 17:20:41.808 random number : 12
-2019-07-26 17:20:42.411 random number : 15
-2019-07-26 17:20:43.014 random number : 15
-2019-07-26 17:20:43.618 random number : 18
-2019-07-26 17:20:43.720 ResetConditionDetected:5
-2019-07-26 17:20:43.822 !!! isBleConnected: 0
-2019-07-26 17:20:44.225 random number : 1
-2019-07-26 17:20:44.326 !!! isBleConnected: 1
-2019-07-26 17:20:44.830 random number : 1
-2019-07-26 17:20:45.435 random number : 5
-2019-07-26 17:20:46.040 random number : 5
-2019-07-26 17:20:46.646 random number : 8
-2019-07-26 17:20:47.250 random number : 11
-2019-07-26 17:20:47.856 random number : 11
-2019-07-26 17:20:48.462 random number : 15
-2019-07-26 17:20:49.069 random number : 15
-2019-07-26 17:20:49.674 random number : 18
-2019-07-26 17:20:49.776 ResetConditionDetected:6
-2019-07-26 17:20:50.279 random number : 1
-2019-07-26 17:20:50.884 random number : 1
-2019-07-26 17:20:51.488 random number : 4
-2019-07-26 17:20:52.090 random number : 4
-2019-07-26 17:20:52.694 random number : 8
-2019-07-26 17:20:53.299 random number : 11
-2019-07-26 17:20:53.904 random number : 11
-2019-07-26 17:20:54.506 random number : 14
-2019-07-26 17:20:55.110 random number : 17
-2019-07-26 17:20:55.212 ResetConditionDetected:7
-2019-07-26 17:20:55.715 random number : 17
-2019-07-26 17:20:55.817 ResetConditionDetected:8
-2019-07-26 17:20:56.321 random number : 1
-2019-07-26 17:20:56.925 random number : 1
-2019-07-26 17:20:57.529 random number : 4
-2019-07-26 17:20:58.133 random number : 7
-2019-07-26 17:20:58.738 random number : 7
-2019-07-26 17:20:59.342 random number : 10
-2019-07-26 17:20:59.948 random number : 10
-2019-07-26 17:21:00.553 random number : 14
-2019-07-26 17:21:01.160 random number : 17
-2019-07-26 17:21:01.262 ResetConditionDetected:9
-2019-07-26 17:21:01.767 random number : 17
-2019-07-26 17:21:01.870 ResetConditionDetected:10
-2019-07-26 17:21:02.374 random number : 20
-2019-07-26 17:21:02.476 ResetConditionDetected:11
-2019-07-26 17:21:02.980 random number : 20
-2019-07-26 17:21:03.081 ResetConditionDetected:12
-2019-07-26 17:21:03.583 random number : 4
-2019-07-26 17:21:04.187 random number : 7
-2019-07-26 17:21:04.790 random number : 7
-2019-07-26 17:21:05.394 random number : 10
-2019-07-26 17:21:05.998 random number : 10
-2019-07-26 17:21:06.602 random number : 13
-2019-07-26 17:21:07.207 random number : 17
-2019-07-26 17:21:07.309 ResetConditionDetected:13
-2019-07-26 17:21:07.815 random number : 17
-2019-07-26 17:21:07.917 ResetConditionDetected:14
-2019-07-26 17:21:08.421 random number : 20
-2019-07-26 17:21:08.522 ResetConditionDetected:15
-2019-07-26 17:21:09.028 random number : 20
-2019-07-26 17:21:09.130 ResetConditionDetected:16
-2019-07-26 17:21:09.232 !!! isBleConnected: 0
-2019-07-26 17:21:09.634 random number : 3
-2019-07-26 17:21:09.737 !!! isBleConnected: 1
-2019-07-26 17:21:10.243 random number : 6
-2019-07-26 17:21:10.847 random number : 6
-2019-07-26 17:21:11.451 random number : 10
-2019-07-26 17:21:12.054 random number : 10
-2019-07-26 17:21:12.659 random number : 13
-2019-07-26 17:21:13.264 random number : 16
-2019-07-26 17:21:13.868 random number : 16
-2019-07-26 17:21:14.473 random number : 19
-2019-07-26 17:21:14.574 ResetConditionDetected:17
-2019-07-26 17:21:15.077 random number : 19
-2019-07-26 17:21:15.179 ResetConditionDetected:18
-2019-07-26 17:21:15.683 random number : 3
-2019-07-26 17:21:16.287 random number : 6
-2019-07-26 17:21:16.892 random number : 6
-2019-07-26 17:21:17.496 random number : 9
-2019-07-26 17:21:18.100 random number : 13
-2019-07-26 17:21:18.705 random number : 13
-2019-07-26 17:21:19.310 random number : 16
-2019-07-26 17:21:19.915 random number : 16
-2019-07-26 17:21:20.519 random number : 19
-2019-07-26 17:21:20.622 ResetConditionDetected:19
-2019-07-26 17:21:21.126 random number : 2
-2019-07-26 17:21:21.729 random number : 2
-2019-07-26 17:21:22.333 random number : 6
-2019-07-26 17:21:22.936 random number : 6
-2019-07-26 17:21:23.542 random number : 9
-2019-07-26 17:21:24.145 random number : 12
-2019-07-26 17:21:24.751 random number : 12
-2019-07-26 17:21:25.356 random number : 15
-2019-07-26 17:21:25.961 random number : 15
-2019-07-26 17:21:26.565 random number : 19
-2019-07-26 17:21:26.666 ResetConditionDetected:20
-2019-07-26 17:21:26.769 Reset: ResetByWatchDog
-2019-07-26 17:21:27.172 --ScriptsFunctionInitial 
-2019-07-26 17:21:27.777 EventGenerator 
-2019-07-26 17:21:27.880 random number : 2
-2019-07-26 17:21:27.982 ----UserEventInit
-2019-07-26 17:21:28.085 ----BleConditionInit
-2019-07-26 17:21:28.387 random number : 5
-2019-07-26 17:21:28.489 !!! isBleConnected: 0
-2019-07-26 17:21:28.994 random number : 5
-2019-07-26 17:21:29.598 random number : 8
-2019-07-26 17:21:30.202 random number : 12
-2019-07-26 17:21:30.805 random number : 12
-2019-07-26 17:21:31.410 random number : 15
-2019-07-26 17:21:32.014 random number : 15
-2019-07-26 17:21:32.620 random number : 18
-2019-07-26 17:21:32.722 ResetConditionDetected:1
-2019-07-26 17:21:33.224 random number : 2
-2019-07-26 17:21:33.327 !!! isBleConnected: 1
-2019-07-26 17:21:33.832 random number : 2
-2019-07-26 17:21:34.437 random number : 5
-2019-07-26 17:21:35.042 random number : 5
-2019-07-26 17:21:35.644 random number : 8
-2019-07-26 17:21:36.249 random number : 11
-2019-07-26 17:21:36.852 random number : 11
-2019-07-26 17:21:37.457 random number : 15
-2019-07-26 17:21:38.062 random number : 15
-2019-07-26 17:21:38.665 random number : 18
-2019-07-26 17:21:38.766 ResetConditionDetected:2
-2019-07-26 17:21:39.270 random number : 1
-2019-07-26 17:21:39.873 random number : 1
-2019-07-26 17:21:40.479 random number : 4
-2019-07-26 17:21:41.082 random number : 4
-2019-07-26 17:21:41.687 random number : 8
-2019-07-26 17:21:42.289 random number : 11
-2019-07-26 17:21:42.893 random number : 11
-2019-07-26 17:21:43.499 random number : 14
-2019-07-26 17:21:44.104 random number : 17
+2019-07-26 17:51:30.954 hello I am string debug 
+2019-07-26 17:51:32.261 ----UserEventInit
+2019-07-26 17:51:32.362 ----BleConditionInit
+2019-07-26 17:51:32.465 ----NotityEventInit
+2019-07-26 17:51:32.868 !!! isBleConnected: 0
+2019-07-26 17:51:32.971 !!! no notify
+2019-07-26 17:51:33.473 ResetConditionDetected:1
+2019-07-26 17:51:34.077 ResetConditionDetected:2
+2019-07-26 17:51:34.681 !!! isBleConnected: 1
+2019-07-26 17:51:34.784 !!!  notify
+2019-07-26 17:51:39.504 ResetConditionDetected:3
+2019-07-26 17:51:45.534 ResetConditionDetected:4
+2019-07-26 17:51:51.559 ResetConditionDetected:5
+2019-07-26 17:51:57.584 ResetConditionDetected:6
+2019-07-26 17:52:03.611 ResetConditionDetected:7
+2019-07-26 17:52:03.713 !!! isBleConnected: 0
+2019-07-26 17:52:03.816 !!! no notify
+2019-07-26 17:52:04.218 !!! isBleConnected: 1
+2019-07-26 17:52:04.321 !!!  notify
+2019-07-26 17:52:09.648 ResetConditionDetected:8
+2019-07-26 17:52:10.252 ResetConditionDetected:9
+2019-07-26 17:52:10.857 ResetConditionDetected:10
+2019-07-26 17:52:15.681 ResetConditionDetected:11
+2019-07-26 17:52:16.286 ResetConditionDetected:12
+2019-07-26 17:52:16.891 ResetConditionDetected:13
+2019-07-26 17:52:22.319 ResetConditionDetected:14
+2019-07-26 17:52:22.421 !!! isBleConnected: 0
+2019-07-26 17:52:22.522 !!! no notify
+2019-07-26 17:52:22.925 ResetConditionDetected:15
+2019-07-26 17:52:23.530 !!! isBleConnected: 1
+2019-07-26 17:52:23.632 !!!  notify
+2019-07-26 17:52:28.359 ResetConditionDetected:16
+2019-07-26 17:52:28.963 ResetConditionDetected:17
+2019-07-26 17:52:34.391 ResetConditionDetected:18
+2019-07-26 17:52:34.997 ResetConditionDetected:19
+2019-07-26 17:52:40.421 ResetConditionDetected:20
+2019-07-26 17:52:40.524 Reset: ResetByUser
+2019-07-26 17:52:40.626 !!! isBleConnected: 0
+2019-07-26 17:52:40.728 !!! no notify
+2019-07-26 17:52:41.635 ----UserEventInit
+2019-07-26 17:52:41.738 ----BleConditionInit
+2019-07-26 17:52:41.840 ----NotityEventInit
+2019-07-26 17:52:46.463 ResetConditionDetected:1
+2019-07-26 17:52:47.068 ResetConditionDetected:2
+2019-07-26 17:52:47.670 !!! isBleConnected: 1
+2019-07-26 17:52:47.773 !!!  notify
+2019-07-26 17:52:52.495 ResetConditionDetected:3
+2019-07-26 17:52:53.100 ResetConditionDetected:4
+2019-07-26 17:52:58.527 ResetConditionDetected:5
+2019-07-26 17:52:59.132 ResetConditionDetected:6
+2019-07-26 17:52:59.737 ResetConditionDetected:7
+2019-07-26 17:53:04.560 ResetConditionDetected:8
+2019-07-26 17:53:05.165 ResetConditionDetected:9
+2019-07-26 17:53:05.266 !!! isBleConnected: 0
+2019-07-26 17:53:05.369 !!! no notify
+2019-07-26 17:53:05.771 ResetConditionDetected:10
+2019-07-26 17:53:06.375 !!! isBleConnected: 1
+2019-07-26 17:53:06.478 !!!  notify
+2019-07-26 17:53:11.201 ResetConditionDetected:11
+2019-07-26 17:53:11.805 ResetConditionDetected:12
+2019-07-26 17:53:17.228 ResetConditionDetected:13
+2019-07-26 17:53:17.832 ResetConditionDetected:14
+2019-07-26 17:53:23.254 ResetConditionDetected:15
+2019-07-26 17:53:23.356 !!! isBleConnected: 0
+2019-07-26 17:53:23.458 !!! no notify
+2019-07-26 17:53:23.862 ResetConditionDetected:16
+2019-07-26 17:53:24.467 !!! isBleConnected: 1
+2019-07-26 17:53:24.569 !!!  notify
+2019-07-26 17:53:29.292 ResetConditionDetected:17
+2019-07-26 17:53:29.895 ResetConditionDetected:18
+2019-07-26 17:53:35.320 ResetConditionDetected:19
+2019-07-26 17:53:35.923 ResetConditionDetected:20
+2019-07-26 17:53:36.026 Reset: ResetByUser
+2019-07-26 17:53:37.132 ----UserEventInit
+2019-07-26 17:53:37.234 ----BleConditionInit
+2019-07-26 17:53:37.336 ----NotityEventInit
+2019-07-26 17:53:37.741 !!! isBleConnected: 0
+2019-07-26 17:53:37.843 !!! no notify
+2019-07-26 17:53:41.360 ResetConditionDetected:1
+2019-07-26 17:53:41.964 ResetConditionDetected:2
+2019-07-26 17:53:42.570 !!! isBleConnected: 1
+2019-07-26 17:53:42.671 !!!  notify
+2019-07-26 18:06:46.971 hello I am string debug 
+2019-07-26 18:06:48.280 ----UserEventInit
+2019-07-26 18:06:48.383 ----BleConditionInit
+2019-07-26 18:06:48.483 ----NotityEventInit
+2019-07-26 18:06:48.887 !!! isBleConnected: 0
+2019-07-26 18:06:48.989 !!! no notify
+2019-07-26 18:06:51.301 ResetConditionDetected:1
+2019-07-26 18:06:51.907 ResetConditionDetected:2
+2019-07-26 18:06:52.511 !!! isBleConnected: 1
+2019-07-26 18:06:52.613 !!!  notify
+2019-07-26 18:06:52.715 !!!  key_notify 0
+2019-07-26 18:06:52.818 !!!  AirMouse_notify 0
+2019-07-26 18:06:52.921 !!!  PenTip_notify 0
+2019-07-26 18:06:53.023 !!!  Color_notify 0
+2019-07-26 18:06:53.125 !!!  PenType_notify 0
+2019-07-26 18:06:53.227 !!!  Battery_notify 0
+2019-07-26 18:06:57.349 ResetConditionDetected:3
+2019-07-26 18:06:57.954 ResetConditionDetected:4
+2019-07-26 18:06:58.558 ResetConditionDetected:5
