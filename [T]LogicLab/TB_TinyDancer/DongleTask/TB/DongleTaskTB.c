@@ -1,4 +1,5 @@
 #include "DongleTaskTB.h"
+#include "..\DongleTask.h"
 #include "..\..\..\UserDebug.h"
 #include "..\..\..\..\CommonSource\StateMachine\StateMachine.h"
 #include "..\..\..\ScriptsCommandModule\HexCommand.h"
@@ -118,6 +119,9 @@ static X_Boolean ScriptsFunctionInitial(X_Void * p_param)
 	ResetUserEventState();
 	ResetBleConditionState();
 	ResetNotifyEventState();
+
+	DongleTaskInit();
+
 	return X_True;
 }
 static X_Boolean EventGenerator(X_Void * p_param)

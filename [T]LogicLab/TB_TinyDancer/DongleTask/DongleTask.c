@@ -33,14 +33,17 @@
 //	app_timer_start(main_tick, APP_TIMER_TICKS(DONGLE_TASK_INTERVAL_IN_MS),X_Null);
 //}
 
+static X_Boolean isInit = X_False;
+
 X_Void DongleTaskInit(X_Void)
 {
 //	ButtonInitialize();
 	DataFlowInit();
 //	BasicUsbInit();
 //	app_timer_create(&main_tick, APP_TIMER_MODE_REPEATED, onTick);
+	isInit = X_True;
 }
 X_Void onTick(X_Void)
 {
-
+	if(isInit == X_False) {return;}
 }
