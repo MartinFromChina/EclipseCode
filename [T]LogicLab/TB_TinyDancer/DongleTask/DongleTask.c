@@ -45,10 +45,15 @@ X_Void DongleTaskInit(X_Void)
 //	app_timer_create(&main_tick, APP_TIMER_MODE_REPEATED, onTick);
 	isInit = X_True;
 }
+
+static uint8_t airmouse_buf[CHAR_AIRMOUSE_LENGTH] = {0};
+
 X_Void onTick(X_Void)
 {
 	if(isInit == X_False) {return;}
 
+	airmouse_buf[0] = airmouse_buf[0] + 1;
+	DataFlowPush(CharAirMouseEntry,airmouse_buf,CHAR_AIRMOUSE_LENGTH);
 	if(DataFlowPop(CharAirMouseEntry,&p_data,&length) == X_True)
 	{
 		SEGGER_RTT_Debug(NOTITY_DEBUG,(USER_MAX_STRING_LENGTH,"length:%d data:%2x %2x\r\n",length,p_data[0],p_data[1]));

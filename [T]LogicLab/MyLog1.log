@@ -1,6 +1,102 @@
-2019-07-27 19:47:19.693 hello I am string debug 
-2019-07-27 19:47:21.103 ----NotityEventInit
-2019-07-27 19:47:21.740 !!! no notify
-2019-07-27 19:47:24.360 --------------  notify 30
-2019-07-27 19:47:24.463 !!!  PenType_notify 1
-2019-07-27 19:47:24.572 !!!  Battery_notify 1
+2019-07-28 00:00:58.314 hello I am string debug 
+2019-07-28 00:00:59.079 DataFlowPush 3 buf_number 0 
+2019-07-28 00:00:59.729 DataFlowPush 3 buf_number 1 
+2019-07-28 00:01:00.381 DataFlowPush 3 buf_number 2 
+2019-07-28 00:01:01.040 DataFlowPush 3 buf_number 3 
+2019-07-28 00:01:01.682 DataFlowPush 3 buf_number 4 
+2019-07-28 00:01:02.342 DataFlowPush 3 buf_number 0 
+2019-07-28 00:01:02.984 DataFlowPush 3 buf_number 1 
+2019-07-28 00:01:03.644 DataFlowPush 3 buf_number 2 
+2019-07-28 00:01:04.296 DataFlowPush 3 buf_number 3 
+2019-07-28 00:01:04.956 DataFlowPush 3 buf_number 4 
+2019-07-28 00:01:05.608 DataFlowPush 3 buf_number 0 
+2019-07-28 00:01:06.268 DataFlowPush 3 buf_number 1 
+2019-07-28 00:01:06.930 DataFlowPush 3 buf_number 2 
+2019-07-28 00:01:07.590 DataFlowPush 3 buf_number 3 
+2019-07-28 00:01:08.234 DataFlowPush 3 buf_number 4 
+2019-07-28 00:01:08.894 DataFlowPush 3 buf_number 0 
+2019-07-28 00:01:09.537 DataFlowPush 3 buf_number 1 
+2019-07-28 00:01:10.197 DataFlowPush 3 buf_number 2 
+2019-07-28 00:01:10.849 DataFlowPush 3 buf_number 3 
+2019-07-28 00:01:11.509 DataFlowPush 3 buf_number 4 
+2019-07-28 00:01:12.151 DataFlowPush 3 buf_number 0 
+2019-07-28 00:01:12.811 DataFlowPush 3 buf_number 1 
+2019-07-28 00:01:13.452 DataFlowPush 3 buf_number 2 
+2019-07-28 00:01:14.092 DataFlowPush 3 buf_number 3 
+2019-07-28 00:02:07.820 hello I am string debug 
+2019-07-28 00:02:08.570 DataFlowPush 3 buf_number 0 
+2019-07-28 00:02:08.680 DataFlowPop 3 buf_number 0
+2019-07-28 00:02:09.230 DataFlowPush 3 buf_number 1 
+2019-07-28 00:02:09.332 DataFlowPop 3 buf_number 1
+2019-07-28 00:02:09.882 DataFlowPush 3 buf_number 2 
+2019-07-28 00:02:09.992 DataFlowPop 3 buf_number 2
+2019-07-28 00:02:10.542 DataFlowPush 3 buf_number 3 
+2019-07-28 00:02:10.645 DataFlowPop 3 buf_number 3
+2019-07-28 00:02:11.185 DataFlowPush 3 buf_number 4 
+2019-07-28 00:02:11.295 DataFlowPop 3 buf_number 4
+2019-07-28 00:02:11.845 DataFlowPush 3 buf_number 0 
+2019-07-28 00:02:11.957 DataFlowPop 3 buf_number 0
+2019-07-28 00:02:12.507 DataFlowPush 3 buf_number 1 
+2019-07-28 00:02:12.617 DataFlowPop 3 buf_number 1
+2019-07-28 00:02:13.157 DataFlowPush 3 buf_number 2 
+2019-07-28 00:02:13.269 DataFlowPop 3 buf_number 2
+2019-07-28 00:02:13.819 DataFlowPush 3 buf_number 3 
+2019-07-28 00:02:36.389 hello I am string debug 
+2019-07-28 00:02:37.159 DataFlowPush 3 buf_number 0 
+2019-07-28 00:02:37.269 DataFlowPop 3 buf_number 0
+2019-07-28 00:02:37.809 DataFlowPush 3 buf_number 1 
+2019-07-28 00:02:37.921 DataFlowPop 3 buf_number 1
+2019-07-28 00:02:38.471 DataFlowPush 3 buf_number 2 
+2019-07-28 00:02:38.581 DataFlowPop 3 buf_number 2
+2019-07-28 00:02:39.131 DataFlowPush 3 buf_number 3 
+2019-07-28 00:02:39.233 DataFlowPop 3 buf_number 3
+2019-07-28 00:03:07.208 hello I am string debug 
+2019-07-28 00:03:07.958 DataFlowPush 3 buf_number 0 
+2019-07-28 00:03:08.068 DataFlowPop 3 buf_number 0 40e200
+2019-07-28 00:03:08.618 DataFlowPush 3 buf_number 1 
+2019-07-28 00:03:08.720 DataFlowPop 3 buf_number 1 40e215
+2019-07-28 00:03:09.270 DataFlowPush 3 buf_number 2 
+2019-07-28 00:03:09.380 DataFlowPop 3 buf_number 2 40e22a
+2019-07-28 00:03:09.930 DataFlowPush 3 buf_number 3 
+2019-07-28 00:03:10.042 DataFlowPop 3 buf_number 3 40e23f
+2019-07-28 00:03:10.582 DataFlowPush 3 buf_number 4 
+2019-07-28 00:03:10.692 DataFlowPop 3 buf_number 4 40e254
+2019-07-28 00:03:11.242 DataFlowPush 3 buf_number 0 
+2019-07-28 00:03:11.354 DataFlowPop 3 buf_number 0 40e200
+2019-07-28 00:03:11.904 DataFlowPush 3 buf_number 1 
+2019-07-28 00:03:12.014 DataFlowPop 3 buf_number 1 40e215
+2019-07-28 00:03:12.534 DataFlowPush 3 buf_number 2 
+2019-07-28 00:03:12.636 DataFlowPop 3 buf_number 2 40e22a
+2019-07-28 00:03:13.176 DataFlowPush 3 buf_number 3 
+2019-07-28 00:03:13.286 DataFlowPop 3 buf_number 3 40e23f
+2019-07-28 00:03:13.836 DataFlowPush 3 buf_number 4 
+2019-07-28 00:03:13.948 DataFlowPop 3 buf_number 4 40e254
+2019-07-28 00:03:14.498 DataFlowPush 3 buf_number 0 
+2019-07-28 00:03:14.608 DataFlowPop 3 buf_number 0 40e200
+2019-07-28 00:03:15.151 DataFlowPush 3 buf_number 1 
+2019-07-28 00:03:15.263 DataFlowPop 3 buf_number 1 40e215
+2019-07-28 00:03:15.813 DataFlowPush 3 buf_number 2 
+2019-07-28 00:03:15.922 DataFlowPop 3 buf_number 2 40e22a
+2019-07-28 00:04:22.323 hello I am string debug 
+2019-07-28 00:04:23.076 DataFlowPush 3 buf_number 0 
+2019-07-28 00:04:23.185 length:0 data: 1  0
+2019-07-28 00:04:23.736 DataFlowPush 3 buf_number 1 
+2019-07-28 00:04:23.838 length:0 data: 2  0
+2019-07-28 00:04:24.378 DataFlowPush 3 buf_number 2 
+2019-07-28 00:04:24.488 length:0 data: 3  0
+2019-07-28 00:04:25.038 DataFlowPush 3 buf_number 3 
+2019-07-28 00:04:25.141 length:0 data: 4  0
+2019-07-28 00:04:25.691 DataFlowPush 3 buf_number 4 
+2019-07-28 00:04:25.800 length:0 data: 5  0
+2019-07-28 00:04:26.351 DataFlowPush 3 buf_number 0 
+2019-07-28 00:04:26.453 length:0 data: 6  0
+2019-07-28 00:04:27.003 DataFlowPush 3 buf_number 1 
+2019-07-28 00:04:27.113 length:0 data: 7  0
+2019-07-28 00:04:27.663 DataFlowPush 3 buf_number 2 
+2019-07-28 00:04:27.775 length:0 data: 8  0
+2019-07-28 00:04:28.315 DataFlowPush 3 buf_number 3 
+2019-07-28 00:04:28.425 length:0 data: 9  0
+2019-07-28 00:04:28.955 DataFlowPush 3 buf_number 4 
+2019-07-28 00:04:29.067 length:0 data: a  0
+2019-07-28 00:04:29.597 DataFlowPush 3 buf_number 0 
+2019-07-28 00:04:29.707 length:0 data: b  0

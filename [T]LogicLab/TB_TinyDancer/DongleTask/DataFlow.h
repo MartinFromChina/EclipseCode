@@ -5,11 +5,11 @@
 
 typedef enum
 {
-	CommandGetEntry,
-	CommandSetEntry,
-	CharKeyEntry,
-	CharAirMouseEntry,
-	CharPenTipEntry,
+	CommandGetEntry = 0,  //
+	CommandSetEntry,   //
+	CharKeyEntry,    //  can be lose
+	CharAirMouseEntry, //  can be lose
+	CharPenTipEntry, //  can be lose
 	CharColorEntry,
 	CharPenTypeEntry,
 	CharBatteryEntry,

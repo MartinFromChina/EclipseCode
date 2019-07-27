@@ -164,7 +164,7 @@ static StateNumber ConditionDetectedAction(StateNumber current_state)
 		SEGGER_RTT_Debug_Once(NOTITY_DEBUG,p_notify,2,(40,"--------------  notify %2x\r\n",current_num));
 		NotityEventUpData(current_num);
 
-		AirMouseNotifyHandle();
+//		AirMouseNotifyHandle();
 
 		SEGGER_RTT_Debug_Once(NOTITY_DEBUG,p_key		,sNE.isKeyNotify		,(30,"!!!  key_notify %d\r\n",sNE.isKeyNotify));
 
