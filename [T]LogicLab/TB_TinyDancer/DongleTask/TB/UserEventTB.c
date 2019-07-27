@@ -8,10 +8,10 @@ static uint32_t  ResetConditionDetectedTimes = 0;
 static uint32_t current_num = 0;
 
 static _sCommandMap const CommandMap[]= {
-		{0,SuddenlyPowerOff		,"SuddenlyPowerOff"	},
-		{1,ResetByWatchDog		,"ResetByWatchDog"  },
-		{2,ResetByUser			,"ResetByUser"		},
-		{3,HardFault			,"HardFault"		},
+		{0,SuddenlyPowerOff		,0,"SuddenlyPowerOff"	},
+		{1,ResetByWatchDog		,0,"ResetByWatchDog"  },
+		{2,ResetByUser			,0,"ResetByUser"		},
+		{3,HardFault			,0,"HardFault"		},
 };
 
 typedef enum

@@ -3,22 +3,23 @@
 #include "..\..\..\UserDebug.h"
 #include "..\..\..\..\CommonSource\StateMachine\StateMachine.h"
 #include "..\..\..\..\CommonSource\AppCommon.h"
+#include "..\..\..\..\CommonSource\Math\random_number.h"
 #include "..\DataFlow.h"
 
-static uint8_t get_buf[MAX_DATA_LENGTH];
-static uint8_t set_buf[MAX_DATA_LENGTH];
+static uint8_t get_buf[MAX_DATA_LENGTH]= {0x02,0x01};
+static uint8_t set_buf[MAX_DATA_LENGTH]= {0x03,0x00,0x00,0x00};
 
 static _sCommandMap const CommandMap[]= {
-		{0,SetTestMode			,"SetTestMode"				},
-		{1,SetReportBleState	,"SetReportBleState"  	 	},
-		{2,SetReportProductType	,"SetReportProductType"		},
-		{3,SetReportInformation	,"SetReportInformation"		},
-		{4,SetKeyValueMap		,"SetKeyValueMap"			},
-		{5,SetClearWhiteList	,"SetClearWhiteList"		},
-		{6,SetUserID			,"SetUserID"				},
-		{7,	SetPenType			,"SetPenType"				},
-		{8,	SetColor			,"SetColor"					},
-		{9,SetEnableHidDevice	,"SetEnableHidDevice"		},
+		{0,SetTestMode			,3		,"SetTestMode"				},//3
+		{1,SetReportBleState	,3		,"SetReportBleState"  	 	},//3
+		{2,SetReportProductType	,3		,"SetReportProductType"		},//3
+		{3,SetReportInformation	,4		,"SetReportInformation"		},//4
+		{4,SetKeyValueMap		,15		,"SetKeyValueMap"			},//15
+		{5,SetClearWhiteList	,3		,"SetClearWhiteList"		},//3
+		{6,SetUserID			,13		,"SetUserID"				},//13
+		{7,	SetPenType			,5		,"SetPenType"				},//5
+		{8,	SetColor			,6		,"SetColor"					},//6
+		{9,SetEnableHidDevice	,4		,"SetEnableHidDevice"		},//4
 
 };
 
@@ -41,7 +42,14 @@ static StateNumber SetFeatureAction(StateNumber current_state)
 
 	if(current_num % 3 == 0)
 	{
+		current_num = GetRandomNumber(0,12);
+		if(current_num > 9) {current_num = 0;}
 		SEGGER_RTT_Debug(USB_FEATURE_DEBUG,(43,"SetFeatureAction %s\r\n",CommandMap[current_num % 10].p_char));
+
+		set_buf[0] = CommandMap[current_num % 10].command_length;
+		set_buf[1] = CommandMap[current_num % 10].command;
+
+		DataFlowPush(CommandSetEntry,set_buf,set_buf[0]);
 		if(DelayCounter == 0) {return GetFeature;}
 		else {return FeatureDelay;}
 	}
@@ -56,6 +64,7 @@ static StateNumber FeatureDelayAction(StateNumber current_state)
 static StateNumber GetFeatureAction(StateNumber current_state)
 {
 	SEGGER_RTT_Debug(USB_FEATURE_DEBUG,(30,"GetFeatureAction\r\n"));
+	DataFlowPush(CommandGetEntry,get_buf,get_buf[0]);
 	return SetFeature;
 }
 

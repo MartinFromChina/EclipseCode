@@ -7,6 +7,7 @@
 typedef struct {
 	uint8_t number;
 	uint8_t command;
+	uint8_t command_length;
 	char *  p_char;
 }_sCommandMap;
 
