@@ -4,6 +4,7 @@
 #include "..\..\..\..\CommonSource\StateMachine\StateMachine.h"
 #include "..\..\..\..\CommonSource\Math\bit_operation.h"
 #include "..\..\..\..\CommonSource\Math\random_number.h"
+#include "..\DataFlow.h"
 
 typedef enum
 {
@@ -40,14 +41,15 @@ static X_Boolean isBleConnect = X_False;
 static uint8_t current_num = 0,delay_counter = 0;
 static sNotifyEvent sNE;
 
-//static _sCommandMap const CommandMap[]= {
-//		{0,KeyNotify		,"KeyNotify"		},
-//		{1,AirMouseNotify	,"AirMouseNotify"  	},
-//		{2,PenTipNotify		,"PenTipNotify"		},
-//		{3,ColorNotify		,"ColorNotify"		},
-//		{4,PenTypeNotify	,"PenTypeNotify"	},
-//		{5,BatteryNotify	,"BatteryNotify"	},
-//};
+static uint8_t get_buf[MAX_DATA_LENGTH];
+static uint8_t set_buf[MAX_DATA_LENGTH];
+
+static uint8_t key_buf[CHAR_KEY_LENGTH];
+static uint8_t pentip_buf[CHAR_PENTIP_LENGTH];
+static uint8_t airmouse_buf[CHAR_AIRMOUSE_LENGTH];
+static uint8_t color_buf[CHAR_COLOR_LENGTH];
+static uint8_t pentype_buf[CHAR_PENTYPE_LENGTH];
+static uint8_t battery_buf[CHAR_BATTERY_LENGTH];
 
 typedef enum
 {
@@ -75,6 +77,37 @@ static X_Void NotityEventDebugReset(X_Void)
 	*p_battery  = 0;
 }
 
+static X_Void BufInit(uint8_t *p_buf,uint8_t length,uint8_t init_value)
+{
+	uint8_t i;
+	for(i = 0;i<length;i++)
+	{
+		p_buf[i] = init_value;
+	}
+}
+
+static uint8_t get_buf[MAX_DATA_LENGTH];
+static uint8_t set_buf[MAX_DATA_LENGTH];
+
+static uint8_t key_buf[CHAR_KEY_LENGTH];
+static uint8_t pentip_buf[CHAR_PENTIP_LENGTH];
+static uint8_t airmouse_buf[CHAR_AIRMOUSE_LENGTH];
+static uint8_t color_buf[CHAR_COLOR_LENGTH];
+static uint8_t pentype_buf[CHAR_PENTYPE_LENGTH];
+static uint8_t battery_buf[CHAR_BATTERY_LENGTH];
+
+static X_Void AllBufInit(X_Void)
+{
+	BufInit(get_buf			,MAX_DATA_LENGTH		,0);
+	BufInit(set_buf			,MAX_DATA_LENGTH		,0);
+	BufInit(key_buf			,CHAR_KEY_LENGTH		,0);
+	BufInit(pentip_buf		,CHAR_PENTIP_LENGTH		,0);
+	BufInit(airmouse_buf	,CHAR_AIRMOUSE_LENGTH	,0);
+	BufInit(color_buf		,CHAR_COLOR_LENGTH		,0);
+	BufInit(pentype_buf		,CHAR_PENTYPE_LENGTH	,0);
+	BufInit(battery_buf		,CHAR_BATTERY_LENGTH	,0);
+}
+
 static X_Void NotityEventUpData(uint8_t random_num)
 {
 	sNE.isKeyNotify	 		= byte_getbit(random_num,0) ;
@@ -85,12 +118,30 @@ static X_Void NotityEventUpData(uint8_t random_num)
 	sNE.isBatteryNotify 	= byte_getbit(random_num,5) ;
 }
 
+static X_Void AirMouseNotifyHandle(X_Void)
+{
+	SEGGER_RTT_Debug_Once(NOTITY_DEBUG,p_airmouse	,sNE.isAirMouseNotify	,(30,"!!!  AirMouse_notify %d\r\n",sNE.isAirMouseNotify));
+	if(isBleConnect == X_False)
+	{
+		DataFlowClear(CharAirMouseEntry);
+		return;
+	}
+
+	if(sNE.isAirMouseNotify == 1)
+	{
+		airmouse_buf[0] = airmouse_buf[0] + 1;
+		DataFlowPush(CharAirMouseEntry,airmouse_buf,CHAR_AIRMOUSE_LENGTH);
+	}
+}
+
 static StateNumber IdleAction(StateNumber current_state)
 {
 	SEGGER_RTT_Debug(NOTITY_DEBUG,(30,"----NotityEventInit\r\n"));
 	current_num = 0;
 	delay_counter = 8;
 	isBleConnect = X_False;
+
+	AllBufInit();
 	NotityEventReset();
 
 	return ConditionDetected;
@@ -113,8 +164,10 @@ static StateNumber ConditionDetectedAction(StateNumber current_state)
 		SEGGER_RTT_Debug_Once(NOTITY_DEBUG,p_notify,2,(40,"--------------  notify %2x\r\n",current_num));
 		NotityEventUpData(current_num);
 
+		AirMouseNotifyHandle();
+
 		SEGGER_RTT_Debug_Once(NOTITY_DEBUG,p_key		,sNE.isKeyNotify		,(30,"!!!  key_notify %d\r\n",sNE.isKeyNotify));
-		SEGGER_RTT_Debug_Once(NOTITY_DEBUG,p_airmouse	,sNE.isAirMouseNotify	,(30,"!!!  AirMouse_notify %d\r\n",sNE.isAirMouseNotify));
+
 		SEGGER_RTT_Debug_Once(NOTITY_DEBUG,p_pentip		,sNE.isPenTipNotify		,(30,"!!!  PenTip_notify %d\r\n",sNE.isPenTipNotify));
 		SEGGER_RTT_Debug_Once(NOTITY_DEBUG,p_color		,sNE.isColorNotify		,(30,"!!!  Color_notify %d\r\n",sNE.isColorNotify));
 		SEGGER_RTT_Debug_Once(NOTITY_DEBUG,p_pentype	,sNE.isPenTypeNotify	,(30,"!!!  PenType_notify %d\r\n",sNE.isPenTypeNotify));

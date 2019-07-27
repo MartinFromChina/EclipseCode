@@ -1,16 +1,9 @@
 #include "DataFlow.h"
 #include "..\..\UserDebug.h"
 #include "..\..\..\CommonSource\MulLoopQueue\mul_loop_queues.h"
+#include "..\..\..\CommonSource\AppCommon.h"
 
-#define MAX_DATA_LENGTH   30
 #define BUF_NUM_DEFAULT   5
-
-#define CHAR_KEY_LENGTH				1
-#define CHAR_PENTIP_LENGTH			11
-#define CHAR_AIRMOUSE_LENGTH		20
-#define CHAR_COLOR_LENGTH			3
-#define CHAR_PENTYPE_LENGTH			1
-#define CHAR_BATTERY_LENGTH			1
 
 static uint8_t get_buf[BUF_NUM_DEFAULT][MAX_DATA_LENGTH+1];
 static uint8_t set_buf[BUF_NUM_DEFAULT][MAX_DATA_LENGTH+1];
@@ -42,8 +35,8 @@ X_Boolean DataFlowPush(DataFlowEntry entry,const uint8_t * p_data,uint8_t length
 	buf_number = QueueFirstIn(p_airmouse_manager,&isOK,X_False);
 	if(isOK == X_False) {return X_False;}
 	
-//	CopyBuffer(p_data,&airmouse_buf[buf_number][0],length);
-	 airmouse_buf[buf_number][MAX_DATA_LENGTH]= length;
+	CopyBuffer(p_data,&airmouse_buf[buf_number][0],length);
+	airmouse_buf[buf_number][MAX_DATA_LENGTH]= length;
 	return X_True;
 }
 
@@ -58,8 +51,13 @@ X_Boolean DataFlowPop(DataFlowEntry entry,uint8_t ** p_data,uint8_t* length)
 	if(isOK == X_False) {return X_False;}
 	
 	*length 	= airmouse_buf[buf_number][MAX_DATA_LENGTH];
-	* p_data 	= &airmouse_buf[buf_number][0];
+	*p_data 	= &airmouse_buf[buf_number][0];
 	return X_True;
+}
+
+X_Void DataFlowClear(DataFlowEntry entry)
+{
+	//
 }
 
 X_Void DataFlowInit(X_Void)

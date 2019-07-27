@@ -5,6 +5,6 @@
 #define USB_FEATURE_DEBUG     0
 #define USER_EVENT_DEBUG      0
 #define BLE_CONDITION_DEBUG   0
-#define NOTITY_DEBUG   		  0
+#define NOTITY_DEBUG   		  1
 
 #endif

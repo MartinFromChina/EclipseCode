@@ -64,7 +64,7 @@ static StateNumber BleEventHandleAction(StateNumber current_state)
 static StateNumber NotifyEventHandleAction(StateNumber current_state)
 {
 	CharacteristicNotifyEventHandle(isBleConnected);
-	return 0;
+	return GetRandomNum;
 }
 
 static const StateAction SimpleStateAction[5] = {
@@ -81,7 +81,7 @@ APP_SIMPLE_STATE_MACHINE_DEF(p_simple_state,5,5,&SimpleStateAction[0]);
 static X_Void StateJumpRecorder(StateNumber current_state,StateNumber next_state)
 {
 	// going to jump new state:state_num
-//	SEGGER_RTT_Debug(DONGLE_SCRIPT_DEBUG,(USER_MAX_STRING_LENGTH,"current:%d \r\n",current_state));
+	SEGGER_RTT_Debug(DONGLE_SCRIPT_DEBUG,(USER_MAX_STRING_LENGTH,"current:%d \r\n",current_state));
 }
 static X_Boolean DoesBreakSimple(const StateSimpleParam *p_sbp,StateNumber nextstate,uint16_t loop_counter)
 {

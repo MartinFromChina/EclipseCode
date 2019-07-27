@@ -34,6 +34,8 @@
 //}
 
 static X_Boolean isInit = X_False;
+static uint8_t *p_data;
+static uint8_t length;
 
 X_Void DongleTaskInit(X_Void)
 {
@@ -46,4 +48,9 @@ X_Void DongleTaskInit(X_Void)
 X_Void onTick(X_Void)
 {
 	if(isInit == X_False) {return;}
+
+	if(DataFlowPop(CharAirMouseEntry,&p_data,&length) == X_True)
+	{
+		SEGGER_RTT_Debug(NOTITY_DEBUG,(USER_MAX_STRING_LENGTH,"length:%d data:%2x %2x\r\n",length,p_data[0],p_data[1]));
+	}
 }
