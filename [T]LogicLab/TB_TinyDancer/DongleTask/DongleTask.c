@@ -48,9 +48,17 @@ X_Void DongleTaskInit(X_Void)
 
 X_Void onTick(X_Void)
 {
+	uint8_t i;
 	if(isInit == X_False) {return;}
-	if(DataFlowPop(CharAirMouseEntry,&p_data,&length) == X_True)
+
+	for(i = 0;i<EntryMaxNumber;i++)
 	{
-		SEGGER_RTT_Debug(DATA_FLOW_DEBUG,(USER_MAX_STRING_LENGTH,"length:%d data:%2x %2x\r\n",length,p_data[0],p_data[1]));
+		if(DataFlowPop((DataFlowEntry)i,&p_data,&length) == X_True)
+		{
+			SEGGER_RTT_Debug((DATA_FLOW_DEBUG && (GetDebugFlag(i) == 1)),(USER_MAX_STRING_LENGTH," %s :data:%2x %2x \r\n"
+												,EventStringGet(i),p_data[0],p_data[1]));
+		}
 	}
+
+
 }

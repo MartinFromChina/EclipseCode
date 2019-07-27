@@ -146,8 +146,6 @@ X_Boolean DataFlowPush(DataFlowEntry entry,const uint8_t * p_data,uint8_t length
 	if(buf_length == 0 || buf_pointer == X_Null) {return X_False;}
 	if(length > buf_length) {return X_False;}
 
-	SEGGER_RTT_Debug(DATA_FLOW_DEBUG,(40,"DataFlowPush %d buf_number %d \r\n",entry,buf_number));
-
 	CopyBuffer(p_data,buf_pointer,length);
 	buf_pointer[buf_length]= length;
 	return X_True;

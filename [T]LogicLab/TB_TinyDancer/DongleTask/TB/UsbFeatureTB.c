@@ -2,6 +2,11 @@
 #include "DongleTaskTB.h"
 #include "..\..\..\UserDebug.h"
 #include "..\..\..\..\CommonSource\StateMachine\StateMachine.h"
+#include "..\..\..\..\CommonSource\AppCommon.h"
+#include "..\DataFlow.h"
+
+static uint8_t get_buf[MAX_DATA_LENGTH];
+static uint8_t set_buf[MAX_DATA_LENGTH];
 
 static _sCommandMap const CommandMap[]= {
 		{0,SetTestMode			,"SetTestMode"				},

@@ -13,6 +13,7 @@ typedef enum
 	CharColorEntry,
 	CharPenTypeEntry,
 	CharBatteryEntry,
+	EntryMaxNumber,
 }DataFlowEntry;
 
 #define CHAR_KEY_LENGTH				3

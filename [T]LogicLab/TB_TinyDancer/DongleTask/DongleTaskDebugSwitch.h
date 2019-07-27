@@ -8,4 +8,13 @@
 #define NOTITY_DEBUG   		  0
 #define DATA_FLOW_DEBUG       1
 
+#define DATA_FLOW_GET_DEBUG         0
+#define DATA_FLOW_SET_DEBUG         0
+#define DATA_FLOW_KEY_DEBUG   		0
+#define DATA_FLOW_PENTIP_DEBUG   	0
+#define DATA_FLOW_AIRMOUSE_DEBUG   	1
+#define DATA_FLOW_COLOR_DEBUG   	0
+#define DATA_FLOW_PENTYPE_DEBUG   	0
+#define DATA_FLOW_BATTERY_DEBUG   	1
+
 #endif

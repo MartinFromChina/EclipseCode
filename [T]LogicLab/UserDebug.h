@@ -20,6 +20,9 @@ SEGGER_RTT_Debug_Counter(flag,entry,counter_ref,message)
 #define SEGGER_RTT_Debug_Counter(flag,entry,counter_ref,message)  	String_Debug_Counter(flag,entry,counter_ref,message)
 
 #include "TB_TinyDancer\DongleTask\DongleTaskDebugSwitch.h"
+
+char *EventStringGet(uint8_t event);
+uint8_t GetDebugFlag(uint8_t number);
 	
 #endif
 
