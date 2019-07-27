@@ -67,7 +67,7 @@ static X_Void SetNodePermitOccupyOrNot(const sListManager *p_manager,uint16_t no
 static uint16_t NodeMoveForward(uint16_t max_node,uint16_t current_node)
 {
 	uint16_t next_node;
-	if(current_node >= max_node)
+	if((current_node+1) >= max_node)
 	{
 		next_node = 0;
 	}
