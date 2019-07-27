@@ -156,6 +156,8 @@ static StateNumber ConditionDetectedAction(StateNumber current_state)
 		delay_counter = 7;
 		return current_state;
 	}
+	AirMouseNotifyHandle();
+
 	if(delay_counter >= 8)
 	{
 		delay_counter = 0;
@@ -163,8 +165,6 @@ static StateNumber ConditionDetectedAction(StateNumber current_state)
 		current_num = GetRandomNumber(0,63);
 		SEGGER_RTT_Debug_Once(NOTITY_DEBUG,p_notify,2,(40,"--------------  notify %2x\r\n",current_num));
 		NotityEventUpData(current_num);
-
-//		AirMouseNotifyHandle();
 
 		SEGGER_RTT_Debug_Once(NOTITY_DEBUG,p_key		,sNE.isKeyNotify		,(30,"!!!  key_notify %d\r\n",sNE.isKeyNotify));
 
