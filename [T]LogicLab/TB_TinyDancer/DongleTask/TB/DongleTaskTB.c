@@ -76,7 +76,10 @@ static const StateAction SimpleStateAction[5] = {
 };
 
 
-APP_SIMPLE_STATE_MACHINE_DEF(p_simple_state,5,5,&SimpleStateAction[0]);
+APP_SIMPLE_STATE_MACHINE_DEF(p_simple_state
+							,sizeof(SimpleStateAction)/sizeof(SimpleStateAction[0])
+							,5
+							,&SimpleStateAction[0]);
 
 static X_Void StateJumpRecorder(StateNumber current_state,StateNumber next_state)
 {

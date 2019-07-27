@@ -64,7 +64,6 @@ X_Void DataFlowInit(X_Void)
 {
 	queueInitialize(p_get		,p_get_manager		,get_buf_num);
 	queueInitialize(p_set		,p_set_manager		,set_buf_num);
-
 	queueInitialize(p_key		,p_key_manager		,key_buf_length);
 	queueInitialize(p_airmouse	,p_airmouse_manager	,airmouse_buf_length);
 	queueInitialize(p_pentip	,p_pentip_manager	,pentip_buf_length);

@@ -84,7 +84,7 @@ static const StateAction SimpleStateAction[5] = {
 		{X_Null},
 };
 
-static X_Boolean DoesBreakSimple(const StateSimpleParam *p_sbp,StateNumber current_state,StateNumber nextstate,uint16_t loop_counter)
+static X_Boolean DoesBreakSimple(const StateSimpleParam *p_sbp,StateNumber nextstate,uint16_t loop_counter)
 {
 	if(loop_counter > 3) {return X_True;}
 	return X_False;
