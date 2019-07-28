@@ -38,6 +38,13 @@ static X_Void UpdataListState( const sListManager *p_manager)
 	}
 	p_manager->p_LMP->state = QueueNormal;
 }
+/*
+static X_Boolean DoesBuffFree(const sListManager *p_manager,uint16_t node_num)
+{
+	if(p_manager == X_Null) {return X_False;}
+	if(node_num >= p_manager->ValidNodeNumber) {return X_False;}
+	return (GetBitMethod(p_manager->p_buf[node_num],isOccupyPermitBitPosition) == 0);
+}*/
 static X_Boolean DoesNodeOccupyPermit(const sListManager *p_manager,uint16_t node_num)
 {
 	if(p_manager == X_Null) {return X_False;}
@@ -116,7 +123,7 @@ uint16_t    SimpleQueueFirstIn(const sListManager *p_manager,X_Boolean *isOK,X_B
 {
 	uint16_t buf_number,current_free_node_number;
 	if(p_manager == X_Null) {return 0;}
-	UpdataListState(p_manager);
+//	UpdataListState(p_manager);
 
 	buf_number = 0;
 	current_free_node_number = p_manager->p_LMP->first_in_node_num;
@@ -163,7 +170,7 @@ uint16_t    SimpleQueueFirstOut(const sListManager *p_manager,X_Boolean *isOK)
 	uint16_t buf_number,current_filled_node_number;
 	if(p_manager == X_Null) {return 0;}
 
-	UpdataListState(p_manager);
+//	UpdataListState(p_manager);
 
 	buf_number = 0;
 	current_filled_node_number = p_manager->p_LMP->first_out_node_num;
@@ -198,5 +205,9 @@ X_Void      ClearSimpleQueue(const sListManager *p_manager)
 X_Boolean   DoesSimpleQueueEmpty(const sListManager *p_manager)
 {
 	return (GetQueueState(p_manager) == QueueEmpty);
+}
+X_Boolean   DoesSimpleQueueFull(const sListManager *p_manager)
+{
+	return (GetQueueState(p_manager) == QueueFull);
 }
 

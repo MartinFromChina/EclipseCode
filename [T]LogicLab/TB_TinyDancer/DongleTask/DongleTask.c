@@ -4,6 +4,7 @@
 #include "DongleTask.h"
 #include "DataFlow.h"
 #include "..\..\UserDebug.h"
+#include "..\..\..\CommonSource\StateMachine\StateMachine.h"
 //#include "button.h"
 //#include "user_usb.h"
 //
@@ -46,11 +47,36 @@ X_Void DongleTaskInit(X_Void)
 	isInit = X_True;
 }
 
+static X_Void AllEventHandle(X_Void);
+
 X_Void onTick(X_Void)
 {
-	uint8_t i;
 	if(isInit == X_False) {return;}
 
+	AllEventHandle();// USB event  ;  BLE event  ;   user event
+}
+
+
+//typedef enum
+//{
+//
+//}
+
+
+
+
+
+
+/* call it three times faster than notify ,so that data buf will not be overwriten
+  consider the worst situation :
+  key ,air mouse ,pentip notify come together , function :AllEventHandle have to sent them out in 7.5ms
+  which means 2.5ms for each notify in USB Interrupt endpoint 3 channel.
+  if not , the queue buf could be full , there is a risk of buf be overwrite by higher interrupt when lower interrupt is using it
+ */
+
+static X_Void AllEventHandle(X_Void)
+{
+	uint8_t i;
 	for(i = 0;i<EntryMaxNumber;i++)
 	{
 		if(DataFlowPop((DataFlowEntry)i,&p_data,&length) == X_True)
@@ -60,5 +86,6 @@ X_Void onTick(X_Void)
 		}
 	}
 
-
 }
+
+

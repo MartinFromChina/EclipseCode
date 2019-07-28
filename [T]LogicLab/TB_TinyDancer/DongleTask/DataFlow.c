@@ -133,7 +133,6 @@ X_Boolean DataFlowPush(DataFlowEntry entry,const uint8_t * p_data,uint8_t length
 	uint8_t buf_number,buf_length;
 
 	if(isInit == X_False) {return X_False;}
-	if(length > MAX_DATA_LENGTH) {return X_False; }
 	if(entry > (sizeof(p_manager_buf)/sizeof(p_manager_buf[0]))) {return X_False;}
 
 	if(entry == CharKeyEntry || entry == CharAirMouseEntry || entry == CharPenTipEntry){isDataCanBeLose = X_True;}
