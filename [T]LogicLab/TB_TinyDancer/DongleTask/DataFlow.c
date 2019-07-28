@@ -135,8 +135,9 @@ X_Boolean DataFlowPush(DataFlowEntry entry,const uint8_t * p_data,uint8_t length
 	if(isInit == X_False) {return X_False;}
 	if(entry > (sizeof(p_manager_buf)/sizeof(p_manager_buf[0]))) {return X_False;}
 
-	if(entry == CharKeyEntry || entry == CharAirMouseEntry || entry == CharPenTipEntry){isDataCanBeLose = X_True;}
-	else{isDataCanBeLose = X_False;}
+//	if(entry == CharKeyEntry || entry == CharAirMouseEntry || entry == CharPenTipEntry){isDataCanBeLose = X_True;}
+//	else{isDataCanBeLose = X_False;}
+	isDataCanBeLose = X_False;
 
 	buf_number = SimpleQueueFirstIn(p_manager_buf[entry],&isOK,isDataCanBeLose);
 	if(isOK == X_False) {return X_False;}

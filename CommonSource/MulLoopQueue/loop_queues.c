@@ -142,7 +142,7 @@ uint16_t    SimpleQueueFirstIn(const sListManager *p_manager,X_Boolean *isOK,X_B
 		break;
 		case QueueFull:
 
-			if(DoesNodeOccupyPermit(p_manager,current_free_node_number) == X_True)
+			if(DoesNodeOccupyPermit(p_manager,current_free_node_number) == X_True )
 			{
 				NodeNumberInMoveForward(p_manager);
 				NodeNumberOutMoveForward(p_manager);
@@ -184,7 +184,6 @@ uint16_t    SimpleQueueFirstOut(const sListManager *p_manager,X_Boolean *isOK)
 		case QueueFull:
 			//
 			NodeNumberOutMoveForward(p_manager);
-			p_manager->p_buf[current_filled_node_number] = 0; // set node free and OccupyPermit
 			if(p_manager->p_LMP->used_node_num > 0) {p_manager->p_LMP->used_node_num --;}
 			UpdataListState(p_manager);
 
@@ -201,6 +200,12 @@ uint16_t    SimpleQueueFirstOut(const sListManager *p_manager,X_Boolean *isOK)
 X_Void      ClearSimpleQueue(const sListManager *p_manager)
 {
 	SimpleQueueInitialize(p_manager);
+}
+X_Void      RealseSimpleQueueBuf(const sListManager *p_manager,uint8_t buf_num)
+{
+	if(p_manager == X_Null) {return;}
+	if(buf_num >= p_manager->ValidNodeNumber) {return;}
+	SetNodePermitOccupyOrNot(p_manager,buf_num,X_True);
 }
 X_Boolean   DoesSimpleQueueEmpty(const sListManager *p_manager)
 {
