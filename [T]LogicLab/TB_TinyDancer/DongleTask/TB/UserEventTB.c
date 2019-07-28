@@ -43,7 +43,7 @@ static StateNumber ResetConditionDetectedAction(StateNumber current_state)
 	if(ResetConditionDetectedTimes >= 20)
 	{
 		ResetConditionDetectedTimes = 0;
-		SEGGER_RTT_Debug(USER_EVENT_DEBUG,(43,"Reset: %s\r\n",CommandMap[20-current_num].p_char));
+		SEGGER_RTT_Debug( (RESET_DEBUG || USER_EVENT_DEBUG) ,(43,"Reset: %s\r\n",CommandMap[20-current_num].p_char));
 		isReset = X_True;
 	}
 	else

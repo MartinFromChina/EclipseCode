@@ -127,6 +127,7 @@ static uint8_t GetBufPointerAndLength(DataFlowEntry entry,uint8_t buf_num,uint8_
 }
 
 static uint8_t *buf_pointer;
+static uint8_t current_used_buf_number = 0;
 X_Boolean DataFlowPush(DataFlowEntry entry,const uint8_t * p_data,uint8_t length)
 {
 	X_Boolean isOK,isDataCanBeLose;
@@ -135,11 +136,23 @@ X_Boolean DataFlowPush(DataFlowEntry entry,const uint8_t * p_data,uint8_t length
 	if(isInit == X_False) {return X_False;}
 	if(entry > (sizeof(p_manager_buf)/sizeof(p_manager_buf[0]))) {return X_False;}
 
-//	if(entry == CharKeyEntry || entry == CharAirMouseEntry || entry == CharPenTipEntry){isDataCanBeLose = X_True;}
-//	else{isDataCanBeLose = X_False;}
 	isDataCanBeLose = X_False;
 
 	buf_number = SimpleQueueFirstIn(p_manager_buf[entry],&isOK,isDataCanBeLose);
+/*
+	if(entry == CommandGetEntry)
+	{
+		if(isOK == X_False)
+		{
+			SEGGER_RTT_Debug(DATA_FLOW_DEBUG,(43,"push failed \r\n"));
+			return X_False;
+		}
+		SEGGER_RTT_Debug(DATA_FLOW_DEBUG,(43,"Push buf_num %d free %d,allbuf : %d\r\n"
+										,buf_number
+										,p_manager_buf[CommandGetEntry]->p_buf[buf_number]
+										,GetSimpleQueueUsedNodeNumber(p_manager_buf[CommandGetEntry])));
+	}
+*/
 	if(isOK == X_False) {return X_False;}
 
 	buf_length = GetBufPointerAndLength(entry,buf_number,&buf_pointer);
@@ -158,9 +171,22 @@ X_Boolean DataFlowPop(DataFlowEntry entry,uint8_t ** p_data,uint8_t* length)
 
 	if(isInit == X_False) {return X_False;}
 	if(entry > (sizeof(p_manager_buf)/sizeof(p_manager_buf[0]))) {return X_False;}
-	if(DoesSimpleQueueEmpty(p_manager_buf[entry]) == X_True) {return X_False;}
 	
 	buf_number = SimpleQueueFirstOut(p_manager_buf[entry],&isOK);
+/*
+	if(entry == CommandGetEntry)
+	{
+		if(isOK == X_False)
+		{
+			SEGGER_RTT_Debug(DATA_FLOW_DEBUG,(43,"pop failed \r\n"));
+			return X_False;
+		}
+		SEGGER_RTT_Debug(DATA_FLOW_DEBUG,(43,"Pop buf_num %d free %d,allbuf : %d\r\n"
+												,buf_number
+												,p_manager_buf[CommandGetEntry]->p_buf[buf_number]
+												,GetSimpleQueueUsedNodeNumber(p_manager_buf[CommandGetEntry])));
+	}
+*/
 	if(isOK == X_False) {return X_False;}
 
 	buf_length = GetBufPointerAndLength(entry,buf_number,&buf_pointer);
@@ -168,8 +194,14 @@ X_Boolean DataFlowPop(DataFlowEntry entry,uint8_t ** p_data,uint8_t* length)
 	*length 	= buf_pointer[buf_length-1];
 	*p_data 	= buf_pointer;
 
-	//	SEGGER_RTT_Debug(DATA_FLOW_DEBUG,(43,"DataFlowPop %d buf_number %d %2x\r\n",entry,buf_number,buf_pointer));
+	current_used_buf_number = buf_number;
 	return X_True;
+}
+
+X_Void DataFlowReleaseCurrentBuf(DataFlowEntry entry)
+{
+	if(entry > (sizeof(p_manager_buf)/sizeof(p_manager_buf[0]))) {return;}
+	RealseSimpleQueueBuf(p_manager_buf[entry],current_used_buf_number);
 }
 
 X_Void DataFlowClear(DataFlowEntry entry)
@@ -191,5 +223,6 @@ X_Void DataFlowInit(X_Void)
 	SimpleQueueInitialize(p_battery_manager	);
 
 	ManagerInit();
+	current_used_buf_number = 0;
 	isInit = X_True;
 }

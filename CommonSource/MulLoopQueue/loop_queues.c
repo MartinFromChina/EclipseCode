@@ -11,12 +11,6 @@ typedef enum
 	QueueStateError,
 }QueueState;
 
-static QueueState GetQueueState(const sListManager *p_manager)
-{
-	if(p_manager == X_Null) {return QueueStateError;}
-	if((p_manager->p_LMP->state) >= QueueStateError) {return QueueStateError;}
-	return (p_manager->p_LMP->state);
-}
 static X_Void UpdataListState( const sListManager *p_manager)
 {
 	if(p_manager == X_Null) {return;}
@@ -88,18 +82,27 @@ uint16_t    SimpleQueueFirstIn(const sListManager *p_manager,X_Boolean *isOK,X_B
 
 	buf_number = 0;
 	current_free_node_number = p_manager->p_LMP->first_in_node_num;
+
 	switch(p_manager->p_LMP->state)
 	{
 		case QueueEmpty:
 		case QueueNormal:
-			NodeNumberInMoveForward(p_manager);
-			if(is_OccupyPermit == X_False) {p_manager->p_buf[current_free_node_number] = BUF_USED;}
-			else {p_manager->p_buf[current_free_node_number] = BUF_FREE;}
-			p_manager->p_LMP->used_node_num ++;
-			UpdataListState(p_manager);
+			if(p_manager->p_buf[current_free_node_number] == BUF_FREE )
+			{
+				NodeNumberInMoveForward(p_manager);
+				if(is_OccupyPermit == X_False) {p_manager->p_buf[current_free_node_number] = BUF_USED;}
+				else {p_manager->p_buf[current_free_node_number] = BUF_FREE;}
+				p_manager->p_LMP->used_node_num ++;
+				UpdataListState(p_manager);
 
-			buf_number = current_free_node_number;
-			*isOK = X_True;
+				buf_number = current_free_node_number;
+				*isOK = X_True;
+			}
+			else
+			{
+				*isOK = X_False;
+				buf_number = 0;
+			}
 		break;
 		case QueueFull:
 
@@ -165,12 +168,9 @@ X_Void      RealseSimpleQueueBuf(const sListManager *p_manager,uint8_t buf_num)
 	if(buf_num >= p_manager->ValidNodeNumber) {return;}
 	p_manager->p_buf[buf_num] = BUF_FREE;
 }
-X_Boolean   DoesSimpleQueueEmpty(const sListManager *p_manager)
+uint16_t GetSimpleQueueUsedNodeNumber(const sListManager *p_manager)
 {
-	return (GetQueueState(p_manager) == QueueEmpty);
-}
-X_Boolean   DoesSimpleQueueFull(const sListManager *p_manager)
-{
-	return (GetQueueState(p_manager) == QueueFull);
+	if(p_manager == X_Null) {return 0;}
+	return p_manager->p_LMP->used_node_num;
 }
 

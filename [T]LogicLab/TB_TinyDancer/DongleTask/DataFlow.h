@@ -26,6 +26,7 @@ typedef enum
 
 X_Boolean DataFlowPush(DataFlowEntry entry,const uint8_t * p_data,uint8_t length);
 X_Boolean DataFlowPop(DataFlowEntry entry,uint8_t ** p_data,uint8_t* length);
+X_Void DataFlowReleaseCurrentBuf(DataFlowEntry entry);
 X_Void DataFlowClear(DataFlowEntry entry);
 X_Void DataFlowInit(X_Void);
 

@@ -1,11 +1,12 @@
 #ifndef __DONGLETASKDEBUGSWITCH_H
 #define __DONGLETASKDEBUGSWITCH_H
 
+#define RESET_DEBUG           1
 #define DONGLE_SCRIPT_DEBUG   0
 #define USB_FEATURE_DEBUG     0
 #define USER_EVENT_DEBUG      0
 #define BLE_CONDITION_DEBUG   0
-#define NOTITY_DEBUG   		  0
+#define NOTITY_DEBUG   		  1
 #define DATA_FLOW_DEBUG       1
 
 #define DATA_FLOW_GET_DEBUG         1
@@ -16,5 +17,7 @@
 #define DATA_FLOW_COLOR_DEBUG   	0
 #define DATA_FLOW_PENTYPE_DEBUG   	0
 #define DATA_FLOW_BATTERY_DEBUG   	0
+
+#define USB_EP3_DEBUG     	 1
 
 #endif

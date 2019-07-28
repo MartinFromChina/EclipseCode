@@ -21,7 +21,7 @@ static void NormalDelay(unsigned int counter)
 
 	}
 }
-
+static void PushPopSimple(void);
 static void PushPopTest(void);
 static void PushTest(X_Boolean isOccupyPermit);
 static void PopTest(void);
@@ -37,21 +37,49 @@ int main(void)
 	isStop = X_False;
 	while(1)
 	{
+		PushPopSimple();
 //		PushPopTest();
-		if(counter < CALL_CONDITON_WITH_RESTART)
-		{
-			counter ++;
-			PushTest(X_False);
-		}
-		else
-		{
-			PopTest();
-		}
+//		if(counter < CALL_CONDITON_WITH_RESTART)
+//		{
+//			counter ++;
+//			PushTest(X_False);
+//		}
+//		else
+//		{
+//			PopTest();
+//		}
 	}
 }
 
 static  uint16_t buf_number;
 static 	uint8_t data_buf[MAX_LONG_QUEUE_LENGTH];
+
+static void PushPopSimple(void)
+{
+	X_Boolean isOK;
+	NormalDelay(0x1fffffff);
+	buf_number = SimpleQueueFirstIn(p_queue_manager,&isOK,X_False);
+	if(isOK == X_True)
+	{
+		data_buf[buf_number] = i;
+		printf("buf_number[%d] pushdata %d  ; occupy not permit\r\n",buf_number,i);
+	}
+	else
+	{
+		printf("push failed  i = %d\r\n",i);
+	}
+	i++;
+	buf_number = SimpleQueueFirstOut(p_queue_manager,&isOK);
+	if(isOK == X_True)
+	{
+		printf("buf_number[%d] popdata %d \r\n",buf_number,data_buf[buf_number]);
+//		RealseSimpleQueueBuf(p_queue_manager,buf_number);
+	}
+	else
+	{
+		printf("pop failed \r\n");
+	}
+}
 
 static void PushPopTest(void)
 {
@@ -124,7 +152,7 @@ static void PopTest(void)
 	X_Boolean isOK;
 	NormalDelay(0x2ffffff);
 	if(isStop == X_True) {return;}
-	if(DoesSimpleQueueEmpty(p_long_queue_manager) == X_True)
+	if(GetSimpleQueueUsedNodeNumber(p_long_queue_manager) == 0)
 	{
 		isStop = X_True;
 		printf("queue empty\r\n");

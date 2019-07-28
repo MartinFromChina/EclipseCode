@@ -4,7 +4,7 @@
 #include "DongleTask.h"
 #include "DataFlow.h"
 #include "..\..\UserDebug.h"
-#include "..\..\..\CommonSource\StateMachine\StateMachine.h"
+#include "UserEndPoint.h"
 //#include "button.h"
 //#include "user_usb.h"
 //
@@ -52,20 +52,8 @@ static X_Void AllEventHandle(X_Void);
 X_Void onTick(X_Void)
 {
 	if(isInit == X_False) {return;}
-
-	AllEventHandle();// USB event  ;  BLE event  ;   user event
+		AllEventHandle();// USB event  ;  BLE event  ;   user event
 }
-
-
-//typedef enum
-//{
-//
-//}
-
-
-
-
-
 
 /* call it three times faster than notify ,so that data buf will not be overwriten
   consider the worst situation :
@@ -80,15 +68,26 @@ X_Void onTick(X_Void)
 static X_Void AllEventHandle(X_Void)
 {
 	uint8_t i;
+	X_Boolean isBreak;
+	/*
 	for(i = 0;i<EntryMaxNumber;i++)
 	{
 		if(DataFlowPop((DataFlowEntry)i,&p_data,&length) == X_True)
 		{
 			SEGGER_RTT_Debug((DATA_FLOW_DEBUG && (GetDebugFlag(i) == 1)),(USER_MAX_STRING_LENGTH," %s :data:%2x %2x \r\n"
 												,EventStringGet(i),p_data[0],p_data[1]));
+			DataFlowReleaseCurrentBuf((DataFlowEntry)i);
 		}
 	}
-
+	*/
+	for(i = 0;i<3 ;i++ ) // call it three times so that
+	{
+		isBreak = UserEndPointThreeHandle();
+		if(isBreak == X_True)
+		{
+			break;
+		}
+	}
 }
 
 
