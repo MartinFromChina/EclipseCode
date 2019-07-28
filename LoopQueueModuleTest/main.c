@@ -57,11 +57,11 @@ static void PushPopTest(void)
 {
 	X_Boolean isOK;
 	NormalDelay(0x1fffffff);
-	buf_number = SimpleQueueFirstIn(p_queue_manager,&isOK,X_True);
+	buf_number = SimpleQueueFirstIn(p_queue_manager,&isOK,X_False);
 	if(isOK == X_True)
 	{
 		data_buf[buf_number] = i;
-		printf("buf_number[%d] pushdata %d  ; occupy permit\r\n",buf_number,i);
+		printf("buf_number[%d] pushdata %d  ; occupy not permit\r\n",buf_number,i);
 	}
 	else
 	{
@@ -87,6 +87,7 @@ static void PushPopTest(void)
 	if(isOK == X_True)
 	{
 		printf("buf_number[%d] popdata %d \r\n",buf_number,data_buf[buf_number]);
+		RealseSimpleQueueBuf(p_queue_manager,buf_number);
 	}
 	else
 	{
