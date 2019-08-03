@@ -20,7 +20,7 @@ uint8_t GetBinaryBitNumber(uint32_t value)
 	if(value == 0) {return 1;}
 	for(i=0;i<sizeof(power_table_for_number2)/sizeof(power_table_for_number2[0]);i++)
 	{
-		if(value < power_table_for_number2[i].result) {return i+1;}
+		if(value < power_table_for_number2[i].result) {return i;}
 	}
 	return i+1; // 32
 }

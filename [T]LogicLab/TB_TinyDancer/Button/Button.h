@@ -5,6 +5,7 @@
 #include <stdio.h>
 
 FILE * ButtonTestOpenFile(void);
+X_Void ButtonInitialize(X_Void);
 X_Void onTick(X_Void);
 
 #endif

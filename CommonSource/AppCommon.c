@@ -1,6 +1,7 @@
 #include "AppCommon.h"
 #include <stdlib.h>
 #include "Math\bit_operation.h"
+//#include "CharStringDebug\CharStringDebugModule.h"
 
 X_Void byteBufInit(uint8_t *p_buf,uint16_t length,uint8_t init_value)
 {
@@ -22,21 +23,22 @@ X_Void twobyteBufInit(uint16_t *p_buf,uint16_t length,uint16_t init_value)
 	}
 }
 
-#define MAX_STRING_LENGTH   32
-static char string[MAX_STRING_LENGTH];
+#define MAX_BINARY_STRING_LENGTH   32
+static char string[MAX_BINARY_STRING_LENGTH];
 static char error_buf[] = "length error";
 
 char *ValueToBinaryString(X_Boolean isAlign,uint8_t string_length,uint32_t value)
 {
 	uint8_t bitnumber,i;
-	char string_backup[MAX_STRING_LENGTH];
+	char string_backup[MAX_BINARY_STRING_LENGTH];
 	// clear buf ?
-	if(string_length > MAX_STRING_LENGTH) {return error_buf;}//
+	if(string_length > MAX_BINARY_STRING_LENGTH) {return error_buf;}//
 	itoa(value, string, 2);
 
 	if(isAlign == X_True)
 	{
 		bitnumber = GetBinaryBitNumber(value);
+//		String_Debug(1,(40,"value %d;bitnumber %d\r\n",value,bitnumber));
 		if(bitnumber == string_length) {return string;}
 		if(bitnumber > string_length)
 		{

@@ -1,4 +1,5 @@
 #include "ButtonTB.h"
+#include "Button.h"
 //#include "..\..\..\CommonSource\StateMachine\StateMachine.h"
 #include "..\..\ScriptsCommandModule\HexCommand.h"
 #include "..\..\..\CommonSource\Math\random_number.h"
@@ -26,12 +27,13 @@ static X_Boolean ScriptsFunctionInitial(X_Void * p_param)
 {
 	SEGGER_RTT_Debug_Once(BUTTON_SCRIPT_DEBUG,p_script_func_num,1,(30,"--ScriptsFunctionInitial \r\n"));
 	button_value = 0;
+	ButtonInitialize();
 	return X_True;
 }
 static X_Boolean EventGenerator(X_Void * p_param)
 {
 	SEGGER_RTT_Debug_Once(BUTTON_SCRIPT_DEBUG,p_script_func_num,2,(30,"EventGenerator \r\n"));
-	button_value = GetRandomNumber(1,20);
+	button_value = GetRandomNumber(0,MAX_BUTTON_VALUE);
 	return X_True;
 
 }
