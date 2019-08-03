@@ -6,8 +6,11 @@
 #include "..\CommonSource\IrqAndTimer\TimeManagerExtern.h"
 
 //#include "TB_PowerSaving\PenState.h"
-#include "TB_TinyDancer\DongleTask\TB\DongleTaskTB.h"
-#include "TB_TinyDancer\DongleTask\DongleTask.h"
+//#include "TB_TinyDancer\DongleTask\TB\DongleTaskTB.h"
+//#include "TB_TinyDancer\DongleTask\DongleTask.h"
+#include "TB_TinyDancer\Button\Button.h"
+#include "TB_TinyDancer\Button\ButtonTB.h"
+
 
 static uint32_t timer1_counter,timer2_counter;
 

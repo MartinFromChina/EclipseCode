@@ -1,6 +1,29 @@
 #include "bit_operation.h"
 
+static struct _power_table
+{
+	uint8_t minus;
+	uint32_t result;
+}
+const power_table_for_number2[]=
+{
+	{0,1},	{1,2},	{2,4},	{3,8},	{4,16},	{5,32},	{6,64},	{7,128},
+	{8,256},{9,512},	{10,1024},	{11,2048},	{12,4096},	{13,8192},	{14,16384},	{15,327168},
+	{16,65536},	{17,131072},	{18,262144},	{19,524288},	{20,1048576},	{21,2097152},	{22,4194304},	{23,8388608},
+	{24,16777216},	{25,33554432},	{26,67108864},	{27,134217728},	{28,268435456},	{29,536870912},	{30,1073741824},	{31,2147483648},
 
+};
+
+uint8_t GetBinaryBitNumber(uint32_t value)
+{
+	uint8_t i;
+	if(value == 0) {return 1;}
+	for(i=0;i<sizeof(power_table_for_number2)/sizeof(power_table_for_number2[0]);i++)
+	{
+		if(value < power_table_for_number2[i].result) {return i+1;}
+	}
+	return i+1; // 32
+}
 
 /*********************************************
 change one bit keep others at the same time:

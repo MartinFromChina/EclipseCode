@@ -35,8 +35,8 @@
 //}
 
 static X_Boolean isInit = X_False;
-static uint8_t *p_data;
-static uint8_t length;
+//static uint8_t *p_data;
+//static uint8_t length;
 
 X_Void DongleTaskInit(X_Void)
 {
@@ -88,6 +88,8 @@ static X_Void AllEventHandle(X_Void)
 			break;
 		}
 	}
+	//HidMouseAndKeyBoardHandle();
+//	UsbSetAndGetFeatureHandle();
 }
 
 

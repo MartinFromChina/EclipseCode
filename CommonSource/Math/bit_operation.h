@@ -6,6 +6,8 @@
 #define Set  (0 == 0)
 #define Clear (0 != 0)
 
+uint8_t GetBinaryBitNumber(uint32_t value);
+
 uint8_t byte_rotate_bit(uint8_t source);
 uint8_t byte_setbit(uint8_t source,uint8_t bitnumber);
 uint8_t byte_clearbit(uint8_t source,uint8_t bitnumber);

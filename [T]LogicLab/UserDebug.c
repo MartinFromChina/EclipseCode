@@ -31,7 +31,7 @@ char *EventStringGet(uint8_t event)
 		if(event >= EVENT_ENTRY_MAX) {return &Canot_Translate[0][0];}
 		return &EventTranslate[event][0];
 }
-
+#ifdef DATA_FLOW_DEBUG
 uint8_t GetDebugFlag(uint8_t number)
 {
 	if(number == 0) {return DATA_FLOW_GET_DEBUG;}
@@ -44,3 +44,4 @@ uint8_t GetDebugFlag(uint8_t number)
 	else if(number == 7){return DATA_FLOW_BATTERY_DEBUG;}
 	else {return 0;}
 }
+#endif

@@ -29,5 +29,10 @@
 			<type>2</type>
 			<location>D:/AllApplication/GitAll/EclipseCode/CommonSource</location>
 		</link>
+		<link>
+			<name>CustomizedModule</name>
+			<type>2</type>
+			<location>D:/AllApplication/GitAll/EclipseCode/CustomizedModule</location>
+		</link>
 	</linkedResources>
 </projectDescription>

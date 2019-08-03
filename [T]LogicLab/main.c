@@ -3,7 +3,7 @@
 #include "..\CommonSource\FileOperation\read_scripts.h"
 
 #include "user_timer.h"
-#include "TB_TinyDancer\DongleTask\TB\DongleTaskTB.h"
+#include "TB_TinyDancer\Button\Button.h"
 
 
 static void PrintfInit(void)
@@ -20,7 +20,7 @@ int main(void)
 {
 	StringDebugInit(PrintfInit);
 
-	ReadScriptsInit(DongleTaskOpenFile);
+	ReadScriptsInit(ButtonTestOpenFile);
 
 	UserIrqCreated();
 	AppTimerModuleStart(AllTimerConfig);

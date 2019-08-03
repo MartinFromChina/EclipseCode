@@ -44,8 +44,9 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="TB_PowerSaving|ScriptsCommandModule/CalledByScripts.c|ScriptCommandModule|CommonSource" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="TB_TinyDancer/DongleTask|CustomizedModule|TB_PowerSaving|ScriptsCommandModule/CalledByScripts.c|ScriptCommandModule|CommonSource" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 						<entry excluding="IrqAndTimer/TimeManager.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="CommonSource"/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="CustomizedModule"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -90,7 +91,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="TB_PowerSaving|CommonSource/IrqAndTimer/TimeManager.c|ScriptsCommandModule/CalledByScripts.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="TB_TinyDancer/DongleTask|TB_PowerSaving|CommonSource/IrqAndTimer/TimeManager.c|ScriptsCommandModule/CalledByScripts.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
