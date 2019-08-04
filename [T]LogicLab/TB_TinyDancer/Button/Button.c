@@ -5,33 +5,31 @@
 #include "..\..\..\CommonSource\Math\bit_operation.h"
 #include "..\..\..\CustomizedModule\ButtonModule\ButtonModule.h"
 
+#define UserNeedLongPush
+
 RTT_DEBUG_ONCE_ENTRY_DEF(p_button,0);
 
 /*****************************long push*******************************/
 #ifdef UserNeedLongPush
 static void Button2_LongPushDoing(void)
 {
-	SEGGER_RTT_Debug(BUTTON_DOING_DEBUG,("Button One LongPush \r\n"));
-	#if (USE_FAKE_CHARGE_IN == 1)
-	ToggleFakeChargeIn();
-	#endif
+	SEGGER_RTT_Debug(BUTTON_DOING_DEBUG,(30,"Button One LongPush \r\n"));
 }
 static void Button3_LongPushDoing(void)
 {
-	SEGGER_RTT_Debug(BUTTON_DOING_DEBUG,("Button Two LongPush \r\n"));
+	SEGGER_RTT_Debug(BUTTON_DOING_DEBUG,(30,"Button Two LongPush \r\n"));
 }
 static void Button4_LongPushDoing(void)
 {
-	SEGGER_RTT_Debug(BUTTON_DOING_DEBUG,("Button Three LongPush \r\n"));
+	SEGGER_RTT_Debug(BUTTON_DOING_DEBUG,(30,"Button Three LongPush \r\n"));
 }
 static void Button5_LongPushDoing(void)
 {
-	SEGGER_RTT_Debug(BUTTON_DOING_DEBUG,("Button Four LongPush \r\n"));
+	SEGGER_RTT_Debug(BUTTON_DOING_DEBUG,(30,"Button Four LongPush \r\n"));
 }
 static void Button6_LongPushDoing(void)
 {
-	SEGGER_RTT_Debug(BUTTON_DOING_DEBUG,("Button Five LongPush \r\n"));
-	PowerKeyLongPushStart();
+	SEGGER_RTT_Debug(BUTTON_DOING_DEBUG,(30,"Button Five LongPush \r\n"));
 }
 
 static struct _LongPushDoing
@@ -50,7 +48,7 @@ const LongPushDoing[]={
 static void LongPushBehavior(CombineButtonValue value)
 {
 	uint8_t i;
-	SEGGER_RTT_Debug(BUTTON_BEHAVIOR_DEBUG,("LongPush : %2x\r\n",value));
+	SEGGER_RTT_Debug(BUTTON_BEHAVIOR_DEBUG,(30,"LongPush : %2x\r\n",value));
 	for(i=0;i<sizeof(LongPushDoing)/sizeof(LongPushDoing[0]);i++)
 	{
 		if((value & (ButtonMask << i)) != 0)
@@ -127,7 +125,7 @@ const LongPushReleaseDoing[]={
 	{Button6_LongPushReleaseDoing},
 };
 
-static void LongPushFinishedBehavior(CombineButtonValue const value,uint16_t const*longpushtickcycle)
+static void LongPushFinishedBehavior(CombineButtonValue value,uint16_t const*longpushtickcycle)
 {
 	uint8_t i;
 	SEGGER_RTT_Debug(BUTTON_BEHAVIOR_DEBUG,("LongPushRelease : %2x\r\n",value));
@@ -306,23 +304,41 @@ static void DoubleClickBehavior(CombineButtonValue value)
 }
 #endif
 
-X_Void ButtonInitialize(X_Void)
-{
-//	ButtonModuleInit(GetCurrentButtonValue,ClickBehavior,MaybeContinuClickBehavior,DoubleClickBehavior
-//									,LongPushBehavior,LongPushFinishedBehavior);
-}
 
 FILE * ButtonTestOpenFile(void)
 {
 	return fopen(".//TB_TinyDancer//Button//command.txt", "r");
 }
 
-#define  CombineButtonValue  uint8_t
+
 static X_Boolean ButtonStateHandle(CombineButtonValue value);
 X_Void onTick(X_Void)
 {
 	ButtonStateHandle(GetCurrentButtonValue());
 }
+
+/*
+,function_init
+,function_get_value
+,function_config
+,function_click_cb
+,function_continus_click_cb
+,function_double_click_cb
+,fucntion_long_push_cb
+,function_long_push_release_cb
+*/
+
+CUSTOM_BUTTON_MONITOR_2_DEF(p_monitor
+						   ,X_Null
+						   ,GetCurrentButtonValue
+						   ,X_Null
+						   ,X_Null
+						   ,X_Null
+						   ,X_Null
+						   ,LongPushBehavior
+						   ,X_Null);
+
+
 
 static X_Boolean ButtonStateHandle(CombineButtonValue value)
 {

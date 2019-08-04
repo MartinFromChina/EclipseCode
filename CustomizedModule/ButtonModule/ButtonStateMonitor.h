@@ -1,0 +1,176 @@
+#ifndef __BUTTONSTATEMONITOR_H
+#define __BUTTONSTATEMONITOR_H
+
+#include "..\..\CommonSource\KeilMDK.h"
+#include "..\..\CommonSource\StateMachine\StateMachine.h"
+#include "ButtonModule.h"
+
+#define MAX_BUTTON_MONITOR_HOP_TIMES_IN_ONE_CALL   10
+
+typedef enum
+{
+	BM_Init,
+	BM_GetPinValue,
+
+}ButtonMonitorState;
+
+StateNumber CustomizedBM_InitAction(StateNumber current_state);
+
+/*************************************************1**************************************************/
+#define CUSTOM_BUTTON_MONITOR_1_DEF(p_button_module						\
+									,function_init						\
+									,function_get_value					\
+									,function_config					\
+									,function_click_cb					\
+									,function_continus_click_cb			\
+									,function_double_click_cb			\
+									,fucntion_long_push_cb				\
+									,function_long_push_release_cb		\
+)																		\
+		CUSTOM_BUTTON_MODULE_DEF(p_button_module						\
+								,1										\
+								,function_init							\
+								,function_get_value						\
+								,function_config						\
+								,function_click_cb						\
+								,function_continus_click_cb				\
+								,function_double_click_cb				\
+								,fucntion_long_push_cb					\
+								,function_long_push_release_cb			\
+);																		\
+static const StateAction CONCAT_2(p_button_module, _ButtonStateAction)[] = {	\
+		{CustomizedBM_InitAction},												\
+		{X_Null},																\
+		{X_Null},																\
+		{X_Null},																\
+		{X_Null},																\
+};																				\
+																				\
+/***********0************/															\
+APP_SIMPLE_STATE_MACHINE_DEF_WITH_OUT_POINTER(p_button_module_motion_action_0																			\
+									,sizeof(CONCAT_2(p_button_module, _ButtonStateAction))/sizeof(CONCAT_2(p_button_module, _ButtonStateAction)[0])   	\
+									,MAX_BUTTON_MONITOR_HOP_TIMES_IN_ONE_CALL																			\
+									,&CONCAT_2(p_button_module, _ButtonStateAction)[0]);																\
+/***********end************/														\
+static const sButtonModuleExtern CONCAT_2(p_button_module, _with_monitor) = {		\
+		&CONCAT_2(p_button_module, _entry),											\
+		1,																			\
+		{																			\
+		&CONCAT_2(p_button_module_motion_action_0, _entry),							\
+		},																			\
+};																					\
+																					\
+static const sButtonModuleExtern * p_button_module = &CONCAT_2(p_button_module, _with_monitor)
+
+/*************************************************2**************************************************/
+#define CUSTOM_BUTTON_MONITOR_2_DEF(p_button_module						\
+									,function_init						\
+									,function_get_value					\
+									,function_config					\
+									,function_click_cb					\
+									,function_continus_click_cb			\
+									,function_double_click_cb			\
+									,fucntion_long_push_cb				\
+									,function_long_push_release_cb		\
+)																		\
+		CUSTOM_BUTTON_MODULE_DEF(p_button_module						\
+								,2										\
+								,function_init							\
+								,function_get_value						\
+								,function_config						\
+								,function_click_cb						\
+								,function_continus_click_cb				\
+								,function_double_click_cb				\
+								,fucntion_long_push_cb					\
+								,function_long_push_release_cb			\
+);																		\
+static const StateAction CONCAT_2(p_button_module, _ButtonStateAction)[] = {	\
+		{CustomizedBM_InitAction},												\
+		{X_Null},																\
+		{X_Null},																\
+		{X_Null},																\
+		{X_Null},																\
+};																				\
+																				\
+/***********0************/															\
+APP_SIMPLE_STATE_MACHINE_DEF_WITH_OUT_POINTER(p_button_module_motion_action_0																			\
+									,sizeof(CONCAT_2(p_button_module, _ButtonStateAction))/sizeof(CONCAT_2(p_button_module, _ButtonStateAction)[0])   	\
+									,MAX_BUTTON_MONITOR_HOP_TIMES_IN_ONE_CALL																			\
+									,&CONCAT_2(p_button_module, _ButtonStateAction)[0]);																\
+/***********1************/															\
+APP_SIMPLE_STATE_MACHINE_DEF_WITH_OUT_POINTER(p_button_module_motion_action_1																			\
+							,sizeof(CONCAT_2(p_button_module, _ButtonStateAction))/sizeof(CONCAT_2(p_button_module, _ButtonStateAction)[0])   			\
+							,MAX_BUTTON_MONITOR_HOP_TIMES_IN_ONE_CALL																					\
+							,&CONCAT_2(p_button_module, _ButtonStateAction)[0]);																		\
+/***********end************/														\
+static const sButtonModuleExtern CONCAT_2(p_button_module, _with_monitor) = {		\
+		&CONCAT_2(p_button_module, _entry),											\
+		2,																			\
+		{																			\
+		&CONCAT_2(p_button_module_motion_action_0, _entry),							\
+		&CONCAT_2(p_button_module_motion_action_1, _entry),							\
+		},																			\
+};																					\
+																					\
+static const sButtonModuleExtern * p_button_module = &CONCAT_2(p_button_module, _with_monitor)
+
+/*************************************************3**************************************************/
+#define CUSTOM_BUTTON_MONITOR_3_DEF(p_button_module						\
+									,function_init						\
+									,function_get_value					\
+									,function_config					\
+									,function_click_cb					\
+									,function_continus_click_cb			\
+									,function_double_click_cb			\
+									,fucntion_long_push_cb				\
+									,function_long_push_release_cb		\
+)																		\
+		CUSTOM_BUTTON_MODULE_DEF(p_button_module						\
+								,3										\
+								,function_init							\
+								,function_get_value						\
+								,function_config						\
+								,function_click_cb						\
+								,function_continus_click_cb				\
+								,function_double_click_cb				\
+								,fucntion_long_push_cb					\
+								,function_long_push_release_cb			\
+);																		\
+static const StateAction CONCAT_2(p_button_module, _ButtonStateAction)[] = {	\
+		{CustomizedBM_InitAction},												\
+		{X_Null},																\
+		{X_Null},																\
+		{X_Null},																\
+		{X_Null},																\
+};																				\
+																				\
+/***********0************/															\
+APP_SIMPLE_STATE_MACHINE_DEF_WITH_OUT_POINTER(p_button_module_motion_action_0																			\
+									,sizeof(CONCAT_2(p_button_module, _ButtonStateAction))/sizeof(CONCAT_2(p_button_module, _ButtonStateAction)[0])   	\
+									,MAX_BUTTON_MONITOR_HOP_TIMES_IN_ONE_CALL																			\
+									,&CONCAT_2(p_button_module, _ButtonStateAction)[0]);																\
+/***********1************/															\
+APP_SIMPLE_STATE_MACHINE_DEF_WITH_OUT_POINTER(p_button_module_motion_action_1																			\
+							,sizeof(CONCAT_2(p_button_module, _ButtonStateAction))/sizeof(CONCAT_2(p_button_module, _ButtonStateAction)[0])   			\
+							,MAX_BUTTON_MONITOR_HOP_TIMES_IN_ONE_CALL																					\
+							,&CONCAT_2(p_button_module, _ButtonStateAction)[0]);																		\
+/***********2************/															\
+APP_SIMPLE_STATE_MACHINE_DEF_WITH_OUT_POINTER(p_button_module_motion_action_2																			\
+							,sizeof(CONCAT_2(p_button_module, _ButtonStateAction))/sizeof(CONCAT_2(p_button_module, _ButtonStateAction)[0])   			\
+							,MAX_BUTTON_MONITOR_HOP_TIMES_IN_ONE_CALL																					\
+							,&CONCAT_2(p_button_module, _ButtonStateAction)[0]);																		\
+/***********end************/														\
+static const sButtonModuleExtern CONCAT_2(p_button_module, _with_monitor) = {		\
+		&CONCAT_2(p_button_module, _entry),											\
+		3,																			\
+		{																			\
+		&CONCAT_2(p_button_module_motion_action_0, _entry),							\
+		&CONCAT_2(p_button_module_motion_action_1, _entry),							\
+		&CONCAT_2(p_button_module_motion_action_2, _entry),							\
+		},																			\
+};																					\
+																					\
+static const sButtonModuleExtern * p_button_module = &CONCAT_2(p_button_module, _with_monitor)
+
+
+#endif

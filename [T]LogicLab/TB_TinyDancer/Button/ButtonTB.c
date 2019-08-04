@@ -27,7 +27,6 @@ static X_Boolean ScriptsFunctionInitial(X_Void * p_param)
 {
 	SEGGER_RTT_Debug_Once(BUTTON_SCRIPT_DEBUG,p_script_func_num,1,(30,"--ScriptsFunctionInitial \r\n"));
 	button_value = 0;
-	ButtonInitialize();
 	return X_True;
 }
 static X_Boolean EventGenerator(X_Void * p_param)

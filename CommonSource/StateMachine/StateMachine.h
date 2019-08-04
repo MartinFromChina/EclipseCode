@@ -44,6 +44,10 @@ typedef struct
     StateNumber         *p_CurrentStateNum;
 }StateSimpleParam;
 
+#define APP_SIMPLE_STATE_MACHINE_DEF_WITH_OUT_POINTER(id_entry,state_number,max_signal_loop_times,p_action)                \
+static StateNumber CONCAT_2(id_entry, _current_state_number) = DEFAULT_STATE_NUMBER;						\
+static const StateSimpleParam CONCAT_2(id_entry, _entry) = {state_number,max_signal_loop_times,p_action,&CONCAT_2(id_entry, _current_state_number)}
+
 #define APP_SIMPLE_STATE_MACHINE_DEF(id,state_number,max_signal_loop_times,p_action)                \
 static StateNumber CONCAT_2(id, _current_state_number) = DEFAULT_STATE_NUMBER;						\
 static const StateSimpleParam CONCAT_2(id, _entry) = {state_number,max_signal_loop_times,p_action,&CONCAT_2(id, _current_state_number)}; \
