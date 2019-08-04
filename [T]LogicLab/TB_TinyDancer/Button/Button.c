@@ -310,11 +310,14 @@ FILE * ButtonTestOpenFile(void)
 	return fopen(".//TB_TinyDancer//Button//command.txt", "r");
 }
 
+X_Void ButtonInitialize(X_Void)
+{
 
-static X_Boolean ButtonStateHandle(CombineButtonValue value);
+}
+static X_Boolean ButtonStateHandle();
 X_Void onTick(X_Void)
 {
-	ButtonStateHandle(GetCurrentButtonValue());
+	ButtonStateHandle();
 }
 
 /*
@@ -340,9 +343,11 @@ CUSTOM_BUTTON_MONITOR_2_DEF(p_monitor
 
 
 
-static X_Boolean ButtonStateHandle(CombineButtonValue value)
+static X_Boolean ButtonStateHandle(X_Void)
 {
+	uint32_t  value;
+	ButtonStateMonitor(p_monitor,&value);
 	SEGGER_RTT_Debug_Once(BUTTON_SCRIPT_DEBUG,p_button,value,(40,"button : %s ,%d\r\n"
-											,ValueToBinaryString(X_True,8,value),value));
+												,ValueToBinaryString(X_True,8,value),value));
 	return X_True;
 }

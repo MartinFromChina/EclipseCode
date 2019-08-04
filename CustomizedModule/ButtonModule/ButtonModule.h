@@ -56,7 +56,7 @@ static const sButtonModule CONCAT_2(p_button_module, _entry) = {		\
 };
 
 
-X_Void ButtonStateMonitor(const sButtonModuleExtern *p_sbm,CombineButtonValue value);
+X_Void ButtonStateMonitor(const sButtonModuleExtern *p_sbm,CombineButtonValue *value);
 
 
 #endif
