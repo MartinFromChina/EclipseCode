@@ -4,9 +4,13 @@
 #include "..\..\CommonSource\KeilMDK.h"
 #include "..\..\CommonSource\CommonMarco.h"
 
-#define  CombineButtonValue  uint32_t
+#define  MAX_BUTTON_NUMBER   16
+#define  CombineButtonValue  uint16_t
 typedef uint32_t        			 ButtonActionFlagMask;
 #define ButtonMask					 ((ButtonActionFlagMask)(1u << 0))
+
+#define ButtonSampleFrequencyInMs        (24)
+#define LongPushMonitorResetInterval     500 // tick cycle
 
 #include "ButtonStateMonitor.h"
 
@@ -16,9 +20,9 @@ typedef struct
 	X_Void (*init)(X_Void);
 	CombineButtonValue (*get_value)(X_Void);
 	X_Void (*config)(X_Void);
-	X_Void (*click)(X_Void);
-	X_Void (*continus_click)(X_Void);
-	X_Void (*double_click)(X_Void);
+	X_Void (*click)(CombineButtonValue value);
+	X_Void (*continus_click)(CombineButtonValue value);
+	X_Void (*double_click)(CombineButtonValue value);
 	X_Void (*long_push)(CombineButtonValue value);
 	X_Void (*long_push_release)(CombineButtonValue value,uint16_t const*longpushtickcycle);
 

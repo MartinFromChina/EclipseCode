@@ -64,7 +64,7 @@ X_Boolean CallFunction(uint8_t func_num,X_Void * p_param)
 	return isOK;
 }
 
-uint32_t  GetCurrentButtonValue(X_Void)
+uint16_t  GetCurrentButtonValue(X_Void)
 {
 	return button_value;
 }

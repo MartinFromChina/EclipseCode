@@ -11,6 +11,10 @@ RTT_DEBUG_ONCE_ENTRY_DEF(p_button,0);
 
 /*****************************long push*******************************/
 #ifdef UserNeedLongPush
+static void Button1_LongPushDoing(void)
+{
+	SEGGER_RTT_Debug(BUTTON_DOING_DEBUG,(30,"Button Zero LongPush \r\n"));
+}
 static void Button2_LongPushDoing(void)
 {
 	SEGGER_RTT_Debug(BUTTON_DOING_DEBUG,(30,"Button One LongPush \r\n"));
@@ -37,7 +41,7 @@ static struct _LongPushDoing
 	void (*Action)(void);
 }
 const LongPushDoing[]={
-	{X_Null},
+	{Button1_LongPushDoing},
 	{Button2_LongPushDoing},
 	{Button3_LongPushDoing},
 	{Button4_LongPushDoing},
@@ -345,7 +349,7 @@ CUSTOM_BUTTON_MONITOR_2_DEF(p_monitor
 
 static X_Boolean ButtonStateHandle(X_Void)
 {
-	uint32_t  value;
+	CombineButtonValue  value;
 	ButtonStateMonitor(p_monitor,&value);
 	SEGGER_RTT_Debug_Once(BUTTON_SCRIPT_DEBUG,p_button,value,(40,"button : %s ,%d\r\n"
 												,ValueToBinaryString(X_True,8,value),value));

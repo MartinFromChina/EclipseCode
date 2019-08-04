@@ -10,7 +10,6 @@
 typedef enum
 {
 	BM_Init,
-	BM_GetPinValue,
 
 }ButtonMonitorState;
 
