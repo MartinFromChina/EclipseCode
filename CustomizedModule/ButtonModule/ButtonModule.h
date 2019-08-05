@@ -16,10 +16,17 @@ typedef uint32_t        			 ButtonActionFlagMask;
 
 typedef struct
 {
+//	X_Boolean isNewParamAboutTimeUsed;
+	ButtonOperationMode CurrentOM;
+	sParamAboutTime*  p_spat;
+}sParamSingleButton;
+
+typedef struct
+{
 	uint8_t button_number;
 	X_Void (*init)(X_Void);
 	CombineButtonValue (*get_value)(X_Void);
-	X_Void (*config)(X_Void);
+	X_Void (*config)(sParamSingleButton * p_spsb);
 	X_Void (*click)(CombineButtonValue value);
 	X_Void (*continus_click)(CombineButtonValue value);
 	X_Void (*double_click)(CombineButtonValue value);
@@ -61,6 +68,7 @@ static const sButtonModule CONCAT_2(p_button_module, _entry) = {		\
 
 
 X_Void ButtonStateMonitor(const sButtonModuleExtern *p_sbm,CombineButtonValue *value);
+X_Void SetCurrentButtonConfigMode(CombineButtonValue mode);
 
 
 #endif
