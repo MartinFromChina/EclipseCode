@@ -1,6 +1,8 @@
 #include "ButtonModule.h"
 #include "..\..\CommonSource\Math\bit_operation.h"
 
+#define TIMER_COUNTER_MAX                      (0xffff)
+
 #define NewStartTimeLimitBig    				3000 							//ms
 #define NewStartTimeLimitSmall  				(ButtonSampleFrequencyInMs*2)  	//48   //ms
 
@@ -10,11 +12,6 @@
 #define DoubleClickTimeIntervalInMsDefault   	120								//ms
 #define LongPushTimeLimitInMsDefault   			900								//ms
 /*************************************************************************/
-typedef enum
-{
-	MouseMode = 0, // click 	,double click 		, long push
-	KeyBoardMode ,  // click 	, continous click 	, long push
-}ButtonOperationMode;
 typedef struct
 {
 	uint32_t isClick;
@@ -23,21 +20,13 @@ typedef struct
 	uint32_t isLongpush;
 	uint32_t isLongpushRelease;
 }sButtonParam;
-typedef struct
-{
-	uint16_t ClickTimeThresholdInMS;
-	uint16_t ContinuousClickTimeThresholdInMS;
-	uint16_t ReleaseTimeThresholdInMS;
-	uint16_t DoubleClickTimeIntervalThresholdInMS;
-	uint16_t LongPushTimeThresholdInMS;
-}sParamAboutTime;
 
 static X_Boolean isCurrentButtonPushed = X_False;
 static CombineButtonValue CurrentButtonValue = 0;
 static uint8_t CurrentButtonNumber = 0;
 static CombineButtonValue CurrentButtonConfigMode = 0;
 static sParamSingleButton sPSB[MAX_BUTTON_NUMBER];
-static sButtonModuleExtern *p_sBME;
+static const sButtonModuleExtern *p_sBME;
 
 static const sParamAboutTime sPAT_Default = {
 		ClickTimeLimitInMsDefault,
@@ -47,9 +36,29 @@ static const sParamAboutTime sPAT_Default = {
 		LongPushTimeLimitInMsDefault,
 };
 
+static X_Void TimeManager(sParamSingleButton * p_psb)
+{
+	if(p_psb == X_Null) {return;}
+
+	if(p_psb->isButtonPushed == X_True)
+	{
+		p_psb->release_time_counter = 0;
+		if(p_psb->push_time_counter >= TIMER_COUNTER_MAX) {return;}
+		p_psb->push_time_counter ++;
+
+	}
+	else
+	{
+		p_psb->push_time_counter = 0;
+		if(p_psb->release_time_counter >= TIMER_COUNTER_MAX) {return;}
+		p_psb->release_time_counter ++;
+	}
+}
+
 
 StateNumber CustomizedBM_InitAction(StateNumber current_state)
 {
+	if(CurrentButtonNumber >= p_sBME->button_number) {return BM_Init;}
 	if(p_sBME->base->config == X_Null)
 	{
 		sPSB[CurrentButtonNumber].p_spat = &sPAT_Default;
@@ -59,12 +68,22 @@ StateNumber CustomizedBM_InitAction(StateNumber current_state)
 		p_sBME->base->config(&sPSB[CurrentButtonNumber]);// to do :get something param from flash or set it into flash
 	}
 	sPSB[CurrentButtonNumber].CurrentOM = (twobyte_getbit(CurrentButtonConfigMode,CurrentButtonNumber) == 0 ) ? MouseMode : KeyBoardMode;
-	return current_state;
+	sPSB[CurrentButtonNumber].push_time_counter = 0;
+	sPSB[CurrentButtonNumber].release_time_counter = 0;
+	sPSB[CurrentButtonNumber].isButtonPushed = X_False;
+	return BM_ClickDetected;
 }
 
-StateNumber CustomizedBM_InitAction(StateNumber current_state)
+StateNumber CustomizedBM_ClickDetectedAction(StateNumber current_state)
 {
+	if(CurrentButtonNumber >= p_sBME->button_number) {return BM_Init;}
+	sParamSingleButton * p_spsb = &sPSB[CurrentButtonNumber];
+	sPSB[CurrentButtonNumber].isButtonPushed = isCurrentButtonPushed;
+	if((p_spsb->push_time_counter * p_sBME->base->ModuleLoopTimeInMS) >= p_spsb -> p_spat->ClickTimeThresholdInMS)
+	{
 
+	}
+	return current_state;
 }
 
 
@@ -80,6 +99,7 @@ X_Void ButtonStateMonitor(const sButtonModuleExtern *p_sbm,CombineButtonValue *v
 		CurrentButtonNumber = i;
 		isCurrentButtonPushed = (twobyte_getbit(CurrentButtonValue,CurrentButtonNumber) == 1) ? X_True : X_False;
 		SimpleStateMachineRun(p_sbm->p_monitor[i],X_Null,X_Null);
+		TimeManager(&sPSB[CurrentButtonNumber]);
 	}
 }
 X_Void SetCurrentButtonConfigMode(CombineButtonValue mode)

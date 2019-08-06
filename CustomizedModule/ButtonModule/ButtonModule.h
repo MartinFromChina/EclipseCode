@@ -14,16 +14,34 @@ typedef uint32_t        			 ButtonActionFlagMask;
 
 #include "ButtonStateMonitor.h"
 
+typedef enum
+{
+	MouseMode = 0, // click 	,double click 		, long push
+	KeyBoardMode ,  // click 	, continous click 	, long push
+}ButtonOperationMode;
+
 typedef struct
 {
-//	X_Boolean isNewParamAboutTimeUsed;
+	uint16_t ClickTimeThresholdInMS;
+	uint16_t ContinuousClickTimeThresholdInMS;
+	uint16_t ReleaseTimeThresholdInMS;
+	uint16_t DoubleClickTimeIntervalThresholdInMS;
+	uint16_t LongPushTimeThresholdInMS;
+}sParamAboutTime;
+
+typedef struct
+{
+	X_Boolean isButtonPushed;
+	uint16_t push_time_counter;
+	uint16_t release_time_counter;
 	ButtonOperationMode CurrentOM;
-	sParamAboutTime*  p_spat;
+	sParamAboutTime const *  p_spat;
 }sParamSingleButton;
 
 typedef struct
 {
 	uint8_t button_number;
+	uint8_t ModuleLoopTimeInMS;
 	X_Void (*init)(X_Void);
 	CombineButtonValue (*get_value)(X_Void);
 	X_Void (*config)(sParamSingleButton * p_spsb);
@@ -46,6 +64,7 @@ typedef struct
 
 #define CUSTOM_BUTTON_MODULE_DEF(	p_button_module						\
 									,button_number                      \
+									,loop_time_in_ms					\
 									,function_init						\
 									,function_get_value					\
 									,function_config					\
@@ -56,6 +75,7 @@ typedef struct
 									,function_long_push_release_cb)		\
 static const sButtonModule CONCAT_2(p_button_module, _entry) = {		\
 		button_number,													\
+		loop_time_in_ms,												\
 		function_init,													\
 		function_get_value,												\
 		function_config,												\

@@ -10,6 +10,7 @@
 typedef enum
 {
 	BM_Init,
+	BM_ClickDetected,
 
 }ButtonMonitorState;
 
@@ -17,6 +18,7 @@ StateNumber CustomizedBM_InitAction(StateNumber current_state);
 
 /*************************************************1**************************************************/
 #define CUSTOM_BUTTON_MONITOR_1_DEF(p_button_module						\
+									,loop_time_in_ms						\
 									,function_init						\
 									,function_get_value					\
 									,function_config					\
@@ -28,6 +30,7 @@ StateNumber CustomizedBM_InitAction(StateNumber current_state);
 )																		\
 		CUSTOM_BUTTON_MODULE_DEF(p_button_module						\
 								,1										\
+								,loop_time_in_ms						\
 								,function_init							\
 								,function_get_value						\
 								,function_config						\
@@ -63,6 +66,7 @@ static const sButtonModuleExtern * p_button_module = &CONCAT_2(p_button_module, 
 
 /*************************************************2**************************************************/
 #define CUSTOM_BUTTON_MONITOR_2_DEF(p_button_module						\
+									,loop_time_in_ms					\
 									,function_init						\
 									,function_get_value					\
 									,function_config					\
@@ -74,6 +78,7 @@ static const sButtonModuleExtern * p_button_module = &CONCAT_2(p_button_module, 
 )																		\
 		CUSTOM_BUTTON_MODULE_DEF(p_button_module						\
 								,2										\
+								,loop_time_in_ms						\
 								,function_init							\
 								,function_get_value						\
 								,function_config						\
@@ -115,6 +120,7 @@ static const sButtonModuleExtern * p_button_module = &CONCAT_2(p_button_module, 
 
 /*************************************************3**************************************************/
 #define CUSTOM_BUTTON_MONITOR_3_DEF(p_button_module						\
+									,loop_time_in_ms						\
 									,function_init						\
 									,function_get_value					\
 									,function_config					\
@@ -126,6 +132,7 @@ static const sButtonModuleExtern * p_button_module = &CONCAT_2(p_button_module, 
 )																		\
 		CUSTOM_BUTTON_MODULE_DEF(p_button_module						\
 								,3										\
+								,loop_time_in_ms						\
 								,function_init							\
 								,function_get_value						\
 								,function_config						\

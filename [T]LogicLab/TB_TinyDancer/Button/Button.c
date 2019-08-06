@@ -336,6 +336,7 @@ X_Void onTick(X_Void)
 */
 
 CUSTOM_BUTTON_MONITOR_2_DEF(p_monitor
+						   ,3
 						   ,X_Null
 						   ,GetCurrentButtonValue
 						   ,X_Null
