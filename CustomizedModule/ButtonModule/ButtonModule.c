@@ -12,6 +12,20 @@
 #define DoubleClickTimeIntervalInMsDefault   	120								//ms
 #define LongPushTimeLimitInMsDefault   			900								//ms
 /*************************************************************************/
+typedef enum
+{
+	BM_Init = 0,
+	BM_Start,
+	BM_ClickDetect,
+	BM_LongPushDetect,
+	BM_SureLongPush,
+	BM_LongPushReleaseDetect,
+	BM_SureLongPushRelease,
+	BM_ClickReleaseDetect,
+	BM_DoubleClickDetect,
+	BM_SureClick,
+}ButtonMonitorState;
+
 typedef struct
 {
 	uint32_t isClick;
@@ -36,11 +50,11 @@ static const sParamAboutTime sPAT_Default = {
 		LongPushTimeLimitInMsDefault,
 };
 
-static X_Void TimeManager(sParamSingleButton * p_psb)
+static X_Void TimeManager(sParamSingleButton * p_psb,X_Boolean isPushed)
 {
 	if(p_psb == X_Null) {return;}
 
-	if(p_psb->isButtonPushed == X_True)
+	if(isPushed == X_True)
 	{
 		p_psb->release_time_counter = 0;
 		if(p_psb->push_time_counter >= TIMER_COUNTER_MAX) {return;}
@@ -54,7 +68,6 @@ static X_Void TimeManager(sParamSingleButton * p_psb)
 		p_psb->release_time_counter ++;
 	}
 }
-
 
 StateNumber CustomizedBM_InitAction(StateNumber current_state)
 {
@@ -70,21 +83,56 @@ StateNumber CustomizedBM_InitAction(StateNumber current_state)
 	sPSB[CurrentButtonNumber].CurrentOM = (twobyte_getbit(CurrentButtonConfigMode,CurrentButtonNumber) == 0 ) ? MouseMode : KeyBoardMode;
 	sPSB[CurrentButtonNumber].push_time_counter = 0;
 	sPSB[CurrentButtonNumber].release_time_counter = 0;
-	sPSB[CurrentButtonNumber].isButtonPushed = X_False;
-	return BM_ClickDetected;
+	return BM_Start;
 }
-
-StateNumber CustomizedBM_ClickDetectedAction(StateNumber current_state)
+StateNumber CustomizedBM_StartAction(StateNumber current_state)
+{
+//	if(CurrentButtonNumber >= p_sBME->button_number) {return BM_Init;}
+//	sParamSingleButton * p_spsb = &sPSB[CurrentButtonNumber];
+//	if((p_spsb->push_time_counter * p_sBME->base->ModuleLoopTimeInMS) >= p_spsb -> p_spat->ClickTimeThresholdInMS)
+	return BM_ClickDetect;
+}
+StateNumber CustomizedBM_ClickDetectAction(StateNumber current_state)
 {
 	if(CurrentButtonNumber >= p_sBME->button_number) {return BM_Init;}
 	sParamSingleButton * p_spsb = &sPSB[CurrentButtonNumber];
-	sPSB[CurrentButtonNumber].isButtonPushed = isCurrentButtonPushed;
-	if((p_spsb->push_time_counter * p_sBME->base->ModuleLoopTimeInMS) >= p_spsb -> p_spat->ClickTimeThresholdInMS)
-	{
-
-	}
-	return current_state;
 }
+StateNumber CustomizedBM_LongPushDetectAction(StateNumber current_state)
+{
+	if(CurrentButtonNumber >= p_sBME->button_number) {return BM_Init;}
+	sParamSingleButton * p_spsb = &sPSB[CurrentButtonNumber];
+}
+StateNumber CustomizedBM_SureLongPushAction(StateNumber current_state)
+{
+	if(CurrentButtonNumber >= p_sBME->button_number) {return BM_Init;}
+	sParamSingleButton * p_spsb = &sPSB[CurrentButtonNumber];
+}
+StateNumber CustomizedBM_LongPushReleaseDetectAction(StateNumber current_state)
+{
+	if(CurrentButtonNumber >= p_sBME->button_number) {return BM_Init;}
+	sParamSingleButton * p_spsb = &sPSB[CurrentButtonNumber];
+}
+StateNumber CustomizedBM_SureLongPushReleaseAction(StateNumber current_state)
+{
+	if(CurrentButtonNumber >= p_sBME->button_number) {return BM_Init;}
+	sParamSingleButton * p_spsb = &sPSB[CurrentButtonNumber];
+}
+StateNumber CustomizedBM_ClickReleaseDetectAction(StateNumber current_state)
+{
+	if(CurrentButtonNumber >= p_sBME->button_number) {return BM_Init;}
+	sParamSingleButton * p_spsb = &sPSB[CurrentButtonNumber];
+}
+StateNumber CustomizedBM_DoubleClickDetectAction(StateNumber current_state)
+{
+	if(CurrentButtonNumber >= p_sBME->button_number) {return BM_Init;}
+	sParamSingleButton * p_spsb = &sPSB[CurrentButtonNumber];
+}
+StateNumber CustomizedBM_SureClickAction(StateNumber current_state)
+{
+	if(CurrentButtonNumber >= p_sBME->button_number) {return BM_Init;}
+	sParamSingleButton * p_spsb = &sPSB[CurrentButtonNumber];
+}
+
 
 
 X_Void ButtonStateMonitor(const sButtonModuleExtern *p_sbm,CombineButtonValue *value)
@@ -99,13 +147,33 @@ X_Void ButtonStateMonitor(const sButtonModuleExtern *p_sbm,CombineButtonValue *v
 		CurrentButtonNumber = i;
 		isCurrentButtonPushed = (twobyte_getbit(CurrentButtonValue,CurrentButtonNumber) == 1) ? X_True : X_False;
 		SimpleStateMachineRun(p_sbm->p_monitor[i],X_Null,X_Null);
-		TimeManager(&sPSB[CurrentButtonNumber]);
+		TimeManager(&sPSB[CurrentButtonNumber],isCurrentButtonPushed);
 	}
 }
 X_Void SetCurrentButtonConfigMode(CombineButtonValue mode)
 {
 	CurrentButtonConfigMode = mode;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
 #define FourByteMask							((uint32_t)(1u << 0))
 static uint8_t byte4_getbit(uint32_t source,uint8_t bitnumber)

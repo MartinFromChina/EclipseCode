@@ -31,7 +31,6 @@ typedef struct
 
 typedef struct
 {
-	X_Boolean isButtonPushed;
 	uint16_t push_time_counter;
 	uint16_t release_time_counter;
 	ButtonOperationMode CurrentOM;
