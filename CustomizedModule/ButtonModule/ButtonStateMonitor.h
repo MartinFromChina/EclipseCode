@@ -26,7 +26,6 @@ StateNumber CustomizedBM_SureDoubleClickAction(StateNumber current_state);
 									,function_get_value					\
 									,function_config					\
 									,function_click_cb					\
-									,function_continus_click_cb			\
 									,function_double_click_cb			\
 									,fucntion_long_push_cb				\
 									,function_long_push_release_cb		\
@@ -38,7 +37,6 @@ StateNumber CustomizedBM_SureDoubleClickAction(StateNumber current_state);
 								,function_get_value						\
 								,function_config						\
 								,function_click_cb						\
-								,function_continus_click_cb				\
 								,function_double_click_cb				\
 								,fucntion_long_push_cb					\
 								,function_long_push_release_cb			\
@@ -80,7 +78,6 @@ static const sButtonModuleExtern * p_button_module = &CONCAT_2(p_button_module, 
 									,function_get_value					\
 									,function_config					\
 									,function_click_cb					\
-									,function_continus_click_cb			\
 									,function_double_click_cb			\
 									,fucntion_long_push_cb				\
 									,function_long_push_release_cb		\
@@ -92,7 +89,6 @@ static const sButtonModuleExtern * p_button_module = &CONCAT_2(p_button_module, 
 								,function_get_value						\
 								,function_config						\
 								,function_click_cb						\
-								,function_continus_click_cb				\
 								,function_double_click_cb				\
 								,fucntion_long_push_cb					\
 								,function_long_push_release_cb			\
@@ -140,7 +136,6 @@ static const sButtonModuleExtern * p_button_module = &CONCAT_2(p_button_module, 
 									,function_get_value					\
 									,function_config					\
 									,function_click_cb					\
-									,function_continus_click_cb			\
 									,function_double_click_cb			\
 									,fucntion_long_push_cb				\
 									,function_long_push_release_cb		\
@@ -152,7 +147,6 @@ static const sButtonModuleExtern * p_button_module = &CONCAT_2(p_button_module, 
 								,function_get_value						\
 								,function_config						\
 								,function_click_cb						\
-								,function_continus_click_cb				\
 								,function_double_click_cb				\
 								,fucntion_long_push_cb					\
 								,function_long_push_release_cb			\

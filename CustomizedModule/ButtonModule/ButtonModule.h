@@ -37,7 +37,6 @@ typedef struct
 	CombineButtonValue (*get_value)(X_Void);
 	X_Void (*config)(sParamSingleButton * p_spsb);
 	X_Void (*click)(const CombineButtonValue value);
-	X_Void (*continus_click)(const CombineButtonValue value);
 	X_Void (*double_click)(const CombineButtonValue value);
 	X_Void (*long_push)(const CombineButtonValue value);
 	X_Void (*long_push_release)(const CombineButtonValue value,uint16_t const*longpushtickcycle);
@@ -60,7 +59,6 @@ typedef struct
 									,function_get_value					\
 									,function_config					\
 									,function_click_cb					\
-									,function_continus_click_cb			\
 									,function_double_click_cb			\
 									,fucntion_long_push_cb				\
 									,function_long_push_release_cb)		\
@@ -71,7 +69,6 @@ static const sButtonModule CONCAT_2(p_button_module, _entry) = {		\
 		function_get_value,												\
 		function_config,												\
 		function_click_cb,												\
-		function_continus_click_cb,										\
 		function_double_click_cb,										\
 		fucntion_long_push_cb,											\
 		function_long_push_release_cb,									\

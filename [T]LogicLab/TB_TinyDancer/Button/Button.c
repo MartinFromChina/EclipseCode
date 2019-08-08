@@ -342,7 +342,6 @@ CUSTOM_BUTTON_MONITOR_2_DEF(p_monitor
 						   ,X_Null
 						   ,X_Null
 						   ,X_Null
-						   ,X_Null
 						   ,LongPushBehavior
 						   ,X_Null);
 
