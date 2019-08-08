@@ -14,26 +14,18 @@ typedef uint32_t        			 ButtonActionFlagMask;
 
 #include "ButtonStateMonitor.h"
 
-typedef enum
-{
-	MouseMode = 0, // click 	,double click 		, long push
-	KeyBoardMode ,  // click 	, continous click 	, long push
-}ButtonOperationMode;
-
 typedef struct
 {
 	uint16_t ClickTimeThresholdInMS;
-	uint16_t ContinuousClickTimeThresholdInMS;
 	uint16_t ReleaseTimeThresholdInMS;
-	uint16_t DoubleClickTimeIntervalThresholdInMS;
 	uint16_t LongPushTimeThresholdInMS;
+	uint16_t ReleaseAllTimeThresholdInMS;
 }sParamAboutTime;
 
 typedef struct
 {
 	uint16_t push_time_counter;
 	uint16_t release_time_counter;
-	ButtonOperationMode CurrentOM;
 	sParamAboutTime const *  p_spat;
 }sParamSingleButton;
 
@@ -44,11 +36,11 @@ typedef struct
 	X_Void (*init)(X_Void);
 	CombineButtonValue (*get_value)(X_Void);
 	X_Void (*config)(sParamSingleButton * p_spsb);
-	X_Void (*click)(CombineButtonValue value);
-	X_Void (*continus_click)(CombineButtonValue value);
-	X_Void (*double_click)(CombineButtonValue value);
-	X_Void (*long_push)(CombineButtonValue value);
-	X_Void (*long_push_release)(CombineButtonValue value,uint16_t const*longpushtickcycle);
+	X_Void (*click)(const CombineButtonValue value);
+	X_Void (*continus_click)(const CombineButtonValue value);
+	X_Void (*double_click)(const CombineButtonValue value);
+	X_Void (*long_push)(const CombineButtonValue value);
+	X_Void (*long_push_release)(const CombineButtonValue value,uint16_t const*longpushtickcycle);
 
 }sButtonModule;
 

@@ -41,7 +41,6 @@ void AllTimerConfig(void)
 //	SystemTimerStart(systimer1);
 //	SystemTimerStart(systimer2);
 
-	AppTimerInit();
 	timer1_counter = 0;
 	timer2_counter = 0;
 	AppTimerCreated(timer1,500,timer1_callback);

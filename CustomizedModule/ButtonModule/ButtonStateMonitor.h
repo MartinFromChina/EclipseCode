@@ -5,7 +5,7 @@
 #include "..\..\CommonSource\StateMachine\StateMachine.h"
 #include "ButtonModule.h"
 
-#define MAX_BUTTON_MONITOR_HOP_TIMES_IN_ONE_CALL   10
+#define MAX_BUTTON_MONITOR_HOP_TIMES_IN_ONE_CALL   2
 
 StateNumber CustomizedBM_InitAction(StateNumber current_state);
 StateNumber CustomizedBM_StartAction(StateNumber current_state);
@@ -17,6 +17,7 @@ StateNumber CustomizedBM_SureLongPushReleaseAction(StateNumber current_state);
 StateNumber CustomizedBM_ClickReleaseDetectAction(StateNumber current_state);
 StateNumber CustomizedBM_DoubleClickDetectAction(StateNumber current_state);
 StateNumber CustomizedBM_SureClickAction(StateNumber current_state);
+StateNumber CustomizedBM_SureDoubleClickAction(StateNumber current_state);
 
 /*************************************************1**************************************************/
 #define CUSTOM_BUTTON_MONITOR_1_DEF(p_button_module						\
@@ -53,6 +54,7 @@ static const StateAction CONCAT_2(p_button_module, _ButtonStateAction)[] = {	\
 		{CustomizedBM_ClickReleaseDetectAction},								\
 		{CustomizedBM_DoubleClickDetectAction},									\
 		{CustomizedBM_SureClickAction},											\
+		{CustomizedBM_SureDoubleClickAction},									\
 };																				\
 																				\
 /***********0************/														\
@@ -106,6 +108,7 @@ static const StateAction CONCAT_2(p_button_module, _ButtonStateAction)[] = {	\
 		{CustomizedBM_ClickReleaseDetectAction},								\
 		{CustomizedBM_DoubleClickDetectAction},									\
 		{CustomizedBM_SureClickAction},											\
+		{CustomizedBM_SureDoubleClickAction},									\
 };																				\
 																				\
 /***********0************/															\
@@ -165,6 +168,7 @@ static const StateAction CONCAT_2(p_button_module, _ButtonStateAction)[] = {	\
 		{CustomizedBM_ClickReleaseDetectAction},								\
 		{CustomizedBM_DoubleClickDetectAction},									\
 		{CustomizedBM_SureClickAction},											\
+		{CustomizedBM_SureDoubleClickAction},									\
 };																				\
 																				\
 /***********0************/															\
