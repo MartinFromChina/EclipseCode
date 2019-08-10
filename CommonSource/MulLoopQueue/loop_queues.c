@@ -78,7 +78,7 @@ X_Void 		SimpleQueueInitialize(const sListManager *p_manager)
 uint16_t    SimpleQueueFirstIn(const sListManager *p_manager,X_Boolean *isOK,X_Boolean is_OccupyPermit)
 {
 	uint16_t buf_number,current_free_node_number;
-	if(p_manager == X_Null) {return 0;}
+	if(p_manager == X_Null) {*isOK = X_False; return 0;}
 
 	buf_number = 0;
 	current_free_node_number = p_manager->p_LMP->first_in_node_num;
@@ -132,7 +132,7 @@ uint16_t    SimpleQueueFirstIn(const sListManager *p_manager,X_Boolean *isOK,X_B
 uint16_t    SimpleQueueFirstOut(const sListManager *p_manager,X_Boolean *isOK)
 {
 	uint16_t buf_number,current_filled_node_number;
-	if(p_manager == X_Null) {return 0;}
+	if(p_manager == X_Null) {*isOK = X_False; return 0;}
 
 	buf_number = 0;
 	current_filled_node_number = p_manager->p_LMP->first_out_node_num;
@@ -172,5 +172,10 @@ uint16_t GetSimpleQueueUsedNodeNumber(const sListManager *p_manager)
 {
 	if(p_manager == X_Null) {return 0;}
 	return p_manager->p_LMP->used_node_num;
+}
+X_Boolean   DoesSimpleQueueEmpty(const sListManager *p_manager)
+{
+	if(p_manager == X_Null) {return X_True;}
+	return (p_manager->p_LMP->state == QueueEmpty);
 }
 

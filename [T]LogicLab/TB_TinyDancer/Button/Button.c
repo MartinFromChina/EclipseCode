@@ -49,7 +49,7 @@ const LongPushDoing[]={
 	{Button6_LongPushDoing},
 };
 
-static void LongPushBehavior(CombineButtonValue value)
+static void LongPushBehavior(const CombineButtonValue value)
 {
 	uint8_t i;
 	SEGGER_RTT_Debug(BUTTON_BEHAVIOR_DEBUG,(30,"LongPush : %2x\r\n",value));
@@ -343,6 +343,7 @@ CUSTOM_BUTTON_MONITOR_2_DEF(p_monitor
 						   ,X_Null
 						   ,X_Null
 						   ,LongPushBehavior
+						   ,X_Null
 						   ,X_Null);
 
 

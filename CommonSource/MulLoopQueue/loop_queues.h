@@ -39,5 +39,6 @@ uint16_t    SimpleQueueFirstOut(const sListManager *p_manager,X_Boolean *isOK);
 X_Void      ClearSimpleQueue(const sListManager *p_manager);
 X_Void      RealseSimpleQueueBuf(const sListManager *p_manager,uint8_t buf_num);
 uint16_t    GetSimpleQueueUsedNodeNumber(const sListManager *p_manager);
+X_Boolean   DoesSimpleQueueEmpty(const sListManager *p_manager);
 
 #endif

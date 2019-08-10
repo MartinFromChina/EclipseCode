@@ -9,9 +9,6 @@
 typedef uint32_t        			 ButtonActionFlagMask;
 #define ButtonMask					 ((ButtonActionFlagMask)(1u << 0))
 
-#define ButtonSampleFrequencyInMs        (24)
-#define LongPushMonitorResetInterval     500 // tick cycle
-
 #include "ButtonStateMonitor.h"
 
 typedef struct
@@ -26,6 +23,7 @@ typedef struct
 {
 	uint16_t push_time_counter;
 	uint16_t release_time_counter;
+	uint16_t latest_push_time_counter_backup;
 	sParamAboutTime const *  p_spat;
 }sParamSingleButton;
 
@@ -40,6 +38,7 @@ typedef struct
 	X_Void (*double_click)(const CombineButtonValue value);
 	X_Void (*long_push)(const CombineButtonValue value);
 	X_Void (*long_push_release)(const CombineButtonValue value,uint16_t const*longpushtickcycle);
+	X_Void (*StateRecorder)(StateNumber current_state,StateNumber next_state);
 
 }sButtonModule;
 
@@ -47,7 +46,7 @@ typedef struct
 {
 	const sButtonModule  	*base;
 	const uint8_t          	button_number;
-	const StateSimpleParam  *p_monitor[];
+	const StateSimpleParam  *p_monitor[MAX_BUTTON_NUMBER];
 }sButtonModuleExtern;
 
 
@@ -61,7 +60,8 @@ typedef struct
 									,function_click_cb					\
 									,function_double_click_cb			\
 									,fucntion_long_push_cb				\
-									,function_long_push_release_cb)		\
+									,function_long_push_release_cb		\
+									,function_state_recorder)				\
 static const sButtonModule CONCAT_2(p_button_module, _entry) = {		\
 		button_number,													\
 		loop_time_in_ms,												\
@@ -72,11 +72,12 @@ static const sButtonModule CONCAT_2(p_button_module, _entry) = {		\
 		function_double_click_cb,										\
 		fucntion_long_push_cb,											\
 		function_long_push_release_cb,									\
+		function_state_recorder,										\
 };
 
 
 X_Void ButtonStateMonitor(const sButtonModuleExtern *p_sbm,CombineButtonValue *value);
 X_Void SetCurrentButtonConfigMode(CombineButtonValue mode);
-
+uint8_t GetCurrentButtonNumber(X_Void);
 
 #endif
