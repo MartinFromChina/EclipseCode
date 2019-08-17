@@ -44,8 +44,6 @@ typedef struct
 
 static X_Boolean isCurrentButtonPushed = X_False;
 static CombineButtonValue CurrentButtonValue = 0;
-static uint8_t CurrentButtonNumber = 0;
-static sParamSingleButton sPSB[MAX_BUTTON_NUMBER];
 static const sButtonModuleExtern *p_sBME;
 static sButtonStateFlag sBSF = {0,0,0,0};
 
@@ -55,6 +53,15 @@ static const sParamAboutTime sPAT_Default = {
 		VALID_LONG_PUSH_IN_MS_DEFAULT,
 		VALID_LONG_RELEASE_IN_MS_DEFAULT,
 };
+
+typedef struct
+{
+	s_StateMachineParam base;
+	uint8_t CurrentButtonNumber;
+	sParamSingleButton s_psb;
+}sParamExtern;
+
+static sParamExtern sPE[MAX_BUTTON_NUMBER];
 
 static X_Boolean DoesValidPush(const sParamSingleButton * p_psb)
 {
@@ -163,99 +170,106 @@ static X_Void ButtonFlagReport(const sButtonModuleExtern *p_sbm)
 	ButtonFlagInit();
 }
 
-StateNumber CustomizedBM_InitAction(StateNumber current_state)
+StateNumber CustomizedBM_InitAction(s_StateMachineParam *p_this)
 {
-	if(CurrentButtonNumber >= p_sBME->button_number) {return BM_Init;}
+	sParamExtern *p_spe = (sParamExtern*)p_this;
 	if(p_sBME->base->config == X_Null)
 	{
-		sPSB[CurrentButtonNumber].p_spat = &sPAT_Default;
+		p_spe->s_psb.p_spat = &sPAT_Default;
 	}
 	else
 	{
-		p_sBME->base->config(&sPSB[CurrentButtonNumber]);// to do :get something param from flash or set it into flash
+		p_sBME->base->config(&p_spe->s_psb);// to do :get something param from flash or set it into flash
 	}
-	sPSB[CurrentButtonNumber].push_time_counter = 0;
-	sPSB[CurrentButtonNumber].release_time_counter = 0;
-	sPSB[CurrentButtonNumber].latest_push_time_counter_backup = 0;
+	p_spe->s_psb.push_time_counter = 0;
+	p_spe->s_psb.release_time_counter = 0;
+	p_spe->s_psb.latest_push_time_counter_backup = 0;
 	ButtonFlagInit();
 	return BM_Start;
 }
-StateNumber CustomizedBM_StartAction(StateNumber current_state)
+StateNumber CustomizedBM_StartAction(s_StateMachineParam *p_this)
 {
 //	if(CurrentButtonNumber >= p_sBME->button_number) {return BM_Init;}
 //	sParamSingleButton * p_spsb = &sPSB[CurrentButtonNumber];
 //	if((p_spsb->push_time_counter * p_sBME->base->ModuleLoopTimeInMS) >= p_spsb -> p_spat->ClickTimeThresholdInMS)
 	return BM_ClickDetect;
 }
-StateNumber CustomizedBM_ClickDetectAction(StateNumber current_state)
+StateNumber CustomizedBM_ClickDetectAction(s_StateMachineParam *p_this)
 {
-	if(CurrentButtonNumber >= p_sBME->button_number) {return BM_Init;}
-	if(DoesValidPush(&sPSB[CurrentButtonNumber]) == X_True)
+	sParamExtern *p_spe = (sParamExtern*)p_this;
+	if(DoesValidPush(&p_spe->s_psb) == X_True)
 	{
-		ClearPushCounter(&sPSB[CurrentButtonNumber]);
+		ClearPushCounter(&p_spe->s_psb);
 		return BM_LongPushDetect;
 	}
-	if(DoesValidLongRelease(&sPSB[CurrentButtonNumber]) == X_True) {return BM_Start;}
-	return current_state;
+	if(DoesValidLongRelease(&p_spe->s_psb) == X_True) {return BM_Start;}
+	return p_this->current_state;
 }
-StateNumber CustomizedBM_LongPushDetectAction(StateNumber current_state)
+StateNumber CustomizedBM_LongPushDetectAction(s_StateMachineParam *p_this)
 {
-	if(CurrentButtonNumber >= p_sBME->button_number) {return BM_Init;}
-	if(DoesValidLongPush(&sPSB[CurrentButtonNumber]) == X_True) {return BM_SureLongPush;}
-	if(DoesValidRelease(&sPSB[CurrentButtonNumber]) == X_True)
+	sParamExtern *p_spe = (sParamExtern*)p_this;
+	if(DoesValidLongPush(&p_spe->s_psb) == X_True) {return BM_SureLongPush;}
+	if(DoesValidRelease(&p_spe->s_psb) == X_True)
 	{
-		ClearReleaseCounter(&sPSB[CurrentButtonNumber]);
+		ClearReleaseCounter(&p_spe->s_psb);
 		return BM_ClickReleaseDetect;
 	}
-	return current_state;
+	return p_this->current_state;
 }
-StateNumber CustomizedBM_SureLongPushAction(StateNumber current_state)
+StateNumber CustomizedBM_SureLongPushAction(s_StateMachineParam *p_this)
 {
 	// to do : tell user
-	ButtonFlagSet(BA_longpush,CurrentButtonNumber,0);
+	sParamExtern *p_spe = (sParamExtern*)p_this;
+	ButtonFlagSet(BA_longpush,p_spe->CurrentButtonNumber,0);
 	return BM_LongPushReleaseDetect;
 }
-StateNumber CustomizedBM_LongPushReleaseDetectAction(StateNumber current_state)
+StateNumber CustomizedBM_LongPushReleaseDetectAction(s_StateMachineParam *p_this)
 {
-	if(CurrentButtonNumber >= p_sBME->button_number) {return BM_Init;}
-	if(DoesValidRelease(&sPSB[CurrentButtonNumber]) == X_True) {return BM_SureLongPushRelease;}
-	return current_state;
+	sParamExtern *p_spe = (sParamExtern*)p_this;
+	if(p_spe->CurrentButtonNumber >= p_sBME->button_number) {return BM_Init;}
+	if(DoesValidRelease(&p_spe->s_psb) == X_True) {return BM_SureLongPushRelease;}
+	return p_this->current_state;
 }
-StateNumber CustomizedBM_SureLongPushReleaseAction(StateNumber current_state)
+StateNumber CustomizedBM_SureLongPushReleaseAction(s_StateMachineParam *p_this)
 {
-	if(CurrentButtonNumber >= p_sBME->button_number) {return BM_Init;}
+	sParamExtern *p_spe = (sParamExtern*)p_this;
+	if(p_spe->CurrentButtonNumber >= p_sBME->button_number) {return BM_Init;}
 	// to do : tell user
-	ButtonFlagSet(BA_longpushrelease,CurrentButtonNumber,sPSB[CurrentButtonNumber].latest_push_time_counter_backup);
+	ButtonFlagSet(BA_longpushrelease,p_spe->CurrentButtonNumber,p_spe->s_psb.latest_push_time_counter_backup);
 	return BM_Start;
 }
-StateNumber CustomizedBM_ClickReleaseDetectAction(StateNumber current_state)
+StateNumber CustomizedBM_ClickReleaseDetectAction(s_StateMachineParam *p_this)
 {
-	if(CurrentButtonNumber >= p_sBME->button_number) {return BM_Init;}
-	if(DoesValidLongRelease(&sPSB[CurrentButtonNumber]) == X_True) {return BM_SureClick;}
-	if(DoesValidPush(&sPSB[CurrentButtonNumber]) == X_True)
+	sParamExtern *p_spe = (sParamExtern*)p_this;
+	if(p_spe->CurrentButtonNumber >= p_sBME->button_number) {return BM_Init;}
+	if(DoesValidLongRelease(&p_spe->s_psb) == X_True) {return BM_SureClick;}
+	if(DoesValidPush(&p_spe->s_psb) == X_True)
 	{
-		ClearPushCounter(&sPSB[CurrentButtonNumber]);
+		ClearPushCounter(&p_spe->s_psb);
 		return BM_DoubleClickDetect;
 	}
-	return current_state;
+	return p_this->current_state;
 }
-StateNumber CustomizedBM_DoubleClickDetectAction(StateNumber current_state)
+StateNumber CustomizedBM_DoubleClickDetectAction(s_StateMachineParam *p_this)
 {
-	if(CurrentButtonNumber >= p_sBME->button_number) {return BM_Init;}
-	if(DoesValidRelease(&sPSB[CurrentButtonNumber]) == X_True) {return BM_SureDoubleClick;}
-	if(DoesValidLongPush(&sPSB[CurrentButtonNumber]) == X_True){return BM_SureLongPush;}
-	return current_state;
+	sParamExtern *p_spe = (sParamExtern*)p_this;
+	if(p_spe->CurrentButtonNumber >= p_sBME->button_number) {return BM_Init;}
+	if(DoesValidRelease(&p_spe->s_psb) == X_True) {return BM_SureDoubleClick;}
+	if(DoesValidLongPush(&p_spe->s_psb) == X_True){return BM_SureLongPush;}
+	return p_this->current_state;
 }
-StateNumber CustomizedBM_SureClickAction(StateNumber current_state)
+StateNumber CustomizedBM_SureClickAction(s_StateMachineParam *p_this)
 {
 	// to do : tell user
-	ButtonFlagSet(BA_click,CurrentButtonNumber,0);
+	sParamExtern *p_spe = (sParamExtern*)p_this;
+	ButtonFlagSet(BA_click,p_spe->CurrentButtonNumber,0);
 	return BM_Start;
 }
-StateNumber CustomizedBM_SureDoubleClickAction(StateNumber current_state)
+StateNumber CustomizedBM_SureDoubleClickAction(s_StateMachineParam *p_this)
 {
 	// to do : tell user
-	ButtonFlagSet(BA_doubleclick,CurrentButtonNumber,0);
+	sParamExtern *p_spe = (sParamExtern*)p_this;
+	ButtonFlagSet(BA_doubleclick,p_spe->CurrentButtonNumber,0);
 	return BM_Start;
 }
 
@@ -268,15 +282,10 @@ X_Void ButtonStateMonitor(const sButtonModuleExtern *p_sbm,CombineButtonValue *v
 	p_sBME = p_sbm;
 	for(i=0;i<p_sbm->button_number;i++)
 	{
-		CurrentButtonNumber = i;
-		isCurrentButtonPushed = (twobyte_getbit(CurrentButtonValue,CurrentButtonNumber) == 1) ? X_True : X_False;
-		SimpleStateMachineRun(p_sbm->p_monitor[i],X_Null,p_sbm->base->StateRecorder);
-		TimeManager(&sPSB[CurrentButtonNumber],isCurrentButtonPushed);
+		sPE[i].CurrentButtonNumber = i;
+		isCurrentButtonPushed = (twobyte_getbit(CurrentButtonValue,i) == 1) ? X_True : X_False;
+		SimpleStateMachineRun(p_sbm->p_monitor[i],&sPE[i].base,X_Null,p_sbm->base->StateRecorder);
+		TimeManager(&sPE[i].s_psb,isCurrentButtonPushed);
 	}
 	ButtonFlagReport(p_sbm);
-}
-
-uint8_t GetCurrentButtonNumber(X_Void)
-{
-	return CurrentButtonNumber;
 }

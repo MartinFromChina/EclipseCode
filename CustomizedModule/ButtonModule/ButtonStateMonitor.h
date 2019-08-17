@@ -7,17 +7,17 @@
 
 #define MAX_BUTTON_MONITOR_HOP_TIMES_IN_ONE_CALL   2
 
-StateNumber CustomizedBM_InitAction(StateNumber current_state);
-StateNumber CustomizedBM_StartAction(StateNumber current_state);
-StateNumber CustomizedBM_ClickDetectAction(StateNumber current_state);
-StateNumber CustomizedBM_LongPushDetectAction(StateNumber current_state);
-StateNumber CustomizedBM_SureLongPushAction(StateNumber current_state);
-StateNumber CustomizedBM_LongPushReleaseDetectAction(StateNumber current_state);
-StateNumber CustomizedBM_SureLongPushReleaseAction(StateNumber current_state);
-StateNumber CustomizedBM_ClickReleaseDetectAction(StateNumber current_state);
-StateNumber CustomizedBM_DoubleClickDetectAction(StateNumber current_state);
-StateNumber CustomizedBM_SureClickAction(StateNumber current_state);
-StateNumber CustomizedBM_SureDoubleClickAction(StateNumber current_state);
+StateNumber CustomizedBM_InitAction(s_StateMachineParam *p_this);
+StateNumber CustomizedBM_StartAction(s_StateMachineParam *p_this);
+StateNumber CustomizedBM_ClickDetectAction(s_StateMachineParam *p_this);
+StateNumber CustomizedBM_LongPushDetectAction(s_StateMachineParam *p_this);
+StateNumber CustomizedBM_SureLongPushAction(s_StateMachineParam *p_this);
+StateNumber CustomizedBM_LongPushReleaseDetectAction(s_StateMachineParam *p_this);
+StateNumber CustomizedBM_SureLongPushReleaseAction(s_StateMachineParam *p_this);
+StateNumber CustomizedBM_ClickReleaseDetectAction(s_StateMachineParam *p_this);
+StateNumber CustomizedBM_DoubleClickDetectAction(s_StateMachineParam *p_this);
+StateNumber CustomizedBM_SureClickAction(s_StateMachineParam *p_this);
+StateNumber CustomizedBM_SureDoubleClickAction(s_StateMachineParam *p_this);
 
 /*************************************************1**************************************************/
 #define CUSTOM_BUTTON_MONITOR_1_DEF(p_button_module						\

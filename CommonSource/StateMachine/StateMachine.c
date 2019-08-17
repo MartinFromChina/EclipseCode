@@ -8,6 +8,7 @@ static X_Boolean DoesBreakDefault(const StateBasicParam *p_sbp,StateNumber nexts
 }
 
 uint8_t StateMachineRun( const StateBasicParam *p_sbp
+						,s_StateMachineParam *p_smp
 						,X_Boolean isNullEventForbid
 						,X_Boolean (*DoesBreak)(const StateBasicParam *p_sbp,StateNumber nextstate,uint16_t loop_counter)
 						,X_Void(*StateRecorder)(StateNumber current_state,StateNumber next_state))
@@ -16,7 +17,7 @@ uint8_t StateMachineRun( const StateBasicParam *p_sbp
 	StateNumber i,current_state,previous_state;
 	X_Boolean isStateJumpWrong,isReachNullEvent;
 
-	if(p_sbp == X_Null) {return APP_POINTER_NULL;}
+	if(p_sbp == X_Null || p_smp == X_Null) {return APP_POINTER_NULL;}
 	if(p_sbp->p_Handle == X_Null){return APP_POINTER_NULL;}
 	if(p_sbp->AllStateNum > MAX_STATE_NUMBER || p_sbp->AllStateNum == 0) {return APP_BEYOND_SCOPE;}
 	if(p_sbp->MaxEventNum > MAX_STATE_EVENT_NUMBER || p_sbp->MaxEventNum == 0) {return APP_BEYOND_SCOPE;}
@@ -36,7 +37,8 @@ uint8_t StateMachineRun( const StateBasicParam *p_sbp
 		if(p_sbp ->p_Handle[current_state].SAction[i].Action != X_Null)
 		{
 			previous_state = current_state;
-			current_state = p_sbp ->p_Handle[current_state].SAction[i].Action(current_state);
+			p_smp->current_state = current_state;
+			current_state = p_sbp ->p_Handle[current_state].SAction[i].Action(p_smp);
 			Counter ++;
 			if((current_state+1) > p_sbp->AllStateNum)
 			{
@@ -77,6 +79,7 @@ uint8_t StateMachineRun( const StateBasicParam *p_sbp
 }
 
 uint8_t SimpleStateMachineRun(const StateSimpleParam *p_ssp
+						,s_StateMachineParam *p_smp
 						,X_Boolean (*DoesBreak)(const StateSimpleParam *p_sbp,StateNumber nextstate,uint16_t loop_counter)
 						,X_Void(*StateRecorder)(StateNumber current_state,StateNumber next_state))
 {
@@ -84,7 +87,7 @@ uint8_t SimpleStateMachineRun(const StateSimpleParam *p_ssp
 	StateNumber i,current_state,previous_state;
 	X_Boolean isStateJumpWrong;
 
-	if(p_ssp == X_Null) {return APP_POINTER_NULL;}
+	if(p_ssp == X_Null || p_smp == X_Null) {return APP_POINTER_NULL;}
 	if(p_ssp->p_Action == X_Null){return APP_POINTER_NULL;}
 	if(p_ssp->AllStateNum > MAX_STATE_NUMBER || p_ssp->AllStateNum == 0) {return APP_BEYOND_SCOPE;}
 	if((*p_ssp->p_CurrentStateNum) > MAX_STATE_NUMBER)
@@ -103,7 +106,8 @@ uint8_t SimpleStateMachineRun(const StateSimpleParam *p_ssp
 		{
 			previous_state = current_state;
 			(*p_ssp->p_CurrentStateNum) = current_state;
-			current_state = p_ssp ->p_Action[current_state].Action(current_state);
+			p_smp->current_state = current_state;
+			current_state = p_ssp ->p_Action[current_state].Action(p_smp);
 			Counter ++;
 			if((current_state+1) > p_ssp->AllStateNum)
 			{

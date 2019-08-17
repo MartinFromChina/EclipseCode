@@ -10,9 +10,13 @@
 #define DEFAULT_STATE_NUMBER        0
 
 typedef uint8_t 			StateNumber;
+typedef  struct
+{
+	StateNumber current_state;
+}s_StateMachineParam;
 
 typedef  struct {
-	StateNumber (*Action)(StateNumber current_state);
+	StateNumber (*Action)(s_StateMachineParam *p_this);
 }StateAction;
 typedef struct {
 	StateAction SAction[MAX_STATE_EVENT_NUMBER];
@@ -32,6 +36,7 @@ static const StateBasicParam    CONCAT_2(id, _entry) = {state_number,event_numbe
 static const StateBasicParam* id = &CONCAT_2(id, _entry)
 
 uint8_t StateMachineRun( const StateBasicParam *p_sbp
+						,s_StateMachineParam *p_smp
 						,X_Boolean isNullEventForbid
 						,X_Boolean (*DoesBreak)(const StateBasicParam *p_sbp,StateNumber nextstate,uint16_t loop_counter)
 						,X_Void(*StateRecorder)(StateNumber current_state,StateNumber next_state));
@@ -55,12 +60,15 @@ static const StateSimpleParam* id = &CONCAT_2(id, _entry)
 
 
 uint8_t SimpleStateMachineRun( const StateSimpleParam *p_ssp
+						,s_StateMachineParam *p_smp
 						,X_Boolean (*DoesBreak)(const StateSimpleParam *p_sbp,StateNumber nextstate,uint16_t loop_counter)
 						,X_Void(*StateRecorder)(StateNumber current_state,StateNumber next_state));
 
 //uint8_t StateMachineSetState(X_Boolean isSimpleMachine,StateNumber state,const X_Void *p_This);
 
 /*
+ * static s_StateMachineParam s_SMP;
+ *
  static const StateHandle ExampleStateHandle[2] = {
 
 		{{{X_Null},{X_Null},{X_Null},{X_Null},{X_Null},{X_Null}}},  // if the position is empty , the pointer's init value is X_Null?
@@ -75,7 +83,7 @@ static X_Void StateJumpRecorder(StateNumber current_state,StateNumber next_state
 	// going to jump new state:next_state
 }
 
-StateMachineRun(p_example_state,X_False,X_Null,StateJumpRecorder);
+StateMachineRun(p_example_state,&s_SMP,X_False,X_Null,StateJumpRecorder);
 
  */
 
@@ -96,7 +104,17 @@ static X_Boolean DoesBreakSimple(const StateSimpleParam *p_sbp,StateNumber nexts
 
 APP_SIMPLE_STATE_MACHINE_DEF(p_simple_state,5,2,&SimpleStateAction[0]);
 
-error_code = SimpleStateMachineRun(p_simple_state,DoesBreakSimple,StateJumpRecorder);
+
+
+typedef struct
+{
+	s_StateMachineParam base;
+	X_Boolean UserFlag;
+}sParamExtern;
+
+static sParamExtern sPE;
+
+error_code = SimpleStateMachineRun(p_simple_state,&sPE.base,DoesBreakSimple,StateJumpRecorder);
  */
 
 #endif

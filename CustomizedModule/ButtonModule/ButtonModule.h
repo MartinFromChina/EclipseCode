@@ -78,6 +78,5 @@ static const sButtonModule CONCAT_2(p_button_module, _entry) = {		\
 
 X_Void ButtonStateMonitor(const sButtonModuleExtern *p_sbm,CombineButtonValue *value);
 X_Void SetCurrentButtonConfigMode(CombineButtonValue mode);
-uint8_t GetCurrentButtonNumber(X_Void);
 
 #endif
