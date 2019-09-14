@@ -57,6 +57,68 @@ uint8_t StateMachineRun( const StateBasicParam *p_sbp
 
 X_Void StateMachineStateSet(const StateBasicParam *p_sbp,StateNumber state);
 
+/*
+ **************************************************************************************************
+ *example code
+ *************************************************************************************************
+typedef enum
+{
+  state_Idle = 0,
+  state_Second,
+}eState;
+static X_Boolean DoesIdleHop2(s_StateMachineParam *p_this)
+{
+	return X_True;
+}
+static X_Boolean DoesIdleHop3(s_StateMachineParam *p_this)
+{
+	return X_False;
+}
+static X_Boolean DoesIdleHop4(s_StateMachineParam *p_this)
+{
+	return X_True;
+}
+static X_Boolean DoesSecondHop1(s_StateMachineParam *p_this)
+{
+	return X_True;
+}
+static const sHopHandle IdleHop[] =
+{
+		{X_Null			,CURRENT_STATE_FLAG		,state_Second},
+		{DoesIdleHop2	,CURRENT_STATE_FLAG		,state_Second},
+		{DoesIdleHop3	,CURRENT_STATE_FLAG		,state_Second},
+		{DoesIdleHop4	,CURRENT_STATE_FLAG		,state_Second},
+};
+
+static const sHopHandle SecondHop[] =
+{
+		{DoesSecondHop1,state_Idle,state_Second},
+};
+
+
+static const StateHandle ExampleStateHandle[] = {
+		{0,sizeof(IdleHop)/sizeof(IdleHop[0])		,&IdleHop[0]},
+		{1,sizeof(SecondHop)/sizeof(SecondHop[0])	,&SecondHop[0]},
+
+};
+
+APP_STATE_MACHINE_DEF(p_state_machine
+						,sizeof(ExampleStateHandle)/sizeof(ExampleStateHandle[0])
+						,2
+						,&ExampleStateHandle[0]);
+
+
+
+
+X_Void NoName(X_Void)
+{
+	s_StateMachineParam s_SMP;
+	uint32_t error;
+	error = StateMachineRun(p_state_machine,&s_SMP,X_Null,X_Null);
+}
+
+ */
+
 /*************************************simple state machine*****************************************************************/
 
 typedef  struct {
@@ -87,52 +149,6 @@ uint8_t SimpleStateMachineRun( const StateSimpleParam *p_ssp
 
 X_Void SimpleStateMachineStateSet(const StateSimpleParam *p_ss,StateNumber state);
 
-/*
- * static s_StateMachineParam s_SMP;
- *
-
-
-
-APP_STATE_MACHINE_DEF(p_example_state,sizeof(ExampleStateHandle)/sizeof(ExampleStateHandle[0]),3,&ExampleStateHandle[0]);
-
-static X_Void StateJumpRecorder(StateNumber state_going_to_leave,StateNumber state_going_to_come)
-{
-	// going to jump new state:next_state
-}
-
-StateMachineRun(p_example_state,&s_SMP,X_False,X_Null,StateJumpRecorder);
-
- */
-
-/*
-static const StateAction SimpleStateAction[] = {
-		{X_Null},
-		{X_Null},
-		{X_Null},
-		{X_Null},
-		{X_Null},
-};
-
-static X_Boolean DoesBreakSimple(const StateSimpleParam *p_sbp,StateNumber nextstate,uint16_t loop_counter)
-{
-	if(loop_counter > 3) {return X_True;}
-	return X_False;
-}
-
-APP_SIMPLE_STATE_MACHINE_DEF(p_simple_state,sizeof(SimpleStateAction)/sizeof(SimpleStateAction[0]),2,&SimpleStateAction[0]);
-
-
-typedef struct
-{
-	s_StateMachineParam base;
-	X_Boolean UserFlag;
-}sParamExtern;
-
-static sParamExtern sPE;
-
-error_code = SimpleStateMachineRun(p_simple_state,&sPE.base,DoesBreakSimple,StateJumpRecorder);
-
-*/
 /*
 ******************************************************
 example code
@@ -169,10 +185,19 @@ APP_SIMPLE_STATE_MACHINE_DEF(p_simple_state
 														,1
 														,&SimpleStateAction[0]);
 
+static X_Boolean DoesBreakSimple(const StateSimpleParam *p_sbp,StateNumber nextstate,uint16_t loop_counter)
+{
+	if(loop_counter > 3) {return X_True;}
+	return X_False;
+}
+static X_Void StateJumpRecorder(StateNumber state_going_to_leave,StateNumber state_going_to_come)
+{
+
+}
 
 X_Void NoName(X_Void)
 {
-	SimpleStateMachineRun(p_simple_state,&sPE.base,X_Null,X_Null);
+	SimpleStateMachineRun(p_simple_state,&sPE.base,DoesBreakSimple,StateJumpRecorder);
 }
  */
 
