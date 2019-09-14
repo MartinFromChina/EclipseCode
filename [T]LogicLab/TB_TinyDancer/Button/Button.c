@@ -362,7 +362,7 @@ static X_Boolean DoesIdleHop2(s_StateMachineParam *p_this)
 static X_Boolean DoesIdleHop3(s_StateMachineParam *p_this)
 {
 	SEGGER_RTT_Debug(BUTTON_DOING_DEBUG,(30,"DoesIdleHop3 \r\n"));
-	return X_True;
+	return X_False;
 }
 static X_Boolean DoesIdleHop4(s_StateMachineParam *p_this)
 {
@@ -398,25 +398,22 @@ static const StateHandle ExampleStateHandle[] = {
 
 APP_STATE_MACHINE_DEF(p_state_machine
 						,sizeof(ExampleStateHandle)/sizeof(ExampleStateHandle[0])
-						,3
+						,5
 						,&ExampleStateHandle[0]);
 
 
 
-
-
-
-
-
-
-
-
+static X_Boolean DoesBreak(const StateBasicParam *p_sbp,StateNumber nextstate,uint16_t loop_counter)
+{
+	if(loop_counter >= 4) {return X_True;}
+	return X_False;
+}
 
 static s_StateMachineParam s_SMP;
 
 X_Void onTick(X_Void)
 {
-	StateMachineRun(p_state_machine,&s_SMP,X_Null,X_Null);
+	StateMachineRun(p_state_machine,&s_SMP,DoesBreak,X_Null);
 	SEGGER_RTT_Debug(BUTTON_DOING_DEBUG,(40," **************** \r\n"));
 //	ButtonStateHandle();
 }
