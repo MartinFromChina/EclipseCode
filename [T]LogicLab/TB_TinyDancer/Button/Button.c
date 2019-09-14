@@ -377,8 +377,8 @@ static X_Boolean DoesSecondHop2(s_StateMachineParam *p_this)
 static const sHopHandle IdleHop[] =
 {
 		{X_Null,CURRENT_STATE_FLAG,1},
-		{DoesIdleHop2,200,1},
-		{DoesIdleHop3,CURRENT_STATE_FLAG,100},
+		{DoesIdleHop2,CURRENT_STATE_FLAG,1},
+		{DoesIdleHop3,CURRENT_STATE_FLAG,1},
 		{DoesIdleHop4,CURRENT_STATE_FLAG,1},
 };
 
@@ -392,8 +392,9 @@ static const sHopHandle SecondHop[] =
 
 static const StateHandle ExampleStateHandle[] = {
 		{0,sizeof(IdleHop)/sizeof(IdleHop[0])		,&IdleHop[0]},
-		{1,sizeof(SecondHop)/sizeof(SecondHop[0])	,&SecondHop[0]},
-		{2,0										,X_Null},
+		{1,1										,X_Null},
+		{2,sizeof(SecondHop)/sizeof(SecondHop[0])	,&SecondHop[0]},
+
 };
 
 APP_STATE_MACHINE_DEF(p_state_machine

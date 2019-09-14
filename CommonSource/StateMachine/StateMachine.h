@@ -55,6 +55,8 @@ uint8_t StateMachineRun( const StateBasicParam *p_sbp
 						,X_Boolean (*DoesBreak)(const StateBasicParam *p_sbp,StateNumber nextstate,uint16_t loop_counter)
 						,X_Void(*StateRecorder)(StateNumber current_state_going_to_leave,StateNumber next_state_going_to_enter));
 
+X_Void StateMachineStateSet(const StateBasicParam *p_sbp,StateNumber state);
+
 /*************************************simple state machine*****************************************************************/
 
 typedef  struct {

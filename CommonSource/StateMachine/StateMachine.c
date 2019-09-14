@@ -32,6 +32,13 @@ uint8_t StateMachineRun( const StateBasicParam *p_sbp
 			isStateJumpWrong = X_True;
 			break;
 		}
+		if(p_sbp ->p_Handle[current_state].current_max_hop_times == 0
+			|| p_sbp ->p_Handle[current_state].p_hop  == X_Null)
+		{
+			current_state = DEFAULT_STATE_NUMBER;
+			isStateJumpWrong = X_True;
+			break;
+		}
 		current_hop_times = p_sbp ->p_Handle[current_state].current_max_hop_times;
 		current_hop_counter = 0;
 		for(i=0;i<current_hop_times;i++)
@@ -78,6 +85,12 @@ uint8_t StateMachineRun( const StateBasicParam *p_sbp
 	if(isStateJumpWrong == X_True ) {return APP_ERROR;}
 	return APP_SUCCESSED;
 
+}
+
+X_Void StateMachineStateSet(const StateBasicParam *p_sbp,StateNumber state)
+{
+	if(p_sbp == X_Null) {return;}
+	*p_sbp ->p_CurrentStateNum = state;
 }
 
 uint8_t SimpleStateMachineRun(const StateSimpleParam *p_ssp
