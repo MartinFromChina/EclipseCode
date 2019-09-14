@@ -84,7 +84,6 @@ static X_Boolean DoesValidLongRelease(const sParamSingleButton * p_psb)
 	return ((p_psb->release_time_counter * p_sBME->base->ModuleLoopTimeInMS)  >=  p_psb->p_spat->ReleaseAllTimeThresholdInMS);
 }
 
-
 static X_Void ClearPushCounter(sParamSingleButton * p_psb)
 {
 	if(p_psb == X_Null) {return ;}
@@ -117,8 +116,6 @@ static X_Void TimeManager(sParamSingleButton * p_psb,X_Boolean isPushed)
 	}
 }
 
-
-
 static X_Void ButtonFlagInit(X_Void)
 {
 	sBSF.isClick = 0;
@@ -126,7 +123,6 @@ static X_Void ButtonFlagInit(X_Void)
 	sBSF.isLongpush = 0;
 	sBSF.isLongpushRelease = 0;
 }
-
 static X_Void ButtonFlagSet(eButtonAction action,uint8_t button_num,uint16_t long_push_last)
 {
 	switch(action)

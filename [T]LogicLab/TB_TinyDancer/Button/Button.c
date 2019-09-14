@@ -319,9 +319,106 @@ X_Void ButtonInitialize(X_Void)
 
 }
 static X_Boolean ButtonStateHandle();
+
+
+
+
+
+
+/*
+ * *************************************************************************************************
+ * state machine test
+ * typedef struct
+{
+	X_Boolean (*onHop)(X_Void);
+	StateNumber NextStateWhenTrue;
+	StateNumber NextStateWhenFalse;
+}sHopHandle;
+
+typedef struct {
+	uint8_t      current_hop_times;
+	sHopHandle * p_hop;
+}StateHandle;
+
+typedef struct
+{
+	const StateNumber 	AllStateNum;
+	const uint16_t     	MaxStateHopTimesInSignalProcess;
+	StateHandle const 	*p_Handle;
+	StateNumber 		*p_CurrentStateNum;
+}StateBasicParam;
+ * *************************************************************************************************
+ */
+static X_Boolean  DoesIdleHop1(s_StateMachineParam *p_this)
+{
+	SEGGER_RTT_Debug(BUTTON_DOING_DEBUG,(30,"DoesIdleHop1 \r\n"));
+	return X_True;
+}
+static X_Boolean DoesIdleHop2(s_StateMachineParam *p_this)
+{
+	SEGGER_RTT_Debug(BUTTON_DOING_DEBUG,(30,"DoesIdleHop2 \r\n"));
+	return X_True;
+}
+static X_Boolean DoesIdleHop3(s_StateMachineParam *p_this)
+{
+	SEGGER_RTT_Debug(BUTTON_DOING_DEBUG,(30,"DoesIdleHop3 \r\n"));
+	return X_True;
+}
+static X_Boolean DoesIdleHop4(s_StateMachineParam *p_this)
+{
+	SEGGER_RTT_Debug(BUTTON_DOING_DEBUG,(30,"DoesIdleHop4 \r\n"));
+	return X_True;
+}
+static X_Boolean DoesSecondHop2(s_StateMachineParam *p_this)
+{
+	SEGGER_RTT_Debug(BUTTON_DOING_DEBUG,(30,"DoesSecondHop2 \r\n"));
+	return X_True;
+}
+static const sHopHandle IdleHop[] =
+{
+		{X_Null,CURRENT_STATE_FLAG,1},
+		{DoesIdleHop2,CURRENT_STATE_FLAG,1},
+		{DoesIdleHop3,CURRENT_STATE_FLAG,1},
+		{DoesIdleHop4,CURRENT_STATE_FLAG,1},
+};
+
+static const sHopHandle SecondHop[] =
+{
+		{X_Null,0,1},
+		{DoesSecondHop2,0,1},
+		{X_Null,0,1},
+};
+
+
+static const StateHandle ExampleStateHandle[] = {
+		{0,sizeof(IdleHop)/sizeof(IdleHop[0])		,&IdleHop[0]},
+		{1,sizeof(SecondHop)/sizeof(SecondHop[0])	,&SecondHop[0]},
+		{2,0										,X_Null},
+};
+
+APP_STATE_MACHINE_DEF(p_state_machine
+						,sizeof(ExampleStateHandle)/sizeof(ExampleStateHandle[0])
+						,3
+						,&ExampleStateHandle[0]);
+
+
+
+
+
+
+
+
+
+
+
+
+static s_StateMachineParam s_SMP;
+
 X_Void onTick(X_Void)
 {
-	ButtonStateHandle();
+	StateMachineRun(p_state_machine,&s_SMP,X_Null,X_Null);
+	SEGGER_RTT_Debug(BUTTON_DOING_DEBUG,(40," **************** \r\n"));
+//	ButtonStateHandle();
 }
 
 /*
