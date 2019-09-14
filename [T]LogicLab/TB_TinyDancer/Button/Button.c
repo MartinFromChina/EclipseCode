@@ -398,22 +398,28 @@ static const StateHandle ExampleStateHandle[] = {
 
 APP_STATE_MACHINE_DEF(p_state_machine
 						,sizeof(ExampleStateHandle)/sizeof(ExampleStateHandle[0])
-						,5
+						,1
 						,&ExampleStateHandle[0]);
 
 
 
-static X_Boolean DoesBreak(const StateBasicParam *p_sbp,StateNumber nextstate,uint16_t loop_counter)
+//static X_Boolean DoesBreak(const StateBasicParam *p_sbp,StateNumber nextstate,uint16_t loop_counter)
+//{
+//	if(loop_counter >= 4) {return X_True;}
+//	return X_False;
+//}
+
+static X_Void StateJumpRecorder(StateNumber state_going_to_leave,StateNumber state_going_to_come)
 {
-	if(loop_counter >= 4) {return X_True;}
-	return X_False;
+	// going to jump new state:next_state
+	SEGGER_RTT_Debug(BUTTON_DOING_DEBUG,(40," leave %d come %d \r\n",state_going_to_leave,state_going_to_come));
 }
 
 static s_StateMachineParam s_SMP;
 
 X_Void onTick(X_Void)
 {
-	StateMachineRun(p_state_machine,&s_SMP,DoesBreak,X_Null);
+	StateMachineRun(p_state_machine,&s_SMP,X_Null,StateJumpRecorder);
 	SEGGER_RTT_Debug(BUTTON_DOING_DEBUG,(40," **************** \r\n"));
 //	ButtonStateHandle();
 }
