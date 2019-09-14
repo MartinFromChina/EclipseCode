@@ -377,8 +377,8 @@ static X_Boolean DoesSecondHop2(s_StateMachineParam *p_this)
 static const sHopHandle IdleHop[] =
 {
 		{X_Null,CURRENT_STATE_FLAG,1},
-		{DoesIdleHop2,CURRENT_STATE_FLAG,1},
-		{DoesIdleHop3,CURRENT_STATE_FLAG,1},
+		{DoesIdleHop2,200,1},
+		{DoesIdleHop3,CURRENT_STATE_FLAG,100},
 		{DoesIdleHop4,CURRENT_STATE_FLAG,1},
 };
 
@@ -398,16 +398,16 @@ static const StateHandle ExampleStateHandle[] = {
 
 APP_STATE_MACHINE_DEF(p_state_machine
 						,sizeof(ExampleStateHandle)/sizeof(ExampleStateHandle[0])
-						,1
+						,2
 						,&ExampleStateHandle[0]);
 
 
 
-//static X_Boolean DoesBreak(const StateBasicParam *p_sbp,StateNumber nextstate,uint16_t loop_counter)
-//{
-//	if(loop_counter >= 4) {return X_True;}
-//	return X_False;
-//}
+static X_Boolean DoesBreak(const StateBasicParam *p_sbp,StateNumber nextstate,uint16_t loop_counter)
+{
+	if(loop_counter >= 2) {return X_True;}
+	return X_False;
+}
 
 static X_Void StateJumpRecorder(StateNumber state_going_to_leave,StateNumber state_going_to_come)
 {
@@ -419,8 +419,9 @@ static s_StateMachineParam s_SMP;
 
 X_Void onTick(X_Void)
 {
-	StateMachineRun(p_state_machine,&s_SMP,X_Null,StateJumpRecorder);
-	SEGGER_RTT_Debug(BUTTON_DOING_DEBUG,(40," **************** \r\n"));
+	uint32_t error;
+	error = StateMachineRun(p_state_machine,&s_SMP,DoesBreak,StateJumpRecorder);
+	SEGGER_RTT_Debug(BUTTON_DOING_DEBUG,(40," **************error: %d\r\n",error));
 //	ButtonStateHandle();
 }
 

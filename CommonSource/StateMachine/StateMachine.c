@@ -7,7 +7,7 @@ uint8_t StateMachineRun( const StateBasicParam *p_sbp
 {
 	uint16_t Counter;
 	StateNumber i,j,current_state,previous_state,current_hop_times,current_hop_counter;
-	X_Boolean isStateJumpWrong,isReachNullEvent;
+	X_Boolean isStateJumpWrong;
 
 	if(p_sbp == X_Null || p_smp == X_Null) {return APP_POINTER_NULL;}
 	if(p_sbp->p_Handle == X_Null){return APP_POINTER_NULL;}
@@ -22,7 +22,6 @@ uint8_t StateMachineRun( const StateBasicParam *p_sbp
 	Counter = 0;
 	current_state = (*p_sbp->p_CurrentStateNum);
 	isStateJumpWrong = X_False;
-	isReachNullEvent = X_False;
 
 	for(j=0;j<p_sbp->MaxStateHopTimesInSignalProcess;j++)
 	{
@@ -76,7 +75,7 @@ uint8_t StateMachineRun( const StateBasicParam *p_sbp
 
 	(*p_sbp->p_CurrentStateNum) = current_state;
 
-	if(isStateJumpWrong == X_True || isReachNullEvent == X_True) {return APP_ERROR;}
+	if(isStateJumpWrong == X_True ) {return APP_ERROR;}
 	return APP_SUCCESSED;
 
 }
