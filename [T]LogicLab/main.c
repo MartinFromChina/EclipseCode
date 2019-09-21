@@ -3,7 +3,8 @@
 #include "..\CommonSource\FileOperation\read_scripts.h"
 
 #include "user_timer.h"
-#include "TB_TinyDancer\Button\Button.h"
+//#include "TB_TinyDancer\Button\Button.h"
+#include "TB_TinyDancer\FlashReadWrite\UserFlash.h"
 
 
 static void PrintfInit(void)
@@ -20,7 +21,7 @@ int main(void)
 {
 	StringDebugInit(PrintfInit);
 
-	ReadScriptsInit(ButtonTestOpenFile);
+	ReadScriptsInit(FlashTestOpenFile);
 
 	UserIrqCreated();
 	AppTimerModuleStart(AllTimerConfig);

@@ -5933,3 +5933,12 @@ java.net.UnknownHostException: dev.eclipse.org
 	at com.google.common.util.concurrent.AbstractIdleService$DelegateService$1.run(AbstractIdleService.java:62)
 	at com.google.common.util.concurrent.Callables$4.run(Callables.java:122)
 	at java.lang.Thread.run(Unknown Source)
+
+!ENTRY org.eclipse.launchbar.core 2 0 2019-09-21 23:18:26.432
+!MESSAGE Enablement expression is missing for descriptor type org.eclipse.cdt.debug.core.coreBuildDescriptorType
+
+!ENTRY org.eclipse.launchbar.core 2 0 2019-09-21 23:18:26.434
+!MESSAGE Enablement expression is missing for config provider for org.eclipse.cdt.debug.core.coreBuildDescriptorType
+
+!ENTRY org.eclipse.launchbar.core 2 0 2019-09-21 23:18:26.435
+!MESSAGE Enablement expression is missing for config provider for org.eclipse.cdt.debug.core.coreBuildDescriptorType
