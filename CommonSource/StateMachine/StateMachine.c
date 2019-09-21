@@ -3,11 +3,12 @@
 uint8_t StateMachineRun( const StateBasicParam *p_sbp
 						,s_StateMachineParam *p_smp
 						,X_Boolean (*DoesBreak)(const StateBasicParam *p_sbp,StateNumber nextstate,uint16_t loop_counter)
-						,X_Void(*StateRecorder)(StateNumber current_state_going_to_leave,StateNumber next_state_going_to_enter))
+						,X_Void(*StateRecorder)(StateNumber current_state_going_to_leave,StateNumber next_state_going_to_enter)
+						,X_Void(*onDebug)(StateNumber current_state,StateNumber current_hop_count,X_Boolean isResultTrue,s_StateMachineParam const* p_This))
 {
 	uint16_t Counter;
 	StateNumber i,j,current_state,previous_state,current_hop_times,current_hop_counter;
-	X_Boolean isStateJumpWrong;
+	X_Boolean isStateJumpWrong,hop_result;
 
 	if(p_sbp == X_Null || p_smp == X_Null) {return APP_POINTER_NULL;}
 	if(p_sbp->p_Handle == X_Null){return APP_POINTER_NULL;}
@@ -46,21 +47,29 @@ uint8_t StateMachineRun( const StateBasicParam *p_sbp
 			previous_state = current_state;
 			if(p_sbp ->p_Handle[current_state].p_hop[current_hop_counter].onHop != X_Null)
 			{
+				p_smp ->current_state = current_state;
 				if(p_sbp ->p_Handle[current_state].p_hop[current_hop_counter].onHop(p_smp) == X_True)
 				{
 					current_state = p_sbp ->p_Handle[current_state].p_hop[current_hop_counter].NextStateWhenTrue;
+					hop_result = X_True;
 				}
 				else
 				{
 					current_state = p_sbp ->p_Handle[current_state].p_hop[current_hop_counter].NextStateWhenFalse;
+					hop_result = X_False;
 				}
-
-				if(current_state == CURRENT_STATE_FLAG || current_state == previous_state)
+				
+				if(current_state == USE_VARIABLE_STATE_FLAG)
 				{
-					// no state change ,go on
-					current_state = previous_state;
+					current_state = p_smp ->current_state;
 				}
-				else
+				
+				if(onDebug != X_Null)
+				{
+					onDebug(previous_state,current_hop_counter,hop_result,p_smp);
+				}
+				
+				if( current_state != previous_state)
 				{
 					if(StateRecorder != X_Null) {StateRecorder(previous_state,current_state);}
 					break;
@@ -158,23 +167,3 @@ X_Void SimpleStateMachineStateSet(const StateSimpleParam *p_ss,StateNumber state
 	if(p_ss == X_Null) {return;}
 	*p_ss ->p_CurrentStateNum = state;
 }
-/*
-uint8_t StateMachineSetState(X_Boolean isSimpleMachine,StateNumber state,const X_Void *p_This)
-{
-	if(p_This == X_Null) {return APP_POINTER_NULL;}
-	if(isSimpleMachine == X_True)
-	{
-		const StateSimpleParam *p_entry = (StateSimpleParam *)p_This;
-		if( (state+1) >=  p_entry->AllStateNum ) {return APP_BEYOND_SCOPE;}
-		(*p_entry->p_CurrentStateNum) = state;
-	}
-	else
-	{
-		const StateBasicParam *p_entry = (StateBasicParam *)p_This;
-		if( (state+1) >=  p_entry->AllStateNum ) {return APP_BEYOND_SCOPE;}
-		(*p_entry->p_CurrentStateNum) = state;
-	}
-	return APP_SUCCESSED;
-
-}
-*/

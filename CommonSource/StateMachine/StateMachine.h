@@ -8,7 +8,8 @@
 #define MAX_STATE_NUMBER    		20
 #define MAX_STATE_EVENT_NUMBER    	6
 #define DEFAULT_STATE_NUMBER        0
-#define CURRENT_STATE_FLAG          0xff
+
+#define USE_VARIABLE_STATE_FLAG     0xff
 
 typedef uint8_t 			StateNumber;
 
@@ -29,7 +30,6 @@ typedef struct
 }sHopHandle;
 
 typedef struct {
-	StateNumber const 	current_state_number;
 	uint8_t     const   current_max_hop_times;
 	sHopHandle  const    *p_hop;
 }StateHandle;
@@ -53,7 +53,8 @@ static const StateBasicParam* id = &CONCAT_2(id, _entry)
 uint8_t StateMachineRun( const StateBasicParam *p_sbp
 						,s_StateMachineParam *p_smp
 						,X_Boolean (*DoesBreak)(const StateBasicParam *p_sbp,StateNumber nextstate,uint16_t loop_counter)
-						,X_Void(*StateRecorder)(StateNumber current_state_going_to_leave,StateNumber next_state_going_to_enter));
+						,X_Void(*StateRecorder)(StateNumber current_state_going_to_leave,StateNumber next_state_going_to_enter)
+						,X_Void(*onDebug)(StateNumber current_state,StateNumber current_hop_count,X_Boolean isResultTrue,s_StateMachineParam const* p_This));
 
 X_Void StateMachineStateSet(const StateBasicParam *p_sbp,StateNumber state);
 
