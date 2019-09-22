@@ -13,10 +13,76 @@ typedef enum
 	QP_Insert,
 }ePriorityQueuePushAction;
 
-static X_Boolean GetActionAndNodeNumber(const sMySingleLinkList * s_sll,X_Boolean isFromSmall,uint16_t priority
+static X_Boolean GetActionAndNodeNumber(const sMySingleLinkList * s_sll,X_Boolean isFromSmall,uint16_t priority,uint16_t current_node_count
 									,ePriorityQueuePushAction *p_action,uint16_t *p_number)
 {
-
+	uint16_t i,infor_number;
+//	X_Boolean isOK;
+	if(s_sll == X_Null ||p_action == X_Null || p_number == X_Null){return X_False;}
+	if(current_node_count > s_sll ->ValidNodeNumber){return X_False;}
+	if(current_node_count == 0)
+	{
+		*p_action =	QP_Insert;
+		*p_number = 0;
+		return X_True;
+	}
+//	isOK = X_False;
+	if(isFromSmall == X_True)
+	{
+		for(i=0;i<current_node_count;i++)
+		{
+			if(mSingleListInformationGetByNodeNumber(s_sll,i,&infor_number) == X_True)
+			{
+				if(priority == infor_number)
+				{
+					*p_action = QP_Replace;
+					*p_number = i;
+					return X_True;
+				}
+				else if(priority < infor_number )
+				{
+					*p_action = QP_Insert;
+					*p_number = i;
+					return X_True;
+				}
+			}
+			else
+			{
+				return X_False;
+			}
+		}
+		*p_action = QP_Insert;
+		*p_number = i;
+		return X_True;
+	}
+	else
+	{
+		for(i=0;i<current_node_count;i++)
+		{
+			if(mSingleListInformationGetByNodeNumber(s_sll,i,&infor_number) == X_True)
+			{
+				if(priority == infor_number)
+				{
+					*p_action = QP_Replace;
+					*p_number = i;
+					return X_True;
+				}
+				else if(priority > infor_number )
+				{
+					*p_action = QP_Insert;
+					*p_number = i;
+					return X_True;
+				}
+			}
+			else
+			{
+				return X_False;
+			}
+		}
+		*p_action = QP_Insert;
+		*p_number = i;
+		return X_True;
+	}
 }
 X_Void 		mPriorityQueueInitialize(const sMyPriorityListManager *p_manager)
 {
@@ -53,7 +119,8 @@ X_Boolean   mPriorityQueuePush(const sMyPriorityListManager *p_manager,sMyPriori
 	}
 	else if(node_count >= p_manager ->MaxNodeNumber) // only replace can be done
 	{
-		if(GetActionAndNodeNumber(p_manager->p_list,p_manager ->isHighPriorityFromSmall,p_data ->priority,&e_pqpa,&node_number) == X_True)
+		if(GetActionAndNodeNumber(p_manager->p_list,p_manager ->isHighPriorityFromSmall,p_data ->priority,node_count
+									,&e_pqpa,&node_number) == X_True)
 		{
 			if(e_pqpa == QP_Insert) {return X_False;}
 			if(mSingleListUpdataValueByNodeNumber(p_manager->p_list,node_number,p_data ->priority) == X_True) {return X_True;}
@@ -63,7 +130,8 @@ X_Boolean   mPriorityQueuePush(const sMyPriorityListManager *p_manager,sMyPriori
 	}
 	else
 	{
-		if(GetActionAndNodeNumber(p_manager->p_list,p_manager ->isHighPriorityFromSmall,p_data ->priority,&e_pqpa,&node_number) == X_True)
+		if(GetActionAndNodeNumber(p_manager->p_list,p_manager ->isHighPriorityFromSmall,p_data ->priority,node_count
+									,&e_pqpa,&node_number) == X_True)
 		{
 			if(e_pqpa == QP_Insert)
 			{
