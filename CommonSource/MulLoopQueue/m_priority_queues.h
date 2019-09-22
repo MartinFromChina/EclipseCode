@@ -20,6 +20,16 @@ typedef struct
 	uint8_t     *p_buf;
 }sMyPriorityListManager;
 
+#define APP_PRIORITY_QUEUE_DEF(p_manager,max_node_number)            									\
+		static uint8_t  CONCAT_2(p_manager,_node_buf)[max_node_number];	 							\
+		static sListManagerParam CONCAT_2(p_manager,_param) = {0,0,0,0};    						\
+		static const  sListManager  CONCAT_2(p_manager,_entry) = {									\
+			CONCAT_2(p_manager,_node_buf),															\
+			max_node_number,																		\
+			&CONCAT_2(p_manager,_param),															\
+		} ;																						    \
+		static const  sListManager * p_manager = &CONCAT_2(p_manager,_entry)
+
 X_Void 		mPriorityQueueInitialize(const sMyPriorityListManager *p_manager);
 X_Boolean   mPriorityQueuePush(const sMyPriorityListManager *p_manager,sMyPriorityNodeParam const *p_data);
 X_Boolean   mPriorityQueuePop(const sMyPriorityListManager *p_manager,sMyPriorityNodeParam *p_data);

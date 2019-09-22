@@ -1,8 +1,8 @@
 #include "command.h"
 #include "..\CharStringDebug\CharStringDebugModule.h"
-#include "..\MulLoopQueue\mul_loop_queues.h"
+#include "..\MulLoopQueue\loop_queues.h"
 
-APP_LOOPQUEUE_DEF(command_queue,command_queue_manager,command_queue_length,MaxCommandBufNumber);
+SIMPLE_LOOPQUEUE_DEF(command_queue_manager,MaxCommandBufNumber);
 
 static const uint8_t CharToHexTable[MaxCharToHexTableSize]={
 	   0,	   1,	   2,	   3,      4,      5,      6,      7,      8,      9,// 48~57
@@ -51,7 +51,7 @@ static X_Boolean CopyHexModeCommandByCharType(char *p_command)
 {
 	X_Boolean isOK;
 	uint16_t bufnumber,i,commandsize;
-	bufnumber = QueueFirstIn(command_queue_manager,&isOK,X_False);
+	bufnumber = SimpleQueueFirstIn(command_queue_manager,&isOK,X_False);
 	if(isOK == X_True && bufnumber < MaxCommandBufNumber)
 	{
 		commandsize = GetStringLength(p_command);
@@ -142,7 +142,7 @@ X_Boolean CommandAnalysis(char * command_string,ScriptCommandParam *p_commparam,
 
 void CommandReceivedInit(void)
 {
-	queueInitialize(command_queue,command_queue_manager,command_queue_length);
+	SimpleQueueInitialize(command_queue_manager);
 }
 
 X_Boolean LoadCommand(uint8_t **p_command_value,uint8_t *length,X_Boolean isImmediately)
@@ -160,13 +160,16 @@ X_Boolean LoadCommand(uint8_t **p_command_value,uint8_t *length,X_Boolean isImme
 		return X_True;
 	}
 
-	bufnumber = QueueFirstOut(command_queue_manager,&isOK);
+	bufnumber = SimpleQueueFirstOut(command_queue_manager,&isOK);
 	if(isOK == X_False) {bufnumber = 0;}
 
 	if(CommandBuf[bufnumber][CommandLengthAddr] > MaxCommandLength ) {*length = MaxCommandLength;}
 	else {*length = CommandBuf[bufnumber][CommandLengthAddr];}
 
 	*p_command_value = &CommandBuf[bufnumber][0];
+
+	if(isOK == X_True) {RealseSimpleQueueBuf(command_queue_manager,bufnumber);}
+
 	return isOK;
 }
 

@@ -1,5 +1,5 @@
-#ifndef __MUL_LOOP_QUEUES_H
-#define __MUL_LOOP_QUEUES_H
+#ifndef __M_LIST_NODE_H
+#define __M_LIST_NODE_H
 
 /****************************************************
  * the loop queue can't be interrupt by an irq !!!

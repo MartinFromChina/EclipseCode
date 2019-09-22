@@ -1,11 +1,11 @@
 #include "CharStringDebugModule.h"
 //#include <string.h>
 #include <stdarg.h>
-#include "..\MulLoopQueue\mul_loop_queues.h"
+#include "..\MulLoopQueue\loop_queues.h"
 
 
 
-APP_LOOPQUEUE_DEF(string_queue,string_queue_manager,string_queue_length,STRING_DEBUG_BUF_NUMBER);
+SIMPLE_LOOPQUEUE_DEF(string_queue_manager,STRING_DEBUG_BUF_NUMBER);
 
 
 #if (USE_STRING_DEBUG == 1)
@@ -65,7 +65,7 @@ APP_LOOPQUEUE_DEF(string_queue,string_queue_manager,string_queue_length,STRING_D
 		#endif
 		DEBUG_ENTER_CRITICAL_METHOD;
 
-		bufnumber = QueueFirstIn(string_queue_manager,&isOK,X_False);
+		bufnumber = SimpleQueueFirstIn(string_queue_manager,&isOK,X_False);
 
 		if(isOK != X_True)
 		{
@@ -97,19 +97,20 @@ APP_LOOPQUEUE_DEF(string_queue,string_queue_manager,string_queue_length,STRING_D
 		uint8_t bufnumber;
 		char *p_buf;
 
-		if(DoesQueueEmpty(string_queue_manager) == X_True){return;}
+		if(DoesSimpleQueueEmpty(string_queue_manager) == X_True){return;}
 
 		#if(USE_OPERATION_SYSTEM == 1)
 		GET_DEBUG_SEMPHORE_METHOD;
 		#endif
 		DEBUG_ENTER_CRITICAL_METHOD;
-		bufnumber = QueueFirstOut(string_queue_manager,&isOK);
+		bufnumber = SimpleQueueFirstOut(string_queue_manager,&isOK);
 
 		while(isOK == X_True)
 		{
 			p_buf = &CharBuf[bufnumber][0];
 			DebugPopString(p_buf);
-			bufnumber = QueueFirstOut(string_queue_manager,&isOK);
+			RealseSimpleQueueBuf(string_queue_manager,bufnumber);
+			bufnumber = SimpleQueueFirstOut(string_queue_manager,&isOK);
 		}
 
 		DEBUG_EXIT_CRITICAL_METHOD;
@@ -123,7 +124,7 @@ APP_LOOPQUEUE_DEF(string_queue,string_queue_manager,string_queue_length,STRING_D
 		uint8_t bufnumber;
 		char *p_buf;
 
-		if(DoesQueueEmpty(string_queue_manager) == X_True)
+		if(DoesSimpleQueueEmpty(string_queue_manager) == X_True)
 		{
 //			printf("empty\r\n");
 			return;
@@ -135,12 +136,13 @@ APP_LOOPQUEUE_DEF(string_queue,string_queue_manager,string_queue_length,STRING_D
 		GET_DEBUG_SEMPHORE_METHOD;
 		#endif
 		DEBUG_ENTER_CRITICAL_METHOD;
-		bufnumber = QueueFirstOut(string_queue_manager,&isOK);
+		bufnumber = SimpleQueueFirstOut(string_queue_manager,&isOK);
 
 		if(isOK == X_True)
 		{
 			p_buf = &CharBuf[bufnumber][0];
 			DebugPopString(p_buf);
+			RealseSimpleQueueBuf(string_queue_manager,bufnumber);
 		}
 
 		DEBUG_EXIT_CRITICAL_METHOD;
@@ -161,7 +163,7 @@ APP_LOOPQUEUE_DEF(string_queue,string_queue_manager,string_queue_length,STRING_D
 			}
 
 		}
-		queueInitialize(string_queue,string_queue_manager,string_queue_length);
+		SimpleQueueInitialize(string_queue_manager);
 		(*p_init)();
 		String_Debug(FOW_NOW_DEBUG,(30,"hello %s \r\n","I am string debug"));
 	}
