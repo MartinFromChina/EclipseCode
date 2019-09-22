@@ -1,8 +1,10 @@
 #include "UserFlash.h"
 #include "UserFlashTB.h"
+#include "..\..\..\CustomizedModule\FlashReadWrite\FlashEventHandle.h"
 
 FILE * FlashTestOpenFile(void)
 {
+	FlashEventInit();
 	return fopen(".//TB_TinyDancer//FlashReadWrite//command.txt", "r");
 }
 static uint16_t debug_counter = 0;

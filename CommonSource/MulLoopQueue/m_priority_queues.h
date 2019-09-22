@@ -7,6 +7,9 @@
 
 #include "stdbool.h"
 #include "..\KeilMDK.h"
+#include "m_list_node.h"
+
+#define MAX_PRIORITY_QUEUE_COUNT      500
 
 typedef struct
 {
@@ -17,26 +20,33 @@ typedef struct
 
 typedef struct
 {
-	uint8_t     *p_buf;
+	X_Boolean 			*isInit;
+    sMySingleLinkList 	const*p_list;
+	uint16_t    		MaxNodeNumber;
+	X_Boolean			isHighPriorityFromSmall;// priority from high to low ;  true : the smaller value ,the high priority ; false : the bigger value ,the high priority
+    sMyPriorityNodeParam *p_param;
 }sMyPriorityListManager;
 
-#define APP_PRIORITY_QUEUE_DEF(p_manager,max_node_number)            									\
-		static uint8_t  CONCAT_2(p_manager,_node_buf)[max_node_number];	 							\
-		static sListManagerParam CONCAT_2(p_manager,_param) = {0,0,0,0};    						\
-		static const  sListManager  CONCAT_2(p_manager,_entry) = {									\
-			CONCAT_2(p_manager,_node_buf),															\
+#define APP_PRIORITY_QUEUE_DEF(p_manager,max_node_number,is_from_small)            					\
+		static X_Boolean CONCAT_2(p_manager,_isInit) = X_False;										\
+		APP_SINGLE_LIST_DEF_WITHOUT_POINTER(p_manager,max_node_number);    							\
+		static sMyPriorityNodeParam CONCAT_2(p_manager,_queue_param)[max_node_number];				\
+		static  const sMyPriorityListManager  CONCAT_2(p_manager,_queue_entry) = {					\
+			&CONCAT_2(p_manager,_isInit),															\
+			&CONCAT_2(p_manager,_list_entry),														\
 			max_node_number,																		\
-			&CONCAT_2(p_manager,_param),															\
+			is_from_small,																			\
+			CONCAT_2(p_manager,_queue_param),														\
 		} ;																						    \
-		static const  sListManager * p_manager = &CONCAT_2(p_manager,_entry)
+		static  sMyPriorityListManager const* p_manager = &CONCAT_2(p_manager,_queue_entry)
 
 X_Void 		mPriorityQueueInitialize(const sMyPriorityListManager *p_manager);
 X_Boolean   mPriorityQueuePush(const sMyPriorityListManager *p_manager,sMyPriorityNodeParam const *p_data);
 X_Boolean   mPriorityQueuePop(const sMyPriorityListManager *p_manager,sMyPriorityNodeParam *p_data);
 X_Void      ClearMyPriorityQueue(const sMyPriorityListManager *p_manager);
-X_Void      RealseMyPriorityQueueNode(const sMyPriorityListManager *p_manager,uint8_t buf_num);
+m_app_result  RealseMyPriorityQueueNode(const sMyPriorityListManager *p_manager,uint16_t node_priority);
 uint16_t    GetMyPriorityQueueUsedNodeCount(const sMyPriorityListManager *p_manager);
-X_Boolean   GetCurrentUsedPriorityScope(const sMyPriorityListManager *p_manager,uint16_t *p_min,uint16_t *p_max);
+X_Boolean   GetCurrentUsedPriorityScope(const sMyPriorityListManager *p_manager,uint16_t *p_high,uint16_t *p_low);
 X_Boolean   DoesMyPriorityQueueEmpty(const sMyPriorityListManager *p_manager);
 
 

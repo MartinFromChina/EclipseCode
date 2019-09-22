@@ -3,4 +3,7 @@
 
 #include "..\..\CommonSource\KeilMDK.h"
 
+// only support one instance !!!
+
+X_Void FlashEventInit(X_Void);
 #endif

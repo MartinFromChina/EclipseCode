@@ -31,16 +31,24 @@ typedef struct
 	sMySingleLinkListParam      *p_param;
 }sMySingleLinkList;
 
+#define APP_SINGLE_LIST_DEF_WITHOUT_POINTER(p_list_manager,max_node_count)            					\
+		static sNodeInformation   				CONCAT_2(p_list_manager,_inf_buf)[max_node_count];		\
+		static sMySingleLinkListParam 			CONCAT_2(p_list_manager,_param) = {X_False,0,0};    	\
+		static const sMySingleLinkList 			CONCAT_2(p_list_manager,_list_entry) = {				\
+		CONCAT_2(p_list_manager,_inf_buf)																\
+		,max_node_count																					\
+		,&CONCAT_2(p_list_manager,_param)																\
+		};
 
 #define APP_SINGLE_LIST_DEF(p_list_manager,max_node_count)            									\
 		static sNodeInformation   				CONCAT_2(p_list_manager,_inf_buf)[max_node_count];		\
 		static sMySingleLinkListParam 			CONCAT_2(p_list_manager,_param) = {X_False,0,0};    	\
-		static const sMySingleLinkList 			CONCAT_2(p_list_manager,_entry) = {						\
+		static const sMySingleLinkList 			CONCAT_2(p_list_manager,_list_entry) = {				\
 		CONCAT_2(p_list_manager,_inf_buf)																\
 		,max_node_count																					\
 		,CONCAT_2(p_list_manager,_param)																\
 		};																								\
-		static const sMySingleLinkList * p_list_manager = &CONCAT_2(p_list_manager,_entry)
+		static const sMySingleLinkList * p_list_manager = &CONCAT_2(p_list_manager,_list_entry)
 
 // node number : 0~ MY_MAX_NODE_COUNT
 m_app_result mSingleListInit(const sMySingleLinkList * s_sll);
