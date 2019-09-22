@@ -5,7 +5,7 @@ static char Canot_Translate[2][9] = {
 		"unsupport",
 };
 
-#define APP_ERROR_MAX (5)
+#define APP_ERROR_MAX (6)
 /*
 #define APP_SUCCESSED       0
 #define APP_ERROR           1
@@ -19,6 +19,7 @@ static char ErrorTranslate[APP_ERROR_MAX][30]={
 	"APP_BEYOND_SCOPE",
     "APP_POINTER_NULL",
 	"APP_ALREADY_DONE_BEFORE",
+	"APP_PARAM_ERROR",
 };
 char *AppErrorGet(uint32_t error,char* p_cannot)
 {

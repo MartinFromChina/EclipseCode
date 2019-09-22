@@ -19,6 +19,7 @@ typedef struct
 
 typedef struct
 {
+	X_Boolean isInitOK;
 	uint16_t first_node_address;
 	uint16_t used_node_num;
 }sMySingleLinkListParam;
@@ -33,7 +34,7 @@ typedef struct
 
 #define APP_SINGLE_LIST_DEF(p_list_manager,max_node_count)            									\
 		static sNodeInformation   				CONCAT_2(p_list_manager,_inf_buf)[max_node_count];		\
-		static sMySingleLinkListParam 			CONCAT_2(p_list_manager,_param) = {0,0};    			\
+		static sMySingleLinkListParam 			CONCAT_2(p_list_manager,_param) = {X_False,0,0};    	\
 		static const sMySingleLinkList 			CONCAT_2(p_list_manager,_entry) = {						\
 		CONCAT_2(p_list_manager,_inf_buf)																\
 		,max_node_count																					\
@@ -41,6 +42,7 @@ typedef struct
 		};																								\
 		static const sMySingleLinkList * p_list_manager = &CONCAT_2(p_list_manager,_entry)
 
+// node number : 0~ MY_MAX_NODE_COUNT
 m_app_result mSingleListInit(const sMySingleLinkList * s_sll);
 m_app_result mSingleListTailAdd(const sMySingleLinkList * s_sll,uint16_t infor_number);
 m_app_result mSingleListTailRemove(const sMySingleLinkList * s_sll);
