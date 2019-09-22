@@ -3,6 +3,8 @@
 
 #include "KeilMDK.h"
 
+typedef uint8_t						m_app_result;
+
 #define APP_SUCCESSED       		0
 #define APP_ERROR           		1
 #define APP_BEYOND_SCOPE    		2

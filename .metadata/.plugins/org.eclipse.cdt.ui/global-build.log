@@ -1,29 +1,12 @@
-14:20:22 **** Incremental Build of configuration Debug for project [T]LogicLab ****
+17:06:44 **** Incremental Build of configuration Debug for project [T]LogicLab ****
 Info: Internal Builder is used for build
-gcc "-ID:\\AllApplication\\GitAll\\EclipseCode\\[T]LogicLab\\ScriptsCommandModule" -O0 -g3 -Wall -c -fmessage-length=0 -o "CommonSource\\CharStringDebug\\CharStringDebugModule.o" "..\\..\\CommonSource\\CharStringDebug\\CharStringDebugModule.c" 
-gcc "-ID:\\AllApplication\\GitAll\\EclipseCode\\[T]LogicLab\\ScriptsCommandModule" -O0 -g3 -Wall -c -fmessage-length=0 -o "CommonSource\\FileOperation\\command.o" "..\\..\\CommonSource\\FileOperation\\command.c" 
-gcc -o [T]LogicLab.exe "CommonSource\\AppCommon.o" "CommonSource\\AppError.o" "CommonSource\\CharStringDebug\\CharStringDebugModule.o" "CommonSource\\FileOperation\\command.o" "CommonSource\\FileOperation\\read_scripts.o" "CommonSource\\IrqAndTimer\\TimeManagerExtern.o" "CommonSource\\IrqAndTimer\\app_timer.o" "CommonSource\\IrqAndTimer\\user_irq.o" "CommonSource\\LogFile\\user_log.o" "CommonSource\\Math\\bit_operation.o" "CommonSource\\Math\\lcm_gcd.o" "CommonSource\\Math\\random_number.o" "CommonSource\\MulLoopQueue\\loop_queues.o" "CommonSource\\MulLoopQueue\\m_list_node.o" "CommonSource\\MulLoopQueue\\m_priority_queues.o" "CommonSource\\StateMachine\\StateMachine.o" "CustomizedModule\\ButtonModule\\ButtonModule.o" "CustomizedModule\\FlashReadWrite\\FlashEventHandle.o" "ScriptsCommandModule\\HexCommand.o" "TB_TinyDancer\\FlashReadWrite\\UserFlash.o" "TB_TinyDancer\\FlashReadWrite\\UserFlashTB.o" "TB_TinyDancer\\UsartCommunication\\UsartCommunication.o" UserDebug.o main.o user_timer.o 
-14:20:35 **** Incremental Build of configuration Debug for project [T]LogicLab ****
-Info: Internal Builder is used for build
-gcc "-ID:\\AllApplication\\GitAll\\EclipseCode\\[T]LogicLab\\ScriptsCommandModule" -O0 -g3 -Wall -c -fmessage-length=0 -o "CommonSource\\MulLoopQueue\\m_priority_queues.o" "..\\..\\CommonSource\\MulLoopQueue\\m_priority_queues.c" 
-..\..\CommonSource\MulLoopQueue\m_priority_queues.c: In function 'mPriorityQueuePush':
-..\..\CommonSource\MulLoopQueue\m_priority_queues.c:17:1: warning: control reaches end of non-void function [-Wreturn-type]
+gcc "-ID:\\AllApplication\\GitAll\\EclipseCode\\[T]LogicLab\\ScriptsCommandModule" -O0 -g3 -Wall -c -fmessage-length=0 -o "CommonSource\\MulLoopQueue\\m_list_node.o" "..\\..\\CommonSource\\MulLoopQueue\\m_list_node.c" 
+..\..\CommonSource\MulLoopQueue\m_list_node.c: In function 'mSingleListInsert':
+..\..\CommonSource\MulLoopQueue\m_list_node.c:131:1: warning: control reaches end of non-void function [-Wreturn-type]
  }
  ^
-..\..\CommonSource\MulLoopQueue\m_priority_queues.c: In function 'mPriorityQueuePop':
-..\..\CommonSource\MulLoopQueue\m_priority_queues.c:21:1: warning: control reaches end of non-void function [-Wreturn-type]
- }
- ^
-..\..\CommonSource\MulLoopQueue\m_priority_queues.c: In function 'GetMyPriorityQueueUsedNodeCount':
-..\..\CommonSource\MulLoopQueue\m_priority_queues.c:33:1: warning: control reaches end of non-void function [-Wreturn-type]
- }
- ^
-..\..\CommonSource\MulLoopQueue\m_priority_queues.c: In function 'GetCurrentUsedPriorityScope':
-..\..\CommonSource\MulLoopQueue\m_priority_queues.c:37:1: warning: control reaches end of non-void function [-Wreturn-type]
- }
- ^
-..\..\CommonSource\MulLoopQueue\m_priority_queues.c: In function 'DoesMyPriorityQueueEmpty':
-..\..\CommonSource\MulLoopQueue\m_priority_queues.c:41:1: warning: control reaches end of non-void function [-Wreturn-type]
+..\..\CommonSource\MulLoopQueue\m_list_node.c: In function 'mSingleListPullAway':
+..\..\CommonSource\MulLoopQueue\m_list_node.c:135:1: warning: control reaches end of non-void function [-Wreturn-type]
  }
  ^
 gcc -o [T]LogicLab.exe "CommonSource\\AppCommon.o" "CommonSource\\AppError.o" "CommonSource\\CharStringDebug\\CharStringDebugModule.o" "CommonSource\\FileOperation\\command.o" "CommonSource\\FileOperation\\read_scripts.o" "CommonSource\\IrqAndTimer\\TimeManagerExtern.o" "CommonSource\\IrqAndTimer\\app_timer.o" "CommonSource\\IrqAndTimer\\user_irq.o" "CommonSource\\LogFile\\user_log.o" "CommonSource\\Math\\bit_operation.o" "CommonSource\\Math\\lcm_gcd.o" "CommonSource\\Math\\random_number.o" "CommonSource\\MulLoopQueue\\loop_queues.o" "CommonSource\\MulLoopQueue\\m_list_node.o" "CommonSource\\MulLoopQueue\\m_priority_queues.o" "CommonSource\\StateMachine\\StateMachine.o" "CustomizedModule\\ButtonModule\\ButtonModule.o" "CustomizedModule\\FlashReadWrite\\FlashEventHandle.o" "ScriptsCommandModule\\HexCommand.o" "TB_TinyDancer\\FlashReadWrite\\UserFlash.o" "TB_TinyDancer\\FlashReadWrite\\UserFlashTB.o" "TB_TinyDancer\\UsartCommunication\\UsartCommunication.o" UserDebug.o main.o user_timer.o 

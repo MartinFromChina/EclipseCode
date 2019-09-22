@@ -2,54 +2,59 @@
 #define __M_LIST_NODE_H
 
 /****************************************************
- * the loop queue can't be interrupt by an irq !!!
+ *
  */
-
-#include "stdbool.h"
 #include "..\KeilMDK.h"
+#include "..\CommonMarco.h"
+#include "..\AppError.h"
 
-
-typedef struct DataList data_list;
-struct DataList
-{
-	X_Boolean 	isBufFree;
-	X_Boolean 	isOccupyPermit;
-	uint16_t 	list_number;
-	data_list   *NextPtr;
-};
-
-typedef enum
-{
-	empty	=	0,
-	normal,
-	full,
-}list_state;
+#define MY_MAX_NODE_COUNT    (0xfffe)
+#define MY_INVALID_NODE_CONTEXT    (0xffff)
 
 typedef struct
 {
-	X_Boolean   isEmpty;
-	list_state  l_state;
-	uint16_t    FilledBufNum;
-	uint16_t    MaxBufNumber;
-	uint16_t  	ValidNodeNumber;
-	data_list 	*FirstIn;
-	data_list 	*FirstOut;
-}List_Manager;
+	uint16_t next_node_address;
+	uint16_t information_number;
+}sNodeInformation;
 
-#define CONCAT_2(p1, p2)      CONCAT_2_(p1, p2)
-/** Auxiliary macro used by @ref CONCAT_2 */
-#define CONCAT_2_(p1, p2)     p1##p2
+typedef struct
+{
+	uint16_t first_node_address;
+	uint16_t used_node_num;
+}sMySingleLinkListParam;
 
-#define APP_LOOPQUEUE_DEF(id,id_manager,id_length,buf_num)            					\
-		static const  uint16_t    id_length = buf_num;										\
-		static data_list   CONCAT_2(id,_list)[buf_num];								\
-		static data_list 	* id =   &CONCAT_2(id,_list)[0];								\
-		static List_Manager CONCAT_2(id,_listmanager) ;      		\
-		static List_Manager * id_manager = &CONCAT_2(id,_listmanager)
+typedef struct
+{
+	sNodeInformation 			*p_inf_buf;
+	uint16_t  					ValidNodeNumber;
+	sMySingleLinkListParam      *p_param;
+}sMySingleLinkList;
 
-X_Void queueInitialize(  data_list * p_list, List_Manager *p_manager,const uint8_t length);
-uint16_t QueueFirstIn(  List_Manager *p_manager,X_Boolean *isOK,X_Boolean is_OccupyPermit);
-uint16_t QueueFirstOut(  List_Manager *p_manager,X_Boolean *isOK);
-X_Boolean DoesQueueEmpty( List_Manager *p_manager);
+
+#define APP_SINGLE_LIST_DEF(p_list_manager,max_node_count)            									\
+		static sNodeInformation   				CONCAT_2(p_list_manager,_inf_buf)[max_node_count];		\
+		static sMySingleLinkListParam 			CONCAT_2(p_list_manager,_param) = {0,0};    			\
+		static const sMySingleLinkList 			CONCAT_2(p_list_manager,_entry) = {						\
+		CONCAT_2(p_list_manager,_inf_buf)																\
+		,max_node_count																					\
+		,CONCAT_2(p_list_manager,_param)																\
+		};																								\
+		static const sMySingleLinkList * p_list_manager = &CONCAT_2(p_list_manager,_entry)
+
+m_app_result mSingleListInit(const sMySingleLinkList * s_sll);
+m_app_result mSingleListTailAdd(const sMySingleLinkList * s_sll,uint16_t infor_number);
+m_app_result mSingleListTailRemove(const sMySingleLinkList * s_sll);
+m_app_result mSingleListHeadAdd(const sMySingleLinkList * s_sll,uint16_t infor_number);
+m_app_result mSingleListHeadRemove(const sMySingleLinkList * s_sll);
+m_app_result mSingleListInsert(const sMySingleLinkList * s_sll,uint16_t node_number,uint16_t infor_number);
+m_app_result mSingleListPullAway(const sMySingleLinkList * s_sll,uint16_t node_number);
+X_Boolean mSingleListSizeGet(const sMySingleLinkList * s_sll,uint16_t *p_size);
+X_Boolean DoesMySingleListEmpty(const sMySingleLinkList * s_sll);
+X_Void mSingleListClear(const sMySingleLinkList * s_sll);
+
+X_Boolean mSingleListFindByValue(const sMySingleLinkList * s_sll,uint16_t infor_number,uint16_t *p_node_number);
+X_Boolean mSingleListInformationGetByNodeNumber(const sMySingleLinkList * s_sll,uint16_t node_number,uint16_t *p_infor_num);
+X_Boolean mSingleListUpdataValueByNodeNumber(const sMySingleLinkList * s_sll,uint16_t node_number,uint16_t new_infor_number);
+
 
 #endif
