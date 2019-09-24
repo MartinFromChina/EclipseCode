@@ -1,4 +1,7 @@
 #include "m_priority_queues.h"
+#if (USE_PRINT_DEBUG == 1)
+#include "../CharStringDebug/CharStringDebugModule.h"
+#endif
 /*
  ***********************************************************************************************
  *1,push node into queue with priority
@@ -26,7 +29,7 @@ static X_Boolean GetActionAndNodeNumber(const sMySingleLinkList * s_sll,X_Boolea
 		*p_number = 0;
 		return X_True;
 	}
-//	isOK = X_False;
+
 	if(isFromSmall == X_True)
 	{
 		for(i=0;i<current_node_count;i++)
@@ -86,21 +89,24 @@ static X_Boolean GetActionAndNodeNumber(const sMySingleLinkList * s_sll,X_Boolea
 }
 X_Void 		mPriorityQueueInitialize(const sMyPriorityListManager *p_manager)
 {
-	uint16_t i;
+	uint16_t i,priority_default;
 	if(p_manager == X_Null) {return;}
 	mSingleListInit(p_manager ->p_list);
 	if(p_manager ->MaxNodeNumber >= 500) {return;}
 
+	priority_default = (p_manager ->isHighPriorityFromSmall == X_True) ? MY_MAX_PRIORITY_VALUE : 0;
+
 	for(i=0;i<p_manager ->MaxNodeNumber;i++)
 	{
 		p_manager ->p_param[i].is_OccupyPermit = X_True;
-		p_manager ->p_param[i].priority		   = 0;
+		p_manager ->p_param[i].priority		   = priority_default;
 		p_manager ->p_param[i].p_buf           = X_Null;
 	}
 	*p_manager ->isInit = X_True;
 }
 X_Boolean   mPriorityQueuePush(const sMyPriorityListManager *p_manager,sMyPriorityNodeParam const *p_data)
 {
+	uint8_t error_code;
 	uint16_t node_count,node_number;
 	ePriorityQueuePushAction e_pqpa;
 	if(p_manager == X_Null || p_data == X_Null) {return X_False;}
@@ -114,11 +120,13 @@ X_Boolean   mPriorityQueuePush(const sMyPriorityListManager *p_manager,sMyPriori
 	p_manager ->p_param[p_data ->priority].p_buf = p_data ->p_buf;
 	if(node_count == 0)// insert first element
 	{
+		printf("insert first element :head add\r\n");
 		if(mSingleListHeadAdd(p_manager->p_list,p_data ->priority) == APP_SUCCESSED){return X_True;}
 		return X_False;
 	}
 	else if(node_count >= p_manager ->MaxNodeNumber) // only replace can be done
 	{
+		printf("insert full,only replace can be done \r\n");
 		if(GetActionAndNodeNumber(p_manager->p_list,p_manager ->isHighPriorityFromSmall,p_data ->priority,node_count
 									,&e_pqpa,&node_number) == X_True)
 		{
@@ -130,15 +138,20 @@ X_Boolean   mPriorityQueuePush(const sMyPriorityListManager *p_manager,sMyPriori
 	}
 	else
 	{
+		printf("insert element \r\n");
 		if(GetActionAndNodeNumber(p_manager->p_list,p_manager ->isHighPriorityFromSmall,p_data ->priority,node_count
 									,&e_pqpa,&node_number) == X_True)
 		{
+			printf(" node_count %d node_number : %d ; priority : %d \r\n",node_count,node_number,p_data ->priority);
 			if(e_pqpa == QP_Insert)
 			{
-				if(mSingleListInsert(p_manager->p_list,node_number,p_data ->priority) == APP_SUCCESSED){return X_True;}
+				error_code = mSingleListInsert(p_manager->p_list,node_number,p_data ->priority);
+				if( error_code == APP_SUCCESSED){return X_True;}
+				printf("mSingleListInsert failed %d\r\n",error_code);
 				return X_False;
 			}
 			if(mSingleListUpdataValueByNodeNumber(p_manager->p_list,node_number,p_data ->priority) == X_True) {return X_True;}
+			printf("mSingleListUpdataValueByNodeNumber failed \r\n");
 			return X_False;
 		}
 		return X_False;
@@ -158,6 +171,7 @@ X_Boolean   mPriorityQueuePop(const sMyPriorityListManager *p_manager,sMyPriorit
 		p_data ->is_OccupyPermit = p_manager ->p_param[infor_number].is_OccupyPermit;
 		p_data ->priority		 = p_manager ->p_param[infor_number].priority;
 		p_data ->p_buf			 = p_manager ->p_param[infor_number].p_buf;
+		printf("pop : HeadRemove \r\n");
 		return X_True;
 	}
 	return X_False;

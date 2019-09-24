@@ -8,8 +8,9 @@
 #include "..\CommonMarco.h"
 #include "..\AppError.h"
 
-#define MY_MAX_NODE_COUNT    (0xfffe)
-#define MY_INVALID_NODE_CONTEXT    (0xffff)
+#define MY_MAX_PRIORITY_VALUE 		 (0xffff)
+#define MY_MAX_NODE_COUNT   		 (0xfffe)
+#define MY_INVALID_NODE_CONTEXT    	 (0xffff)
 
 typedef struct
 {
@@ -24,29 +25,33 @@ typedef struct
 	uint16_t used_node_num;
 }sMySingleLinkListParam;
 
-typedef struct
+typedef struct   _sMySingleLinkList    sMySingleLinkList;
+struct _sMySingleLinkList
 {
 	sNodeInformation 			*p_inf_buf;
 	uint16_t  					ValidNodeNumber;
 	sMySingleLinkListParam      *p_param;
-}sMySingleLinkList;
+	X_Void 						(*onDebug)(const sMySingleLinkList * s_sll);
+};
 
-#define APP_SINGLE_LIST_DEF_WITHOUT_POINTER(p_list_manager,max_node_count)            					\
+#define APP_SINGLE_LIST_DEF_WITHOUT_POINTER(p_list_manager,max_node_count,debug_method)            		\
 		static sNodeInformation   				CONCAT_2(p_list_manager,_inf_buf)[max_node_count];		\
 		static sMySingleLinkListParam 			CONCAT_2(p_list_manager,_param) = {X_False,0,0};    	\
 		static const sMySingleLinkList 			CONCAT_2(p_list_manager,_list_entry) = {				\
 		CONCAT_2(p_list_manager,_inf_buf)																\
 		,max_node_count																					\
 		,&CONCAT_2(p_list_manager,_param)																\
+		,debug_method																					\
 		};
 
-#define APP_SINGLE_LIST_DEF(p_list_manager,max_node_count)            									\
+#define APP_SINGLE_LIST_DEF(p_list_manager,max_node_count,debug_method)            						\
 		static sNodeInformation   				CONCAT_2(p_list_manager,_inf_buf)[max_node_count];		\
 		static sMySingleLinkListParam 			CONCAT_2(p_list_manager,_param) = {X_False,0,0};    	\
 		static const sMySingleLinkList 			CONCAT_2(p_list_manager,_list_entry) = {				\
 		CONCAT_2(p_list_manager,_inf_buf)																\
 		,max_node_count																					\
 		,CONCAT_2(p_list_manager,_param)																\
+		,debug_method																					\
 		};																								\
 		static const sMySingleLinkList * p_list_manager = &CONCAT_2(p_list_manager,_list_entry)
 

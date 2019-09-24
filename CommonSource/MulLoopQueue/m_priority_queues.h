@@ -9,7 +9,11 @@
 #include "..\KeilMDK.h"
 #include "m_list_node.h"
 
-#define MAX_PRIORITY_QUEUE_COUNT      500
+#ifdef USE_LOCAL_PRIORITY_QUEUE_CONFIG
+	#include "m_priority_queues_config_local.h"
+#else
+	#include "m_priority_queues_config_default.h"
+#endif
 
 typedef struct
 {
@@ -18,18 +22,21 @@ typedef struct
 	uint8_t     *p_buf;
 }sMyPriorityNodeParam;
 
-typedef struct
+typedef struct s_MyPriorityListManager sMyPriorityListManager;
+
+struct s_MyPriorityListManager
 {
 	X_Boolean 			*isInit;
     sMySingleLinkList 	const*p_list;
 	uint16_t    		MaxNodeNumber;
 	X_Boolean			isHighPriorityFromSmall;// priority from high to low ;  true : the smaller value ,the high priority ; false : the bigger value ,the high priority
     sMyPriorityNodeParam *p_param;
-}sMyPriorityListManager;
+    X_Void (*onDebug)(const sMyPriorityListManager *p_lm);
+};
 
-#define APP_PRIORITY_QUEUE_DEF(p_manager,max_node_number,is_from_small)            					\
+#define APP_PRIORITY_QUEUE_DEF(p_manager,max_node_number,is_from_small,list_debug,queue_debug)      \
 		static X_Boolean CONCAT_2(p_manager,_isInit) = X_False;										\
-		APP_SINGLE_LIST_DEF_WITHOUT_POINTER(p_manager,max_node_number);    							\
+		APP_SINGLE_LIST_DEF_WITHOUT_POINTER(p_manager,max_node_number,list_debug);    				\
 		static sMyPriorityNodeParam CONCAT_2(p_manager,_queue_param)[max_node_number];				\
 		static  const sMyPriorityListManager  CONCAT_2(p_manager,_queue_entry) = {					\
 			&CONCAT_2(p_manager,_isInit),															\
@@ -37,6 +44,7 @@ typedef struct
 			max_node_number,																		\
 			is_from_small,																			\
 			CONCAT_2(p_manager,_queue_param),														\
+			list_debug,																				\
 		} ;																						    \
 		static  sMyPriorityListManager const* p_manager = &CONCAT_2(p_manager,_queue_entry)
 

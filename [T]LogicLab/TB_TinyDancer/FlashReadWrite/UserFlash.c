@@ -16,5 +16,7 @@ X_Void onTick(X_Void)
 		SEGGER_RTT_Debug(FLASH_SECTOR_DEBUG,(60,"**%d**flash ready ? %d ; current sector number %d\r\n"
 													,debug_counter,DoesFlashReady(),sector_number));
 		debug_counter ++;
+
+		Test_PriorityQueue(sector_number);
 	}
 }

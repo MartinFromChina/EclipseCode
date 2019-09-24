@@ -1,5 +1,11 @@
 #include "m_list_node.h"
 
+#define USE_PRINT_DEBUG
+
+#ifdef USE_PRINT_DEBUG
+#include "stdio.h"
+#endif
+
 static uint16_t NodeAddressMoveForward(uint16_t max_node_number,uint16_t current_address)
 {
 	if(current_address < (max_node_number - 1)){current_address ++;}
@@ -93,6 +99,9 @@ m_app_result mSingleListTailAdd(const sMySingleLinkList * s_sll,uint16_t infor_n
 	}
 	s_sll ->p_inf_buf[next_node_address].information_number = infor_number;
 	s_sll ->p_param ->used_node_num ++;
+	#ifdef USE_PRINT_DEBUG
+	printf("***************tail add successed,node number :%d\r\n",s_sll ->p_param ->used_node_num );
+	#endif
 	return APP_SUCCESSED;
 }
 m_app_result mSingleListTailRemove(const sMySingleLinkList * s_sll)
@@ -114,8 +123,14 @@ m_app_result mSingleListTailRemove(const sMySingleLinkList * s_sll)
 		}
 		s_sll ->p_inf_buf[previous_node_address].next_node_address = MY_INVALID_NODE_CONTEXT;
 		s_sll ->p_param ->used_node_num --;
+		#ifdef USE_PRINT_DEBUG
+		printf("***************tail remove successed,node number :%d\r\n",s_sll ->p_param ->used_node_num );
+		#endif
 		return APP_SUCCESSED;
 	}
+	#ifdef USE_PRINT_DEBUG
+	printf("***************tail remove already done\r\n" );
+	#endif
 	return APP_ALREADY_DONE_BEFORE;
 
 }
@@ -138,6 +153,9 @@ m_app_result mSingleListHeadAdd(const sMySingleLinkList * s_sll,uint16_t infor_n
 	s_sll ->p_inf_buf[front_node_address].information_number = infor_number;
 	s_sll ->p_param ->used_node_num ++;
 	s_sll ->p_param ->first_node_address = front_node_address;
+	#ifdef USE_PRINT_DEBUG
+	printf("***************head add successed,node used :%d , information : %d \r\n",s_sll ->p_param ->used_node_num ,infor_number);
+	#endif
 	return APP_SUCCESSED;
 }
 m_app_result mSingleListHeadRemove(const sMySingleLinkList * s_sll)
@@ -145,6 +163,10 @@ m_app_result mSingleListHeadRemove(const sMySingleLinkList * s_sll)
 	uint16_t  next_node_address;
 	if(s_sll == X_Null) {return APP_POINTER_NULL;}
 	if(s_sll ->p_param ->isInitOK == X_False){return APP_ERROR;}
+
+	#ifdef USE_PRINT_DEBUG
+	uint16_t infor_num = s_sll->p_inf_buf[s_sll ->p_param ->first_node_address].information_number;
+	#endif
 
 	if(s_sll ->p_param ->used_node_num > 0) //
 	{
@@ -159,8 +181,14 @@ m_app_result mSingleListHeadRemove(const sMySingleLinkList * s_sll)
 		s_sll ->p_inf_buf[s_sll ->p_param ->first_node_address].next_node_address = MY_INVALID_NODE_CONTEXT;
 		s_sll ->p_param ->used_node_num --;
 		s_sll ->p_param ->first_node_address = next_node_address;
+		#ifdef USE_PRINT_DEBUG
+		printf("***************head remove successed,node used :%d ; infor_num :%d\r\n",s_sll ->p_param ->used_node_num ,infor_num);
+		#endif
 		return APP_SUCCESSED;
 	}
+	#ifdef USE_PRINT_DEBUG
+	printf("***************head remove already done\r\n" );
+	#endif
 	return APP_ALREADY_DONE_BEFORE;
 }
 m_app_result mSingleListInsert(const sMySingleLinkList * s_sll,uint16_t node_number,uint16_t infor_number)
@@ -173,28 +201,43 @@ m_app_result mSingleListInsert(const sMySingleLinkList * s_sll,uint16_t node_num
 
 	if(node_number == 0)// insert head
 	{
-		mSingleListHeadAdd(s_sll,infor_number);
+		#ifdef USE_PRINT_DEBUG
+		printf("first insert : head add\r\n");
+		#endif
+		return mSingleListHeadAdd(s_sll,infor_number);
 	}
 	else if(node_number == (s_sll ->p_param ->used_node_num + 1)) // inset tail
 	{
-		mSingleListTailAdd(s_sll,infor_number);
+		#ifdef USE_PRINT_DEBUG
+		printf("insert : tail add\r\n");
+		#endif
+		return mSingleListTailAdd(s_sll,infor_number);
 	}
 	else
 	{
-		if(GetNextNodeAddrByNodeNumber(s_sll->p_inf_buf,node_number,s_sll ->p_param ->first_node_address,&right_addr) == X_False) {return APP_ERROR;}
-		if(right_addr >= s_sll ->ValidNodeNumber){return APP_ERROR;}
-
+		// get new node address  (get m)
 		latest_used_node_addr = CurrentNodeAddressGet(s_sll ->p_param ->used_node_num,s_sll->ValidNodeNumber,s_sll ->p_param ->first_node_address);
 		next_empty_node_addr = NodeAddressMoveForward(s_sll->ValidNodeNumber,latest_used_node_addr);
-
+		// origin right node  addr backup from left node (back up r from l)
+		if(GetNextNodeAddrByNodeNumber(s_sll->p_inf_buf,node_number,s_sll ->p_param ->first_node_address,&right_addr) == X_False) {return APP_ERROR;}
+		if(right_addr >= s_sll ->ValidNodeNumber)
+		{
+			printf("insert : right addr get :right_addr %d ; ValidNodeNumber %d\r\n",right_addr ,s_sll ->ValidNodeNumber);
+			return APP_ERROR;
+		}
+		// left node relink to new node  addr (l = m)
 		if(SetNextNodeAddrByNodeNumber(s_sll->p_inf_buf,node_number - 1,s_sll ->p_param ->first_node_address,next_empty_node_addr) == X_False) {return APP_ERROR;}
-
+		// new node  link to origin right node  addr (m = r)
 		s_sll ->p_inf_buf[next_empty_node_addr].information_number = infor_number;
 		s_sll ->p_inf_buf[next_empty_node_addr].next_node_address  = right_addr;
 
 		s_sll ->p_param ->used_node_num ++;
+		#ifdef USE_PRINT_DEBUG
+		printf("***************insert successed,node used :%d ; infor_number %d\r\n",s_sll ->p_param ->used_node_num ,infor_number);
+		#endif
+		return APP_SUCCESSED;
 	}
-	return APP_SUCCESSED;
+
 }
 m_app_result mSingleListPullAway(const sMySingleLinkList * s_sll,uint16_t node_number)
 {
@@ -207,14 +250,12 @@ m_app_result mSingleListPullAway(const sMySingleLinkList * s_sll,uint16_t node_n
 
 	if(s_sll ->p_param ->used_node_num ==  (node_number + 1)) //
 	{
-		mSingleListTailRemove(s_sll);
-		return APP_SUCCESSED;
+		return mSingleListTailRemove(s_sll);
 	}
 
 	if(node_number == 0)
 	{
-		mSingleListHeadRemove(s_sll);
-		return APP_SUCCESSED;
+		return mSingleListHeadRemove(s_sll);
 	}
 
 	if(GetNextNodeAddrByNodeNumber(s_sll->p_inf_buf,node_number - 1,s_sll ->p_param ->first_node_address,&current_addr) == X_False) {return APP_ERROR;}
@@ -223,6 +264,9 @@ m_app_result mSingleListPullAway(const sMySingleLinkList * s_sll,uint16_t node_n
 			,s_sll->p_inf_buf[current_addr].next_node_address) == X_False) {return APP_ERROR;}
 	s_sll->p_inf_buf[current_addr].next_node_address = MY_INVALID_NODE_CONTEXT; // not necessary ?
 	s_sll ->p_param ->used_node_num --;
+	#ifdef USE_PRINT_DEBUG
+	printf("***************pull away successed,node used :%d\r\n",s_sll ->p_param ->used_node_num );
+	#endif
 	return APP_SUCCESSED;
 
 }
@@ -276,6 +320,7 @@ X_Boolean mSingleListInformationGetByNodeNumber(const sMySingleLinkList * s_sll,
 
 	isOK = X_True;
 	addr = s_sll ->p_param ->first_node_address;
+
 	for(i=0;i<node_number;i++)
 	{
 		if(addr >= s_sll ->ValidNodeNumber) {isOK = X_False;break;}
