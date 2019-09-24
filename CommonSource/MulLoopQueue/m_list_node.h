@@ -53,7 +53,7 @@ struct _sMySingleLinkList
 	X_Void 						(*onDebug)(eListOperation e_lop,uint8_t operation_ID,const sMySingleLinkList * s_sll);
 };
 
-typedef   X_Void (*m_list_node_debug_handler)(eListOperation e_lop,uint8_t operation_ID,const sMySingleLinkList * s_sll);
+typedef   X_Void (*m_list_node_debug_handler)(const sMySingleLinkList * s_sll);
 
 typedef struct
 {
@@ -97,6 +97,30 @@ X_Void mSingleListClear(const sMySingleLinkList * s_sll);
 X_Boolean mSingleListFindByValue(const sMySingleLinkList * s_sll,uint16_t infor_number,uint16_t *p_node_number);
 X_Boolean mSingleListInformationGetByNodeNumber(const sMySingleLinkList * s_sll,uint16_t node_number,uint16_t *p_infor_num);
 X_Boolean mSingleListUpdataValueByNodeNumber(const sMySingleLinkList * s_sll,uint16_t node_number,uint16_t new_infor_number);
+
+/************
+debug example code:
+static  X_Void ListInitDebug(const sMySingleLinkList * s_sll)
+{
+	SEGGER_RTT_Debug(FLASH_TEST_DEBUG,(60,"list node init OK valid node num: %d\r\n",s_sll ->ValidNodeNumber));
+}
+static const sListNodeMessageDebugTable sLNMDT[] = {
+		{
+			LO_init,
+			{ListInitDebug,X_Null,X_Null,X_Null,X_Null,},
+		},
+		{
+			LO_TailAdd,
+			{X_Null,X_Null,X_Null,X_Null,X_Null,},
+		},
+};
+static X_Void onListNodeDebug(eListOperation e_lop,uint8_t operation_ID,const sMySingleLinkList * s_sll)
+{
+	if(e_lop >= (sizeof(sLNMDT)/sizeof(sLNMDT[0]))) {return;}
+	if(operation_ID >= MAX_LISTNODE_DEBUG_ID_COUNT) {return;}
+	if(sLNMDT[e_lop].debug_handler[operation_ID] != X_Null){sLNMDT[e_lop].debug_handler[operation_ID](s_sll);}
+}
+ */
 
 
 #endif

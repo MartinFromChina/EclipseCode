@@ -46,12 +46,12 @@ struct s_MyPriorityListManager
     X_Void (*onDebug)(ePriorityQueueOperation e_ppo,uint8_t operation_ID,const sMyPriorityListManager *p_lm);
 };
 
-typedef   X_Void (*m_priority_queue_debug_handler)(ePriorityQueueOperation e_ppo,uint8_t operation_ID,const sMyPriorityListManager *p_lm);
+typedef   X_Void (*m_priority_queue_debug_handler)(const sMyPriorityListManager *p_lm);
 
 typedef struct
 {
 	ePriorityQueueOperation ePQO;
-	m_priority_queue_debug_handler debug_handle[MAX_PRIORITY_QUEUE_DEBUG_ID_COUNT];
+	m_priority_queue_debug_handler debug_handler[MAX_PRIORITY_QUEUE_DEBUG_ID_COUNT];
 }sPriorityQueueMessageDebugTable;
 
 #define APP_PRIORITY_QUEUE_DEF(p_manager,max_node_number,is_from_small,list_debug,queue_debug)      \
@@ -77,5 +77,25 @@ uint16_t    GetMyPriorityQueueUsedNodeCount(const sMyPriorityListManager *p_mana
 X_Boolean   GetCurrentUsedPriorityScope(const sMyPriorityListManager *p_manager,uint16_t *p_high,uint16_t *p_low);
 X_Boolean   DoesMyPriorityQueueEmpty(const sMyPriorityListManager *p_manager);
 
+/*
+ * example debug code
+ static const sPriorityQueueMessageDebugTable sPQMDT[] = {
+		{
+			PQO_init,
+			{X_Null,X_Null,X_Null,X_Null,X_Null,},
+		},
+		{
+			PQO_Push,
+			{X_Null,X_Null,X_Null,X_Null,X_Null,},
+		},
+};
 
+static X_Void onQueueDebug(ePriorityQueueOperation e_ppo,uint8_t operation_ID,const sMyPriorityListManager *p_lm)
+{
+	if(e_ppo >= (sizeof(sPQMDT)/sizeof(sPQMDT[0]))) {return;}
+	if(operation_ID >= MAX_LISTNODE_DEBUG_ID_COUNT) {return;}
+	if(sPQMDT[e_ppo].debug_handler[operation_ID] != X_Null) {sPQMDT[e_ppo].debug_handler[operation_ID](p_lm);}
+}
+
+ */
 #endif

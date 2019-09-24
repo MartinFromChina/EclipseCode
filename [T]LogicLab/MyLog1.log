@@ -51,4 +51,40 @@ printf("insert full,only replace can be done \r\n");
 		printf("insert element \r\n");
 printf(" node_count %d node_number : %d ; priority : %d \r\n",node_count,node_number,p_data ->priority);
 printf("mSingleListInsert failed %d\r\n",error_code);
-printf("mSingleListUpdataValueByNodeNumber failed \r\n");
+printf("mSingleListUpdataValueByNodeNumber failed \r\n");2019-09-24 21:35:08.701 hello I am string debug 
+2019-09-24 21:35:08.810 list node init OK valid node 2019-09-24 21:35:10.070 **0**flash ready ? 0 ; current sector number 3
+2019-09-24 21:35:11.370 **1**flash ready ? 0 ; current sector number 10
+2019-09-24 21:35:12.640 **2**flash ready ? 0 ; current sector number 2
+2019-09-24 21:35:13.940 **3**flash ready ? 0 ; current sector number 5
+2019-09-24 21:35:15.230 **4**flash ready ? 0 ; current sector number 1
+2019-09-24 21:35:15.340 node_count 3
+2019-09-24 21:35:15.450 priority scope 1 ~ 26975
+2019-09-24 21:35:15.560 ~~~~ is?0; p_buf 40f438 ; priority 1
+2019-09-24 21:35:15.680 ~~~~ is?0; p_buf 40f438 ; priority 2
+2019-09-24 21:35:15.790 ~~~~ is?0; p_buf 40f438 ; priority 3
+2019-09-24 21:35:16.540 **5**flash ready ? 0 ; current sector number 4
+2019-09-24 21:35:17.840 **6**flash ready ? 0 ; current sector number 7
+2019-09-24 21:35:19.130 **7**flash ready ? 0 ; current sector number 3
+2019-09-24 21:36:12.711 hello I am string debug 
+2019-09-24 21:36:12.820 list node init OK valid node num: 10
+2019-09-24 21:36:14.100 **0**flash ready ? 0 ; current sector number 3
+2019-09-24 21:36:15.410 **1**flash ready ? 0 ; current sector number 10
+2019-09-24 21:36:16.710 **2**flash ready ? 0 ; current sector number 2
+2019-09-24 21:36:18.010 **3**flash ready ? 0 ; current sector number 5
+2019-09-24 21:36:19.310 **4**flash ready ? 0 ; current sector number 1
+2019-09-24 21:36:19.430 node_count 3
+2019-09-24 21:36:20.600 **5**flash ready ? 0 ; current sector number 4
+2019-09-24 21:36:21.880 **6**flash ready ? 0 ; current sector number 7
+2019-09-24 21:36:23.180 **7**flash ready ? 0 ; current sector number 3
+2019-09-24 21:36:24.470 **8**flash ready ? 0 ; current sector number 6
+2019-09-24 21:36:25.770 **9**flash ready ? 0 ; current sector number 9
+2019-09-24 21:36:25.880 node_count 2
+2019-09-24 21:36:27.080 **10**flash ready ? 1 ; current sector number 2
+2019-09-24 21:36:28.370 **11**flash ready ? 1 ; current sector number 8
+2019-09-24 21:36:29.680 **12**flash ready ? 1 ; current sector number 0
+2019-09-24 21:36:30.980 **13**flash ready ? 1 ; current sector number 4
+2019-09-24 21:38:21.491 hello I am string debug 
+2019-09-24 21:38:21.600 list node init OK valid node num: 10
+2019-09-24 21:43:48.199 hello I am string debug 
+2019-09-24 21:43:48.318 list node init OK valid node num: 20
+2019-09-24 21:43:48.438 queue init OK max node num: 20
