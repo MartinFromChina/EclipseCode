@@ -3,6 +3,6 @@
 
 #define MAX_PRIORITY_QUEUE_COUNT      500
 
-#define USE_PRINT_DEBUG    			  1
+#define MAX_PRIORITY_QUEUE_DEBUG_ID_COUNT            5
 
 #endif

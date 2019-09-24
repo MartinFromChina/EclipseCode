@@ -1,108 +1,54 @@
-2019-09-24 14:04:44.240 hello I am string debug 
-2019-09-24 14:04:45.549 **0**flash ready ? 0 ; current sector number 5
-2019-09-24 14:04:45.654 insert first element 
-2019-09-24 14:04:46.768 **1**flash ready ? 0 ; current sector number 9
-2019-09-24 14:04:46.878 insert element 
-2019-09-24 14:04:47.988 **2**flash ready ? 0 ; current sector number 1
-2019-09-24 14:04:48.092 insert element 
-2019-09-24 14:04:49.207 **3**flash ready ? 0 ; current sector number 7
-2019-09-24 14:04:49.316 insert element 
-2019-09-24 14:04:50.434 **4**flash ready ? 0 ; current sector number 0
-2019-09-24 14:04:50.539 insert element 
-2019-09-24 14:04:50.648 node_count 3
-2019-09-24 14:04:50.757 priority scope 0 ~ 26975
-2019-09-24 14:04:50.866 ~~~~ is?0; p_buf 40f438 ; priority 0
-2019-09-24 14:04:50.975 ~~~~ is?0; p_buf 40f438 ; priority 1
-2019-09-24 14:04:51.089 ~~~~ is?0; p_buf 40f438 ; priority 5
-2019-09-24 14:04:51.702 **5**flash ready ? 0 ; current sector number 3
-2019-09-24 14:04:51.811 insert first element 
-2019-09-24 14:04:52.922 **6**flash ready ? 0 ; current sector number 6
-2019-09-24 14:04:53.032 insert element 
-2019-09-24 14:04:54.141 **7**flash ready ? 0 ; current sector number 2
-2019-09-24 14:04:54.250 insert element 
-2019-09-24 14:04:55.360 **8**flash ready ? 0 ; current sector number 5
-2019-09-24 14:04:55.465 insert element 
-2019-09-24 14:30:10.340 hello I am string debug 
-2019-09-24 14:30:11.652 **0**flash ready ? 0 ; current sector number 6
-2019-09-24 14:30:11.762 insert first element 
-2019-09-24 14:30:12.876 **1**flash ready ? 0 ; current sector number 9
-2019-09-24 14:30:12.986 insert element 
-2019-09-24 14:30:14.104 **2**flash ready ? 0 ; current sector number 4
-2019-09-24 14:30:14.215 insert element 
-2019-09-24 14:30:15.325 **3**flash ready ? 0 ; current sector number 8
-2019-09-24 14:30:15.435 insert element 
-2019-09-24 14:30:16.545 **4**flash ready ? 0 ; current sector number 0
-2019-09-24 14:30:16.658 insert element 
-2019-09-24 14:30:16.771 node_count 3
-2019-09-24 14:30:16.884 priority scope 0 ~ 26975
-2019-09-24 14:30:16.992 ~~~~ is?0; p_buf 40f438 ; priority 0
-2019-09-24 14:30:17.105 ~~~~ is?0; p_buf 40f438 ; priority 4
-2019-09-24 14:30:17.215 ~~~~ is?0; p_buf 40f438 ; priority 6
-2019-09-24 14:30:17.826 **5**flash ready ? 0 ; current sector number 3
-2019-09-24 14:30:17.936 insert first element 
-2019-09-24 14:30:19.051 **6**flash ready ? 0 ; current sector number 6
-2019-09-24 14:30:19.161 insert element 
-2019-09-24 14:33:30.340 hello I am string debug 
-2019-09-24 14:33:31.654 **0**flash ready ? 0 ; current sector number 10
-2019-09-24 14:33:32.870 **1**flash ready ? 0 ; current sector number 2
-2019-09-24 14:33:32.981 insert first element 
-2019-09-24 14:33:34.092 **2**flash ready ? 0 ; current sector number 5
-2019-09-24 14:33:34.202 insert element 
-2019-09-24 14:33:35.313 **3**flash ready ? 0 ; current sector number 1
-2019-09-24 14:33:35.423 insert element 
-2019-09-24 14:33:36.535 **4**flash ready ? 0 ; current sector number 4
-2019-09-24 14:33:36.644 insert element 
-2019-09-24 14:33:36.751 node_count 2
-2019-09-24 14:33:36.856 priority scope 1 ~ 26975
-2019-09-24 14:33:36.964 ~~~~ is?0; p_buf 40f438 ; priority 1
-2019-09-24 14:33:37.070 ~~~~ is?0; p_buf 40f438 ; priority 2
-2019-09-24 14:33:37.783 **5**flash ready ? 0 ; current sector number 7
-2019-09-24 14:33:37.892 insert first element 
-2019-09-24 14:33:39.006 **6**flash ready ? 0 ; current sector number 10
-2019-09-24 14:35:26.481 hello I am string debug 
-2019-09-24 14:35:27.792 insert first element 
-2019-09-24 14:35:29.005 insert element 
-2019-09-24 14:35:30.222 insert element 
-2019-09-24 14:35:31.431 insert element 
-2019-09-24 14:35:32.647 insert element 
-2019-09-24 14:35:33.863 insert first element 
-2019-09-24 14:35:35.077 insert element 
-2019-09-24 14:35:36.295 insert element 
-2019-09-24 14:35:37.512 insert element 
-2019-09-24 14:35:38.728 insert element 
-2019-09-24 14:35:41.150 insert first element 
-2019-09-24 14:36:04.333 hello I am string debug 
-2019-09-24 14:38:35.339 hello I am string debug 
-2019-09-24 14:38:36.648 insert first element 
-2019-09-24 14:38:37.863 insert element 
-2019-09-24 14:38:39.074 insert element 
-2019-09-24 14:38:40.285 insert element 
-2019-09-24 14:38:42.706 insert first element 
-2019-09-24 14:38:43.921 insert element 
-2019-09-24 14:38:45.137 insert element 
-2019-09-24 14:38:46.356 insert element 
-2019-09-24 14:38:47.576 insert element 
-2019-09-24 14:38:48.788 insert first element 
-2019-09-24 14:38:49.998 insert element 
-2019-09-24 14:49:28.473 hello I am string debug 
-2019-09-24 14:52:35.848 hello I am string debug 
-2019-09-24 14:54:24.684 hello I am string debug 
-2019-09-24 14:56:38.868 hello I am string debug 
-2019-09-24 14:58:12.743 hello I am string debug 
-2019-09-24 15:09:42.087 hello I am string debug 
-2019-09-24 15:11:41.559 hello I am string debug 
-2019-09-24 15:12:52.014 hello I am string debug 
-2019-09-24 15:16:12.726 hello I am string debug 
-2019-09-24 15:22:46.233 hello I am string debug 
-2019-09-24 15:27:25.012 hello I am string debug 
-2019-09-24 15:28:10.988 hello I am string debug 
-2019-09-24 15:28:49.111 hello I am string debug 
-2019-09-24 15:29:30.550 hello I am string debug 
-2019-09-24 15:31:23.230 hello I am string debug 
-2019-09-24 15:55:22.466 hello I am string debug 
-2019-09-24 16:19:57.265 hello I am string debug 
-2019-09-24 16:23:35.377 hello I am string debug 
-2019-09-24 16:29:04.594 hello I am string debug 
-2019-09-24 16:32:31.219 hello I am string debug 
-2019-09-24 16:53:52.968 hello I am string debug 
-2019-09-24 17:44:55.902 hello I am string debug 
+#ifdef USE_PRINT_DEBUG
+	printf("***************tail add successed,node number :%d\r\n",s_sll ->p_param ->used_node_num );
+	#endif
+	
+#ifdef USE_PRINT_DEBUG
+		printf("***************tail remove successed,node number :%d\r\n",s_sll ->p_param ->used_node_num );
+		#endif
+#ifdef USE_PRINT_DEBUG
+	printf("***************tail remove already done\r\n" );
+	#endif
+#ifdef USE_PRINT_DEBUG
+	printf("***************head add successed,node used :%d , information : %d \r\n",s_sll ->p_param ->used_node_num ,infor_number);
+	#endif
+	
+if(s_sll ->onDebug != X_Null)
+	{
+		uint16_t infor_num = s_sll->p_inf_buf[s_sll ->p_param ->first_node_address].information_number;
+	}
+
+	#endif
+#ifdef USE_PRINT_DEBUG
+		printf("***************head remove successed,node used :%d ; infor_num :%d\r\n",s_sll ->p_param ->used_node_num ,infor_num);
+		#endif
+#ifdef USE_PRINT_DEBUG
+	printf("***************head remove already done\r\n" );
+	#endif
+	
+#ifdef USE_PRINT_DEBUG
+		printf("first insert : head add\r\n");
+		#endif
+		
+#ifdef USE_PRINT_DEBUG
+		printf("insert : tail add\r\n");
+		#endif
+		
+printf("insert : right addr get :right_addr %d ; ValidNodeNumber %d\r\n",right_addr ,s_sll ->ValidNodeNumber);
+
+#ifdef USE_PRINT_DEBUG
+		printf("***************insert successed,node used :%d ; infor_number %d\r\n",s_sll ->p_param ->used_node_num ,infor_number);
+		#endif
+		
+#ifdef USE_PRINT_DEBUG
+	printf("***************pull away successed,node used :%d\r\n",s_sll ->p_param ->used_node_num );
+	#endif
+	
+	
+	
+printf("insert first element :head add\r\n");
+
+printf("insert full,only replace can be done \r\n");
+		printf("insert element \r\n");
+printf(" node_count %d node_number : %d ; priority : %d \r\n",node_count,node_number,p_data ->priority);
+printf("mSingleListInsert failed %d\r\n",error_code);
+printf("mSingleListUpdataValueByNodeNumber failed \r\n");

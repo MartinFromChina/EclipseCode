@@ -15,6 +15,18 @@
 	#include "m_priority_queues_config_default.h"
 #endif
 
+typedef enum
+{
+	PQO_init = 0,
+	PQO_Push,
+	PQO_Pop,
+	PQO_Clear,
+	PQO_ReleaseNode,
+	PQO_NodeCount,
+	PQO_PriorityScope,
+	PQO_DoesEmpty,
+}ePriorityQueueOperation;
+
 typedef struct
 {
 	X_Boolean 	is_OccupyPermit; // false : can't be replaced by new data  with the same priority
@@ -31,8 +43,16 @@ struct s_MyPriorityListManager
 	uint16_t    		MaxNodeNumber;
 	X_Boolean			isHighPriorityFromSmall;// priority from high to low ;  true : the smaller value ,the high priority ; false : the bigger value ,the high priority
     sMyPriorityNodeParam *p_param;
-    X_Void (*onDebug)(const sMyPriorityListManager *p_lm);
+    X_Void (*onDebug)(ePriorityQueueOperation e_ppo,uint8_t operation_ID,const sMyPriorityListManager *p_lm);
 };
+
+typedef   X_Void (*m_priority_queue_debug_handler)(ePriorityQueueOperation e_ppo,uint8_t operation_ID,const sMyPriorityListManager *p_lm);
+
+typedef struct
+{
+	ePriorityQueueOperation ePQO;
+	m_priority_queue_debug_handler debug_handle[MAX_PRIORITY_QUEUE_DEBUG_ID_COUNT];
+}sPriorityQueueMessageDebugTable;
 
 #define APP_PRIORITY_QUEUE_DEF(p_manager,max_node_number,is_from_small,list_debug,queue_debug)      \
 		static X_Boolean CONCAT_2(p_manager,_isInit) = X_False;										\
@@ -44,7 +64,7 @@ struct s_MyPriorityListManager
 			max_node_number,																		\
 			is_from_small,																			\
 			CONCAT_2(p_manager,_queue_param),														\
-			list_debug,																				\
+			queue_debug,																			\
 		} ;																						    \
 		static  sMyPriorityListManager const* p_manager = &CONCAT_2(p_manager,_queue_entry)
 

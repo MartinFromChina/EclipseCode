@@ -12,6 +12,25 @@
 #define MY_MAX_NODE_COUNT   		 (0xfffe)
 #define MY_INVALID_NODE_CONTEXT    	 (0xffff)
 
+#define MAX_LISTNODE_DEBUG_ID_COUNT     5
+
+typedef enum
+{
+	LO_init = 0,
+	LO_TailAdd,
+	LO_TailRemove,
+	LO_HeadAdd,
+	LO_HeadRemove,
+	LO_Insert,
+	LO_PullAway,
+	LO_SizeGet,
+	LO_DoesEmpty,
+	LO_ListClear,
+	LO_FindByValue,
+	LO_InformationGet,
+	LO_InformationUpdata,
+}eListOperation;
+
 typedef struct
 {
 	uint16_t next_node_address;
@@ -31,8 +50,16 @@ struct _sMySingleLinkList
 	sNodeInformation 			*p_inf_buf;
 	uint16_t  					ValidNodeNumber;
 	sMySingleLinkListParam      *p_param;
-	X_Void 						(*onDebug)(const sMySingleLinkList * s_sll);
+	X_Void 						(*onDebug)(eListOperation e_lop,uint8_t operation_ID,const sMySingleLinkList * s_sll);
 };
+
+typedef   X_Void (*m_list_node_debug_handler)(eListOperation e_lop,uint8_t operation_ID,const sMySingleLinkList * s_sll);
+
+typedef struct
+{
+	eListOperation eLO;
+	m_list_node_debug_handler debug_handler[MAX_LISTNODE_DEBUG_ID_COUNT];
+}sListNodeMessageDebugTable;
 
 #define APP_SINGLE_LIST_DEF_WITHOUT_POINTER(p_list_manager,max_node_count,debug_method)            		\
 		static sNodeInformation   				CONCAT_2(p_list_manager,_inf_buf)[max_node_count];		\

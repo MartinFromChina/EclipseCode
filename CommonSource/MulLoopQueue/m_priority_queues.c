@@ -1,7 +1,4 @@
 #include "m_priority_queues.h"
-#if (USE_PRINT_DEBUG == 1)
-#include "../CharStringDebug/CharStringDebugModule.h"
-#endif
 /*
  ***********************************************************************************************
  *1,push node into queue with priority
@@ -103,6 +100,7 @@ X_Void 		mPriorityQueueInitialize(const sMyPriorityListManager *p_manager)
 		p_manager ->p_param[i].p_buf           = X_Null;
 	}
 	*p_manager ->isInit = X_True;
+	if(p_manager ->onDebug != X_Null) {p_manager ->onDebug(PQO_init,0,p_manager);}
 }
 X_Boolean   mPriorityQueuePush(const sMyPriorityListManager *p_manager,sMyPriorityNodeParam const *p_data)
 {
@@ -120,13 +118,13 @@ X_Boolean   mPriorityQueuePush(const sMyPriorityListManager *p_manager,sMyPriori
 	p_manager ->p_param[p_data ->priority].p_buf = p_data ->p_buf;
 	if(node_count == 0)// insert first element
 	{
-		printf("insert first element :head add\r\n");
+		if(p_manager ->onDebug != X_Null) {p_manager ->onDebug(PQO_Push,0,p_manager);}
 		if(mSingleListHeadAdd(p_manager->p_list,p_data ->priority) == APP_SUCCESSED){return X_True;}
 		return X_False;
 	}
 	else if(node_count >= p_manager ->MaxNodeNumber) // only replace can be done
 	{
-		printf("insert full,only replace can be done \r\n");
+		if(p_manager ->onDebug != X_Null) {p_manager ->onDebug(PQO_Push,1,p_manager);}
 		if(GetActionAndNodeNumber(p_manager->p_list,p_manager ->isHighPriorityFromSmall,p_data ->priority,node_count
 									,&e_pqpa,&node_number) == X_True)
 		{
@@ -138,20 +136,20 @@ X_Boolean   mPriorityQueuePush(const sMyPriorityListManager *p_manager,sMyPriori
 	}
 	else
 	{
-		printf("insert element \r\n");
+		if(p_manager ->onDebug != X_Null) {p_manager ->onDebug(PQO_Push,2,p_manager);}
 		if(GetActionAndNodeNumber(p_manager->p_list,p_manager ->isHighPriorityFromSmall,p_data ->priority,node_count
 									,&e_pqpa,&node_number) == X_True)
 		{
-			printf(" node_count %d node_number : %d ; priority : %d \r\n",node_count,node_number,p_data ->priority);
+			if(p_manager ->onDebug != X_Null) {p_manager ->onDebug(PQO_Push,3,p_manager);}
 			if(e_pqpa == QP_Insert)
 			{
 				error_code = mSingleListInsert(p_manager->p_list,node_number,p_data ->priority);
 				if( error_code == APP_SUCCESSED){return X_True;}
-				printf("mSingleListInsert failed %d\r\n",error_code);
+				if(p_manager ->onDebug != X_Null) {p_manager ->onDebug(PQO_Push,4,p_manager);}
 				return X_False;
 			}
 			if(mSingleListUpdataValueByNodeNumber(p_manager->p_list,node_number,p_data ->priority) == X_True) {return X_True;}
-			printf("mSingleListUpdataValueByNodeNumber failed \r\n");
+			if(p_manager ->onDebug != X_Null) {p_manager ->onDebug(PQO_Push,5,p_manager);}
 			return X_False;
 		}
 		return X_False;
@@ -171,7 +169,6 @@ X_Boolean   mPriorityQueuePop(const sMyPriorityListManager *p_manager,sMyPriorit
 		p_data ->is_OccupyPermit = p_manager ->p_param[infor_number].is_OccupyPermit;
 		p_data ->priority		 = p_manager ->p_param[infor_number].priority;
 		p_data ->p_buf			 = p_manager ->p_param[infor_number].p_buf;
-		printf("pop : HeadRemove \r\n");
 		return X_True;
 	}
 	return X_False;
