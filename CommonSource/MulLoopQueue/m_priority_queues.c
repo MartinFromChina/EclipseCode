@@ -118,7 +118,13 @@ X_Boolean   mPriorityQueuePush(const sMyPriorityListManager *p_manager,sMyPriori
 	p_manager ->p_param[p_data ->priority].p_buf = p_data ->p_buf;
 	if(node_count == 0)// insert first element
 	{
-		if(p_manager ->onDebug != X_Null) {p_manager ->onDebug(PQO_Push,0,p_manager);}
+		if(p_manager ->onDebug != X_Null)
+		{
+			if(p_manager ->onDebugParamCollect != X_Null) {p_manager ->onDebugParamCollect(SQO_Push,0);}
+			if(p_manager ->onDebugParamCollect != X_Null) {p_manager ->onDebugParamCollect(SQO_Push,p_data ->priority);}
+			p_manager ->onDebug(PQO_Push,0,p_manager);
+			if(p_manager ->onDebugParamCollect != X_Null) {p_manager ->onDebugParamCollect(SQO_Clear,0);}
+		}
 		if(mSingleListHeadAdd(p_manager->p_list,p_data ->priority) == APP_SUCCESSED){return X_True;}
 		return X_False;
 	}
@@ -136,20 +142,30 @@ X_Boolean   mPriorityQueuePush(const sMyPriorityListManager *p_manager,sMyPriori
 	}
 	else
 	{
-		if(p_manager ->onDebug != X_Null) {p_manager ->onDebug(PQO_Push,2,p_manager);}
 		if(GetActionAndNodeNumber(p_manager->p_list,p_manager ->isHighPriorityFromSmall,p_data ->priority,node_count
 									,&e_pqpa,&node_number) == X_True)
 		{
-			if(p_manager ->onDebug != X_Null) {p_manager ->onDebug(PQO_Push,3,p_manager);}
+			if(p_manager ->onDebug != X_Null)
+			{
+				if(p_manager ->onDebugParamCollect != X_Null) {p_manager ->onDebugParamCollect(SQO_Push,node_number);}
+				if(p_manager ->onDebugParamCollect != X_Null) {p_manager ->onDebugParamCollect(SQO_Push,p_data ->priority);}
+				p_manager ->onDebug(PQO_Push,2,p_manager);
+				if(p_manager ->onDebugParamCollect != X_Null) {p_manager ->onDebugParamCollect(SQO_Clear,0);}
+			}
 			if(e_pqpa == QP_Insert)
 			{
 				error_code = mSingleListInsert(p_manager->p_list,node_number,p_data ->priority);
 				if( error_code == APP_SUCCESSED){return X_True;}
-				if(p_manager ->onDebug != X_Null) {p_manager ->onDebug(PQO_Push,4,p_manager);}
+				if(p_manager ->onDebug != X_Null)
+				{
+					if(p_manager ->onDebugParamCollect != X_Null) {p_manager ->onDebugParamCollect(SQO_Push,error_code);}
+					p_manager ->onDebug(PQO_Push,3,p_manager);
+					if(p_manager ->onDebugParamCollect != X_Null) {p_manager ->onDebugParamCollect(SQO_Clear,0);}
+				}
 				return X_False;
 			}
 			if(mSingleListUpdataValueByNodeNumber(p_manager->p_list,node_number,p_data ->priority) == X_True) {return X_True;}
-			if(p_manager ->onDebug != X_Null) {p_manager ->onDebug(PQO_Push,5,p_manager);}
+			if(p_manager ->onDebug != X_Null) {p_manager ->onDebug(PQO_Push,4,p_manager);}
 			return X_False;
 		}
 		return X_False;

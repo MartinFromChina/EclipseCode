@@ -34,21 +34,11 @@ if(s_sll ->onDebug != X_Null)
 		#endif
 		
 printf("insert : right addr get :right_addr %d ; ValidNodeNumber %d\r\n",right_addr ,s_sll ->ValidNodeNumber);
-
-#ifdef USE_PRINT_DEBUG
-		printf("***************insert successed,node used :%d ; infor_number %d\r\n",s_sll ->p_param ->used_node_num ,infor_number);
-		#endif
 		
 #ifdef USE_PRINT_DEBUG
 	printf("***************pull away successed,node used :%d\r\n",s_sll ->p_param ->used_node_num );
 	#endif
-	
-	
-	
-printf("insert first element :head add\r\n");
 
-printf("insert full,only replace can be done \r\n");
-		printf("insert element \r\n");
 printf(" node_count %d node_number : %d ; priority : %d \r\n",node_count,node_number,p_data ->priority);
 printf("mSingleListInsert failed %d\r\n",error_code);
 printf("mSingleListUpdataValueByNodeNumber failed \r\n");2019-09-24 21:35:08.701 hello I am string debug 
@@ -88,3 +78,307 @@ printf("mSingleListUpdataValueByNodeNumber failed \r\n");2019-09-24 21:35:08.701
 2019-09-24 21:43:48.199 hello I am string debug 
 2019-09-24 21:43:48.318 list node init OK valid node num: 20
 2019-09-24 21:43:48.438 queue init OK max node num: 20
+2019-09-25 00:12:18.288 hello I am string debug 
+2019-09-25 00:12:18.393 list node init OK valid node num: 20
+2019-09-25 00:12:18.501 queue init OK max node num: 20
+2019-09-25 00:12:19.012 --ScriptsFunctionInitial 
+2019-09-25 00:12:19.619 EventGenerator 10
+2019-09-25 00:12:20.231 EventWait 
+2019-09-25 00:12:20.842 EventGenerator 2
+2019-09-25 00:12:21.452 EventWait 
+2019-09-25 00:12:22.064 EventGenerator 5
+2019-09-25 00:12:22.675 EventWait 
+2019-09-25 00:12:23.287 EventGenerator 1
+2019-09-25 00:12:23.898 EventWait 
+2019-09-25 00:12:24.510 EventGenerator 4
+2019-09-25 00:12:24.619 node_count 5
+2019-09-25 00:12:24.728 priority scope 1 ~ 26975
+2019-09-25 00:12:24.843 ~~~~ is?0; p_buf 40f4d0 ; priority 1
+2019-09-25 00:12:24.947 ~~~~ is?0; p_buf 40f4d0 ; priority 2
+2019-09-25 00:12:25.054 ~~~~ is?0; p_buf 40f4d0 ; priority 10
+2019-09-25 00:12:25.162 ~~~~ is?0; p_buf 40f4d0 ; priority 5
+2019-09-25 00:12:25.268 ~~~~ is?0; p_buf 40f4d0 ; priority 4
+2019-09-25 00:12:25.378 EventWait 
+2019-09-25 00:12:25.783 EventGenerator 7
+2019-09-25 00:12:26.393 EventWait 
+2019-09-25 00:12:27.005 EventGenerator 0
+2019-09-25 00:12:27.618 EventWait 
+2019-09-25 00:12:28.231 EventGenerator 6
+2019-09-25 00:12:28.842 EventWait 
+2019-09-25 00:12:29.453 EventGenerator 9
+2019-09-25 00:12:30.065 EventWait 
+2019-09-25 00:12:30.676 EventGenerator 2
+2019-09-25 00:12:30.785 node_count 4
+2019-09-25 00:12:30.889 priority scope 0 ~ 26975
+2019-09-25 00:12:30.994 ~~~~ is?0; p_buf 40f4d0 ; priority 0
+2019-09-25 00:12:31.104 ~~~~ is?0; p_buf 40f4d0 ; priority 7
+2019-09-25 00:12:31.208 ~~~~ is?0; p_buf 40f4d0 ; priority 6
+2019-09-25 00:12:31.312 ~~~~ is?0; p_buf 40f4d0 ; priority 2
+2019-09-25 00:12:31.417 EventWait 
+2019-09-25 00:12:31.929 EventGenerator 5
+2019-09-25 00:12:32.541 EventWait 
+2019-09-25 00:12:33.154 EventGenerator 0
+2019-09-25 00:39:57.484 hello I am string debug 
+2019-09-25 00:39:57.588 list node init OK valid node num: 20
+2019-09-25 00:39:57.694 queue init OK max node num: 20
+2019-09-25 00:39:58.806 insert first element :head add
+2019-09-25 00:40:00.023 ***************insert successed,node used ; 
+2019-09-25 00:40:01.232 ***************insert successed,node used ; 
+2019-09-25 00:40:01.343 updata value failed
+2019-09-25 00:40:02.459 ***************insert successed,node used ; 
+2019-09-25 00:40:03.674 ***************insert successed,node used ; 
+2019-09-25 00:40:04.885 insert first element :head add
+2019-09-25 00:40:06.100 ***************insert successed,node used ; 
+2019-09-25 00:40:07.316 ***************insert successed,node used ; 
+2019-09-25 00:40:07.426 updata value failed
+2019-09-25 00:40:08.536 ***************insert successed,node used ; 
+2019-09-25 00:40:09.750 ***************insert successed,node used ; 
+2019-09-25 00:40:10.963 insert first element :head add
+2019-09-25 00:40:12.177 ***************insert successed,node used ; 
+2019-09-25 00:40:12.287 updata value failed
+2019-09-25 00:40:13.397 ***************insert successed,node used ; 
+2019-09-25 00:40:13.506 updata value failed
+2019-09-25 00:40:14.620 ***************insert successed,node used ; 
+2019-09-25 00:40:14.730 updata value failed
+2019-09-25 00:40:15.839 ***************insert successed,node used ; 
+2019-09-25 00:40:15.949 updata value failed
+2019-09-25 00:40:17.067 insert first element :head add
+2019-09-25 00:40:18.281 ***************insert successed,node used ; 
+2019-09-25 00:40:18.386 updata value failed
+2019-09-25 13:49:22.132 hello I am string debug 
+2019-09-25 13:49:22.242 list node init OK valid node num: 20
+2019-09-25 13:49:22.352 queue init OK max node num: 20
+2019-09-25 13:49:23.551 insert first element :head add
+2019-09-25 13:49:24.873 ***************insert successed 
+2019-09-25 13:49:26.185 ***************insert successed 
+2019-09-25 13:49:26.297 updata value failed
+2019-09-25 13:49:27.506 ***************insert successed 
+2019-09-25 13:49:28.828 ***************insert successed 
+2019-09-25 13:49:30.150 insert first element :head add
+2019-09-25 13:49:31.472 ***************insert successed 
+2019-09-25 13:49:32.793 ***************insert successed 
+2019-09-25 13:49:58.838 hello I am string debug 
+2019-09-25 13:49:58.948 list node init OK valid node num: 20
+2019-09-25 13:49:59.058 queue init OK max node num: 20
+2019-09-25 13:50:00.247 insert first element :head add
+2019-09-25 13:51:41.893 hello I am string debug 
+2019-09-25 13:51:42.013 list node init OK valid node num: 20
+2019-09-25 13:51:42.134 queue init OK max node num: 20
+2019-09-25 13:51:43.343 insert first element :head add
+2019-09-25 13:53:12.684 hello I am string debug 
+2019-09-25 13:53:12.794 list node init OK valid node num: 20
+2019-09-25 13:53:12.904 queue init OK max node num: 20
+2019-09-25 13:53:14.114 insert first element :head add
+2019-09-25 13:53:51.878 hello I am string debug 
+2019-09-25 13:53:51.988 list node init OK valid node num: 20
+2019-09-25 13:53:52.098 queue init OK max node num: 20
+2019-09-25 13:53:53.307 insert first element :head add
+2019-09-25 13:53:54.628 ***************insert successed 
+2019-09-25 13:53:55.950 ***************insert successed 
+2019-09-25 13:53:57.272 ***************insert successed 
+2019-09-25 13:53:58.603 ***************insert successed 
+2019-09-25 13:53:59.916 insert first element :head add
+2019-09-25 13:54:01.227 ***************insert successed 
+2019-09-25 13:54:02.548 ***************insert successed 
+2019-09-25 13:54:02.660 updata value failed
+2019-09-25 13:54:03.870 ***************insert successed 
+2019-09-25 13:54:05.191 ***************insert successed 
+2019-09-25 13:54:06.512 insert first element :head add
+2019-09-25 13:54:07.834 ***************insert successed 
+2019-09-25 13:54:09.155 ***************insert successed 
+2019-09-25 13:54:09.267 updata value failed
+2019-09-25 13:54:10.486 ***************insert successed 
+2019-09-25 13:54:11.808 ***************insert successed 
+2019-09-25 13:55:44.099 hello I am string debug 
+2019-09-25 13:55:44.209 list node init OK valid node num: 20
+2019-09-25 13:55:44.319 queue init OK max node num: 20
+2019-09-25 13:55:45.528 insert first element :head add
+2019-09-25 13:55:46.850 ***************insert successed 
+2019-09-25 13:55:48.171 ***************insert successed 
+2019-09-25 13:55:48.283 updata value failed
+2019-09-25 13:55:49.492 ***************insert successed 
+2019-09-25 13:56:31.580 hello I am string debug 
+2019-09-25 13:56:31.700 list node init OK valid node num: 20
+2019-09-25 13:56:31.820 queue init OK max node num: 20
+2019-09-25 13:56:33.029 insert first element :head add
+2019-09-25 14:03:43.558 hello I am string debug 
+2019-09-25 14:03:43.668 list node init OK valid node num: 20
+2019-09-25 14:03:43.788 queue init OK max node num: 20
+2019-09-25 14:03:44.997 insert first element :head add
+2019-09-25 14:03:46.319 current insert node number 0 
+2019-09-25 14:03:46.431 ***************insert successed 
+2019-09-25 14:03:46.541 updata value failed
+2019-09-25 14:03:47.640 current insert node number 0 
+2019-09-25 14:03:47.754 ***************insert successed 
+2019-09-25 14:03:47.864 updata value failed
+2019-09-25 14:03:48.963 current insert node number 0 
+2019-09-25 14:03:49.074 ***************insert successed 
+2019-09-25 14:03:50.284 current insert node number 0 
+2019-09-25 14:03:50.406 ***************insert successed 
+2019-09-25 14:03:50.516 updata value failed
+2019-09-25 14:03:51.616 insert first element :head add
+2019-09-25 14:03:52.937 current insert node number 0 
+2019-09-25 14:03:53.049 ***************insert successed 
+2019-09-25 14:03:53.159 updata value failed
+2019-09-25 14:03:54.259 current insert node number 0 
+2019-09-25 14:03:54.370 ***************insert successed 
+2019-09-25 14:03:54.480 updata value failed
+2019-09-25 14:03:55.579 current insert node number 0 
+2019-09-25 14:03:55.691 ***************insert successed 
+2019-09-25 14:03:55.801 updata value failed
+2019-09-25 14:03:56.901 current insert node number 0 
+2019-09-25 14:03:57.013 ***************insert successed 
+2019-09-25 14:03:57.123 updata value failed
+2019-09-25 14:03:58.222 insert first element :head add
+2019-09-25 14:03:59.544 current insert node number 0 
+2019-09-25 14:03:59.656 ***************insert successed 
+2019-09-25 14:03:59.765 updata value failed
+2019-09-25 14:04:00.865 current insert node number 0 
+2019-09-25 14:04:00.977 ***************insert successed 
+2019-09-25 14:04:01.087 updata value failed
+2019-09-25 14:04:02.197 current insert node number 0 
+2019-09-25 14:04:02.308 ***************insert successed 
+2019-09-25 14:04:02.418 updata value failed
+2019-09-25 14:04:03.528 current insert node number 0 
+2019-09-25 14:04:03.639 ***************insert successed 
+2019-09-25 14:04:03.749 updata value failed
+2019-09-25 14:04:04.849 insert first element :head add
+2019-09-25 14:04:06.171 current insert node number 0 
+2019-09-25 14:04:06.282 ***************insert successed 
+2019-09-25 14:04:06.392 updata value failed
+2019-09-25 14:04:07.501 current insert node number 0 
+2019-09-25 14:04:07.614 ***************insert successed 
+2019-09-25 14:04:07.723 updata value failed
+2019-09-25 14:32:25.569 hello I am string debug 
+2019-09-25 14:32:25.679 list node init OK valid node num: 20
+2019-09-25 14:32:25.789 queue init OK max node num: 20
+2019-09-25 14:32:26.999 insert first element :head add
+2019-09-25 14:32:28.318 current insert node number 1 priority 1
+2019-09-25 14:32:28.429 ***************insert successed 
+2019-09-25 14:32:28.539 updata value failed
+2019-09-25 14:32:29.638 current insert node number 0 priority 6
+2019-09-25 14:32:29.750 ***************insert successed 
+2019-09-25 14:32:29.860 updata value failed
+2019-09-25 14:32:30.960 current insert node number 1 priority 9
+2019-09-25 14:32:31.072 ***************insert successed 
+2019-09-25 14:32:31.182 updata value failed
+2019-09-25 14:32:32.291 current insert node number 0 priority 1
+2019-09-25 14:32:32.403 ***************insert successed 
+2019-09-25 14:32:32.513 updata value failed
+2019-09-25 14:32:33.613 insert first element :head add
+2019-09-25 14:32:34.934 current insert node number 2 priority 8
+2019-09-25 14:32:35.047 ***************insert successed 
+2019-09-25 14:32:36.256 current insert node number 1 priority 4
+2019-09-25 14:32:36.368 ***************insert successed 
+2019-09-25 14:32:37.567 current insert node number 1 priority 10
+2019-09-25 14:32:37.679 ***************insert successed 
+2019-09-25 14:32:38.889 current insert node number 1 priority 2
+2019-09-25 14:32:39.001 ***************insert successed 
+2019-09-25 14:32:40.210 insert first element :head add
+2019-09-25 14:32:41.533 current insert node number 1 priority 6
+2019-09-25 14:34:52.170 hello I am string debug 
+2019-09-25 14:34:52.280 list node init OK valid node num: 20
+2019-09-25 14:34:52.390 queue init OK max node num: 20
+2019-09-25 14:34:53.599 insert first element :head add node number 0 priority 6
+2019-09-25 14:34:54.922 current insert node number 1 priority 1
+2019-09-25 14:34:55.034 ***************insert successed 
+2019-09-25 14:34:56.244 current insert node number 1 priority 10
+2019-09-25 14:34:56.355 ***************insert successed 
+2019-09-25 14:34:56.465 updata value failed
+2019-09-25 14:34:57.565 current insert node number 0 priority 5
+2019-09-25 14:34:57.677 ***************insert successed 
+2019-09-25 14:34:58.886 current insert node number 2 priority 9
+2019-09-25 14:34:58.999 ***************insert successed 
+2019-09-25 14:34:59.109 updata value failed
+2019-09-25 14:35:00.208 insert first element :head add node number 0 priority 1
+2019-09-25 14:35:01.530 current insert node number 0 priority 7
+2019-09-25 14:35:01.642 ***************insert successed 
+2019-09-25 14:35:01.752 updata value failed
+2019-09-25 14:35:02.852 current insert node number 0 priority 0
+2019-09-25 14:35:02.964 ***************insert successed 
+2019-09-25 14:35:03.074 updata value failed
+2019-09-25 14:35:04.173 current insert node number 1 priority 3
+2019-09-25 14:35:04.286 ***************insert successed 
+2019-09-25 14:38:45.716 hello I am string debug 
+2019-09-25 14:38:45.826 list node init OK valid node num: 20
+2019-09-25 14:38:45.946 queue init OK max node num: 20
+2019-09-25 14:38:47.166 insert first element :head add node number 0 priority 1
+2019-09-25 14:38:48.477 current insert node number 1 priority 1
+2019-09-25 14:38:48.589 ***************insert successed 
+2019-09-25 14:38:49.789 current insert node number 1 priority 4
+2019-09-25 14:38:49.900 ***************insert successed 
+2019-09-25 14:42:43.056 hello I am string debug 
+2019-09-25 14:42:43.166 list node init OK valid node num: 20
+2019-09-25 14:42:43.276 queue init OK max node num: 20
+2019-09-25 14:42:44.485 insert first element :head add node number 0 priority 5
+2019-09-25 14:42:45.801 current insert node number 1 priority 8
+2019-09-25 14:42:47.123 current insert node number 0 priority 3
+2019-09-25 14:42:47.235 ***************insert successed 
+2019-09-25 14:42:48.444 current insert node number 2 priority 7
+2019-09-25 14:42:49.766 current insert node number 2 priority 10
+2019-09-25 14:42:51.088 insert first element :head add node number 0 priority 2
+2019-09-25 14:42:52.399 current insert node number 1 priority 9
+2019-09-25 14:42:53.711 current insert node number 0 priority 1
+2019-09-25 14:42:53.823 ***************insert successed 
+2019-09-25 14:42:55.022 current insert node number 2 priority 4
+2019-09-25 14:57:00.969 hello I am string debug 
+2019-09-25 14:57:01.089 list node init OK valid node num: 20
+2019-09-25 14:57:01.209 queue init OK max node num: 20
+2019-09-25 14:57:02.418 insert first element :head add node number 0 priority 2
+2019-09-25 14:57:03.740 current insert node number 1 priority 6
+2019-09-25 14:57:05.061 current insert node number 1 priority 9
+2019-09-25 14:57:06.383 current insert node number 1 priority 4
+2019-09-25 14:57:07.705 current insert node number 1 priority 8
+2019-09-25 14:57:09.027 insert first element :head add node number 0 priority 0
+2019-09-25 14:57:10.350 current insert node number 1 priority 7
+2019-09-25 14:57:11.671 current insert node number 1 priority 10
+2019-09-25 14:57:12.992 current insert node number 1 priority 2
+2019-09-25 14:57:14.294 current insert node number 1 priority 9
+2019-09-25 14:57:15.616 insert first element :head add node number 0 priority 1
+2019-09-25 14:57:16.937 current insert node number 1 priority 4
+2019-09-25 14:57:18.249 current insert node number 0 priority 0
+2019-09-25 14:57:18.360 ***************insert successed 
+2019-09-25 14:57:19.570 current insert node number 2 priority 3
+2019-09-25 14:57:20.882 current insert node number 2 priority 6
+2019-09-25 14:57:22.203 insert first element :head add node number 0 priority 2
+2019-09-25 14:57:23.524 current insert node number 1 priority 5
+2019-09-25 14:57:24.836 current insert node number 1 priority 8
+2019-09-25 14:57:26.157 current insert node number 1 priority 4
+2019-09-25 14:57:27.478 current insert node number 1 priority 7
+2019-09-25 14:57:28.800 insert first element :head add node number 0 priority 10
+2019-09-25 15:03:00.994 hello I am string debug 
+2019-09-25 15:03:01.104 list node init OK valid node num: 20
+2019-09-25 15:03:01.214 queue init OK max node num: 20
+2019-09-25 15:03:02.414 insert first element :head add node number 0 priority 1
+2019-09-25 15:03:03.745 current insert node number 1 priority 4
+2019-09-25 15:03:03.857 ***************insert failed : reason 1 
+2019-09-25 15:03:05.057 current insert node number 1 priority 8
+2019-09-25 15:03:05.168 ***************insert failed : reason 1 
+2019-09-25 15:03:06.378 current insert node number 1 priority 3
+2019-09-25 15:03:06.490 ***************insert failed : reason 1 
+2019-09-25 15:03:07.699 current insert node number 1 priority 6
+2019-09-25 15:03:07.812 ***************insert failed : reason 1 
+2019-09-25 15:03:09.021 insert first element :head add node number 0 priority 10
+2019-09-25 15:03:10.333 current insert node number 0 priority 5
+2019-09-25 15:03:11.655 current insert node number 1 priority 8
+2019-09-25 15:03:12.976 current insert node number 0 priority 1
+2019-09-25 15:03:14.298 current insert node number 2 priority 7
+2019-09-25 15:03:15.619 insert first element :head add node number 0 priority 10
+2019-09-25 15:03:16.941 current insert node number 0 priority 3
+2019-09-25 15:03:18.263 current insert node number 1 priority 9
+2019-09-25 15:03:19.585 current insert node number 0 priority 2
+2019-09-25 15:03:20.906 current insert node number 2 priority 5
+2019-09-25 15:03:22.228 insert first element :head add node number 0 priority 0
+2019-09-25 15:03:23.549 current insert node number 1 priority 4
+2019-09-25 15:03:23.662 ***************insert failed : reason 1 
+2019-09-25 15:03:24.871 current insert node number 1 priority 7
+2019-09-25 15:03:24.983 ***************insert failed : reason 1 
+2019-09-25 15:03:26.192 current insert node number 1 priority 2
+2019-09-25 15:03:26.301 ***************insert failed : reason 1 
+2019-09-25 15:03:27.510 current insert node number 1 priority 6
+2019-09-25 15:03:27.622 ***************insert failed : reason 1 
+2019-09-25 15:03:28.831 insert first element :head add node number 0 priority 9
+2019-09-25 15:03:30.153 current insert node number 0 priority 4
+2019-09-25 15:03:31.474 current insert node number 1 priority 8
+2019-09-25 15:03:32.796 current insert node number 0 priority 0
+2019-09-25 15:03:34.107 current insert node number 1 priority 3

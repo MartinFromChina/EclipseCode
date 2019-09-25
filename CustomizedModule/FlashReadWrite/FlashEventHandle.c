@@ -1,5 +1,6 @@
 #include "FlashEventHandle.h"
 #include "..\..\CommonSource\MulLoopQueue\m_priority_queues.h"
+#include "..\..\CommonSource\MulLoopQueue\loop_queues.h"
 
 /*
  ******************************************************************************************
@@ -8,26 +9,57 @@
  2, handle user define sector base on MCU sector system
  ******************************************************************************************
  */
+static X_Void FlashTestDebugInit(X_Void);
+static uint32_t DebugParamCollect(eSimpleQueueOperation op,uint32_t param);
 static X_Void onListNodeDebug(eListOperation e_lop,uint8_t operation_ID,const sMySingleLinkList * s_sll);
 static X_Void onQueueDebug(ePriorityQueueOperation e_ppo,uint8_t operation_ID,const sMyPriorityListManager *p_lm);
 
-APP_PRIORITY_QUEUE_DEF(p_prio_queue,20,X_True,onListNodeDebug,onQueueDebug);
+APP_PRIORITY_QUEUE_DEF(p_prio_queue,20,X_True,onListNodeDebug,onQueueDebug,DebugParamCollect);
 X_Void FlashEventInit(X_Void)
 {
+	FlashTestDebugInit();
 	mPriorityQueueInitialize(p_prio_queue);
 }
-
-
 /*******************************************test********************************************/
 #include "../../[T]LogicLab/UserDebug.h"
-
+SIMPLE_LOOPQUEUE_DEF(p_queue,10);
+static uint32_t param_buf[10];
+static X_Void FlashTestDebugInit(X_Void)
+{
+	SimpleQueueInitialize(p_queue);
+}
+static uint32_t DebugParamCollect(eSimpleQueueOperation op,uint32_t param)
+{
+	uint8_t node_num;
+	X_Boolean isOK;
+	if(op == SQO_Push)
+	{
+		node_num = SimpleQueueFirstIn(p_queue,&isOK,X_True);
+		if(isOK == X_True)
+		{
+			param_buf[node_num] = param;
+			return APP_SUCCESSED;
+		}
+		return APP_ERROR;
+	}
+	else if(op == SQO_Pop)
+	{
+		node_num = SimpleQueueFirstOut(p_queue,&isOK);
+		if(isOK == X_True)
+		{
+			RealseSimpleQueueBuf(p_queue,node_num);
+			return param_buf[node_num];
+		}
+		return APP_ERROR;
+	}
+	else if(op == SQO_Clear)
+	{
+		ClearSimpleQueue(p_queue);
+		return APP_SUCCESSED;
+	}
+	return APP_ERROR;
+}
 /*
-	LO_TailAdd,
-	LO_TailRemove,
-	LO_HeadAdd,
-	LO_HeadRemove,
-	LO_Insert,
-	LO_PullAway,
 	LO_SizeGet,
 	LO_DoesEmpty,
 	LO_ListClear,
@@ -36,6 +68,10 @@ X_Void FlashEventInit(X_Void)
 	LO_InformationUpdata,
 */
 static  X_Void ListInitDebug(const sMySingleLinkList * s_sll)
+{
+	SEGGER_RTT_Debug(FLASH_TEST_DEBUG,(60,"list node init OK valid node num: %d\r\n",s_sll ->ValidNodeNumber));
+}
+static  X_Void TailAddSuccessed(const sMySingleLinkList * s_sll)
 {
 	SEGGER_RTT_Debug(FLASH_TEST_DEBUG,(60,"list node init OK valid node num: %d\r\n",s_sll ->ValidNodeNumber));
 }
@@ -48,6 +84,26 @@ static const sListNodeMessageDebugTable sLNMDT[] = {
 			LO_TailAdd,
 			{X_Null,X_Null,X_Null,X_Null,X_Null,},
 		},
+		{
+			LO_TailRemove,
+			{X_Null,X_Null,X_Null,X_Null,X_Null,},
+		},
+		{
+			LO_HeadAdd,
+			{X_Null,X_Null,X_Null,X_Null,X_Null,},
+		},
+		{
+			LO_HeadRemove,
+			{X_Null,X_Null,X_Null,X_Null,X_Null,},
+		},
+		{
+			LO_Insert,
+			{X_Null,X_Null,X_Null,X_Null,X_Null,},
+		},
+		{
+			LO_PullAway,
+			{X_Null,X_Null,X_Null,X_Null,X_Null,},
+		},
 };
 static X_Void onListNodeDebug(eListOperation e_lop,uint8_t operation_ID,const sMySingleLinkList * s_sll)
 {
@@ -57,9 +113,6 @@ static X_Void onListNodeDebug(eListOperation e_lop,uint8_t operation_ID,const sM
 }
 
 /*
-	PQO_init = 0,
-	PQO_Push,
-	PQO_Pop,
 	PQO_Clear,
 	PQO_ReleaseNode,
 	PQO_NodeCount,
@@ -70,6 +123,32 @@ static  X_Void QueueInitDebug(const sMyPriorityListManager *p_lm)
 {
 	SEGGER_RTT_Debug(FLASH_TEST_DEBUG,(60,"queue init OK max node num: %d\r\n",p_lm ->MaxNodeNumber));
 }
+static  X_Void QueuePush_NodeCount0(const sMyPriorityListManager *p_lm)
+{
+	uint32_t node_num,priority;
+	node_num = DebugParamCollect(SQO_Pop,0);
+	priority = DebugParamCollect(SQO_Pop,0);
+	SEGGER_RTT_Debug(FLASH_TEST_DEBUG,(60,"insert first element :head add node number %d priority %d\r\n",node_num,priority));
+}
+static  X_Void QueuePush_NodeCountMax(const sMyPriorityListManager *p_lm)
+{
+	SEGGER_RTT_Debug(FLASH_TEST_DEBUG,(60,"Node count max , only replace can be done\r\n"));
+}
+static  X_Void QueuePush_NodeCountNormal_InsertNodeNumber(const sMyPriorityListManager *p_lm)
+{
+	uint32_t node_num,priority;
+	node_num = DebugParamCollect(SQO_Pop,0);
+	priority = DebugParamCollect(SQO_Pop,0);
+	SEGGER_RTT_Debug(FLASH_TEST_DEBUG,(60,"current insert node number %d priority %d\r\n",node_num,priority));
+}
+static  X_Void QueuePush_NodeCountNormal_UpdataFailed(const sMyPriorityListManager *p_lm)
+{
+	SEGGER_RTT_Debug(FLASH_TEST_DEBUG,(60,"updata value failed\r\n"));
+}
+static  X_Void QueuePush_NodeCountNormal_InsertFailed(const sMyPriorityListManager *p_lm)
+{
+	SEGGER_RTT_Debug(FLASH_TEST_DEBUG,(60,"***************insert failed : reason %d \r\n",DebugParamCollect(SQO_Pop,0)));
+}
 static const sPriorityQueueMessageDebugTable sPQMDT[] = {
 		{
 			PQO_init,
@@ -77,6 +156,14 @@ static const sPriorityQueueMessageDebugTable sPQMDT[] = {
 		},
 		{
 			PQO_Push,
+			{QueuePush_NodeCount0
+			,QueuePush_NodeCountMax
+			,QueuePush_NodeCountNormal_InsertNodeNumber
+			,QueuePush_NodeCountNormal_InsertFailed
+			,QueuePush_NodeCountNormal_UpdataFailed,},
+		},
+		{
+			PQO_Pop,
 			{X_Null,X_Null,X_Null,X_Null,X_Null,},
 		},
 };

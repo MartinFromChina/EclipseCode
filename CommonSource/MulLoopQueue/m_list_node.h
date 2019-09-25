@@ -7,6 +7,7 @@
 #include "..\KeilMDK.h"
 #include "..\CommonMarco.h"
 #include "..\AppError.h"
+#include "loop_queues.h"
 
 #define MY_MAX_PRIORITY_VALUE 		 (0xffff)
 #define MY_MAX_NODE_COUNT   		 (0xfffe)
@@ -51,6 +52,7 @@ struct _sMySingleLinkList
 	uint16_t  					ValidNodeNumber;
 	sMySingleLinkListParam      *p_param;
 	X_Void 						(*onDebug)(eListOperation e_lop,uint8_t operation_ID,const sMySingleLinkList * s_sll);
+	uint32_t                    (*onDebugParamCollect)(eSimpleQueueOperation op,uint32_t param);
 };
 
 typedef   X_Void (*m_list_node_debug_handler)(const sMySingleLinkList * s_sll);
@@ -61,7 +63,7 @@ typedef struct
 	m_list_node_debug_handler debug_handler[MAX_LISTNODE_DEBUG_ID_COUNT];
 }sListNodeMessageDebugTable;
 
-#define APP_SINGLE_LIST_DEF_WITHOUT_POINTER(p_list_manager,max_node_count,debug_method)            		\
+#define APP_SINGLE_LIST_DEF_WITHOUT_POINTER(p_list_manager,max_node_count,debug_method,param_debug)     \
 		static sNodeInformation   				CONCAT_2(p_list_manager,_inf_buf)[max_node_count];		\
 		static sMySingleLinkListParam 			CONCAT_2(p_list_manager,_param) = {X_False,0,0};    	\
 		static const sMySingleLinkList 			CONCAT_2(p_list_manager,_list_entry) = {				\
@@ -69,9 +71,10 @@ typedef struct
 		,max_node_count																					\
 		,&CONCAT_2(p_list_manager,_param)																\
 		,debug_method																					\
+		,param_debug																					\
 		};
 
-#define APP_SINGLE_LIST_DEF(p_list_manager,max_node_count,debug_method)            						\
+#define APP_SINGLE_LIST_DEF(p_list_manager,max_node_count,debug_method,param_debug)            			\
 		static sNodeInformation   				CONCAT_2(p_list_manager,_inf_buf)[max_node_count];		\
 		static sMySingleLinkListParam 			CONCAT_2(p_list_manager,_param) = {X_False,0,0};    	\
 		static const sMySingleLinkList 			CONCAT_2(p_list_manager,_list_entry) = {				\
@@ -79,6 +82,7 @@ typedef struct
 		,max_node_count																					\
 		,CONCAT_2(p_list_manager,_param)																\
 		,debug_method																					\
+		,param_debug																					\
 		};																								\
 		static const sMySingleLinkList * p_list_manager = &CONCAT_2(p_list_manager,_list_entry)
 

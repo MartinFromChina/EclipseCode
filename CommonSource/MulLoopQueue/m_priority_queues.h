@@ -44,6 +44,7 @@ struct s_MyPriorityListManager
 	X_Boolean			isHighPriorityFromSmall;// priority from high to low ;  true : the smaller value ,the high priority ; false : the bigger value ,the high priority
     sMyPriorityNodeParam *p_param;
     X_Void (*onDebug)(ePriorityQueueOperation e_ppo,uint8_t operation_ID,const sMyPriorityListManager *p_lm);
+    uint32_t (*onDebugParamCollect)(eSimpleQueueOperation op,uint32_t param);
 };
 
 typedef   X_Void (*m_priority_queue_debug_handler)(const sMyPriorityListManager *p_lm);
@@ -54,9 +55,9 @@ typedef struct
 	m_priority_queue_debug_handler debug_handler[MAX_PRIORITY_QUEUE_DEBUG_ID_COUNT];
 }sPriorityQueueMessageDebugTable;
 
-#define APP_PRIORITY_QUEUE_DEF(p_manager,max_node_number,is_from_small,list_debug,queue_debug)      \
+#define APP_PRIORITY_QUEUE_DEF(p_manager,max_node_number,is_from_small,list_debug,queue_debug,param_debug)  \
 		static X_Boolean CONCAT_2(p_manager,_isInit) = X_False;										\
-		APP_SINGLE_LIST_DEF_WITHOUT_POINTER(p_manager,max_node_number,list_debug);    				\
+		APP_SINGLE_LIST_DEF_WITHOUT_POINTER(p_manager,max_node_number,list_debug,param_debug);    	\
 		static sMyPriorityNodeParam CONCAT_2(p_manager,_queue_param)[max_node_number];				\
 		static  const sMyPriorityListManager  CONCAT_2(p_manager,_queue_entry) = {					\
 			&CONCAT_2(p_manager,_isInit),															\
@@ -65,6 +66,7 @@ typedef struct
 			is_from_small,																			\
 			CONCAT_2(p_manager,_queue_param),														\
 			queue_debug,																			\
+			param_debug,																			\
 		} ;																						    \
 		static  sMyPriorityListManager const* p_manager = &CONCAT_2(p_manager,_queue_entry)
 

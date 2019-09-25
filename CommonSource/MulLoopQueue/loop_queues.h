@@ -8,6 +8,13 @@
 #include "..\KeilMDK.h"
 #include "..\CommonMarco.h"
 
+typedef enum
+{
+	SQO_Push,
+	SQO_Pop,
+	SQO_Clear,
+}eSimpleQueueOperation;
+
 typedef struct
 {
 	uint8_t  state;
