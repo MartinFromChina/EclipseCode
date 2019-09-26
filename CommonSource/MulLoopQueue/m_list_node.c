@@ -4,18 +4,20 @@ static X_Boolean BorrowNode(sMySingleLinkListParam const*p_node_param,sListNodeS
 {
 	uint16_t i;
 	X_Boolean isOK;
-	if(p_node_param == X_Null || *p_node == X_Null) {return X_False;}// necessary?
+	if(p_node_param == X_Null || p_node == X_Null) {return X_False;}// necessary?
 
 	isOK = X_False;
-	for(i=0;p_node_param ->ValidNodeNumber;i++)
+	for(i=0;i< p_node_param ->ValidNodeNumber;i++)
 	{
 		if(p_node_param ->p_node_space[i].isFree == X_True)
 		{
 			p_node_param ->p_node_space[i].isFree = X_False;
 			*p_node = &(p_node_param ->p_node_space[i]);
 			isOK = X_True;
+			break;
 		}
 	}
+//	printf(" borrow ok ? %d\r\n",isOK);
 	return isOK;
 }
 
@@ -38,7 +40,7 @@ static X_Boolean NodePointerGetByNodeOrderNumber(sMySingleLinkListParam const*p_
 	X_Boolean isOK;
 	sListNodeSpace *p_temp;
 
-	if(p_node_param == X_Null || *p_node == X_Null) {return X_False;}// necessary?
+	if(p_node_param == X_Null || p_node == X_Null) {return X_False;}// necessary?
 	if( first_node_number >= p_node_param ->ValidNodeNumber || node_order >= p_node_param ->ValidNodeNumber) {return X_False;}// necessary?
 
 	p_temp = &(p_node_param ->p_node_space[first_node_number]);
@@ -238,7 +240,11 @@ m_app_result mSingleListInsert(const sMySingleLinkList * s_sll,uint16_t node_ord
 	else
 	{
 		// get new node address  (get m)
-		if(BorrowNode(s_sll ->p_param,&p_new_node) == X_False) {return APP_NO_ENOUGH_SPACE;}
+		if(BorrowNode(s_sll ->p_param,&p_new_node) == X_False)
+		{
+			if(s_sll ->onDebug != X_Null){s_sll ->onDebug(LO_Insert,2,s_sll);}
+			return APP_NO_ENOUGH_SPACE;
+		}
 		if(NodePointerGetByNodeOrderNumber(s_sll ->p_param,s_sll ->p_manager ->current_head_node_number
 											,(node_order_number - 1),&p_left_node) == X_False)
 		{
@@ -254,7 +260,14 @@ m_app_result mSingleListInsert(const sMySingleLinkList * s_sll,uint16_t node_ord
 
 		p_new_node ->extern_information = infor_number;
 		s_sll ->p_manager ->used_node_num ++;
-		if(s_sll ->onDebug != X_Null) {s_sll ->onDebug(LO_Insert,2,s_sll);}
+		if(s_sll ->onDebug != X_Null)
+		{
+			if(s_sll ->onDebugParamCollect != X_Null){s_sll ->onDebugParamCollect(SQO_Push,p_left_node ->node_ID_in_list_array);}
+			if(s_sll ->onDebugParamCollect != X_Null){s_sll ->onDebugParamCollect(SQO_Push,p_new_node ->node_ID_in_list_array);}
+			if(s_sll ->onDebugParamCollect != X_Null){s_sll ->onDebugParamCollect(SQO_Push,p_right_node ->node_ID_in_list_array);}
+			s_sll ->onDebug(LO_Insert,3,s_sll);
+			if(s_sll ->onDebugParamCollect != X_Null){s_sll ->onDebugParamCollect(SQO_Clear,0);}
+		}
 		return APP_SUCCESSED;
 	}
 

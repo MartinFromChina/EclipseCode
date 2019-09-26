@@ -113,9 +113,15 @@ static  X_Void InsertTail(const sMySingleLinkList * s_sll)
 {
 	SEGGER_RTT_Debug(FLASH_TEST_DEBUG,(90,"~~~Insert tail\r\n"));
 }
-static  X_Void Insert_Param2(const sMySingleLinkList * s_sll)
+static  X_Void InsertBorrowFailed(const sMySingleLinkList * s_sll)
 {
-	SEGGER_RTT_Debug(FLASH_TEST_DEBUG,(90,"********Insert failed : right node addr %d ; valid node number %d\r\n"
+	SEGGER_RTT_Debug(FLASH_TEST_DEBUG,(90,"~~~Insert failed because borrow failed\r\n"));
+}
+static  X_Void InsertOK(const sMySingleLinkList * s_sll)
+{
+	SEGGER_RTT_Debug(FLASH_TEST_DEBUG,(90,"********Insert successed  : left %d middle %d right %d; valid node number %d\r\n"
+			,DebugParamCollect(SQO_Pop,0)
+			,DebugParamCollect(SQO_Pop,0)
 			,DebugParamCollect(SQO_Pop,0)
 			,s_sll ->ValidNodeNumber));
 }
@@ -147,7 +153,7 @@ static const sListNodeMessageDebugTable sLNMDT[] = {
 		},
 		{
 			LO_Insert,
-			{InsertHead,InsertTail,Insert_Param2,X_Null,X_Null,},
+			{InsertHead,InsertTail,InsertBorrowFailed,InsertOK,X_Null,},
 		},
 		{
 			LO_PullAway,
@@ -267,7 +273,7 @@ X_Void Test_PriorityQueue(uint16_t priority)
 
 	test_counter ++;
 
-	if(test_counter >= 5)
+	if(test_counter >= 15)
 	{
 		test_counter = 0;
 
@@ -281,7 +287,7 @@ X_Void Test_PriorityQueue(uint16_t priority)
 		for(i=0;i<node_count;i++)
 		{
 			curr_priority = GetPriorityByNodeNumber(p_prio_queue,j);
-			SEGGER_RTT_Debug(1,(30,"node %d prio %d\r\n",j,curr_priority));
+			SEGGER_RTT_Debug(0,(30,"node %d prio %d\r\n",j,curr_priority));
 			j++;
 		}
 		while(mPriorityQueuePop(p_prio_queue,&sMPNP_pop) == X_True)
