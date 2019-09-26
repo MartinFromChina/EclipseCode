@@ -14,7 +14,7 @@ static uint32_t DebugParamCollect(eSimpleQueueOperation op,uint32_t param);
 static X_Void onListNodeDebug(eListOperation e_lop,uint8_t operation_ID,const sMySingleLinkList * s_sll);
 static X_Void onQueueDebug(ePriorityQueueOperation e_ppo,uint8_t operation_ID,const sMyPriorityListManager *p_lm);
 
-APP_PRIORITY_QUEUE_DEF(p_prio_queue,20,X_True,onListNodeDebug,onQueueDebug,DebugParamCollect);
+APP_PRIORITY_QUEUE_DEF(p_prio_queue,6,X_True,onListNodeDebug,onQueueDebug,DebugParamCollect);
 X_Void FlashEventInit(X_Void)
 {
 	FlashTestDebugInit();
@@ -201,10 +201,11 @@ static  X_Void QueuePush_NodeCountMax(const sMyPriorityListManager *p_lm)
 }
 static  X_Void QueuePush_NodeCountNormal_InsertNodeNumber(const sMyPriorityListManager *p_lm)
 {
-	uint32_t node_num,priority;
+	uint32_t action,node_num,priority;
+	action   = DebugParamCollect(SQO_Pop,0);
 	node_num = DebugParamCollect(SQO_Pop,0);
 	priority = DebugParamCollect(SQO_Pop,0);
-	SEGGER_RTT_Debug(FLASH_TEST_DEBUG,(60,"current insert node number %d priority %d\r\n",node_num,priority));
+	SEGGER_RTT_Debug(FLASH_TEST_DEBUG,(60,"current %s; node number %d priority %d\r\n",(action == 0)? "Replace" : "Insert",node_num,priority));
 }
 static  X_Void QueuePush_NodeCountNormal_UpdataFailed(const sMyPriorityListManager *p_lm)
 {
@@ -273,7 +274,7 @@ X_Void Test_PriorityQueue(uint16_t priority)
 
 	test_counter ++;
 
-	if(test_counter >= 15)
+	if(test_counter >= 10)
 	{
 		test_counter = 0;
 

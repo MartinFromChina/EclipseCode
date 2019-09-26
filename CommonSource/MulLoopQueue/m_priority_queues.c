@@ -109,7 +109,6 @@ X_Boolean   mPriorityQueuePush(const sMyPriorityListManager *p_manager,sMyPriori
 	ePriorityQueuePushAction e_pqpa;
 	if(p_manager == X_Null || p_data == X_Null) {return X_False;}
 	if(*p_manager ->isInit == X_False) {return X_False;}
-	if(p_data ->priority >= p_manager ->MaxNodeNumber){return X_False;}
 	if(p_data ->p_buf == X_Null)	 {return X_False;}
 	if( mSingleListSizeGet(p_manager->p_list,&node_count) == X_False){return X_False;}
 
@@ -130,10 +129,17 @@ X_Boolean   mPriorityQueuePush(const sMyPriorityListManager *p_manager,sMyPriori
 	}
 	else if(node_count >= p_manager ->MaxNodeNumber) // only replace can be done
 	{
-		if(p_manager ->onDebug != X_Null) {p_manager ->onDebug(PQO_Push,1,p_manager);}
 		if(GetActionAndNodeNumber(p_manager->p_list,p_manager ->isHighPriorityFromSmall,p_data ->priority,node_count
 									,&e_pqpa,&node_number) == X_True)
 		{
+			if(p_manager ->onDebug != X_Null)
+			{
+				if(p_manager ->onDebugParamCollect != X_Null) {p_manager ->onDebugParamCollect(SQO_Push,e_pqpa);}
+				if(p_manager ->onDebugParamCollect != X_Null) {p_manager ->onDebugParamCollect(SQO_Push,node_number);}
+				if(p_manager ->onDebugParamCollect != X_Null) {p_manager ->onDebugParamCollect(SQO_Push,p_data ->priority);}
+				p_manager ->onDebug(PQO_Push,1,p_manager);
+				if(p_manager ->onDebugParamCollect != X_Null) {p_manager ->onDebugParamCollect(SQO_Clear,0);}
+			}
 			if(e_pqpa == QP_Insert) {return X_False;}
 			if(mSingleListUpdataValueByNodeNumber(p_manager->p_list,node_number,p_data ->priority) == X_True) {return X_True;}
 			return X_False;
@@ -147,6 +153,7 @@ X_Boolean   mPriorityQueuePush(const sMyPriorityListManager *p_manager,sMyPriori
 		{
 			if(p_manager ->onDebug != X_Null)
 			{
+				if(p_manager ->onDebugParamCollect != X_Null) {p_manager ->onDebugParamCollect(SQO_Push,e_pqpa);}
 				if(p_manager ->onDebugParamCollect != X_Null) {p_manager ->onDebugParamCollect(SQO_Push,node_number);}
 				if(p_manager ->onDebugParamCollect != X_Null) {p_manager ->onDebugParamCollect(SQO_Push,p_data ->priority);}
 				p_manager ->onDebug(PQO_Push,2,p_manager);
