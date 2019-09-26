@@ -24,6 +24,7 @@ typedef enum
 	PQO_ReleaseNode,
 	PQO_NodeCount,
 	PQO_PriorityScope,
+	PQO_GetPority,
 	PQO_DoesEmpty,
 }ePriorityQueueOperation;
 
@@ -77,6 +78,7 @@ X_Void      ClearMyPriorityQueue(const sMyPriorityListManager *p_manager);
 m_app_result  RealseMyPriorityQueueNode(const sMyPriorityListManager *p_manager,uint16_t node_priority);
 uint16_t    GetMyPriorityQueueUsedNodeCount(const sMyPriorityListManager *p_manager);
 X_Boolean   GetCurrentUsedPriorityScope(const sMyPriorityListManager *p_manager,uint16_t *p_high,uint16_t *p_low);
+uint16_t   GetPriorityByNodeNumber(const sMyPriorityListManager *p_manager,uint16_t node_number);
 X_Boolean   DoesMyPriorityQueueEmpty(const sMyPriorityListManager *p_manager);
 
 /*

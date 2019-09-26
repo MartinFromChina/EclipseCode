@@ -1,9 +1,42 @@
-15:02:53 **** Incremental Build of configuration Debug for project [T]LogicLab ****
+07:16:56 **** Incremental Build of configuration Debug for project [T]LogicLab ****
 Info: Internal Builder is used for build
+gcc "-ID:\\AllApplication\\GitAll\\EclipseCode\\[T]LogicLab\\ScriptsCommandModule" -O0 -g3 -Wall -c -fmessage-length=0 -o "CommonSource\\MulLoopQueue\\m_priority_queues.o" "..\\..\\CommonSource\\MulLoopQueue\\m_priority_queues.c" 
+In file included from ..\..\CommonSource\MulLoopQueue\m_priority_queues.h:10:0,
+                 from ..\..\CommonSource\MulLoopQueue\m_priority_queues.c:1:
+..\..\CommonSource\MulLoopQueue\m_list_node.h:70:1: warning: multi-line comment [-Wcomment]
+ //#define APP_SINGLE_LIST_DEF_WITHOUT_POINTER(p_list_manager,max_node_count,debug_method,param_debug)     \
+ ^
 gcc "-ID:\\AllApplication\\GitAll\\EclipseCode\\[T]LogicLab\\ScriptsCommandModule" -O0 -g3 -Wall -c -fmessage-length=0 -o "CustomizedModule\\FlashReadWrite\\FlashEventHandle.o" "..\\..\\CustomizedModule\\FlashReadWrite\\FlashEventHandle.c" 
-..\..\CustomizedModule\FlashReadWrite\FlashEventHandle.c:74:16: warning: 'TailAddSuccessed' defined but not used [-Wunused-function]
+In file included from d:\allapplication\gitall\eclipsecode\commonsource\mulloopqueue\m_priority_queues.h:10:0,
+                 from ..\..\CustomizedModule\FlashReadWrite\FlashEventHandle.c:2:
+d:\allapplication\gitall\eclipsecode\commonsource\mulloopqueue\m_list_node.h:70:1: warning: multi-line comment [-Wcomment]
+ //#define APP_SINGLE_LIST_DEF_WITHOUT_POINTER(p_list_manager,max_node_count,debug_method,param_debug)     \
+ ^
+In file included from ..\..\CustomizedModule\FlashReadWrite\FlashEventHandle.c:2:0:
+..\..\CustomizedModule\FlashReadWrite\FlashEventHandle.c:17:37: error: expected ')' before numeric constant
+ APP_PRIORITY_QUEUE_DEF(p_prio_queue,20,X_True,onListNodeDebug,onQueueDebug,DebugParamCollect);
+                                     ^
+d:\allapplication\gitall\eclipsecode\commonsource\mulloopqueue\m_priority_queues.h:61:49: note: in definition of macro 'APP_PRIORITY_QUEUE_DEF'
+   APP_SINGLE_LIST_DEF_WITHOUT_POINTER(p_manager,max_node_number,list_debug,param_debug);     \
+                                                 ^~~~~~~~~~~~~~~
+In file included from d:\allapplication\gitall\eclipsecode\commonsource\mulloopqueue\m_list_node.h:8:0,
+                 from d:\allapplication\gitall\eclipsecode\commonsource\mulloopqueue\m_priority_queues.h:10,
+                 from ..\..\CustomizedModule\FlashReadWrite\FlashEventHandle.c:2:
+..\..\CustomizedModule\FlashReadWrite\FlashEventHandle.c:17:24: error: 'p_prio_queue_list_entry' undeclared here (not in a function)
+ APP_PRIORITY_QUEUE_DEF(p_prio_queue,20,X_True,onListNodeDebug,onQueueDebug,DebugParamCollect);
+                        ^
+d:\allapplication\gitall\eclipsecode\commonsource\commonmarco.h:6:31: note: in definition of macro 'CONCAT_2_'
+ #define CONCAT_2_(p1, p2)     p1##p2
+                               ^~
+d:\allapplication\gitall\eclipsecode\commonsource\mulloopqueue\m_priority_queues.h:65:5: note: in expansion of macro 'CONCAT_2'
+    &CONCAT_2(p_manager,_list_entry),              \
+     ^~~~~~~~
+..\..\CustomizedModule\FlashReadWrite\FlashEventHandle.c:17:1: note: in expansion of macro 'APP_PRIORITY_QUEUE_DEF'
+ APP_PRIORITY_QUEUE_DEF(p_prio_queue,20,X_True,onListNodeDebug,onQueueDebug,DebugParamCollect);
+ ^~~~~~~~~~~~~~~~~~~~~~
+..\..\CustomizedModule\FlashReadWrite\FlashEventHandle.c:157:15: warning: 'onListNodeDebug' defined but not used [-Wunused-function]
+ static X_Void onListNodeDebug(eListOperation e_lop,uint8_t operation_ID,const sMySingleLinkList * s_sll)
+               ^~~~~~~~~~~~~~~
+..\..\CustomizedModule\FlashReadWrite\FlashEventHandle.c:84:16: warning: 'TailAddSuccessed' defined but not used [-Wunused-function]
  static  X_Void TailAddSuccessed(const sMySingleLinkList * s_sll)
                 ^~~~~~~~~~~~~~~~
-gcc "-ID:\\AllApplication\\GitAll\\EclipseCode\\[T]LogicLab\\ScriptsCommandModule" -O0 -g3 -Wall -c -fmessage-length=0 -o "CommonSource\\MulLoopQueue\\m_priority_queues.o" "..\\..\\CommonSource\\MulLoopQueue\\m_priority_queues.c" 
-gcc -o [T]LogicLab.exe "CommonSource\\AppCommon.o" "CommonSource\\AppError.o" "CommonSource\\CharStringDebug\\CharStringDebugModule.o" "CommonSource\\FileOperation\\command.o" "CommonSource\\FileOperation\\read_scripts.o" "CommonSource\\IrqAndTimer\\TimeManagerExtern.o" "CommonSource\\IrqAndTimer\\app_timer.o" "CommonSource\\IrqAndTimer\\user_irq.o" "CommonSource\\LogFile\\user_log.o" "CommonSource\\Math\\bit_operation.o" "CommonSource\\Math\\lcm_gcd.o" "CommonSource\\Math\\random_number.o" "CommonSource\\MulLoopQueue\\loop_queues.o" "CommonSource\\MulLoopQueue\\m_list_node.o" "CommonSource\\MulLoopQueue\\m_priority_queues.o" "CommonSource\\StateMachine\\StateMachine.o" "CustomizedModule\\ButtonModule\\ButtonModule.o" "CustomizedModule\\FlashReadWrite\\FlashEventHandle.o" "ScriptsCommandModule\\HexCommand.o" "TB_TinyDancer\\FlashReadWrite\\UserFlash.o" "TB_TinyDancer\\FlashReadWrite\\UserFlashTB.o" "TB_TinyDancer\\UsartCommunication\\UsartCommunication.o" UserDebug.o main.o user_timer.o 
-Info: Nothing to build for [T]LogicLab

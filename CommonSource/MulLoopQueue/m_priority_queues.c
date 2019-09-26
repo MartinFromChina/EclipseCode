@@ -185,8 +185,15 @@ X_Boolean   mPriorityQueuePop(const sMyPriorityListManager *p_manager,sMyPriorit
 		p_data ->is_OccupyPermit = p_manager ->p_param[infor_number].is_OccupyPermit;
 		p_data ->priority		 = p_manager ->p_param[infor_number].priority;
 		p_data ->p_buf			 = p_manager ->p_param[infor_number].p_buf;
+		if(p_manager ->onDebug != X_Null)
+		{
+			if(p_manager ->onDebugParamCollect != X_Null) {p_manager ->onDebugParamCollect(SQO_Push,infor_number);}
+			p_manager ->onDebug(PQO_Pop,0,p_manager);
+			if(p_manager ->onDebugParamCollect != X_Null) {p_manager ->onDebugParamCollect(SQO_Clear,0);}
+		}
 		return X_True;
 	}
+	if(p_manager ->onDebug != X_Null) {p_manager ->onDebug(PQO_Pop,1,p_manager);}
 	return X_False;
 }
 X_Void    ClearMyPriorityQueue(const sMyPriorityListManager *p_manager)
@@ -225,6 +232,18 @@ X_Boolean   GetCurrentUsedPriorityScope(const sMyPriorityListManager *p_manager,
 	if(mSingleListSizeGet(p_manager->p_list,&node_count) == X_False) {return X_False;}
 	if(mSingleListInformationGetByNodeNumber(p_manager ->p_list,node_count,p_low) == X_False) {return X_False;}
 	return X_True;
+}
+uint16_t   GetPriorityByNodeNumber(const sMyPriorityListManager *p_manager,uint16_t node_number)
+{
+	uint16_t priority;
+	if(p_manager == X_Null) {return X_False;}
+	if(*p_manager ->isInit == X_False) {return X_False;}
+	if(mSingleListInformationGetByNodeNumber(p_manager ->p_list,node_number,&priority) == X_True)
+	{
+		return priority;
+	}
+	return 0xffff;
+//	// //return p_manager ->p_list ->p_inf_buf[node_number].information_number;
 }
 X_Boolean   DoesMyPriorityQueueEmpty(const sMyPriorityListManager *p_manager)
 {

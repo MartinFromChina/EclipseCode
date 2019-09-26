@@ -10,7 +10,7 @@
 #include "loop_queues.h"
 
 #define MY_MAX_PRIORITY_VALUE 		 (0xffff)
-#define MY_MAX_NODE_COUNT   		 (0xfffe)
+#define MY_MAX_NODE_COUNT   		 (100)
 #define MY_INVALID_NODE_CONTEXT    	 (0xffff)
 
 #define MAX_LISTNODE_DEBUG_ID_COUNT     5
@@ -32,25 +32,29 @@ typedef enum
 	LO_InformationUpdata,
 }eListOperation;
 
-typedef struct
+typedef struct _sListNodeSpace sListNodeSpace;
+struct _sListNodeSpace
 {
-	uint16_t next_node_address;
-	uint16_t information_number;
-}sNodeInformation;
+	X_Boolean 	isFree;
+	uint16_t    node_ID_in_list_array;
+	uint16_t    extern_information;
+	sListNodeSpace   *NextPtr;
+};
 
 typedef struct
 {
-	X_Boolean isInitOK;
-	uint16_t first_node_address;
-	uint16_t used_node_num;
+	uint16_t  		const ValidNodeNumber;
+	sListNodeSpace  const *p_node_space;
 }sMySingleLinkListParam;
 
 typedef struct   _sMySingleLinkList    sMySingleLinkList;
 struct _sMySingleLinkList
 {
-	sNodeInformation 			*p_inf_buf;
-	uint16_t  					ValidNodeNumber;
-	sMySingleLinkListParam      *p_param;
+	X_Boolean 					isInitOK;
+	uint16_t  const				ValidNodeNumber;
+	uint16_t	   				current_head_node_number;
+	uint16_t 	   				used_node_num;
+	sMySingleLinkListParam     const *p_param;
 	X_Void 						(*onDebug)(eListOperation e_lop,uint8_t operation_ID,const sMySingleLinkList * s_sll);
 	uint32_t                    (*onDebugParamCollect)(eSimpleQueueOperation op,uint32_t param);
 };
@@ -63,26 +67,27 @@ typedef struct
 	m_list_node_debug_handler debug_handler[MAX_LISTNODE_DEBUG_ID_COUNT];
 }sListNodeMessageDebugTable;
 
-#define APP_SINGLE_LIST_DEF_WITHOUT_POINTER(p_list_manager,max_node_count,debug_method,param_debug)     \
-		static sNodeInformation   				CONCAT_2(p_list_manager,_inf_buf)[max_node_count];		\
-		static sMySingleLinkListParam 			CONCAT_2(p_list_manager,_param) = {X_False,0,0};    	\
-		static const sMySingleLinkList 			CONCAT_2(p_list_manager,_list_entry) = {				\
-		CONCAT_2(p_list_manager,_inf_buf)																\
-		,max_node_count																					\
-		,&CONCAT_2(p_list_manager,_param)																\
-		,debug_method																					\
-		,param_debug																					\
-		};
+//#define APP_SINGLE_LIST_DEF_WITHOUT_POINTER(p_list_manager,max_node_count,debug_method,param_debug)     \
+//		static sListNodeSpace 					CONCAT_2(p_list_manager,_node_space)[max_node_count];	\
+//		static sMySingleLinkListParam 			CONCAT_2(p_list_manager,_param) = {X_False,max_node_count,CONCAT_2(p_list_manager,_node_space),0};    	\
+//		static const sMySingleLinkList 			CONCAT_2(p_list_manager,_list_entry) = {				\
+//		max_node_count																					\
+//		,CONCAT_2(p_list_manager,_param)																\
+//		,debug_method																					\
+//		,param_debug																					\
+//		};
 
 #define APP_SINGLE_LIST_DEF(p_list_manager,max_node_count,debug_method,param_debug)            			\
-		static sNodeInformation   				CONCAT_2(p_list_manager,_inf_buf)[max_node_count];		\
-		static sMySingleLinkListParam 			CONCAT_2(p_list_manager,_param) = {X_False,0,0};    	\
+		static sListNodeSpace 					CONCAT_2(p_list_manager,_node_space)[max_node_count];	\
+		static sMySingleLinkListParam 			CONCAT_2(p_list_manager,_param) = {max_node_count,CONCAT_2(p_list_manager,_node_space)};    	\
 		static const sMySingleLinkList 			CONCAT_2(p_list_manager,_list_entry) = {				\
-		CONCAT_2(p_list_manager,_inf_buf)																\
-		,max_node_count																					\
-		,CONCAT_2(p_list_manager,_param)																\
-		,debug_method																					\
-		,param_debug																					\
+		X_False,																						\
+		max_node_count,																					\
+		0,																								\
+		0,																								\
+		CONCAT_2(p_list_manager,_param),																\
+		debug_method,																					\
+		param_debug,																					\
 		};																								\
 		static const sMySingleLinkList * p_list_manager = &CONCAT_2(p_list_manager,_list_entry)
 

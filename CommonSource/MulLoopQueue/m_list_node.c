@@ -1,60 +1,64 @@
 #include "m_list_node.h"
 
-static uint16_t NodeAddressMoveForward(uint16_t max_node_number,uint16_t current_address)
-{
-	if(current_address < (max_node_number - 1)){current_address ++;}
-	else{current_address = 0;}
-	return current_address;
-}
-static uint16_t NodeAddressStepBack(uint16_t max_node_number,uint16_t current_address)
-{
-	if(current_address > 0){current_address --;}
-	else{current_address = (max_node_number - 1);}
-	return current_address;
-}
-static uint16_t CurrentNodeAddressGet(uint16_t current_used_node_number,uint16_t max_node_number,uint16_t first_node_address)
+static X_Boolean BorrowNode(sMySingleLinkListParam const*p_node_param,sListNodeSpace *p_node)
 {
 	uint16_t i;
-	uint16_t addr;
+	X_Boolean isOK;
+	if(p_node_param == X_Null || p_node == X_Null) {return X_False;}// necessary?
 
-	addr = first_node_address;
-	if(current_used_node_number == 0 || current_used_node_number == 1) {return first_node_address;}
-	for(i=1;i<current_used_node_number;i++)
+	isOK = X_False;
+	for(i=0;p_node_param ->ValidNodeNumber;i++)
 	{
-		addr = NodeAddressMoveForward(max_node_number,addr);
+		if(p_node_param ->p_node_space[i].isFree == X_True)
+		{
+			p_node_param ->p_node_space[i].isFree = X_False;
+			p_node = &(p_node_param ->p_node_space[i]);
+			isOK = X_True;
+		}
 	}
-	return addr;
+	return isOK;
 }
 
-static X_Boolean GetNextNodeAddrByNodeNumber(const sNodeInformation *p_inf_buf,uint16_t node_number,uint16_t first_node_address
-										,uint16_t *p_addr)
+static X_Boolean ReturnNode(sMySingleLinkListParam const*p_node_param,uint16_t node_number)
 {
-	uint16_t i,addr;
+	uint16_t i;
+	X_Boolean isOK;
+	if(p_node_param == X_Null ) {return X_False;}// necessary?
+	if(node_number >= p_node_param ->ValidNodeNumber)  {return X_False;}
 
-	if(p_inf_buf == X_Null || p_addr == X_Null) {return X_False;}
+	p_node_param ->p_node_space[node_number].isFree = X_True;
+	p_node_param ->p_node_space[node_number].NextPtr = X_Null;
 
-	addr = first_node_address;
-	for(i=0;i<node_number;i++)
-	{
-		addr = p_inf_buf[addr].next_node_address;
-	}
-	*p_addr = addr;
 	return X_True;
 }
-static X_Boolean SetNextNodeAddrByNodeNumber(sNodeInformation *p_inf_buf,uint16_t node_number,uint16_t first_node_address
-										,uint16_t new_addr)
+
+static X_Boolean NodePointerGetByNodeOrderNumber(sMySingleLinkListParam const*p_node_param,uint16_t first_node_number
+												,uint16_t node_order // 0 means the first used node   ; 1 means the second  used node ...
+												,sListNodeSpace *p_node)
 {
-	uint16_t i,addr;
+	uint16_t i;
+	X_Boolean isOK;
 
-	if(p_inf_buf == X_Null ) {return X_False;}
+	if(p_node_param == X_Null || p_node == X_Null) {return X_False;}// necessary?
+	if( first_node_number >= p_node_param ->ValidNodeNumber || node_order >= p_node_param ->ValidNodeNumber) {return X_False;}// necessary?
 
-	addr = first_node_address;
-	for(i=0;i<node_number;i++)
+	p_node = &(p_node_param ->p_node_space[first_node_number]);
+
+	isOK = X_True;
+	for(i=0;i<node_order;i++)
 	{
-		addr = p_inf_buf[addr].next_node_address;
+		if(p_node ->NextPtr != X_Null)
+		{
+			p_node = p_node ->NextPtr;
+		}
+		else
+		{
+			isOK = X_False;
+			break;
+		}
+
 	}
-	p_inf_buf[addr].next_node_address = new_addr;
-	return X_True;
+	return isOK;
 }
 
 m_app_result mSingleListInit(const sMySingleLinkList * s_sll)
@@ -62,39 +66,54 @@ m_app_result mSingleListInit(const sMySingleLinkList * s_sll)
 	uint16_t i;
 	if(s_sll == X_Null) {return APP_POINTER_NULL;}
 	if(s_sll->ValidNodeNumber > MY_MAX_NODE_COUNT) {return APP_BEYOND_SCOPE;}
+	if(s_sll ->p_param ->ValidNodeNumber > MY_MAX_NODE_COUNT) {return APP_BEYOND_SCOPE;}
 
-	for(i=0;i<s_sll->ValidNodeNumber;i++)
+
+
+	for(i=0;i<s_sll ->p_param ->ValidNodeNumber;i++)
 	{
-		s_sll ->p_inf_buf[i].next_node_address = MY_INVALID_NODE_CONTEXT;
-		s_sll ->p_inf_buf[i].information_number = 0;
+		s_sll ->p_param ->p_node_space[i].isFree	  = X_True;
+		s_sll ->p_param ->p_node_space[i].extern_information = 0;
+		s_sll ->p_param ->p_node_space[i].NextPtr     = X_Null;
+		s_sll ->p_param ->p_node_space[i].node_ID_in_list_array = i;
 	}
-	s_sll ->p_param ->first_node_address 	= 0;
-	s_sll ->p_param ->used_node_num  		= 0;
-	s_sll ->p_param ->isInitOK       		= X_True;
+	s_sll ->current_head_node_number	= 0;
+	s_sll ->used_node_num  				= 0;
+	s_sll ->isInitOK       				= X_True;
 	if(s_sll ->onDebug != X_Null) {s_sll ->onDebug(LO_init,0,s_sll);}
 	return APP_SUCCESSED;
 }
 m_app_result mSingleListTailAdd(const sMySingleLinkList * s_sll,uint16_t infor_number)
 {
-	uint16_t  current_node_address,next_node_address;
+	sListNodeSpace * p_current_node;
+	sListNodeSpace * p_next_node;
 	if(s_sll == X_Null) {return APP_POINTER_NULL;}
-	if(s_sll ->p_param ->used_node_num >= s_sll->ValidNodeNumber) {return APP_BEYOND_SCOPE;}
-	if(s_sll ->p_param ->isInitOK == X_False){return APP_ERROR;}
+	if(s_sll ->used_node_num >= s_sll->ValidNodeNumber) {return APP_BEYOND_SCOPE;}
+	if(s_sll ->isInitOK == X_False){return APP_ERROR;}
 
-	current_node_address = CurrentNodeAddressGet(s_sll ->p_param ->used_node_num,s_sll->ValidNodeNumber,s_sll ->p_param ->first_node_address);
+	if(BorrowNode(s_sll ->p_param,p_next_node) == X_False) {return APP_ERROR;}
 
-	if(s_sll ->p_param ->used_node_num > 0)
+	p_next_node ->extern_information = infor_number;
+	p_next_node ->NextPtr			   = X_Null;
+
+	if(s_sll ->used_node_num == 0)
 	{
-		next_node_address  = NodeAddressMoveForward(s_sll->ValidNodeNumber,current_node_address);
-		s_sll ->p_inf_buf[current_node_address].next_node_address = next_node_address;
+		s_sll ->current_head_node_number                                   = p_next_node ->node_ID_in_list_array;
+		if(s_sll ->onDebug != X_Null) {s_sll ->onDebug(LO_TailAdd,0,s_sll);}
 	}
 	else
 	{
-		next_node_address    = current_node_address;
+		if(NodePointerGetByNodeOrderNumber(s_sll ->p_param,s_sll ->current_head_node_number
+									,(s_sll ->used_node_num - 1),p_current_node) == X_False)
+		{
+			ReturnNode(s_sll ->p_param,p_next_node ->node_ID_in_list_array);
+			return APP_ERROR;
+		}
+
+		p_current_node ->NextPtr = p_next_node;
+		if(s_sll ->onDebug != X_Null) {s_sll ->onDebug(LO_TailAdd,1,s_sll);}
 	}
-	s_sll ->p_inf_buf[next_node_address].information_number = infor_number;
-	s_sll ->p_param ->used_node_num ++;
-	if(s_sll ->onDebug != X_Null) {s_sll ->onDebug(LO_TailAdd,0,s_sll);}
+	s_sll ->used_node_num ++;
 	return APP_SUCCESSED;
 }
 m_app_result mSingleListTailRemove(const sMySingleLinkList * s_sll)
@@ -186,7 +205,7 @@ m_app_result mSingleListInsert(const sMySingleLinkList * s_sll,uint16_t node_num
 		if(s_sll ->onDebug != X_Null) {s_sll ->onDebug(LO_Insert,0,s_sll);}
 		return mSingleListHeadAdd(s_sll,infor_number);
 	}
-	else if(node_number == (s_sll ->p_param ->used_node_num + 1)) // inset tail
+	else if(node_number == (s_sll ->p_param ->used_node_num )) // inset tail
 	{
 		if(s_sll ->onDebug != X_Null) {s_sll ->onDebug(LO_Insert,1,s_sll);}
 		return mSingleListTailAdd(s_sll,infor_number);
@@ -200,7 +219,9 @@ m_app_result mSingleListInsert(const sMySingleLinkList * s_sll,uint16_t node_num
 		if(GetNextNodeAddrByNodeNumber(s_sll->p_inf_buf,node_number,s_sll ->p_param ->first_node_address,&right_addr) == X_False) {return APP_ERROR;}
 		if(right_addr >= s_sll ->ValidNodeNumber)
 		{
+			if(s_sll ->onDebugParamCollect != X_Null) {s_sll ->onDebugParamCollect(SQO_Push,right_addr);}
 			if(s_sll ->onDebug != X_Null) {s_sll ->onDebug(LO_Insert,2,s_sll);}
+			if(s_sll ->onDebugParamCollect != X_Null) {s_sll ->onDebugParamCollect(SQO_Clear,0);}
 			return APP_ERROR;
 		}
 		// left node relink to new node  addr (l = m)

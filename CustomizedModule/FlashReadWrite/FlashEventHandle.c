@@ -67,14 +67,63 @@ static uint32_t DebugParamCollect(eSimpleQueueOperation op,uint32_t param)
 	LO_InformationGet,
 	LO_InformationUpdata,
 */
+/*
+ *******************************************************************
+	0 	ListInit
+ *******************************************************************
+ */
 static  X_Void ListInitDebug(const sMySingleLinkList * s_sll)
 {
 	SEGGER_RTT_Debug(FLASH_TEST_DEBUG,(60,"list node init OK valid node num: %d\r\n",s_sll ->ValidNodeNumber));
 }
+/*
+ *******************************************************************
+	1	TailAdd
+ *******************************************************************
+ */
 static  X_Void TailAddSuccessed(const sMySingleLinkList * s_sll)
 {
 	SEGGER_RTT_Debug(FLASH_TEST_DEBUG,(60,"list node init OK valid node num: %d\r\n",s_sll ->ValidNodeNumber));
 }
+/*
+ *******************************************************************
+	2
+ *******************************************************************
+ */
+/*
+ *******************************************************************
+	3
+ *******************************************************************
+ */
+/*
+ *******************************************************************
+	4
+ *******************************************************************
+ */
+/*
+ *******************************************************************
+	5 Insert
+ *******************************************************************
+ */
+static  X_Void InsertHead(const sMySingleLinkList * s_sll)
+{
+	SEGGER_RTT_Debug(FLASH_TEST_DEBUG,(90,"~~~Insert head\r\n"));
+}
+static  X_Void InsertTail(const sMySingleLinkList * s_sll)
+{
+	SEGGER_RTT_Debug(FLASH_TEST_DEBUG,(90,"~~~Insert tail\r\n"));
+}
+static  X_Void Insert_Param2(const sMySingleLinkList * s_sll)
+{
+	SEGGER_RTT_Debug(FLASH_TEST_DEBUG,(90,"********Insert failed : right node addr %d ; valid node number %d\r\n"
+			,DebugParamCollect(SQO_Pop,0)
+			,s_sll ->ValidNodeNumber));
+}
+/*
+ *******************************************************************
+
+ *******************************************************************
+ */
 static const sListNodeMessageDebugTable sLNMDT[] = {
 		{
 			LO_init,
@@ -98,7 +147,7 @@ static const sListNodeMessageDebugTable sLNMDT[] = {
 		},
 		{
 			LO_Insert,
-			{X_Null,X_Null,X_Null,X_Null,X_Null,},
+			{InsertHead,InsertTail,Insert_Param2,X_Null,X_Null,},
 		},
 		{
 			LO_PullAway,
@@ -119,10 +168,20 @@ static X_Void onListNodeDebug(eListOperation e_lop,uint8_t operation_ID,const sM
 	PQO_PriorityScope,
 	PQO_DoesEmpty,
  */
+/*
+ *******************************************************************
+	0
+ *******************************************************************
+ */
 static  X_Void QueueInitDebug(const sMyPriorityListManager *p_lm)
 {
 	SEGGER_RTT_Debug(FLASH_TEST_DEBUG,(60,"queue init OK max node num: %d\r\n",p_lm ->MaxNodeNumber));
 }
+/*
+ *******************************************************************
+	1
+ *******************************************************************
+ */
 static  X_Void QueuePush_NodeCount0(const sMyPriorityListManager *p_lm)
 {
 	uint32_t node_num,priority;
@@ -149,6 +208,24 @@ static  X_Void QueuePush_NodeCountNormal_InsertFailed(const sMyPriorityListManag
 {
 	SEGGER_RTT_Debug(FLASH_TEST_DEBUG,(60,"***************insert failed : reason %d \r\n",DebugParamCollect(SQO_Pop,0)));
 }
+/*
+ *******************************************************************
+	2
+ *******************************************************************
+ */
+static  X_Void QueuePopOK(const sMyPriorityListManager *p_lm)
+{
+	SEGGER_RTT_Debug(FLASH_TEST_DEBUG,(60,"_____queue pop head node ,priority %d \r\n",DebugParamCollect(SQO_Pop,0)));
+}
+static  X_Void QueuePopEmpty(const sMyPriorityListManager *p_lm)
+{
+	SEGGER_RTT_Debug(FLASH_TEST_DEBUG,(60,"***************queue pop empty\r\n"));
+}
+/*
+ *******************************************************************
+
+ *******************************************************************
+ */
 static const sPriorityQueueMessageDebugTable sPQMDT[] = {
 		{
 			PQO_init,
@@ -164,7 +241,7 @@ static const sPriorityQueueMessageDebugTable sPQMDT[] = {
 		},
 		{
 			PQO_Pop,
-			{X_Null,X_Null,X_Null,X_Null,X_Null,},
+			{QueuePopOK,QueuePopEmpty,X_Null,X_Null,X_Null,},
 		},
 };
 
@@ -180,7 +257,7 @@ static uint8_t buf[10];
 static uint8_t test_counter = 0;
 X_Void Test_PriorityQueue(uint16_t priority)
 {
-	uint16_t node_count,priority_min,priority_max;
+	uint16_t i,j,node_count,priority_min,priority_max,curr_priority;
 
 	sMyPriorityNodeParam sMPNP,sMPNP_pop;
 	sMPNP.is_OccupyPermit 	= X_False;
@@ -195,13 +272,21 @@ X_Void Test_PriorityQueue(uint16_t priority)
 		test_counter = 0;
 
 		node_count = GetMyPriorityQueueUsedNodeCount(p_prio_queue);
-		SEGGER_RTT_Debug(FLASH_DEBUG && FLASH_TEST_DEBUG,(30,"node_count %d\r\n",node_count));
+		SEGGER_RTT_Debug(1,(40,"queue used node_count %d\r\n",node_count));
 
 		GetCurrentUsedPriorityScope(p_prio_queue,&priority_max,&priority_min);
 		SEGGER_RTT_Debug(FLASH_DEBUG && FLASH_TEST_DEBUG,(30,"priority scope %d ~ %d\r\n",priority_max,priority_min));
 
+		j = 0;
+		for(i=0;i<node_count;i++)
+		{
+			curr_priority = GetPriorityByNodeNumber(p_prio_queue,j);
+			SEGGER_RTT_Debug(1,(30,"node %d prio %d\r\n",j,curr_priority));
+			j++;
+		}
 		while(mPriorityQueuePop(p_prio_queue,&sMPNP_pop) == X_True)
 		{
+
 			SEGGER_RTT_Debug(FLASH_DEBUG && FLASH_TEST_DEBUG,(60,"~~~~ is?%d; p_buf %2x ; priority %d\r\n"
 						,sMPNP_pop.is_OccupyPermit
 						,sMPNP_pop.p_buf
