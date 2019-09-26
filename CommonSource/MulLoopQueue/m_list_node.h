@@ -44,16 +44,21 @@ struct _sListNodeSpace
 typedef struct
 {
 	uint16_t  		const ValidNodeNumber;
-	sListNodeSpace  const *p_node_space;
+	sListNodeSpace   *p_node_space;
 }sMySingleLinkListParam;
+
+typedef struct
+{
+	X_Boolean 					isInitOK;
+	uint16_t	   				current_head_node_number;
+	uint16_t 	   				used_node_num;
+}sMySingleLinkListManager;
 
 typedef struct   _sMySingleLinkList    sMySingleLinkList;
 struct _sMySingleLinkList
 {
-	X_Boolean 					isInitOK;
+	sMySingleLinkListManager   *p_manager;
 	uint16_t  const				ValidNodeNumber;
-	uint16_t	   				current_head_node_number;
-	uint16_t 	   				used_node_num;
 	sMySingleLinkListParam     const *p_param;
 	X_Void 						(*onDebug)(eListOperation e_lop,uint8_t operation_ID,const sMySingleLinkList * s_sll);
 	uint32_t                    (*onDebugParamCollect)(eSimpleQueueOperation op,uint32_t param);
@@ -67,25 +72,26 @@ typedef struct
 	m_list_node_debug_handler debug_handler[MAX_LISTNODE_DEBUG_ID_COUNT];
 }sListNodeMessageDebugTable;
 
-//#define APP_SINGLE_LIST_DEF_WITHOUT_POINTER(p_list_manager,max_node_count,debug_method,param_debug)     \
-//		static sListNodeSpace 					CONCAT_2(p_list_manager,_node_space)[max_node_count];	\
-//		static sMySingleLinkListParam 			CONCAT_2(p_list_manager,_param) = {X_False,max_node_count,CONCAT_2(p_list_manager,_node_space),0};    	\
-//		static const sMySingleLinkList 			CONCAT_2(p_list_manager,_list_entry) = {				\
-//		max_node_count																					\
-//		,CONCAT_2(p_list_manager,_param)																\
-//		,debug_method																					\
-//		,param_debug																					\
-//		};
+#define APP_SINGLE_LIST_DEF_WITHOUT_POINTER(p_list_manager,max_node_count,debug_method,param_debug)     \
+		static sListNodeSpace 					CONCAT_2(p_list_manager,_node_space)[max_node_count];	\
+		static sMySingleLinkListManager         CONCAT_2(p_list_manager,_manager_entry) = {X_False,0,0};\
+		static const sMySingleLinkListParam 	CONCAT_2(p_list_manager,_param) = {max_node_count,CONCAT_2(p_list_manager,_node_space)};    	\
+		static const sMySingleLinkList 			CONCAT_2(p_list_manager,_list_entry) = {				\
+		&CONCAT_2(p_list_manager,_manager_entry),														\
+		max_node_count,																					\
+		&CONCAT_2(p_list_manager,_param),																\
+		debug_method,																					\
+		param_debug,																					\
+		};
 
 #define APP_SINGLE_LIST_DEF(p_list_manager,max_node_count,debug_method,param_debug)            			\
 		static sListNodeSpace 					CONCAT_2(p_list_manager,_node_space)[max_node_count];	\
-		static sMySingleLinkListParam 			CONCAT_2(p_list_manager,_param) = {max_node_count,CONCAT_2(p_list_manager,_node_space)};    	\
+		static sMySingleLinkListManager         CONCAT_2(p_list_manager,_manager_entry) = {X_False,0,0};\
+		static const sMySingleLinkListParam 	CONCAT_2(p_list_manager,_param) = {max_node_count,CONCAT_2(p_list_manager,_node_space)};   \
 		static const sMySingleLinkList 			CONCAT_2(p_list_manager,_list_entry) = {				\
-		X_False,																						\
+		&CONCAT_2(p_list_manager,_manager_entry),														\
 		max_node_count,																					\
-		0,																								\
-		0,																								\
-		CONCAT_2(p_list_manager,_param),																\
+		&CONCAT_2(p_list_manager,_param),																\
 		debug_method,																					\
 		param_debug,																					\
 		};																								\
@@ -97,15 +103,15 @@ m_app_result mSingleListTailAdd(const sMySingleLinkList * s_sll,uint16_t infor_n
 m_app_result mSingleListTailRemove(const sMySingleLinkList * s_sll);
 m_app_result mSingleListHeadAdd(const sMySingleLinkList * s_sll,uint16_t infor_number);
 m_app_result mSingleListHeadRemove(const sMySingleLinkList * s_sll);
-m_app_result mSingleListInsert(const sMySingleLinkList * s_sll,uint16_t node_number,uint16_t infor_number);
-m_app_result mSingleListPullAway(const sMySingleLinkList * s_sll,uint16_t node_number);
+m_app_result mSingleListInsert(const sMySingleLinkList * s_sll,uint16_t node_order_number,uint16_t infor_number);
+m_app_result mSingleListPullAway(const sMySingleLinkList * s_sll,uint16_t node_order_number);
 X_Boolean mSingleListSizeGet(const sMySingleLinkList * s_sll,uint16_t *p_size);
 X_Boolean DoesMySingleListEmpty(const sMySingleLinkList * s_sll);
 X_Void mSingleListClear(const sMySingleLinkList * s_sll);
 
-X_Boolean mSingleListFindByValue(const sMySingleLinkList * s_sll,uint16_t infor_number,uint16_t *p_node_number);
-X_Boolean mSingleListInformationGetByNodeNumber(const sMySingleLinkList * s_sll,uint16_t node_number,uint16_t *p_infor_num);
-X_Boolean mSingleListUpdataValueByNodeNumber(const sMySingleLinkList * s_sll,uint16_t node_number,uint16_t new_infor_number);
+X_Boolean mSingleListFindByValue(const sMySingleLinkList * s_sll,uint16_t infor_number,uint16_t *p_node_order_number);
+X_Boolean mSingleListInformationGetByNodeNumber(const sMySingleLinkList * s_sll,uint16_t node_order_number,uint16_t *p_infor_num);
+X_Boolean mSingleListUpdataValueByNodeNumber(const sMySingleLinkList * s_sll,uint16_t node_order_number,uint16_t new_infor_number);
 
 /************
 debug example code:
