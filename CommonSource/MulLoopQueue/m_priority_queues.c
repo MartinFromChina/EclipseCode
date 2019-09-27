@@ -100,7 +100,9 @@ X_Void 		mPriorityQueueInitialize(const sMyPriorityListManager *p_manager)
 		p_manager ->p_param[i].p_buf           = X_Null;
 	}
 	*p_manager ->isInit = X_True;
+	#if (USE_MY_PRIORITY_QUEUE_DEBUG == 1)
 	if(p_manager ->onDebug != X_Null) {p_manager ->onDebug(PQO_init,0,p_manager);}
+	#endif
 }
 X_Boolean   mPriorityQueuePush(const sMyPriorityListManager *p_manager,sMyPriorityNodeParam const *p_data)
 {
@@ -110,6 +112,7 @@ X_Boolean   mPriorityQueuePush(const sMyPriorityListManager *p_manager,sMyPriori
 	if(p_manager == X_Null || p_data == X_Null) {return X_False;}
 	if(*p_manager ->isInit == X_False) {return X_False;}
 	if(p_data ->p_buf == X_Null)	 {return X_False;}
+	if(p_data ->priority >= p_manager ->MaxNodeNumber) {return X_False;}
 	if( mSingleListSizeGet(p_manager->p_list,&node_count) == X_False){return X_False;}
 
 	p_manager ->p_param[p_data ->priority].is_OccupyPermit = p_data ->is_OccupyPermit;
@@ -117,6 +120,7 @@ X_Boolean   mPriorityQueuePush(const sMyPriorityListManager *p_manager,sMyPriori
 	p_manager ->p_param[p_data ->priority].p_buf = p_data ->p_buf;
 	if(node_count == 0)// insert first element
 	{
+		#if (USE_MY_PRIORITY_QUEUE_DEBUG == 1)
 		if(p_manager ->onDebug != X_Null)
 		{
 			if(p_manager ->onDebugParamCollect != X_Null) {p_manager ->onDebugParamCollect(SQO_Push,0);}
@@ -124,6 +128,7 @@ X_Boolean   mPriorityQueuePush(const sMyPriorityListManager *p_manager,sMyPriori
 			p_manager ->onDebug(PQO_Push,0,p_manager);
 			if(p_manager ->onDebugParamCollect != X_Null) {p_manager ->onDebugParamCollect(SQO_Clear,0);}
 		}
+		#endif
 		if(mSingleListHeadAdd(p_manager->p_list,p_data ->priority) == APP_SUCCESSED){return X_True;}
 		return X_False;
 	}
@@ -132,6 +137,7 @@ X_Boolean   mPriorityQueuePush(const sMyPriorityListManager *p_manager,sMyPriori
 		if(GetActionAndNodeNumber(p_manager->p_list,p_manager ->isHighPriorityFromSmall,p_data ->priority,node_count
 									,&e_pqpa,&node_number) == X_True)
 		{
+			#if (USE_MY_PRIORITY_QUEUE_DEBUG == 1)
 			if(p_manager ->onDebug != X_Null)
 			{
 				if(p_manager ->onDebugParamCollect != X_Null) {p_manager ->onDebugParamCollect(SQO_Push,e_pqpa);}
@@ -140,9 +146,12 @@ X_Boolean   mPriorityQueuePush(const sMyPriorityListManager *p_manager,sMyPriori
 				p_manager ->onDebug(PQO_Push,1,p_manager);
 				if(p_manager ->onDebugParamCollect != X_Null) {p_manager ->onDebugParamCollect(SQO_Clear,0);}
 			}
+			#endif
 			if(e_pqpa == QP_Insert) {return X_False;}
-			if(mSingleListUpdataValueByNodeNumber(p_manager->p_list,node_number,p_data ->priority) == X_True) {return X_True;}
-			return X_False;
+			return X_True;
+				// the updata value == previous value in current situation, no need updata 
+//			if(mSingleListUpdataValueByNodeNumber(p_manager->p_list,node_number,p_data ->priority) == X_True) {return X_True;}
+//			return X_False;
 		}
 		return X_False;
 	}
@@ -151,6 +160,7 @@ X_Boolean   mPriorityQueuePush(const sMyPriorityListManager *p_manager,sMyPriori
 		if(GetActionAndNodeNumber(p_manager->p_list,p_manager ->isHighPriorityFromSmall,p_data ->priority,node_count
 									,&e_pqpa,&node_number) == X_True)
 		{
+			#if (USE_MY_PRIORITY_QUEUE_DEBUG == 1)
 			if(p_manager ->onDebug != X_Null)
 			{
 				if(p_manager ->onDebugParamCollect != X_Null) {p_manager ->onDebugParamCollect(SQO_Push,e_pqpa);}
@@ -159,21 +169,28 @@ X_Boolean   mPriorityQueuePush(const sMyPriorityListManager *p_manager,sMyPriori
 				p_manager ->onDebug(PQO_Push,2,p_manager);
 				if(p_manager ->onDebugParamCollect != X_Null) {p_manager ->onDebugParamCollect(SQO_Clear,0);}
 			}
+			#endif
 			if(e_pqpa == QP_Insert)
 			{
 				error_code = mSingleListInsert(p_manager->p_list,node_number,p_data ->priority);
 				if( error_code == APP_SUCCESSED){return X_True;}
+				#if (USE_MY_PRIORITY_QUEUE_DEBUG == 1)
 				if(p_manager ->onDebug != X_Null)
 				{
 					if(p_manager ->onDebugParamCollect != X_Null) {p_manager ->onDebugParamCollect(SQO_Push,error_code);}
 					p_manager ->onDebug(PQO_Push,3,p_manager);
 					if(p_manager ->onDebugParamCollect != X_Null) {p_manager ->onDebugParamCollect(SQO_Clear,0);}
 				}
+				#endif
 				return X_False;
 			}
-			if(mSingleListUpdataValueByNodeNumber(p_manager->p_list,node_number,p_data ->priority) == X_True) {return X_True;}
-			if(p_manager ->onDebug != X_Null) {p_manager ->onDebug(PQO_Push,4,p_manager);}
-			return X_False;
+			return X_True;
+			// the updata value == previous value in current situation, no need updata 
+//			if(mSingleListUpdataValueByNodeNumber(p_manager->p_list,node_number,p_data ->priority) == X_True) {return X_True;}
+//			#if (USE_MY_PRIORITY_QUEUE_DEBUG == 1)
+//			if(p_manager ->onDebug != X_Null) {p_manager ->onDebug(PQO_Push,4,p_manager);}
+//			#endif
+//			return X_False;
 		}
 		return X_False;
 	}
@@ -187,20 +204,24 @@ X_Boolean   mPriorityQueuePop(const sMyPriorityListManager *p_manager,sMyPriorit
 
 	if(mSingleListInformationGetByNodeNumber(p_manager ->p_list,0,&infor_number) == X_True)
 	{
-		mSingleListHeadRemove(p_manager ->p_list);
 		if(infor_number >= p_manager ->MaxNodeNumber) {return X_False;}
+		mSingleListHeadRemove(p_manager ->p_list);
 		p_data ->is_OccupyPermit = p_manager ->p_param[infor_number].is_OccupyPermit;
 		p_data ->priority		 = p_manager ->p_param[infor_number].priority;
 		p_data ->p_buf			 = p_manager ->p_param[infor_number].p_buf;
+		#if (USE_MY_PRIORITY_QUEUE_DEBUG == 1)
 		if(p_manager ->onDebug != X_Null)
 		{
 			if(p_manager ->onDebugParamCollect != X_Null) {p_manager ->onDebugParamCollect(SQO_Push,infor_number);}
 			p_manager ->onDebug(PQO_Pop,0,p_manager);
 			if(p_manager ->onDebugParamCollect != X_Null) {p_manager ->onDebugParamCollect(SQO_Clear,0);}
 		}
+		#endif
 		return X_True;
 	}
+	#if (USE_MY_PRIORITY_QUEUE_DEBUG == 1)
 	if(p_manager ->onDebug != X_Null) {p_manager ->onDebug(PQO_Pop,1,p_manager);}
+	#endif
 	return X_False;
 }
 X_Void    ClearMyPriorityQueue(const sMyPriorityListManager *p_manager)
@@ -237,7 +258,9 @@ X_Boolean   GetCurrentUsedPriorityScope(const sMyPriorityListManager *p_manager,
 
 	if(mSingleListInformationGetByNodeNumber(p_manager ->p_list,0,p_high) == X_False) {return X_False;}
 	if(mSingleListSizeGet(p_manager->p_list,&node_count) == X_False) {return X_False;}
-	if(mSingleListInformationGetByNodeNumber(p_manager ->p_list,node_count,p_low) == X_False) {return X_False;}
+	if(node_count == 0){return X_False;}
+	if(node_count == 1){p_low = p_high;return X_True;}
+	if(mSingleListInformationGetByNodeNumber(p_manager ->p_list,node_count - 1,p_low) == X_False) {return X_False;}
 	return X_True;
 }
 uint16_t   GetPriorityByNodeNumber(const sMyPriorityListManager *p_manager,uint16_t node_number)
@@ -250,7 +273,6 @@ uint16_t   GetPriorityByNodeNumber(const sMyPriorityListManager *p_manager,uint1
 		return priority;
 	}
 	return 0xffff;
-//	// //return p_manager ->p_list ->p_inf_buf[node_number].information_number;
 }
 X_Boolean   DoesMyPriorityQueueEmpty(const sMyPriorityListManager *p_manager)
 {

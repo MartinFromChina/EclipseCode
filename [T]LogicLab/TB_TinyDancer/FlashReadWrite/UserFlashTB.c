@@ -2,6 +2,7 @@
 #include "..\..\ScriptsCommandModule\HexCommand.h"
 #include "..\..\..\CommonSource\Math\random_number.h"
 #include "..\..\..\CommonSource\MulLoopQueue\loop_queues.h"
+#include "..\..\..\CommonSource\MulLoopQueue\m_priority_queues_config_default.h"
 
 RTT_DEBUG_ONCE_ENTRY_DEF(p_script_func_num,100);
 

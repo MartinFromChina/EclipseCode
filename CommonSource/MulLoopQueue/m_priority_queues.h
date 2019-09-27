@@ -56,7 +56,8 @@ typedef struct
 	m_priority_queue_debug_handler debug_handler[MAX_PRIORITY_QUEUE_DEBUG_ID_COUNT];
 }sPriorityQueueMessageDebugTable;
 
-#define APP_PRIORITY_QUEUE_DEF(p_manager,max_node_number,is_from_small,list_debug,queue_debug,param_debug)  \
+// !!! the WITH_LIMITATION menas : the priority value is limitated :  0 ~ (MaxNodeNumber - 1)
+#define APP_PRIORITY_QUEUE_DEF_WITH_LIMITATION(p_manager,max_node_number,is_from_small,list_debug,queue_debug,param_debug)  \
 		static X_Boolean CONCAT_2(p_manager,_isInit) = X_False;										\
 		APP_SINGLE_LIST_DEF_WITHOUT_POINTER(p_manager,max_node_number,list_debug,param_debug);    	\
 		static sMyPriorityNodeParam CONCAT_2(p_manager,_queue_param)[max_node_number];				\

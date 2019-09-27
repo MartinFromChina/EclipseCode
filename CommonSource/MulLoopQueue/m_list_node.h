@@ -9,11 +9,11 @@
 #include "..\AppError.h"
 #include "loop_queues.h"
 
-#define MY_MAX_PRIORITY_VALUE 		 (0xffff)
-#define MY_MAX_NODE_COUNT   		 (100)
-#define MY_INVALID_NODE_CONTEXT    	 (0xffff)
-
-#define MAX_LISTNODE_DEBUG_ID_COUNT     5
+#ifdef USE_LOCAL_LIST_NODE_CONFIG
+	#include "m_list_node_config_local.h"
+#else
+	#include "m_list_node_config_default.h"
+#endif
 
 typedef enum
 {

@@ -17,7 +17,6 @@ static X_Boolean BorrowNode(sMySingleLinkListParam const*p_node_param,sListNodeS
 			break;
 		}
 	}
-//	printf(" borrow ok ? %d\r\n",isOK);
 	return isOK;
 }
 
@@ -70,8 +69,6 @@ m_app_result mSingleListInit(const sMySingleLinkList * s_sll)
 	if(s_sll->ValidNodeNumber > MY_MAX_NODE_COUNT) {return APP_BEYOND_SCOPE;}
 	if(s_sll ->p_param ->ValidNodeNumber > MY_MAX_NODE_COUNT) {return APP_BEYOND_SCOPE;}
 
-
-
 	for(i=0;i<s_sll ->p_param ->ValidNodeNumber;i++)
 	{
 		s_sll ->p_param ->p_node_space[i].isFree	  = X_True;
@@ -82,7 +79,9 @@ m_app_result mSingleListInit(const sMySingleLinkList * s_sll)
 	s_sll ->p_manager ->current_head_node_number	= 0;
 	s_sll ->p_manager ->used_node_num  				= 0;
 	s_sll ->p_manager ->isInitOK       				= X_True;
+	#if (USB_MY_LIST_NODE_DEBUG == 1)
 	if(s_sll ->onDebug != X_Null) {s_sll ->onDebug(LO_init,0,s_sll);}
+	#endif
 	return APP_SUCCESSED;
 }
 m_app_result mSingleListTailAdd(const sMySingleLinkList * s_sll,uint16_t infor_number)
@@ -101,7 +100,7 @@ m_app_result mSingleListTailAdd(const sMySingleLinkList * s_sll,uint16_t infor_n
 	if(s_sll ->p_manager ->used_node_num == 0)
 	{
 		s_sll ->p_manager ->current_head_node_number = p_next_node ->node_ID_in_list_array;
-		if(s_sll ->onDebug != X_Null) {s_sll ->onDebug(LO_TailAdd,0,s_sll);}
+		p_current_node = p_next_node;//just for debug
 	}
 	else
 	{
@@ -113,8 +112,16 @@ m_app_result mSingleListTailAdd(const sMySingleLinkList * s_sll,uint16_t infor_n
 		}
 
 		p_current_node ->NextPtr = p_next_node;
-		if(s_sll ->onDebug != X_Null) {s_sll ->onDebug(LO_TailAdd,1,s_sll);}
 	}
+	#if (USB_MY_LIST_NODE_DEBUG == 1)
+	if(s_sll ->onDebug != X_Null) 
+	{
+		if(s_sll ->onDebugParamCollect != X_Null){s_sll ->onDebugParamCollect(SQO_Push,p_current_node ->node_ID_in_list_array);}
+		if(s_sll ->onDebugParamCollect != X_Null){s_sll ->onDebugParamCollect(SQO_Push,p_next_node ->node_ID_in_list_array);}
+		s_sll ->onDebug(LO_TailAdd,0,s_sll);
+		if(s_sll ->onDebugParamCollect != X_Null){s_sll ->onDebugParamCollect(SQO_Clear,0);}
+	}
+	#endif
 	s_sll ->p_manager ->used_node_num ++;
 	return APP_SUCCESSED;
 }
@@ -144,13 +151,19 @@ m_app_result mSingleListTailRemove(const sMySingleLinkList * s_sll)
 		if(ReturnNode(s_sll ->p_param,p_current_node ->node_ID_in_list_array) == X_True)
 		{
 			s_sll ->p_manager ->used_node_num --;
+			#if (USB_MY_LIST_NODE_DEBUG == 1)
 			if(s_sll ->onDebug != X_Null) {s_sll ->onDebug(LO_TailRemove,0,s_sll);}
+			#endif
 			return APP_SUCCESSED;
 		}
+		#if (USB_MY_LIST_NODE_DEBUG == 1)
 		if(s_sll ->onDebug != X_Null) {s_sll ->onDebug(LO_TailRemove,1,s_sll);}
+		#endif
 		return APP_ERROR;
 	}
+	#if (USB_MY_LIST_NODE_DEBUG == 1)
 	if(s_sll ->onDebug != X_Null) {s_sll ->onDebug(LO_TailRemove,2,s_sll);}
+	#endif
 	return APP_ALREADY_DONE_BEFORE;
 
 }
@@ -167,6 +180,7 @@ m_app_result mSingleListHeadAdd(const sMySingleLinkList * s_sll,uint16_t infor_n
 	if(s_sll ->p_manager ->used_node_num == 0)
 	{
 		p_new_head_node ->NextPtr = X_Null;
+		p_old_head_node						= p_new_head_node;//  just for debug
 	}
 	else
 	{
@@ -177,7 +191,15 @@ m_app_result mSingleListHeadAdd(const sMySingleLinkList * s_sll,uint16_t infor_n
 	p_new_head_node ->extern_information = infor_number;
 	s_sll ->p_manager ->current_head_node_number 	 = p_new_head_node ->node_ID_in_list_array;
 	s_sll ->p_manager ->used_node_num ++;
-	if(s_sll ->onDebug != X_Null) {s_sll ->onDebug(LO_HeadAdd,0,s_sll);}
+	#if (USB_MY_LIST_NODE_DEBUG == 1)
+	if(s_sll ->onDebug != X_Null) 
+	{
+		if(s_sll ->onDebugParamCollect != X_Null){s_sll ->onDebugParamCollect(SQO_Push,p_old_head_node ->node_ID_in_list_array);}
+		if(s_sll ->onDebugParamCollect != X_Null){s_sll ->onDebugParamCollect(SQO_Push,p_new_head_node ->node_ID_in_list_array);}
+		s_sll ->onDebug(LO_HeadAdd,0,s_sll);
+		if(s_sll ->onDebugParamCollect != X_Null){s_sll ->onDebugParamCollect(SQO_Clear,0);}
+	}
+	#endif
 	return APP_SUCCESSED;
 }
 m_app_result mSingleListHeadRemove(const sMySingleLinkList * s_sll)
@@ -187,8 +209,9 @@ m_app_result mSingleListHeadRemove(const sMySingleLinkList * s_sll)
 	if(s_sll == X_Null) {return APP_POINTER_NULL;}
 	if(s_sll ->p_manager ->current_head_node_number >= s_sll->ValidNodeNumber) {return APP_BEYOND_SCOPE;}
 	if(s_sll ->p_manager ->isInitOK == X_False){return APP_UNEXPECT_STATE;}
-
+	#if (USB_MY_LIST_NODE_DEBUG == 1)
 	if(s_sll ->onDebug != X_Null) {s_sll ->onDebug(LO_HeadRemove,0,s_sll);}
+	#endif
 
 	if(s_sll ->p_manager ->used_node_num > 0) //
 	{
@@ -207,13 +230,19 @@ m_app_result mSingleListHeadRemove(const sMySingleLinkList * s_sll)
 		{
 			s_sll ->p_manager ->current_head_node_number = p_second_node ->node_ID_in_list_array;
 			s_sll ->p_manager ->used_node_num --;
+			#if (USB_MY_LIST_NODE_DEBUG == 1)
 			if(s_sll ->onDebug != X_Null) {s_sll ->onDebug(LO_HeadRemove,1,s_sll);}
+			#endif
 			return APP_SUCCESSED;
 		}
+		#if (USB_MY_LIST_NODE_DEBUG == 1)
 		if(s_sll ->onDebug != X_Null) {s_sll ->onDebug(LO_HeadRemove,2,s_sll);}
+		#endif
 		return APP_ERROR;
 	}
+	#if (USB_MY_LIST_NODE_DEBUG == 1)
 	if(s_sll ->onDebug != X_Null) {s_sll ->onDebug(LO_HeadRemove,3,s_sll);}
+	#endif
 	return APP_ALREADY_DONE_BEFORE;
 }
 m_app_result mSingleListInsert(const sMySingleLinkList * s_sll,uint16_t node_order_number,uint16_t infor_number)
@@ -229,12 +258,16 @@ m_app_result mSingleListInsert(const sMySingleLinkList * s_sll,uint16_t node_ord
 
 	if(node_order_number == 0)// insert head
 	{
+		#if (USB_MY_LIST_NODE_DEBUG == 1)
 		if(s_sll ->onDebug != X_Null) {s_sll ->onDebug(LO_Insert,0,s_sll);}
+		#endif
 		return mSingleListHeadAdd(s_sll,infor_number);
 	}
 	else if(node_order_number == (s_sll ->p_manager ->used_node_num )) // inset tail
 	{
+		#if (USB_MY_LIST_NODE_DEBUG == 1)
 		if(s_sll ->onDebug != X_Null) {s_sll ->onDebug(LO_Insert,1,s_sll);}
+		#endif
 		return mSingleListTailAdd(s_sll,infor_number);
 	}
 	else
@@ -242,7 +275,9 @@ m_app_result mSingleListInsert(const sMySingleLinkList * s_sll,uint16_t node_ord
 		// get new node address  (get m)
 		if(BorrowNode(s_sll ->p_param,&p_new_node) == X_False)
 		{
+			#if (USB_MY_LIST_NODE_DEBUG == 1)
 			if(s_sll ->onDebug != X_Null){s_sll ->onDebug(LO_Insert,2,s_sll);}
+			#endif
 			return APP_NO_ENOUGH_SPACE;
 		}
 		if(NodePointerGetByNodeOrderNumber(s_sll ->p_param,s_sll ->p_manager ->current_head_node_number
@@ -251,15 +286,13 @@ m_app_result mSingleListInsert(const sMySingleLinkList * s_sll,uint16_t node_ord
 			ReturnNode(s_sll ->p_param,p_new_node ->node_ID_in_list_array);
 			return APP_ERROR;
 		}
-		// origin right node  addr backup from left node (back up r from l)
 		p_right_node = p_left_node ->NextPtr;
-		// left node relink to new node  addr (l = m)
 		p_left_node ->NextPtr = p_new_node;
-		// new node  link to origin right node  addr (m = r)
 		p_new_node ->NextPtr = p_right_node;
 
 		p_new_node ->extern_information = infor_number;
 		s_sll ->p_manager ->used_node_num ++;
+		#if (USB_MY_LIST_NODE_DEBUG == 1)
 		if(s_sll ->onDebug != X_Null)
 		{
 			if(s_sll ->onDebugParamCollect != X_Null){s_sll ->onDebugParamCollect(SQO_Push,p_left_node ->node_ID_in_list_array);}
@@ -268,6 +301,7 @@ m_app_result mSingleListInsert(const sMySingleLinkList * s_sll,uint16_t node_ord
 			s_sll ->onDebug(LO_Insert,3,s_sll);
 			if(s_sll ->onDebugParamCollect != X_Null){s_sll ->onDebugParamCollect(SQO_Clear,0);}
 		}
+		#endif
 		return APP_SUCCESSED;
 	}
 
@@ -285,13 +319,17 @@ m_app_result mSingleListPullAway(const sMySingleLinkList * s_sll,uint16_t node_o
 
 	if(s_sll ->p_manager ->used_node_num ==  (node_order_number + 1)) //
 	{
+		#if (USB_MY_LIST_NODE_DEBUG == 1)
 		if(s_sll ->onDebug != X_Null) {s_sll ->onDebug(LO_PullAway,0,s_sll);}
+		#endif
 		return mSingleListTailRemove(s_sll);
 	}
 
 	if(node_order_number == 0)
 	{
+		#if (USB_MY_LIST_NODE_DEBUG == 1)
 		if(s_sll ->onDebug != X_Null) {s_sll ->onDebug(LO_PullAway,1,s_sll);}
+		#endif
 		return mSingleListHeadRemove(s_sll);
 	}
 
@@ -306,10 +344,14 @@ m_app_result mSingleListPullAway(const sMySingleLinkList * s_sll,uint16_t node_o
 	s_sll ->p_manager ->used_node_num --;
 	if(ReturnNode(s_sll ->p_param,p_node_going_to_drop ->node_ID_in_list_array) == X_True)
 	{
+		#if (USB_MY_LIST_NODE_DEBUG == 1)
 		if(s_sll ->onDebug != X_Null) {s_sll ->onDebug(LO_PullAway,2,s_sll);}
+		#endif
 		return APP_SUCCESSED;
 	}
+	#if (USB_MY_LIST_NODE_DEBUG == 1)
 	if(s_sll ->onDebug != X_Null) {s_sll ->onDebug(LO_PullAway,3,s_sll);}
+	#endif
 	return APP_ERROR;
 
 }
@@ -384,5 +426,14 @@ X_Boolean mSingleListUpdataValueByNodeNumber(const sMySingleLinkList * s_sll,uin
 	if(NodePointerGetByNodeOrderNumber(s_sll ->p_param,s_sll ->p_manager ->current_head_node_number
 																,node_order_number,&p_node) == X_False)      {return X_False;}
 	p_node->extern_information = new_infor_number;
+	#if (USB_MY_LIST_NODE_DEBUG == 1)
+	if(s_sll ->onDebug != X_Null)
+	{
+		if(s_sll ->onDebugParamCollect != X_Null){s_sll ->onDebugParamCollect(SQO_Push,p_node ->node_ID_in_list_array);}
+		if(s_sll ->onDebugParamCollect != X_Null){s_sll ->onDebugParamCollect(SQO_Push,new_infor_number);}
+		s_sll ->onDebug(LO_InformationUpdata,0,s_sll);
+		if(s_sll ->onDebugParamCollect != X_Null){s_sll ->onDebugParamCollect(SQO_Clear,0);}
+	}
+	#endif
 	return X_True;
 }

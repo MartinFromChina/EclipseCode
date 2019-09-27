@@ -14,7 +14,7 @@ static uint32_t DebugParamCollect(eSimpleQueueOperation op,uint32_t param);
 static X_Void onListNodeDebug(eListOperation e_lop,uint8_t operation_ID,const sMySingleLinkList * s_sll);
 static X_Void onQueueDebug(ePriorityQueueOperation e_ppo,uint8_t operation_ID,const sMyPriorityListManager *p_lm);
 
-APP_PRIORITY_QUEUE_DEF(p_prio_queue,6,X_True,onListNodeDebug,onQueueDebug,DebugParamCollect);
+APP_PRIORITY_QUEUE_DEF_WITH_LIMITATION(p_prio_queue,MAX_PRIORITY_QUEUE_COUNT,X_False,onListNodeDebug,onQueueDebug,DebugParamCollect);
 X_Void FlashEventInit(X_Void)
 {
 	FlashTestDebugInit();
@@ -81,9 +81,18 @@ static  X_Void ListInitDebug(const sMySingleLinkList * s_sll)
 	1	TailAdd
  *******************************************************************
  */
-static  X_Void TailAddSuccessed(const sMySingleLinkList * s_sll)
+static  X_Void TailFirstAddOK(const sMySingleLinkList * s_sll)
 {
-	SEGGER_RTT_Debug(FLASH_TEST_DEBUG,(60,"list node init OK valid node num: %d\r\n",s_sll ->ValidNodeNumber));
+	SEGGER_RTT_Debug(FLASH_TEST_DEBUG,(90,"********TailAdd successed  : tail = head = %d; valid node number %d\r\n"
+				,DebugParamCollect(SQO_Pop,0)
+				,s_sll ->ValidNodeNumber));
+}
+static  X_Void TailAddOK(const sMySingleLinkList * s_sll)
+{
+	SEGGER_RTT_Debug(FLASH_TEST_DEBUG,(90,"********TailAdd successed  : old head %d new head %d; valid node number %d\r\n"
+				,DebugParamCollect(SQO_Pop,0)
+				,DebugParamCollect(SQO_Pop,0)
+				,s_sll ->ValidNodeNumber));
 }
 /*
  *******************************************************************
@@ -92,9 +101,16 @@ static  X_Void TailAddSuccessed(const sMySingleLinkList * s_sll)
  */
 /*
  *******************************************************************
-	3
+	3 LO_HeadAdd
  *******************************************************************
  */
+static  X_Void HeadAddOK(const sMySingleLinkList * s_sll)
+{
+	SEGGER_RTT_Debug(FLASH_TEST_DEBUG,(90,"********HeadAdd successed  : old head %d new head %d; valid node number %d\r\n"
+			,DebugParamCollect(SQO_Pop,0)
+			,DebugParamCollect(SQO_Pop,0)
+			,s_sll ->ValidNodeNumber));
+}
 /*
  *******************************************************************
 	4
@@ -137,7 +153,7 @@ static const sListNodeMessageDebugTable sLNMDT[] = {
 		},
 		{
 			LO_TailAdd,
-			{X_Null,X_Null,X_Null,X_Null,X_Null,},
+			{TailFirstAddOK,TailAddOK,X_Null,X_Null,X_Null,},
 		},
 		{
 			LO_TailRemove,
@@ -145,7 +161,7 @@ static const sListNodeMessageDebugTable sLNMDT[] = {
 		},
 		{
 			LO_HeadAdd,
-			{X_Null,X_Null,X_Null,X_Null,X_Null,},
+			{HeadAddOK,X_Null,X_Null,X_Null,X_Null,},
 		},
 		{
 			LO_HeadRemove,
