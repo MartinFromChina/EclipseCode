@@ -1,6 +1,7 @@
 #ifndef __M_FLASH_HANDLER_CONFIG_DEFAULT_H
 #define __M_FLASH_HANDLER_CONFIG_DEFAULT_H
 
+#define FLASH_POINTER_TYPE            		uint32_t// void or uint32_t
 #define M_FLASH_BASIC_UNIT_IN_BYTES             4096
 #define M_FLASH_ENABLE_BOUNDARY_CHECK			1
 #define M_FLASH_MULTI_PARTITION                 0
