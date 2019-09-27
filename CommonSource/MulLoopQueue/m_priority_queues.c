@@ -16,9 +16,11 @@ typedef enum
 static X_Boolean GetActionAndNodeNumber(const sMySingleLinkList * s_sll,X_Boolean isFromSmall,uint16_t priority,uint16_t current_node_count
 									,ePriorityQueuePushAction *p_action,uint16_t *p_number)
 {
-	uint16_t i,infor_number;
-//	X_Boolean isOK;
+	uint16_t i;
+	sListNodeSpace * p_node;
 	if(s_sll == X_Null ||p_action == X_Null || p_number == X_Null){return X_False;}
+	if(s_sll ->p_manager ->isInitOK == X_False){return X_False;}
+	if(s_sll ->p_manager ->current_head_node_number >= s_sll ->ValidNodeNumber ){return X_False;}
 	if(current_node_count > s_sll ->ValidNodeNumber){return X_False;}
 	if(current_node_count == 0)
 	{
@@ -27,28 +29,33 @@ static X_Boolean GetActionAndNodeNumber(const sMySingleLinkList * s_sll,X_Boolea
 		return X_True;
 	}
 
+	p_node = &(s_sll->p_param ->p_node_space[s_sll ->p_manager ->current_head_node_number]);
 	if(isFromSmall == X_True)
 	{
 		for(i=0;i<current_node_count;i++)
 		{
-			if(mSingleListInformationGetByNodeNumber(s_sll,i,&infor_number) == X_True)
+			if(priority == p_node ->extern_information)
 			{
-				if(priority == infor_number)
-				{
-					*p_action = QP_Replace;
-					*p_number = i;
-					return X_True;
-				}
-				else if(priority < infor_number )
-				{
-					*p_action = QP_Insert;
-					*p_number = i;
-					return X_True;
-				}
+				*p_action = QP_Replace;
+				*p_number = i;
+				return X_True;
 			}
+			else if(priority < p_node ->extern_information )
+			{
+				*p_action = QP_Insert;
+				*p_number = i;
+				return X_True;
+			}
+
+			if(p_node ->NextPtr != X_Null){p_node = p_node ->NextPtr;}
 			else
 			{
-				return X_False;
+				if((i + 1) == current_node_count)
+				{
+					i = current_node_count;
+					break;
+				}
+				else {return X_False;}
 			}
 		}
 		*p_action = QP_Insert;
@@ -59,24 +66,29 @@ static X_Boolean GetActionAndNodeNumber(const sMySingleLinkList * s_sll,X_Boolea
 	{
 		for(i=0;i<current_node_count;i++)
 		{
-			if(mSingleListInformationGetByNodeNumber(s_sll,i,&infor_number) == X_True)
+
+			if(priority == p_node ->extern_information)
 			{
-				if(priority == infor_number)
-				{
-					*p_action = QP_Replace;
-					*p_number = i;
-					return X_True;
-				}
-				else if(priority > infor_number )
-				{
-					*p_action = QP_Insert;
-					*p_number = i;
-					return X_True;
-				}
+				*p_action = QP_Replace;
+				*p_number = i;
+				return X_True;
 			}
+			else if(priority > p_node ->extern_information )
+			{
+				*p_action = QP_Insert;
+				*p_number = i;
+				return X_True;
+			}
+
+			if(p_node ->NextPtr != X_Null){p_node = p_node ->NextPtr;}
 			else
 			{
-				return X_False;
+				if((i + 1) == current_node_count)
+				{
+					i = current_node_count;
+					break;
+				}
+				else {return X_False;}
 			}
 		}
 		*p_action = QP_Insert;

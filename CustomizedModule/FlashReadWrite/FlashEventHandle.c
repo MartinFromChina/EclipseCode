@@ -14,7 +14,7 @@ static uint32_t DebugParamCollect(eSimpleQueueOperation op,uint32_t param);
 static X_Void onListNodeDebug(eListOperation e_lop,uint8_t operation_ID,const sMySingleLinkList * s_sll);
 static X_Void onQueueDebug(ePriorityQueueOperation e_ppo,uint8_t operation_ID,const sMyPriorityListManager *p_lm);
 
-APP_PRIORITY_QUEUE_DEF_WITH_LIMITATION(p_prio_queue,MAX_PRIORITY_QUEUE_COUNT,X_False,onListNodeDebug,onQueueDebug,DebugParamCollect);
+APP_PRIORITY_QUEUE_DEF_WITH_LIMITATION(p_prio_queue,MAX_PRIORITY_QUEUE_COUNT,X_True,onListNodeDebug,onQueueDebug,DebugParamCollect);
 X_Void FlashEventInit(X_Void)
 {
 	FlashTestDebugInit();
@@ -290,7 +290,7 @@ X_Void Test_PriorityQueue(uint16_t priority)
 
 	test_counter ++;
 
-	if(test_counter >= 10)
+	if(test_counter >= 20)
 	{
 		test_counter = 0;
 
