@@ -30,15 +30,24 @@ typedef struct
 	sListManagerParam *p_LMP;
 }sListManager;
 
-#define SIMPLE_LOOPQUEUE_DEF(p_manager,max_node_number)            									\
-		static uint8_t  CONCAT_2(p_manager,_node_buf)[max_node_number];	 							\
-		static sListManagerParam CONCAT_2(p_manager,_param) = {0,0,0,0};    						\
-		static const  sListManager  CONCAT_2(p_manager,_entry) = {									\
-			CONCAT_2(p_manager,_node_buf),															\
+#define SIMPLE_LOOPQUEUE_DEF_WITHOUT_POINTER(p_manager,max_node_number)            					\
+		static uint8_t  CONCAT_2(p_manager,_loopqueue_node_buf)[max_node_number];	 				\
+		static sListManagerParam CONCAT_2(p_manager,_loopqueue_param) = {0,0,0,0};    				\
+		static const  sListManager  CONCAT_2(p_manager,_loopqueue_entry) = {						\
+			CONCAT_2(p_manager,_loopqueue_node_buf),												\
 			max_node_number,																		\
-			&CONCAT_2(p_manager,_param),															\
+			&CONCAT_2(p_manager,_loopqueue_param),													\
+		}
+
+#define SIMPLE_LOOPQUEUE_DEF(p_manager,max_node_number)            									\
+		static uint8_t  CONCAT_2(p_manager,_loopqueue_node_buf)[max_node_number];	 				\
+		static sListManagerParam CONCAT_2(p_manager,_loopqueue_param) = {0,0,0,0};    				\
+		static const  sListManager  CONCAT_2(p_manager,_loopqueue_entry) = {						\
+			CONCAT_2(p_manager,_loopqueue_node_buf),												\
+			max_node_number,																		\
+			&CONCAT_2(p_manager,_loopqueue_param),													\
 		} ;																						    \
-		static const  sListManager * p_manager = &CONCAT_2(p_manager,_entry)
+		static const  sListManager * p_manager = &CONCAT_2(p_manager,_loopqueue_entry)
 
 X_Void 		SimpleQueueInitialize(const sListManager *p_manager);
 uint16_t    SimpleQueueFirstIn(const sListManager *p_manager,X_Boolean *isOK,X_Boolean is_OccupyPermit);

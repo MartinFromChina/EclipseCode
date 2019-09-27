@@ -1,10 +1,17 @@
 #include "UserFlash.h"
 #include "UserFlashTB.h"
-#include "..\..\..\CustomizedModule\FlashReadWrite\FlashEventHandle.h"
+#include "..\..\..\CustomizedModule\FlashReadWrite\FlashEventHandle.h"											\
+
+APP_FLASH_EVENT_HANDLER_DEFINE(p_flash_handler
+								,0,0
+								,0,0
+								,0,0
+								,X_Null,X_Null,X_Null,X_Null,X_Null,X_Null
+								);
 
 FILE * FlashTestOpenFile(void)
 {
-	FlashEventInit();
+	mFlashEventInit(p_flash_handler);
 	return fopen(".//TB_TinyDancer//FlashReadWrite//command.txt", "r");
 }
 static uint16_t debug_counter = 0;
@@ -17,6 +24,7 @@ X_Void onTick(X_Void)
 													,debug_counter,DoesFlashReady(),sector_number));
 		debug_counter ++;
 
-		Test_PriorityQueue(sector_number);
+//		Test_PriorityQueue(sector_number);
 	}
+	mFlashEventHandlerRun(p_flash_handler);
 }

@@ -1,7 +1,4 @@
 #include "FlashEventHandle.h"
-#include "..\..\CommonSource\MulLoopQueue\m_priority_queues.h"
-#include "..\..\CommonSource\MulLoopQueue\loop_queues.h"
-
 /*
  ******************************************************************************************
  handle flash read write event,descripe in detail:
@@ -9,311 +6,48 @@
  2, handle user define sector base on MCU sector system
  ******************************************************************************************
  */
-static X_Void FlashTestDebugInit(X_Void);
-static uint32_t DebugParamCollect(eSimpleQueueOperation op,uint32_t param);
-static X_Void onListNodeDebug(eListOperation e_lop,uint8_t operation_ID,const sMySingleLinkList * s_sll);
-static X_Void onQueueDebug(ePriorityQueueOperation e_ppo,uint8_t operation_ID,const sMyPriorityListManager *p_lm);
-
-APP_PRIORITY_QUEUE_DEF_WITH_LIMITATION(p_prio_queue,MAX_PRIORITY_QUEUE_COUNT,X_True,onListNodeDebug,onQueueDebug,DebugParamCollect);
-X_Void FlashEventInit(X_Void)
+m_app_result mFlashEventInit(const sMyFlashEventHandler *p_handler)
 {
-	FlashTestDebugInit();
-	mPriorityQueueInitialize(p_prio_queue);
+	if(p_handler == X_Null) {return APP_POINTER_NULL;}
+	mPriorityQueueInitialize(p_handler ->p_priority_queue);
+	return APP_SUCCESSED;
 }
-/*******************************************test********************************************/
-#include "../../[T]LogicLab/UserDebug.h"
-SIMPLE_LOOPQUEUE_DEF(p_queue,10);
-static uint32_t param_buf[10];
-static X_Void FlashTestDebugInit(X_Void)
+m_app_result mFlashEventUnInit(const sMyFlashEventHandler *p_handler)
 {
-	SimpleQueueInitialize(p_queue);
+	return APP_SUCCESSED;
 }
-static uint32_t DebugParamCollect(eSimpleQueueOperation op,uint32_t param)
+m_app_result mFlashReadRequest(const sMyFlashEventHandler *p_handler,uint32_t read_start_addr,uint32_t read_length,void const * p_dest,onReadFinished read_cb)
 {
-	uint8_t node_num;
-	X_Boolean isOK;
-	if(op == SQO_Push)
-	{
-		node_num = SimpleQueueFirstIn(p_queue,&isOK,X_True);
-		if(isOK == X_True)
-		{
-			param_buf[node_num] = param;
-			return APP_SUCCESSED;
-		}
-		return APP_ERROR;
-	}
-	else if(op == SQO_Pop)
-	{
-		node_num = SimpleQueueFirstOut(p_queue,&isOK);
-		if(isOK == X_True)
-		{
-			RealseSimpleQueueBuf(p_queue,node_num);
-			return param_buf[node_num];
-		}
-		return APP_ERROR;
-	}
-	else if(op == SQO_Clear)
-	{
-		ClearSimpleQueue(p_queue);
-		return APP_SUCCESSED;
-	}
-	return APP_ERROR;
+	return APP_SUCCESSED;
 }
-/*
-	LO_SizeGet,
-	LO_DoesEmpty,
-	LO_ListClear,
-	LO_FindByValue,
-	LO_InformationGet,
-	LO_InformationUpdata,
-*/
-/*
- *******************************************************************
-	0 	ListInit
- *******************************************************************
- */
-static  X_Void ListInitDebug(const sMySingleLinkList * s_sll)
+m_app_result mFlashWriteRequest(const sMyFlashEventHandler *p_handler,uint32_t write_start_addr,uint32_t write_length,void const * p_src,onWriteFinished write_cb)
 {
-	SEGGER_RTT_Debug(FLASH_TEST_DEBUG,(60,"list node init OK valid node num: %d\r\n",s_sll ->ValidNodeNumber));
+	return APP_SUCCESSED;
 }
-/*
- *******************************************************************
-	1	TailAdd
- *******************************************************************
- */
-static  X_Void TailFirstAddOK(const sMySingleLinkList * s_sll)
+m_app_result mFlashEraseRequest(const sMyFlashEventHandler *p_handler,uint32_t Erase_start_addr,uint32_t erase_length,void const * p_src,onEraseFinished erase_cb)
 {
-	SEGGER_RTT_Debug(FLASH_TEST_DEBUG,(90,"********TailAdd successed  : tail = head = %d; valid node number %d\r\n"
-				,DebugParamCollect(SQO_Pop,0)
-				,s_sll ->ValidNodeNumber));
-}
-static  X_Void TailAddOK(const sMySingleLinkList * s_sll)
-{
-	SEGGER_RTT_Debug(FLASH_TEST_DEBUG,(90,"********TailAdd successed  : old head %d new head %d; valid node number %d\r\n"
-				,DebugParamCollect(SQO_Pop,0)
-				,DebugParamCollect(SQO_Pop,0)
-				,s_sll ->ValidNodeNumber));
-}
-/*
- *******************************************************************
-	2
- *******************************************************************
- */
-/*
- *******************************************************************
-	3 LO_HeadAdd
- *******************************************************************
- */
-static  X_Void HeadAddOK(const sMySingleLinkList * s_sll)
-{
-	SEGGER_RTT_Debug(FLASH_TEST_DEBUG,(90,"********HeadAdd successed  : old head %d new head %d; valid node number %d\r\n"
-			,DebugParamCollect(SQO_Pop,0)
-			,DebugParamCollect(SQO_Pop,0)
-			,s_sll ->ValidNodeNumber));
-}
-/*
- *******************************************************************
-	4
- *******************************************************************
- */
-/*
- *******************************************************************
-	5 Insert
- *******************************************************************
- */
-static  X_Void InsertHead(const sMySingleLinkList * s_sll)
-{
-	SEGGER_RTT_Debug(FLASH_TEST_DEBUG,(90,"~~~Insert head\r\n"));
-}
-static  X_Void InsertTail(const sMySingleLinkList * s_sll)
-{
-	SEGGER_RTT_Debug(FLASH_TEST_DEBUG,(90,"~~~Insert tail\r\n"));
-}
-static  X_Void InsertBorrowFailed(const sMySingleLinkList * s_sll)
-{
-	SEGGER_RTT_Debug(FLASH_TEST_DEBUG,(90,"~~~Insert failed because borrow failed\r\n"));
-}
-static  X_Void InsertOK(const sMySingleLinkList * s_sll)
-{
-	SEGGER_RTT_Debug(FLASH_TEST_DEBUG,(90,"********Insert successed  : left %d middle %d right %d; valid node number %d\r\n"
-			,DebugParamCollect(SQO_Pop,0)
-			,DebugParamCollect(SQO_Pop,0)
-			,DebugParamCollect(SQO_Pop,0)
-			,s_sll ->ValidNodeNumber));
-}
-/*
- *******************************************************************
-
- *******************************************************************
- */
-static const sListNodeMessageDebugTable sLNMDT[] = {
-		{
-			LO_init,
-			{ListInitDebug,X_Null,X_Null,X_Null,X_Null,},
-		},
-		{
-			LO_TailAdd,
-			{TailFirstAddOK,TailAddOK,X_Null,X_Null,X_Null,},
-		},
-		{
-			LO_TailRemove,
-			{X_Null,X_Null,X_Null,X_Null,X_Null,},
-		},
-		{
-			LO_HeadAdd,
-			{HeadAddOK,X_Null,X_Null,X_Null,X_Null,},
-		},
-		{
-			LO_HeadRemove,
-			{X_Null,X_Null,X_Null,X_Null,X_Null,},
-		},
-		{
-			LO_Insert,
-			{InsertHead,InsertTail,InsertBorrowFailed,InsertOK,X_Null,},
-		},
-		{
-			LO_PullAway,
-			{X_Null,X_Null,X_Null,X_Null,X_Null,},
-		},
-};
-static X_Void onListNodeDebug(eListOperation e_lop,uint8_t operation_ID,const sMySingleLinkList * s_sll)
-{
-	if(e_lop >= (sizeof(sLNMDT)/sizeof(sLNMDT[0]))) {return;}
-	if(operation_ID >= MAX_LISTNODE_DEBUG_ID_COUNT) {return;}
-	if(sLNMDT[e_lop].debug_handler[operation_ID] != X_Null){sLNMDT[e_lop].debug_handler[operation_ID](s_sll);}
+	return APP_SUCCESSED;
 }
 
-/*
-	PQO_Clear,
-	PQO_ReleaseNode,
-	PQO_NodeCount,
-	PQO_PriorityScope,
-	PQO_DoesEmpty,
- */
-/*
- *******************************************************************
-	0
- *******************************************************************
- */
-static  X_Void QueueInitDebug(const sMyPriorityListManager *p_lm)
+m_app_result mFlashSectorReadRequest(const sMyFlashEventHandler *p_handler,uint32_t sector_number,uint32_t length,void const * p_dest,onReadFinished read_cb)
 {
-	SEGGER_RTT_Debug(FLASH_TEST_DEBUG,(60,"queue init OK max node num: %d\r\n",p_lm ->MaxNodeNumber));
+	return APP_SUCCESSED;
 }
-/*
- *******************************************************************
-	1
- *******************************************************************
- */
-static  X_Void QueuePush_NodeCount0(const sMyPriorityListManager *p_lm)
+m_app_result mFlashSectorWriteRequest(const sMyFlashEventHandler *p_handler,uint32_t sector_number,uint32_t length,void const * p_src,onWriteFinished write_cb)
 {
-	uint32_t node_num,priority;
-	node_num = DebugParamCollect(SQO_Pop,0);
-	priority = DebugParamCollect(SQO_Pop,0);
-	SEGGER_RTT_Debug(FLASH_TEST_DEBUG,(60,"insert first element :head add node number %d priority %d\r\n",node_num,priority));
-}
-static  X_Void QueuePush_NodeCountMax(const sMyPriorityListManager *p_lm)
-{
-	SEGGER_RTT_Debug(FLASH_TEST_DEBUG,(60,"Node count max , only replace can be done\r\n"));
-}
-static  X_Void QueuePush_NodeCountNormal_InsertNodeNumber(const sMyPriorityListManager *p_lm)
-{
-	uint32_t action,node_num,priority;
-	action   = DebugParamCollect(SQO_Pop,0);
-	node_num = DebugParamCollect(SQO_Pop,0);
-	priority = DebugParamCollect(SQO_Pop,0);
-	SEGGER_RTT_Debug(FLASH_TEST_DEBUG,(60,"current %s; node number %d priority %d\r\n",(action == 0)? "Replace" : "Insert",node_num,priority));
-}
-static  X_Void QueuePush_NodeCountNormal_UpdataFailed(const sMyPriorityListManager *p_lm)
-{
-	SEGGER_RTT_Debug(FLASH_TEST_DEBUG,(60,"updata value failed\r\n"));
-}
-static  X_Void QueuePush_NodeCountNormal_InsertFailed(const sMyPriorityListManager *p_lm)
-{
-	SEGGER_RTT_Debug(FLASH_TEST_DEBUG,(60,"***************insert failed : reason %d \r\n",DebugParamCollect(SQO_Pop,0)));
-}
-/*
- *******************************************************************
-	2
- *******************************************************************
- */
-static  X_Void QueuePopOK(const sMyPriorityListManager *p_lm)
-{
-	SEGGER_RTT_Debug(FLASH_TEST_DEBUG,(60,"_____queue pop head node ,priority %d \r\n",DebugParamCollect(SQO_Pop,0)));
-}
-static  X_Void QueuePopEmpty(const sMyPriorityListManager *p_lm)
-{
-	SEGGER_RTT_Debug(FLASH_TEST_DEBUG,(60,"***************queue pop empty\r\n"));
-}
-/*
- *******************************************************************
-
- *******************************************************************
- */
-static const sPriorityQueueMessageDebugTable sPQMDT[] = {
-		{
-			PQO_init,
-			{QueueInitDebug,X_Null,X_Null,X_Null,X_Null,},
-		},
-		{
-			PQO_Push,
-			{QueuePush_NodeCount0
-			,QueuePush_NodeCountMax
-			,QueuePush_NodeCountNormal_InsertNodeNumber
-			,QueuePush_NodeCountNormal_InsertFailed
-			,QueuePush_NodeCountNormal_UpdataFailed,},
-		},
-		{
-			PQO_Pop,
-			{QueuePopOK,QueuePopEmpty,X_Null,X_Null,X_Null,},
-		},
-};
-
-static X_Void onQueueDebug(ePriorityQueueOperation e_ppo,uint8_t operation_ID,const sMyPriorityListManager *p_lm)
-{
-	if(e_ppo >= (sizeof(sPQMDT)/sizeof(sPQMDT[0]))) {return;}
-	if(operation_ID >= MAX_LISTNODE_DEBUG_ID_COUNT) {return;}
-	if(sPQMDT[e_ppo].debug_handler[operation_ID] != X_Null) {sPQMDT[e_ppo].debug_handler[operation_ID](p_lm);}
+	return APP_SUCCESSED;
 }
 
-
-static uint8_t buf[10];
-static uint8_t test_counter = 0;
-X_Void Test_PriorityQueue(uint16_t priority)
+m_app_result mFlashEventHandlerHold(const sMyFlashEventHandler *p_handler)
 {
-	uint16_t i,j,node_count,priority_min,priority_max,curr_priority;
+	return APP_SUCCESSED;
+}
+m_app_result mFlashEventHandlerBeginProcessing(const sMyFlashEventHandler *p_handler)
+{
+	return APP_SUCCESSED;
+}
 
-	sMyPriorityNodeParam sMPNP,sMPNP_pop;
-	sMPNP.is_OccupyPermit 	= X_False;
-	sMPNP.p_buf 			= buf;
-	sMPNP.priority			= priority;
-	mPriorityQueuePush(p_prio_queue,&sMPNP);
+X_Void mFlashEventHandlerRun(const sMyFlashEventHandler *p_handler)
+{
 
-	test_counter ++;
-
-	if(test_counter >= 20)
-	{
-		test_counter = 0;
-
-		node_count = GetMyPriorityQueueUsedNodeCount(p_prio_queue);
-		SEGGER_RTT_Debug(1,(40,"queue used node_count %d\r\n",node_count));
-
-		GetCurrentUsedPriorityScope(p_prio_queue,&priority_max,&priority_min);
-		SEGGER_RTT_Debug(FLASH_DEBUG && FLASH_TEST_DEBUG,(30,"priority scope %d ~ %d\r\n",priority_max,priority_min));
-
-		j = 0;
-		for(i=0;i<node_count;i++)
-		{
-			curr_priority = GetPriorityByNodeNumber(p_prio_queue,j);
-			SEGGER_RTT_Debug(0,(30,"node %d prio %d\r\n",j,curr_priority));
-			j++;
-		}
-		while(mPriorityQueuePop(p_prio_queue,&sMPNP_pop) == X_True)
-		{
-
-			SEGGER_RTT_Debug(FLASH_DEBUG && FLASH_TEST_DEBUG,(60,"~~~~ is?%d; p_buf %2x ; priority %d\r\n"
-						,sMPNP_pop.is_OccupyPermit
-						,sMPNP_pop.p_buf
-						,sMPNP_pop.priority));
-		}
-	}
 }

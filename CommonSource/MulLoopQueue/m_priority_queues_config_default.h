@@ -1,9 +1,9 @@
 #ifndef __M_PRIORITY_QUEUES_CONFIG_DEFAULT_H
 #define __M_PRIORITY_QUEUES_CONFIG_DEFAULT_H
 
-#define MAX_PRIORITY_QUEUE_COUNT     6
+#define MAX_PRIORITY_QUEUE_COUNT     				 12
 
-#define USE_MY_PRIORITY_QUEUE_DEBUG                  1
+#define USE_MY_PRIORITY_QUEUE_DEBUG                  0
 #define MAX_PRIORITY_QUEUE_DEBUG_ID_COUNT            5
 
 #endif

@@ -57,6 +57,20 @@ typedef struct
 }sPriorityQueueMessageDebugTable;
 
 // !!! the WITH_LIMITATION menas : the priority value is limitated :  0 ~ (MaxNodeNumber - 1)
+#define APP_PRIORITY_QUEUE_DEF_WITH_LIMITATION_WITHOUT_POINTER(p_manager,max_node_number,is_from_small,list_debug,queue_debug,param_debug)  \
+		static X_Boolean CONCAT_2(p_manager,_isInit) = X_False;										\
+		APP_SINGLE_LIST_DEF_WITHOUT_POINTER(p_manager,max_node_number,list_debug,param_debug);    	\
+		static sMyPriorityNodeParam CONCAT_2(p_manager,_queue_param)[max_node_number];				\
+		static  const sMyPriorityListManager  CONCAT_2(p_manager,_queue_entry) = {					\
+			&CONCAT_2(p_manager,_isInit),															\
+			&CONCAT_2(p_manager,_list_entry),														\
+			max_node_number,																		\
+			is_from_small,																			\
+			CONCAT_2(p_manager,_queue_param),														\
+			queue_debug,																			\
+			param_debug,																			\
+		}
+
 #define APP_PRIORITY_QUEUE_DEF_WITH_LIMITATION(p_manager,max_node_number,is_from_small,list_debug,queue_debug,param_debug)  \
 		static X_Boolean CONCAT_2(p_manager,_isInit) = X_False;										\
 		APP_SINGLE_LIST_DEF_WITHOUT_POINTER(p_manager,max_node_number,list_debug,param_debug);    	\
