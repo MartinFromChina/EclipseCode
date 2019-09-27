@@ -29,6 +29,7 @@ m_app_result mFlashEraseRequest(const sMyFlashEventHandler *p_handler,uint32_t E
 	return APP_SUCCESSED;
 }
 
+#if (M_FLASH_MULTI_PARTITION == 1)
 m_app_result mFlashSectorReadRequest(const sMyFlashEventHandler *p_handler,uint32_t sector_number,uint32_t length,void const * p_dest,onReadFinished read_cb)
 {
 	return APP_SUCCESSED;
@@ -46,6 +47,7 @@ m_app_result mFlashEventHandlerBeginProcessing(const sMyFlashEventHandler *p_han
 {
 	return APP_SUCCESSED;
 }
+#endif
 
 X_Void mFlashEventHandlerRun(const sMyFlashEventHandler *p_handler)
 {

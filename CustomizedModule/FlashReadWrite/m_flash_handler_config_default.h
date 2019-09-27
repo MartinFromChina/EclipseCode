@@ -3,7 +3,8 @@
 
 #define M_FLASH_BASIC_UNIT_IN_BYTES             4096
 #define M_FLASH_ENABLE_BOUNDARY_CHECK			1
-#define M_FLASH_MULTI_PARTITION                 1
+#define M_FLASH_MULTI_PARTITION                 0
 
 #define USE_MY_FLASH_EVENT_HANDLER_DEBUG		1
+#define MAX_MY_FLASH_EVENT_DEBUG_ID_COUNT		5
 #endif

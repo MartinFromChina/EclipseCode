@@ -7,6 +7,7 @@ APP_FLASH_EVENT_HANDLER_DEFINE(p_flash_handler
 								,0,0
 								,0,0
 								,X_Null,X_Null,X_Null,X_Null,X_Null,X_Null
+								,X_Null,X_Null
 								);
 
 FILE * FlashTestOpenFile(void)
