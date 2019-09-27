@@ -56,28 +56,28 @@ typedef struct
 
 typedef struct
 {
-	X_Void(*init)(X_Void);
-	X_Void(*uninit)(X_Void);
-	X_Void(*read)(X_Void);
-	X_Void(*write)(X_Void);
-	X_Void(*erase)(X_Void);
-	X_Void(*doesbusy)(X_Void);
+	X_Void				(*init)(X_Void);
+	X_Void				(*uninit)(X_Void);
+	onMyFlashRead      	read_evt_handler;
+	onMyFlashWrite		write_evt_handler;
+	onMyFlashErase		erase_evt_handler;
+	X_Boolean			(*doesbusy)(X_Void);
 }sMyFlashEventAction;
 
 typedef struct   _sMyFlashEventHandler    sMyFlashEventHandler;
 struct _sMyFlashEventHandler
 {
-	sMyFlashModuleManager  *p_manager;
-	sMyFlashEventBasicParam const *p_basic_param;
-	sMyFlashEventUserParam  const *p_user_param;
-	sListManager		   const* p_loop_queue;
-	sMyPriorityListManager const* p_priority_queue;
-	sMyFlashEventAction    const* p_action;
+	sMyFlashModuleManager   	 * p_manager;
+	sMyFlashEventBasicParam const* p_basic_param;
+	sMyFlashEventUserParam  const* p_user_param;
+	sListManager		    const* p_loop_queue;
+	sMyPriorityListManager  const* p_priority_queue;
+	sMyFlashEventAction     const* p_action;
 	X_Void 						(*onDebug)(eFlashDebugOperation e_fdo,uint8_t operation_ID,const sMyFlashEventHandler * p_handler);
 	uint32_t                    (*onDebugParamCollect)(eSimpleQueueOperation op,uint32_t param);
 };
 
-typedef   X_Void (*m_flash_event_debug_handler)(const sMySingleLinkList * s_sll);
+typedef   X_Void (*m_flash_event_debug_handler)(const sMyFlashEventHandler * p_handler);
 
 typedef struct
 {
@@ -119,12 +119,12 @@ m_app_result mFlashEventInit(const sMyFlashEventHandler *p_handler);
 m_app_result mFlashEventUnInit(const sMyFlashEventHandler *p_handler);
 X_Void 		 mFlashEventHandlerRun(const sMyFlashEventHandler *p_handler);
 
-m_app_result mFlashReadRequest(const sMyFlashEventHandler *p_handler,uint32_t read_start_addr,uint32_t read_length,FLASH_POINTER_TYPE const * p_dest,onReadFinished read_cb);
+m_app_result mFlashReadRequest(const sMyFlashEventHandler *p_handler,uint32_t read_start_addr,uint32_t read_length,FLASH_POINTER_TYPE  * p_dest,onReadFinished read_cb);
 m_app_result mFlashWriteRequest(const sMyFlashEventHandler *p_handler,uint32_t write_start_addr,uint32_t write_length,FLASH_POINTER_TYPE const * p_src,onWriteFinished write_cb);
 m_app_result mFlashEraseRequest(const sMyFlashEventHandler *p_handler,uint32_t Erase_start_addr,uint32_t erase_length,FLASH_POINTER_TYPE const * p_src,onEraseFinished erase_cb);
 
 #if (M_FLASH_MULTI_PARTITION == 1)
-m_app_result mFlashSectorReadRequest(const sMyFlashEventHandler *p_handler,uint32_t sector_number,uint32_t length,FLASH_POINTER_TYPE const * p_dest,onReadFinished read_cb);
+m_app_result mFlashSectorReadRequest(const sMyFlashEventHandler *p_handler,uint32_t sector_number,uint32_t length,FLASH_POINTER_TYPE * p_dest,onReadFinished read_cb);
 m_app_result mFlashSectorWriteRequest(const sMyFlashEventHandler *p_handler,uint32_t sector_number,uint32_t length,FLASH_POINTER_TYPE const * p_src,onWriteFinished write_cb);
 
 m_app_result mFlashEventHandlerHold(const sMyFlashEventHandler *p_handler);

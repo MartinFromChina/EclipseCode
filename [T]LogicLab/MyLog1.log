@@ -42,3 +42,19 @@
 2019-09-27 13:46:34.080 **39**flash ready ? 1 ; current sector number 1
 2019-09-27 13:46:35.299 **40**flash ready ? 1 ; current sector number 2
 2019-09-27 13:46:36.516 **41**flash ready ? 1 ; current sector number 5
+2019-09-27 20:19:16.219 hello I am string debug 
+2019-09-27 20:19:16.324 flash event handler init OK
+2019-09-27 20:19:17.539 **0**flash ready ? 0 ; current sector number 1
+2019-09-27 20:19:18.754 **1**flash ready ? 0 ; current sector number 5
+2019-09-27 20:19:19.965 **2**flash ready ? 0 ; current sector number 8
+2019-09-27 20:19:21.180 **3**flash ready ? 0 ; current sector number 3
+2019-09-27 20:19:22.393 **4**flash ready ? 0 ; current sector number 6
+2019-09-27 20:19:23.607 **5**flash ready ? 0 ; current sector number 9
+2019-09-27 21:33:00.833 hello I am string debug 
+2019-09-27 21:33:00.938 flash event handler init OK
+2019-09-27 21:33:01.044 base_addr:0; size:0 bytes; min erase unit:0 bytes; min program unit:0 bytes;
+2019-09-27 21:33:01.153  sector_size:0; max sector_count:0;
+2019-09-27 21:33:02.162 **0**flash ready ? 0 ; current sector number 4
+2019-09-27 21:33:03.377 **1**flash ready ? 0 ; current sector number 7
+2019-09-27 21:33:04.591 **2**flash ready ? 0 ; current sector number 10
+2019-09-27 21:33:05.807 **3**flash ready ? 0 ; current sector number 1
