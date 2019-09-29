@@ -7,6 +7,7 @@
  *3,user can check the queue state include : (is empty ? min priority ,max priority , cunrrent used node number and so on)
  ***********************************************************************************************
  */
+#ifdef USE_PRIORITY_QUEUE_BASED_ON_LIST_NODE
 typedef enum
 {
 	QP_Replace,
@@ -292,3 +293,48 @@ X_Boolean   DoesMyPriorityQueueEmpty(const sMyPriorityListManager *p_manager)
 	if(*p_manager ->isInit == X_False) {return X_False;}
 	return DoesMySingleListEmpty(p_manager ->p_list);
 }
+#endif
+
+#ifdef USE_PRIORITY_QUEUE_BASED_ON_ARRAY
+
+#endif
+
+#ifdef USE_PRIORITY_QUEUE_BASED_ON_PRIORITY_TABLE
+X_Void 		mPriorityQueueInitialize(const sMyPriorityListManager *p_manager)
+{
+
+}
+X_Boolean   mPriorityQueuePush(const sMyPriorityListManager *p_manager,uint16_t priority,uint16_t *node_number)
+{
+
+}
+X_Boolean   mPriorityQueuePop(const sMyPriorityListManager *p_manager,uint16_t *priority,uint16_t *node_number)
+{
+
+}
+X_Void      ClearMyPriorityQueue(const sMyPriorityListManager *p_manager)
+{
+
+}
+m_app_result  RealseMyPriorityQueueNodeByPriority(const sMyPriorityListManager *p_manager,uint16_t priority)
+{
+
+}
+uint16_t    GetMyPriorityQueueUsedNodeCount(const sMyPriorityListManager *p_manager)
+{
+
+}
+X_Boolean   GetCurrentUsedPriorityScope(const sMyPriorityListManager *p_manager,uint16_t *p_high,uint16_t *p_low)
+{
+
+}
+uint16_t   GetPriorityByNodeNumber(const sMyPriorityListManager *p_manager,uint16_t node_number)
+{
+
+}
+X_Boolean   DoesMyPriorityQueueEmpty(const sMyPriorityListManager *p_manager)
+{
+
+}
+
+#endif

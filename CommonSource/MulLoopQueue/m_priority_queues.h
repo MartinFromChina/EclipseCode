@@ -28,6 +28,7 @@ typedef enum
 	PQO_DoesEmpty,
 }ePriorityQueueOperation;
 
+#ifdef USE_PRIORITY_QUEUE_BASED_ON_LIST_NODE
 typedef struct
 {
 	X_Boolean 	is_OccupyPermit; // false : can't be replaced by new data  with the same priority
@@ -95,6 +96,71 @@ uint16_t    GetMyPriorityQueueUsedNodeCount(const sMyPriorityListManager *p_mana
 X_Boolean   GetCurrentUsedPriorityScope(const sMyPriorityListManager *p_manager,uint16_t *p_high,uint16_t *p_low);
 uint16_t   GetPriorityByNodeNumber(const sMyPriorityListManager *p_manager,uint16_t node_number);
 X_Boolean   DoesMyPriorityQueueEmpty(const sMyPriorityListManager *p_manager);
+
+#endif
+
+#ifdef USE_PRIORITY_QUEUE_BASED_ON_ARRAY
+
+#endif
+
+#ifdef USE_PRIORITY_QUEUE_BASED_ON_PRIORITY_TABLE
+
+typedef struct
+{
+	uint16_t     priority;
+	uint16_t     node_number;
+}sMyPriorityNodeParam;
+
+typedef struct s_MyPriorityListManager sMyPriorityListManager;
+
+struct s_MyPriorityListManager
+{
+	X_Boolean 			*isInit;
+	uint16_t    		MaxNodeNumber;
+	X_Boolean			isHighPriorityFromSmall;// priority from high to low ;  true : the smaller value ,the high priority ; false : the bigger value ,the high priority
+    uint32_t            *p_priority_table;
+	sMyPriorityNodeParam *p_param;
+    sListManager *        p_loop_queue;
+    X_Void (*onDebug)(ePriorityQueueOperation e_ppo,uint8_t operation_ID,const sMyPriorityListManager *p_lm);
+    uint32_t (*onDebugParamCollect)(eSimpleQueueOperation op,uint32_t param);
+};
+
+//priority:0~max_value,if the priority scope is extremely big and its min value is not 0 , offset it to 0 to save space
+#define APP_PRIORITY_QUEUE_DEF(p_manager															\
+								,max_node_number													\
+								,max_priority_value													\
+								,is_from_small														\
+								,list_debug,queue_debug,param_debug)  								\
+		SIMPLE_LOOPQUEUE_DEF_WITHOUT_POINTER(p_manager,max_node_number);     						\
+		static uint32_t  CONCAT_2(p_manager,_priority_table)[GET_PRIORITY_TABLE_SIZE_BY_PRIORITY_SCOPE(max_priority_value)]; \
+		static X_Boolean CONCAT_2(p_manager,_isInit) = X_False;										\
+		static sMyPriorityNodeParam CONCAT_2(p_manager,_queue_param)[max_node_number];				\
+		static  const sMyPriorityListManager  CONCAT_2(p_manager,_queue_entry) = {					\
+			&CONCAT_2(p_manager,_isInit),															\
+			max_node_number,																		\
+			is_from_small,																			\
+			CONCAT_2(p_manager,_priority_table)														\
+			CONCAT_2(p_manager,_queue_param),														\
+			&CONCAT_2(p_manager,_loopqueue_entry),													\
+			queue_debug,																			\
+			param_debug,																			\
+		} ;																						    \
+		static  sMyPriorityListManager const* p_manager = &CONCAT_2(p_manager,_queue_entry)
+
+X_Void 		mPriorityQueueInitialize(const sMyPriorityListManager *p_manager);
+X_Boolean   mPriorityQueuePush(const sMyPriorityListManager *p_manager,uint16_t priority,uint16_t *node_number);
+X_Boolean   mPriorityQueuePop(const sMyPriorityListManager *p_manager,uint16_t *priority,uint16_t *node_number);
+X_Void      ClearMyPriorityQueue(const sMyPriorityListManager *p_manager);
+m_app_result  RealseMyPriorityQueueNodeByPriority(const sMyPriorityListManager *p_manager,uint16_t priority);
+uint16_t    GetMyPriorityQueueUsedNodeCount(const sMyPriorityListManager *p_manager);
+X_Boolean   GetCurrentUsedPriorityScope(const sMyPriorityListManager *p_manager,uint16_t *p_high,uint16_t *p_low);
+uint16_t   GetPriorityByNodeNumber(const sMyPriorityListManager *p_manager,uint16_t node_number);
+X_Boolean   DoesMyPriorityQueueEmpty(const sMyPriorityListManager *p_manager);
+
+#endif
+
+
+
 
 /*
  * example debug code

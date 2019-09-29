@@ -6,17 +6,17 @@ static X_Void FlashTestDebugInit(X_Void);
 static X_Void onFlashDebug(eFlashDebugOperation op,uint8_t operation_ID,const sMyFlashEventHandler * p_handler);
 static uint32_t DebugParamCollect(eSimpleQueueOperation op,uint32_t param);
 
-APP_FLASH_EVENT_HANDLER_DEFINE(p_flash_handler
-								,0,0
-								,0,0
-								,0,0
-								,X_Null,X_Null,X_Null,X_Null,X_Null,X_Null
-								,onFlashDebug,DebugParamCollect
-								);
+//APP_FLASH_EVENT_HANDLER_DEFINE(p_flash_handler
+//								,0,0
+//								,0,0
+//								,0,0
+//								,X_Null,X_Null,X_Null,X_Null,X_Null,X_Null
+//								,onFlashDebug,DebugParamCollect
+//								);
 
 FILE * FlashTestOpenFile(void)
 {
-	mFlashEventInit(p_flash_handler);
+//	mFlashEventInit(p_flash_handler);
 	FlashTestDebugInit();
 	return fopen(".//TB_TinyDancer//FlashReadWrite//command.txt", "r");
 }
@@ -32,7 +32,7 @@ X_Void onTick(X_Void)
 
 //		Test_PriorityQueue(sector_number);
 	}
-	mFlashEventHandlerRun(p_flash_handler);
+//	mFlashEventHandlerRun(p_flash_handler);
 }
 
 
