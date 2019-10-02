@@ -10,9 +10,15 @@ static uint32_t DebugParamCollect(eSimpleQueueOperation op,uint32_t param);
 //								,0,0
 //								,0,0
 //								,0,0
-//								,X_Null,X_Null,X_Null,X_Null,X_Null,X_Null
+//								,,X_Null,X_Null,X_Null,X_Null,X_Null
 //								,onFlashDebug,DebugParamCollect
 //								);
+
+APP_PRIORITY_QUEUE_DEF(p_flash_handler
+						,20
+						,2000
+						,X_True
+						,X_Null,X_Null);
 
 FILE * FlashTestOpenFile(void)
 {

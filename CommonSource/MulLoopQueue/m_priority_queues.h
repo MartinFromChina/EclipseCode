@@ -7,7 +7,8 @@
 
 #include "stdbool.h"
 #include "..\KeilMDK.h"
-#include "m_list_node.h"
+#include "..\AppError.h"
+#include "loop_queues.h"
 
 #ifdef USE_LOCAL_PRIORITY_QUEUE_CONFIG
 	#include "m_priority_queues_config_local.h"
@@ -29,6 +30,8 @@ typedef enum
 }ePriorityQueueOperation;
 
 #ifdef USE_PRIORITY_QUEUE_BASED_ON_LIST_NODE
+#include "m_list_node.h"
+
 typedef struct
 {
 	X_Boolean 	is_OccupyPermit; // false : can't be replaced by new data  with the same priority
@@ -117,10 +120,11 @@ struct s_MyPriorityListManager
 {
 	X_Boolean 			*isInit;
 	uint16_t    		MaxNodeNumber;
+	uint16_t            MaxPriorityValue;
 	X_Boolean			isHighPriorityFromSmall;// priority from high to low ;  true : the smaller value ,the high priority ; false : the bigger value ,the high priority
     uint32_t            *p_priority_table;
 	sMyPriorityNodeParam *p_param;
-    sListManager *        p_loop_queue;
+    sListManager   const*p_loop_queue;
     X_Void (*onDebug)(ePriorityQueueOperation e_ppo,uint8_t operation_ID,const sMyPriorityListManager *p_lm);
     uint32_t (*onDebugParamCollect)(eSimpleQueueOperation op,uint32_t param);
 };
@@ -130,7 +134,7 @@ struct s_MyPriorityListManager
 								,max_node_number													\
 								,max_priority_value													\
 								,is_from_small														\
-								,list_debug,queue_debug,param_debug)  								\
+								,queue_debug,param_debug)  											\
 		SIMPLE_LOOPQUEUE_DEF_WITHOUT_POINTER(p_manager,max_node_number);     						\
 		static uint32_t  CONCAT_2(p_manager,_priority_table)[GET_PRIORITY_TABLE_SIZE_BY_PRIORITY_SCOPE(max_priority_value)]; \
 		static X_Boolean CONCAT_2(p_manager,_isInit) = X_False;										\
@@ -138,8 +142,9 @@ struct s_MyPriorityListManager
 		static  const sMyPriorityListManager  CONCAT_2(p_manager,_queue_entry) = {					\
 			&CONCAT_2(p_manager,_isInit),															\
 			max_node_number,																		\
+			max_priority_value,																		\
 			is_from_small,																			\
-			CONCAT_2(p_manager,_priority_table)														\
+			CONCAT_2(p_manager,_priority_table),													\
 			CONCAT_2(p_manager,_queue_param),														\
 			&CONCAT_2(p_manager,_loopqueue_entry),													\
 			queue_debug,																			\

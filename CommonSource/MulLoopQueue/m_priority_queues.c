@@ -300,11 +300,44 @@ X_Boolean   DoesMyPriorityQueueEmpty(const sMyPriorityListManager *p_manager)
 #endif
 
 #ifdef USE_PRIORITY_QUEUE_BASED_ON_PRIORITY_TABLE
+static X_Boolean PriorityTableInit(uint32_t *p_table,uint16_t max_priority)
+{
+	uint16_t i;
+	if(max_priority == 0 || p_table == X_Null) {return X_False;}
+	uint16_t size = GET_PRIORITY_TABLE_SIZE_BY_PRIORITY_SCOPE(max_priority);
+
+	for(i=0;i<size;i++)
+	{
+		p_table[i] = 0;
+	}
+	return X_True;
+}
+
 X_Void 		mPriorityQueueInitialize(const sMyPriorityListManager *p_manager)
 {
+	uint16_t i,priority_default;
+	if(p_manager == X_Null) {return;}
+	if(p_manager ->MaxNodeNumber >= MY_PRIORITY_QUEUE_MAX_NODE_NUMBER) {return;}
 
+	SimpleQueueInitialize(p_manager ->p_loop_queue);
+
+	priority_default = (p_manager ->isHighPriorityFromSmall == X_True) ? p_manager ->MaxPriorityValue : 0;
+	for(i=0;i<p_manager ->MaxNodeNumber;i++)
+	{
+		p_manager ->p_param[i].node_number = 0;
+		p_manager ->p_param[i].priority = priority_default;
+	}
+	if(PriorityTableInit(p_manager ->p_priority_table,p_manager ->MaxPriorityValue) == X_True)
+	{
+		*p_manager ->isInit = X_True;
+	#if (USE_MY_PRIORITY_QUEUE_DEBUG == 1)
+		if(p_manager ->onDebug != X_Null) {p_manager ->onDebug(PQO_init,0,p_manager);}
+	#endif
+	}
+	#if (USE_MY_PRIORITY_QUEUE_DEBUG == 1)
+		if(p_manager ->onDebug != X_Null) {p_manager ->onDebug(PQO_init,1,p_manager);}
+	#endif
 }
-X_Boolean   mPriorityQueuePush(const sMyPriorityListManager *p_manager,uint16_t priority,uint16_t *node_number)
 {
 
 }
