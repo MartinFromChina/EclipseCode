@@ -1,5 +1,18 @@
-17:31:07 **** Incremental Build of configuration Debug for project [T]LogicLab ****
+18:18:06 **** Incremental Build of configuration Debug for project [T]LogicLab ****
 Info: Internal Builder is used for build
+gcc "-ID:\\AllApplication\\GitAll\\EclipseCode\\[T]LogicLab\\ScriptsCommandModule" -O0 -g3 -Wall -c -fmessage-length=0 -o "TB_TinyDancer\\FlashReadWrite\\UserFlash.o" "..\\TB_TinyDancer\\FlashReadWrite\\UserFlash.c" 
+..\TB_TinyDancer\FlashReadWrite\UserFlash.c:149:15: warning: 'onFlashDebug' defined but not used [-Wunused-function]
+ static X_Void onFlashDebug(eFlashDebugOperation op,uint8_t operation_ID,const sMyFlashEventHandler * p_handler)
+               ^~~~~~~~~~~~
+In file included from d:\allapplication\gitall\eclipsecode\customizedmodule\flashreadwrite\flasheventhandle.h:7:0,
+                 from ..\TB_TinyDancer\FlashReadWrite\UserFlash.c:3:
+..\TB_TinyDancer\FlashReadWrite\UserFlash.c:17:24: warning: 'p_flash_handler' defined but not used [-Wunused-variable]
+ APP_PRIORITY_QUEUE_DEF(p_flash_handler
+                        ^
+d:\allapplication\gitall\eclipsecode\commonsource\mulloopqueue\m_priority_queues.h:170:41: note: in definition of macro 'APP_PRIORITY_QUEUE_DEF'
+   static  sMyPriorityListManager const* p_manager = &CONCAT_2(p_manager,_priority_queue_entry)
+                                         ^~~~~~~~~
+gcc "-ID:\\AllApplication\\GitAll\\EclipseCode\\[T]LogicLab\\ScriptsCommandModule" -O0 -g3 -Wall -c -fmessage-length=0 -o "CustomizedModule\\FlashReadWrite\\FlashEventHandle.o" "..\\..\\CustomizedModule\\FlashReadWrite\\FlashEventHandle.c" 
 gcc "-ID:\\AllApplication\\GitAll\\EclipseCode\\[T]LogicLab\\ScriptsCommandModule" -O0 -g3 -Wall -c -fmessage-length=0 -o "CommonSource\\MulLoopQueue\\m_priority_queues.o" "..\\..\\CommonSource\\MulLoopQueue\\m_priority_queues.c" 
 ..\..\CommonSource\MulLoopQueue\m_priority_queues.c: In function 'mPriorityQueuePush':
 ..\..\CommonSource\MulLoopQueue\m_priority_queues.c:505:13: warning: unused variable 'priority_default' [-Wunused-variable]
@@ -17,22 +30,6 @@ gcc "-ID:\\AllApplication\\GitAll\\EclipseCode\\[T]LogicLab\\ScriptsCommandModul
  ^
 ..\..\CommonSource\MulLoopQueue\m_priority_queues.c: In function 'RealseMyPriorityQueueNodeByPriority':
 ..\..\CommonSource\MulLoopQueue\m_priority_queues.c:519:1: warning: control reaches end of non-void function [-Wreturn-type]
- }
- ^
-..\..\CommonSource\MulLoopQueue\m_priority_queues.c: In function 'GetMyPriorityQueueUsedNodeCount':
-..\..\CommonSource\MulLoopQueue\m_priority_queues.c:523:1: warning: control reaches end of non-void function [-Wreturn-type]
- }
- ^
-..\..\CommonSource\MulLoopQueue\m_priority_queues.c: In function 'GetCurrentUsedPriorityScope':
-..\..\CommonSource\MulLoopQueue\m_priority_queues.c:527:1: warning: control reaches end of non-void function [-Wreturn-type]
- }
- ^
-..\..\CommonSource\MulLoopQueue\m_priority_queues.c: In function 'GetPriorityByNodeNumber':
-..\..\CommonSource\MulLoopQueue\m_priority_queues.c:531:1: warning: control reaches end of non-void function [-Wreturn-type]
- }
- ^
-..\..\CommonSource\MulLoopQueue\m_priority_queues.c: In function 'DoesMyPriorityQueueEmpty':
-..\..\CommonSource\MulLoopQueue\m_priority_queues.c:535:1: warning: control reaches end of non-void function [-Wreturn-type]
  }
  ^
 At top level:

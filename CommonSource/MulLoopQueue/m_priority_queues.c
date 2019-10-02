@@ -511,7 +511,7 @@ X_Boolean   mPriorityQueuePop(const sMyPriorityListManager *p_manager,uint16_t *
 }
 X_Void      ClearMyPriorityQueue(const sMyPriorityListManager *p_manager)
 {
-
+	mPriorityQueueInitialize(p_manager);
 }
 m_app_result  RealseMyPriorityQueueNodeByPriority(const sMyPriorityListManager *p_manager,uint16_t priority)
 {
@@ -519,19 +519,57 @@ m_app_result  RealseMyPriorityQueueNodeByPriority(const sMyPriorityListManager *
 }
 uint16_t    GetMyPriorityQueueUsedNodeCount(const sMyPriorityListManager *p_manager)
 {
-
+	if(p_manager == X_Null) {return 0;}
+	return (*p_manager ->p_node_space_handle->p_current_used_node_count);
 }
 X_Boolean   GetCurrentUsedPriorityScope(const sMyPriorityListManager *p_manager,uint16_t *p_high,uint16_t *p_low)
 {
+	if(p_manager == X_Null) {return X_False;}
+
+
+	return X_True;
+}
+X_Boolean   GetPriorityByNodeNumber(const sMyPriorityListManager *p_manager,uint16_t node_number,uint16_t *p_priority)
+{
+	if(p_manager == X_Null || p_priority == X_Null) {return X_False;}
+	if(node_number >= p_manager ->MaxNodeCount) {return X_False;}
+	if(p_manager ->p_node_space_handle->p_space[node_number].isFree == X_False) {return X_False;}
+
+	*p_priority = p_manager ->p_node_space_handle->p_space[node_number].priority;
+	return X_True;
 
 }
-uint16_t   GetPriorityByNodeNumber(const sMyPriorityListManager *p_manager,uint16_t node_number)
+X_Boolean   GetNodeNumberByPriority(const sMyPriorityListManager *p_manager,uint16_t priority,uint16_t *p_node_number)
 {
+	X_Boolean isOK;
+	uint16_t i,check_scope;
+	sListNodeWithPriority *p_head;
+	if(p_manager == X_Null || p_node_number == X_Null) {return X_False;}
+	if(priority > p_manager ->MaxPriorityValue) {return X_False;}
 
+	p_head = p_manager ->p_node_space_handle->p_list_head_nodes[priority % LIST_NODE_TABLE_SIZE];
+	if(p_head == X_Null) {return X_False;}
+	check_scope = (uint16_t)(p_manager ->MaxPriorityValue / LIST_NODE_TABLE_SIZE) + 1;
+	check_scope = (check_scope > p_manager ->MaxNodeCount) ? p_manager ->MaxNodeCount : check_scope;
+
+	isOK = X_False;
+	for(i=0;i<check_scope;i++)
+	{
+		if(p_head ->priority == priority)
+		{
+			*p_node_number = p_head ->node_ID_in_list_array;
+			isOK = X_True;
+			break;
+		}
+		if(p_head ->NextPtr != X_Null) {p_head = p_head ->NextPtr;}
+		else {break;}
+	}
+	return isOK;
 }
 X_Boolean   DoesMyPriorityQueueEmpty(const sMyPriorityListManager *p_manager)
 {
-
+	if(p_manager == X_Null) {return X_False;}
+	return ((*p_manager ->p_node_space_handle->p_current_used_node_count) == 0);
 }
 
 #endif
