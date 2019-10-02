@@ -19,7 +19,9 @@
 #ifdef USE_PRIORITY_QUEUE_BASED_ON_PRIORITY_TABLE
 	#define MY_PRIORITY_QUEUE_MAX_NODE_NUMBER					500
 	#define LIST_NODE_TABLE_SIZE         						10
+
 	#define BIT_COUNT_IN_UINT32									32 // necessary?
+	#define TYPE_DEF_PRIORITY_TABLE_VALUE						uint32_t
 	/*
 	 * scope : 0 ~ max_priority
 	 * table size = (scope % 32 == 0) ? scope / 32 : scope / 32 + 1

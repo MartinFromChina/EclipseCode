@@ -7,7 +7,7 @@ org.eclipse.launchbar.core.descriptorType.default\:CharStringDebugTest.exe/activ
 org.eclipse.launchbar.core.descriptorType.default\:CharStringDebugTest.exe/activeLaunchTarget=org.eclipse.launchbar.core.launchTargetType.local\:Local
 org.eclipse.launchbar.core.descriptorType.default\:Hello\ World.exe/activeLaunchMode=debug
 org.eclipse.launchbar.core.descriptorType.default\:Hello\ World.exe/activeLaunchTarget=org.eclipse.launchbar.core.launchTargetType.local\:Local
-org.eclipse.launchbar.core.descriptorType.default\:LoopQueueModuleTest.exe/activeLaunchMode=run
+org.eclipse.launchbar.core.descriptorType.default\:LoopQueueModuleTest.exe/activeLaunchMode=debug
 org.eclipse.launchbar.core.descriptorType.default\:StringDebugTest.exe/activeLaunchMode=run
 org.eclipse.launchbar.core.descriptorType.default\:[T]FileCommandSystem.exe/activeLaunchMode=run
 org.eclipse.launchbar.core.descriptorType.default\:[T]TempProjectForES.exe/activeLaunchMode=run

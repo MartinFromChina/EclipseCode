@@ -301,6 +301,39 @@ X_Boolean   DoesMyPriorityQueueEmpty(const sMyPriorityListManager *p_manager)
 
 #ifdef USE_PRIORITY_QUEUE_BASED_ON_PRIORITY_TABLE
 
+static X_Boolean PriorityTableInsert(uint32_t *p_table,X_Boolean isHighPriorityFromSmall,uint16_t max_priority_value,uint16_t priority)
+{
+	uint16_t priority_convert;
+	if(p_table == X_Null) {return X_False;}
+	if(priority > max_priority_value) {return X_False;}
+
+	if(isHighPriorityFromSmall == X_True) {priority_convert = priority;}
+	else {priority_convert = max_priority_value - priority;}
+
+	TYPE_DEF_PRIORITY_TABLE_VALUE bit,bit_number;
+	uint16_t index;
+
+	index = priority_convert/BIT_COUNT_IN_UINT32;
+	bit_number = (TYPE_DEF_PRIORITY_TABLE_VALUE)priority_convert & (BIT_COUNT_IN_UINT32 - 1u);
+	bit = 1u;
+	bit <<= (BIT_COUNT_IN_UINT32 - 1u) - bit_number;
+	p_table[index] |= bit;
+	return X_True;
+}
+static X_Boolean PriorityTableRemove(uint32_t *p_table,X_Boolean isHighPriorityFromSmall,uint16_t max_priority_value,uint16_t priority)
+{
+	uint16_t priority_convert;
+	if(p_table == X_Null) {return X_False;}
+	if(priority > max_priority_value) {return X_False;}
+
+	if(isHighPriorityFromSmall == X_True) {priority_convert = priority;}
+	else {priority_convert = max_priority_value - priority;}
+}
+static X_Boolean PriorityTableGetHighest(uint32_t *p_table,X_Boolean isHighPriorityFromSmall,uint16_t max_priority_value,uint16_t *p_priority)
+{
+
+}
+
 static X_Boolean PrioroityQueueBorrowNode(sPriorityQueueListNodeSpace const*p_space,sListNodeWithPriority **p_node)
 {
 	uint16_t i;
@@ -331,37 +364,6 @@ static X_Boolean PrioroityQueueReturnNode(sPriorityQueueListNodeSpace const*p_sp
 
 	return X_True;
 }
-
-//static X_Boolean NodePointerGetByNodeOrderNumber(sMySingleLinkListParam const*p_node_param,uint16_t first_node_number
-//												,uint16_t node_order // 0 means the first used node   ; 1 means the second  used node ...
-//												,sListNodeSpace **p_node)
-//{
-//	uint16_t i;
-//	X_Boolean isOK;
-//	sListNodeSpace *p_temp;
-//
-//	if(p_node_param == X_Null || p_node == X_Null) {return X_False;}// necessary?
-//	if( first_node_number >= p_node_param ->ValidNodeNumber || node_order >= p_node_param ->ValidNodeNumber) {return X_False;}// necessary?
-//
-//	p_temp = &(p_node_param ->p_node_space[first_node_number]);
-//
-//	isOK = X_True;
-//	for(i=0;i<node_order;i++)
-//	{
-//		if(p_temp ->NextPtr != X_Null)
-//		{
-//			p_temp = p_temp ->NextPtr;
-//		}
-//		else
-//		{
-//			isOK = X_False;
-//			break;
-//		}
-//
-//	}
-//	*p_node = p_temp;
-//	return isOK;
-//}
 
 //m_app_result mSingleListTailAdd(const sMySingleLinkList * s_sll,uint16_t infor_number)
 //{
