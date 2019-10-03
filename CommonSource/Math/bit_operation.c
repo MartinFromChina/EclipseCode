@@ -38,7 +38,7 @@ set others:		 | (111_0)        & (000_1)
 // byte operation
 #define ByteMask							((uint8_t)(1u << 0))
 
-uint8_t byte_rotate_bit(uint8_t source)
+uint8_t byte_rotate_bit(uint8_t source)// ! careful about the hardware platform ,test arm 32 ok
 {
 		source = (source & 0xaa) >> 1 | (source & 0x55) << 1;
 		source = (source & 0xcc) >> 2 | (source & 0x33) << 2;
@@ -134,5 +134,14 @@ uint16_t TwoByteFactorSet(uint16_t factor,uint8_t bit_number,X_Boolean SetOrClea
 }
 
 	return value;
+}
+
+uint32_t uint32_rotate_bit(uint32_t source)// ! careful about the hardware platform
+{
+	source = (((source & 0xaaaaaaaa) >> 1) | ((source & 0x55555555) << 1));
+	source = (((source & 0xcccccccc) >> 2) | ((source & 0x33333333) << 2));
+	source = (((source & 0xf0f0f0f0) >> 4) | ((source & 0x0f0f0f0f) << 4));
+	source = (((source & 0xff00ff00) >> 8) | ((source & 0x00ff00ff) << 8));
+    return((source >> 16) | (source << 16));
 }
 

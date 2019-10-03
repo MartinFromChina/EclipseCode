@@ -26,6 +26,6 @@ X_Void byteBufInit(uint8_t *p_buf,uint16_t length,uint8_t init_value);
 X_Void twobyteBufInit(uint16_t *p_buf,uint16_t length,uint16_t init_value);
 char *ValueToBinaryString(X_Boolean isAlign,uint8_t string_length,uint32_t value);
 uint8_t GetLeadZeroCount(uint32_t source);
-
+uint8_t GetRearZeroCount(uint32_t source);
 
 #endif

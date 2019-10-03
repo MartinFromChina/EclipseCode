@@ -295,10 +295,6 @@ X_Boolean   DoesMyPriorityQueueEmpty(const sMyPriorityListManager *p_manager)
 }
 #endif
 
-#ifdef USE_PRIORITY_QUEUE_BASED_ON_ARRAY
-
-#endif
-
 #ifdef USE_PRIORITY_QUEUE_BASED_ON_PRIORITY_TABLE
 static X_Boolean PriorityTableInit(uint32_t *p_table,uint16_t max_priority)
 {
@@ -355,18 +351,20 @@ static X_Boolean PriorityTableRemove(uint32_t *p_table,X_Boolean isHighPriorityF
 static X_Boolean PriorityTableGetHighest(uint32_t *p_table,X_Boolean isHighPriorityFromSmall,uint16_t max_priority_value,uint16_t *p_priority)
 {
 	uint16_t i,prio,priority_convert;
+	X_Boolean isAllZero;
 	if(p_table == X_Null || p_priority == X_Null) {return X_False;}
 
 	uint16_t size = GET_PRIORITY_TABLE_SIZE_BY_PRIORITY_SCOPE(max_priority_value);
 	prio = 0;
+	isAllZero = X_True;
 	for(i=0;i<size;i++)
 	{
-		if(p_table[i] != 0) {break;}
+		if(p_table[i] != 0) {isAllZero = X_False;break;}
 		else {prio += BIT_COUNT_IN_UINT32;}
 	}
 
+	if( isAllZero == X_True )  {return X_False;}
 	prio +=(uint16_t)GetLeadZeroCount(p_table[i]);
-
 	if(prio > max_priority_value) {return X_False;}
 
 	if(isHighPriorityFromSmall == X_True) {priority_convert = prio;}
@@ -375,7 +373,34 @@ static X_Boolean PriorityTableGetHighest(uint32_t *p_table,X_Boolean isHighPrior
 
 	return X_True;
 }
+static X_Boolean PriorityTableGetLowest(uint32_t *p_table,X_Boolean isHighPriorityFromSmall,uint16_t max_priority_value,uint16_t *p_priority)
+{
+	uint16_t i,prio,priority_convert;
+	uint8_t  rear_zero_count;
+	X_Boolean isAllZero;
+	if(p_table == X_Null || p_priority == X_Null) {return X_False;}
 
+	uint16_t size = GET_PRIORITY_TABLE_SIZE_BY_PRIORITY_SCOPE(max_priority_value);
+	prio = (size * BIT_COUNT_IN_UINT32) - 1;
+	isAllZero = X_True;
+	for(i=size;i>0;i--)
+	{
+		if(p_table[i-1] != 0) {isAllZero = X_False;break;}
+		else {prio -= BIT_COUNT_IN_UINT32;}
+	}
+	if( isAllZero == X_True )  {return X_False;}
+	rear_zero_count = GetRearZeroCount(p_table[i-1]);
+	if(prio >= BIT_COUNT_IN_UINT32) {prio = prio - BIT_COUNT_IN_UINT32;}
+//	printf("!!!!!prio %d ,source %2x ; rear_zero_count %d \r\n",prio,p_table[i-1],rear_zero_count);
+	prio +=(uint16_t)(BIT_COUNT_IN_UINT32 - rear_zero_count);
+	if(prio > max_priority_value) {return X_False;}
+
+	if(isHighPriorityFromSmall == X_True) {priority_convert = prio;}
+	else{priority_convert = max_priority_value - prio;}
+	*p_priority = priority_convert;
+
+	return X_True;
+}
 static X_Boolean PrioroityQueueBorrowNode(sPriorityQueueListNodeSpace const*p_space,sListNodeWithPriority **p_node)
 {
 	uint16_t i;
@@ -524,11 +549,11 @@ X_Void 		mPriorityQueueInitialize(const sMyPriorityListManager *p_manager)
 	{
 		p_manager ->p_node_space_handle->p_list_head_nodes[i] = X_Null;
 	}
-	*p_manager ->p_node_space_handle->p_current_used_node_count = 0;
+	(*p_manager ->p_node_space_handle->p_current_used_node_count) = 0;
 
 	if(PriorityTableInit(p_manager ->p_priority_table,p_manager ->MaxPriorityValue) == X_True)
 	{
-		*p_manager ->isInit = X_True;
+		(*p_manager ->isInit) = X_True;
 	#if (USE_MY_PRIORITY_QUEUE_DEBUG == 1)
 		if(p_manager ->onDebug != X_Null) {p_manager ->onDebug(PQO_init,0,p_manager);}
 	#endif
@@ -567,7 +592,7 @@ X_Void      ClearMyPriorityQueue(const sMyPriorityListManager *p_manager)
 {
 	mPriorityQueueInitialize(p_manager);
 }
-X_Boolean  RealseMyPriorityQueueNodeByPriority(const sMyPriorityListManager *p_manager,uint16_t priority,uint16_t *p_node_released)
+X_Boolean   RealseMyPriorityQueueNodeByPriority(const sMyPriorityListManager *p_manager,uint16_t priority,uint16_t *p_node_released)
 {
 	m_app_result result;
 
@@ -590,8 +615,13 @@ uint16_t    GetMyPriorityQueueUsedNodeCount(const sMyPriorityListManager *p_mana
 X_Boolean   GetCurrentUsedPriorityScope(const sMyPriorityListManager *p_manager,uint16_t *p_high,uint16_t *p_low)
 {
 	if(p_manager == X_Null) {return X_False;}
+	if(*p_manager ->isInit == X_False) {return X_False;}
 
+	if(PriorityTableGetHighest(p_manager ->p_priority_table,p_manager ->isHighPriorityFromSmall
+					,p_manager ->MaxPriorityValue,p_high) == X_False) {return X_False;}
 
+	if(PriorityTableGetLowest(p_manager ->p_priority_table,p_manager ->isHighPriorityFromSmall
+					,p_manager ->MaxPriorityValue,p_low) == X_False) {return X_False;}
 	return X_True;
 }
 X_Boolean   GetPriorityByNodeNumber(const sMyPriorityListManager *p_manager,uint16_t node_number,uint16_t *p_priority)

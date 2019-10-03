@@ -111,6 +111,12 @@ uint8_t GetLeadZeroCount(uint32_t source)
 	}
 	return (nbr_lead_zeros);
 }
+
+uint8_t GetRearZeroCount(uint32_t source)
+{
+	source = uint32_rotate_bit(source);
+	return GetLeadZeroCount(source);
+}
 #endif
 
 
