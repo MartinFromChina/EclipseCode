@@ -1,42 +1,8 @@
-18:18:06 **** Incremental Build of configuration Debug for project [T]LogicLab ****
+12:56:16 **** Incremental Build of configuration Debug for project [T]LogicLab ****
 Info: Internal Builder is used for build
 gcc "-ID:\\AllApplication\\GitAll\\EclipseCode\\[T]LogicLab\\ScriptsCommandModule" -O0 -g3 -Wall -c -fmessage-length=0 -o "TB_TinyDancer\\FlashReadWrite\\UserFlash.o" "..\\TB_TinyDancer\\FlashReadWrite\\UserFlash.c" 
-..\TB_TinyDancer\FlashReadWrite\UserFlash.c:149:15: warning: 'onFlashDebug' defined but not used [-Wunused-function]
+..\TB_TinyDancer\FlashReadWrite\UserFlash.c:167:15: warning: 'onFlashDebug' defined but not used [-Wunused-function]
  static X_Void onFlashDebug(eFlashDebugOperation op,uint8_t operation_ID,const sMyFlashEventHandler * p_handler)
                ^~~~~~~~~~~~
-In file included from d:\allapplication\gitall\eclipsecode\customizedmodule\flashreadwrite\flasheventhandle.h:7:0,
-                 from ..\TB_TinyDancer\FlashReadWrite\UserFlash.c:3:
-..\TB_TinyDancer\FlashReadWrite\UserFlash.c:17:24: warning: 'p_flash_handler' defined but not used [-Wunused-variable]
- APP_PRIORITY_QUEUE_DEF(p_flash_handler
-                        ^
-d:\allapplication\gitall\eclipsecode\commonsource\mulloopqueue\m_priority_queues.h:170:41: note: in definition of macro 'APP_PRIORITY_QUEUE_DEF'
-   static  sMyPriorityListManager const* p_manager = &CONCAT_2(p_manager,_priority_queue_entry)
-                                         ^~~~~~~~~
-gcc "-ID:\\AllApplication\\GitAll\\EclipseCode\\[T]LogicLab\\ScriptsCommandModule" -O0 -g3 -Wall -c -fmessage-length=0 -o "CustomizedModule\\FlashReadWrite\\FlashEventHandle.o" "..\\..\\CustomizedModule\\FlashReadWrite\\FlashEventHandle.c" 
-gcc "-ID:\\AllApplication\\GitAll\\EclipseCode\\[T]LogicLab\\ScriptsCommandModule" -O0 -g3 -Wall -c -fmessage-length=0 -o "CommonSource\\MulLoopQueue\\m_priority_queues.o" "..\\..\\CommonSource\\MulLoopQueue\\m_priority_queues.c" 
-..\..\CommonSource\MulLoopQueue\m_priority_queues.c: In function 'mPriorityQueuePush':
-..\..\CommonSource\MulLoopQueue\m_priority_queues.c:505:13: warning: unused variable 'priority_default' [-Wunused-variable]
-  uint16_t i,priority_default;
-             ^~~~~~~~~~~~~~~~
-..\..\CommonSource\MulLoopQueue\m_priority_queues.c:505:11: warning: unused variable 'i' [-Wunused-variable]
-  uint16_t i,priority_default;
-           ^
-..\..\CommonSource\MulLoopQueue\m_priority_queues.c:507:1: warning: control reaches end of non-void function [-Wreturn-type]
- }
- ^
-..\..\CommonSource\MulLoopQueue\m_priority_queues.c: In function 'mPriorityQueuePop':
-..\..\CommonSource\MulLoopQueue\m_priority_queues.c:511:1: warning: control reaches end of non-void function [-Wreturn-type]
- }
- ^
-..\..\CommonSource\MulLoopQueue\m_priority_queues.c: In function 'RealseMyPriorityQueueNodeByPriority':
-..\..\CommonSource\MulLoopQueue\m_priority_queues.c:519:1: warning: control reaches end of non-void function [-Wreturn-type]
- }
- ^
-At top level:
-..\..\CommonSource\MulLoopQueue\m_priority_queues.c:324:18: warning: 'PrioroityQueueReturnNode' defined but not used [-Wunused-function]
- static X_Boolean PrioroityQueueReturnNode(sPriorityQueueListNodeSpace const*p_space,uint16_t node_ID)
-                  ^~~~~~~~~~~~~~~~~~~~~~~~
-..\..\CommonSource\MulLoopQueue\m_priority_queues.c:304:18: warning: 'PrioroityQueueBorrowNode' defined but not used [-Wunused-function]
- static X_Boolean PrioroityQueueBorrowNode(sPriorityQueueListNodeSpace const*p_space,sListNodeWithPriority **p_node)
-                  ^~~~~~~~~~~~~~~~~~~~~~~~
 gcc -o [T]LogicLab.exe "CommonSource\\AppCommon.o" "CommonSource\\AppError.o" "CommonSource\\CharStringDebug\\CharStringDebugModule.o" "CommonSource\\FileOperation\\command.o" "CommonSource\\FileOperation\\read_scripts.o" "CommonSource\\IrqAndTimer\\TimeManagerExtern.o" "CommonSource\\IrqAndTimer\\app_timer.o" "CommonSource\\IrqAndTimer\\user_irq.o" "CommonSource\\LogFile\\user_log.o" "CommonSource\\Math\\bit_operation.o" "CommonSource\\Math\\lcm_gcd.o" "CommonSource\\Math\\random_number.o" "CommonSource\\MulLoopQueue\\loop_queues.o" "CommonSource\\MulLoopQueue\\m_list_node.o" "CommonSource\\MulLoopQueue\\m_priority_queues.o" "CommonSource\\StateMachine\\StateMachine.o" "CustomizedModule\\ButtonModule\\ButtonModule.o" "CustomizedModule\\FlashReadWrite\\FlashEventHandle.o" "ScriptsCommandModule\\HexCommand.o" "TB_TinyDancer\\FlashReadWrite\\UserFlash.o" "TB_TinyDancer\\FlashReadWrite\\UserFlashTB.o" "TB_TinyDancer\\UsartCommunication\\UsartCommunication.o" UserDebug.o main.o user_timer.o 
+Info: Nothing to build for [T]LogicLab

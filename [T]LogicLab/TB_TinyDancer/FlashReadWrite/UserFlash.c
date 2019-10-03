@@ -14,21 +14,26 @@ static uint32_t DebugParamCollect(eSimpleQueueOperation op,uint32_t param);
 //								,onFlashDebug,DebugParamCollect
 //								);
 
-APP_PRIORITY_QUEUE_DEF(p_flash_handler
-						,20
-						,2000
-						,X_True
-						,X_Null,X_Null);
+//APP_PRIORITY_QUEUE_DEF(p_flash_handler
+//						,20
+//						,2000
+//						,X_True
+//						,X_Null,X_Null);
+
+APP_PRIORITY_QUEUE_DEF(p_priority_queue,5,20,X_True,X_Null,X_Null);
 
 FILE * FlashTestOpenFile(void)
 {
 //	mFlashEventInit(p_flash_handler);
 	FlashTestDebugInit();
+	mPriorityQueueInitialize(p_priority_queue);
 	return fopen(".//TB_TinyDancer//FlashReadWrite//command.txt", "r");
 }
 static uint16_t debug_counter = 0;
 X_Void onTick(X_Void)
 {
+	X_Boolean isOK;
+	uint16_t node_num,priority;
 	uint8_t sector_number;
 	if(GetSectorNumber(&sector_number) == X_True)
 	{
@@ -37,8 +42,21 @@ X_Void onTick(X_Void)
 		debug_counter ++;
 
 //		Test_PriorityQueue(sector_number);
+		isOK = mPriorityQueuePush(p_priority_queue,sector_number,&node_num);
+		if(isOK == X_False)
+		{
+			SEGGER_RTT_Debug(FLASH_SECTOR_DEBUG,(60," push failed\r\n"));
+		}
 	}
 //	mFlashEventHandlerRun(p_flash_handler);
+	if(DoesFlashReady() == X_True)
+	{
+		isOK = mPriorityQueuePop(p_priority_queue,&priority,&node_num);
+		SEGGER_RTT_Debug(FLASH_SECTOR_DEBUG,(60," pop %s , priority %d \r\n",(isOK == X_True)?"OK":"Failed",priority));
+		isOK = mPriorityQueuePop(p_priority_queue,&priority,&node_num);
+		SEGGER_RTT_Debug(FLASH_SECTOR_DEBUG,(60," pop %s , priority %d \r\n",(isOK == X_True)?"OK":"Failed",priority));
+	}
+
 }
 
 

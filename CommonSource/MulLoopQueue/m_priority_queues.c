@@ -300,7 +300,18 @@ X_Boolean   DoesMyPriorityQueueEmpty(const sMyPriorityListManager *p_manager)
 #endif
 
 #ifdef USE_PRIORITY_QUEUE_BASED_ON_PRIORITY_TABLE
+static X_Boolean PriorityTableInit(uint32_t *p_table,uint16_t max_priority)
+{
+	uint16_t i;
+	if(max_priority == 0 || p_table == X_Null) {return X_False;}
+	uint16_t size = GET_PRIORITY_TABLE_SIZE_BY_PRIORITY_SCOPE(max_priority);
 
+	for(i=0;i<size;i++)
+	{
+		p_table[i] = 0;
+	}
+	return X_True;
+}
 static X_Boolean PriorityTableInsert(uint32_t *p_table,X_Boolean isHighPriorityFromSmall,uint16_t max_priority_value,uint16_t priority)
 {
 	uint16_t priority_convert;
@@ -328,10 +339,41 @@ static X_Boolean PriorityTableRemove(uint32_t *p_table,X_Boolean isHighPriorityF
 
 	if(isHighPriorityFromSmall == X_True) {priority_convert = priority;}
 	else {priority_convert = max_priority_value - priority;}
+
+	TYPE_DEF_PRIORITY_TABLE_VALUE bit,bit_number;
+	uint16_t index;
+
+	index = priority_convert/BIT_COUNT_IN_UINT32;
+	bit_number = (TYPE_DEF_PRIORITY_TABLE_VALUE)priority_convert & (BIT_COUNT_IN_UINT32 - 1u);
+	bit = 1u;
+	bit <<= (BIT_COUNT_IN_UINT32 - 1u) - bit_number;
+	p_table[index] &= ~bit;
+	return X_True;
+
+
 }
 static X_Boolean PriorityTableGetHighest(uint32_t *p_table,X_Boolean isHighPriorityFromSmall,uint16_t max_priority_value,uint16_t *p_priority)
 {
+	uint16_t i,prio,priority_convert;
+	if(p_table == X_Null || p_priority == X_Null) {return X_False;}
 
+	uint16_t size = GET_PRIORITY_TABLE_SIZE_BY_PRIORITY_SCOPE(max_priority_value);
+	prio = 0;
+	for(i=0;i<size;i++)
+	{
+		if(p_table[i] != 0) {break;}
+		else {prio += BIT_COUNT_IN_UINT32;}
+	}
+
+	prio +=(uint16_t)GetLeadZeroCount(p_table[i]);
+
+	if(prio > max_priority_value) {return X_False;}
+
+	if(isHighPriorityFromSmall == X_True) {priority_convert = prio;}
+	else{priority_convert = max_priority_value - prio;}
+	*p_priority = priority_convert;
+
+	return X_True;
 }
 
 static X_Boolean PrioroityQueueBorrowNode(sPriorityQueueListNodeSpace const*p_space,sListNodeWithPriority **p_node)
@@ -457,18 +499,6 @@ static X_Boolean PrioroityQueueReturnNode(sPriorityQueueListNodeSpace const*p_sp
 //
 //}
 
-static X_Boolean PriorityTableInit(uint32_t *p_table,uint16_t max_priority)
-{
-	uint16_t i;
-	if(max_priority == 0 || p_table == X_Null) {return X_False;}
-	uint16_t size = GET_PRIORITY_TABLE_SIZE_BY_PRIORITY_SCOPE(max_priority);
-
-	for(i=0;i<size;i++)
-	{
-		p_table[i] = 0;
-	}
-	return X_True;
-}
 
 X_Void 		mPriorityQueueInitialize(const sMyPriorityListManager *p_manager)
 {
@@ -504,12 +534,20 @@ X_Void 		mPriorityQueueInitialize(const sMyPriorityListManager *p_manager)
 
 X_Boolean   mPriorityQueuePush(const sMyPriorityListManager *p_manager,uint16_t priority,uint16_t *node_number)
 {
-	uint16_t i,priority_default;
 	if(p_manager == X_Null) {return X_False;}
+
+	return PriorityTableInsert(p_manager ->p_priority_table,p_manager ->isHighPriorityFromSmall,p_manager ->MaxPriorityValue,priority);
 }
 X_Boolean   mPriorityQueuePop(const sMyPriorityListManager *p_manager,uint16_t *priority,uint16_t *node_number)
 {
+	if(p_manager == X_Null) {return X_False;}
 
+	if( PriorityTableGetHighest(p_manager ->p_priority_table,p_manager ->isHighPriorityFromSmall
+				,p_manager ->MaxPriorityValue,priority) == X_True)
+	{
+		return PriorityTableRemove(p_manager ->p_priority_table,p_manager ->isHighPriorityFromSmall,p_manager ->MaxPriorityValue,*priority);
+	}
+	return X_False;
 }
 X_Void      ClearMyPriorityQueue(const sMyPriorityListManager *p_manager)
 {
@@ -555,7 +593,7 @@ X_Boolean   GetNodeNumberByPriority(const sMyPriorityListManager *p_manager,uint
 	check_scope = (check_scope > p_manager ->MaxNodeCount) ? p_manager ->MaxNodeCount : check_scope;
 
 	isOK = X_False;
-	for(i=0;i<check_scope;i++)
+	for(i=0;i<check_scope;i++)// use while loop is more simple ? more risk ?
 	{
 		if(p_head ->priority == priority)
 		{

@@ -33,7 +33,7 @@
 #endif
 
 
-#define MAX_PRIORITY_QUEUE_COUNT     				 12
+#define MAX_PRIORITY_QUEUE_COUNT     				 20
 
 
 

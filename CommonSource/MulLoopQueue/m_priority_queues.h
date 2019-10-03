@@ -8,6 +8,7 @@
 #include "stdbool.h"
 #include "..\KeilMDK.h"
 #include "..\AppError.h"
+#include "..\AppCommon.h"
 #include "loop_queues.h"
 
 #ifdef USE_LOCAL_PRIORITY_QUEUE_CONFIG

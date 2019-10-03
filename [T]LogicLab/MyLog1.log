@@ -58,3 +58,79 @@
 2019-09-27 21:33:03.377 **1**flash ready ? 0 ; current sector number 7
 2019-09-27 21:33:04.591 **2**flash ready ? 0 ; current sector number 10
 2019-09-27 21:33:05.807 **3**flash ready ? 0 ; current sector number 1
+2019-10-03 12:02:57.596 hello I am string debug 
+2019-10-03 12:02:59.055 **0**flash ready ? 0 ; current sector number 4
+2019-10-03 12:03:00.372 **1**flash ready ? 0 ; current sector number 11
+2019-10-03 12:03:01.695 **2**flash ready ? 0 ; current sector number 2
+2019-10-03 12:03:03.017 **3**flash ready ? 0 ; current sector number 5
+2019-10-03 12:03:04.349 **4**flash ready ? 0 ; current sector number 0
+2019-10-03 12:03:05.653 **5**flash ready ? 0 ; current sector number 3
+2019-10-03 12:03:06.959 **6**flash ready ? 0 ; current sector number 6
+2019-10-03 12:03:08.280 **7**flash ready ? 0 ; current sector number 1
+2019-10-03 12:03:09.602 **8**flash ready ? 0 ; current sector number 4
+2019-10-03 12:03:10.923 **9**flash ready ? 0 ; current sector number 7
+2019-10-03 12:03:12.244 **10**flash ready ? 1 ; current sector number 2
+2019-10-03 12:03:13.566 **11**flash ready ? 1 ; current sector number 5
+2019-10-03 12:03:14.887 **12**flash ready ? 1 ; current sector number 8
+2019-10-03 12:03:16.196 **13**flash ready ? 1 ; current sector number 3
+2019-10-03 12:03:17.508 **14**flash ready ? 1 ; current sector number 6
+2019-10-03 12:03:18.819 **15**flash ready ? 1 ; current sector number 9
+2019-10-03 12:56:23.130 hello I am string debug 
+2019-10-03 12:56:24.560 **0**flash ready ? 0 ; current sector number 2
+2019-10-03 12:56:25.881 **1**flash ready ? 0 ; current sector number 5
+2019-10-03 12:56:27.203 **2**flash ready ? 0 ; current sector number 11
+2019-10-03 12:56:28.525 **3**flash ready ? 0 ; current sector number 15
+2019-10-03 12:56:29.828 **4**flash ready ? 0 ; current sector number 18
+2019-10-03 12:56:31.150 **5**flash ready ? 0 ; current sector number 4
+2019-10-03 12:56:32.471 **6**flash ready ? 0 ; current sector number 8
+2019-10-03 12:56:33.772 **7**flash ready ? 0 ; current sector number 11
+2019-10-03 12:56:35.103 **8**flash ready ? 0 ; current sector number 14
+2019-10-03 12:56:36.425 **9**flash ready ? 0 ; current sector number 1
+2019-10-03 12:56:37.746 **10**flash ready ? 1 ; current sector number 4
+2019-10-03 12:56:37.858  pop OK , priority 1 
+2019-10-03 12:56:37.968  pop OK , priority 2 
+2019-10-03 12:56:38.407  pop OK , priority 4 
+2019-10-03 12:56:38.517  pop OK , priority 5 
+2019-10-03 12:56:39.059 **11**flash ready ? 1 ; current sector number 7
+2019-10-03 12:56:39.171  pop OK , priority 7 
+2019-10-03 12:56:39.281  pop OK , priority 8 
+2019-10-03 12:56:39.721  pop OK , priority 11 
+2019-10-03 12:56:39.831  pop OK , priority 14 
+2019-10-03 12:56:40.381 **12**flash ready ? 1 ; current sector number 14
+2019-10-03 12:56:40.493  pop OK , priority 14 
+2019-10-03 12:56:40.603  pop OK , priority 15 
+2019-10-03 12:56:41.042  pop OK , priority 18 
+2019-10-03 12:56:41.152  pop Failed , priority 18 
+2019-10-03 12:56:41.691 **13**flash ready ? 1 ; current sector number 17
+2019-10-03 12:56:41.804  pop OK , priority 17 
+2019-10-03 12:56:41.914  pop Failed , priority 17 
+2019-10-03 12:56:42.354  pop Failed , priority 65535 
+2019-10-03 12:56:42.463  pop Failed , priority 65535 
+2019-10-03 12:56:43.013 **14**flash ready ? 1 ; current sector number 0
+2019-10-03 12:56:43.125  pop OK , priority 0 
+2019-10-03 12:56:43.235  pop Failed , priority 0 
+2019-10-03 12:56:43.675  pop Failed , priority 65535 
+2019-10-03 12:56:43.785  pop Failed , priority 65535 
+2019-10-03 12:56:44.334 **15**flash ready ? 1 ; current sector number 7
+2019-10-03 12:56:44.447  pop OK , priority 7 
+2019-10-03 12:56:44.557  pop Failed , priority 7 
+2019-10-03 12:56:44.996  pop Failed , priority 65535 
+2019-10-03 12:56:45.106  pop Failed , priority 65535 
+2019-10-03 12:56:45.656 **16**flash ready ? 1 ; current sector number 10
+2019-10-03 12:56:45.770  pop OK , priority 10 
+2019-10-03 12:56:45.880  pop Failed , priority 10 
+2019-10-03 12:56:46.319  pop Failed , priority 65535 
+2019-10-03 12:56:46.429  pop Failed , priority 65535 
+2019-10-03 12:56:46.979 **17**flash ready ? 1 ; current sector number 13
+2019-10-03 12:56:47.092  pop OK , priority 13 
+2019-10-03 12:56:47.202  pop Failed , priority 13 
+2019-10-03 12:56:47.642  pop Failed , priority 65535 
+2019-10-03 12:56:47.752  pop Failed , priority 65535 
+2019-10-03 12:56:48.301 **18**flash ready ? 1 ; current sector number 0
+2019-10-03 12:56:48.413  pop OK , priority 0 
+2019-10-03 12:56:48.523  pop Failed , priority 0 
+2019-10-03 12:56:48.955  pop Failed , priority 65535 
+2019-10-03 12:56:49.065  pop Failed , priority 65535 
+2019-10-03 12:56:49.614 **19**flash ready ? 1 ; current sector number 3
+2019-10-03 12:56:49.727  pop OK , priority 3 
+2019-10-03 12:56:49.837  pop Failed , priority 3 
