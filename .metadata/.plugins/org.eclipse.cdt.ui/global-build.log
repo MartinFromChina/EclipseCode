@@ -1,11 +1,11 @@
-00:31:37 **** Incremental Build of configuration Debug for project [T]LogicLab ****
+01:06:56 **** Incremental Build of configuration Debug for project [T]LogicLab ****
 Info: Internal Builder is used for build
 gcc "-ID:\\AllApplication\\GitAll\\EclipseCode\\[T]LogicLab\\ScriptsCommandModule" -O0 -g3 -Wall -c -fmessage-length=0 -o "CommonSource\\MulLoopQueue\\m_priority_queues.o" "..\\..\\CommonSource\\MulLoopQueue\\m_priority_queues.c" 
-gcc "-ID:\\AllApplication\\GitAll\\EclipseCode\\[T]LogicLab\\ScriptsCommandModule" -O0 -g3 -Wall -c -fmessage-length=0 -o "TB_TinyDancer\\FlashReadWrite\\UserFlashTB.o" "..\\TB_TinyDancer\\FlashReadWrite\\UserFlashTB.c" 
-gcc "-ID:\\AllApplication\\GitAll\\EclipseCode\\[T]LogicLab\\ScriptsCommandModule" -O0 -g3 -Wall -c -fmessage-length=0 -o "CustomizedModule\\FlashReadWrite\\FlashEventHandle.o" "..\\..\\CustomizedModule\\FlashReadWrite\\FlashEventHandle.c" 
-gcc "-ID:\\AllApplication\\GitAll\\EclipseCode\\[T]LogicLab\\ScriptsCommandModule" -O0 -g3 -Wall -c -fmessage-length=0 -o "TB_TinyDancer\\FlashReadWrite\\UserFlash.o" "..\\TB_TinyDancer\\FlashReadWrite\\UserFlash.c" 
-..\TB_TinyDancer\FlashReadWrite\UserFlash.c:182:15: warning: 'onFlashDebug' defined but not used [-Wunused-function]
- static X_Void onFlashDebug(eFlashDebugOperation op,uint8_t operation_ID,const sMyFlashEventHandler * p_handler)
-               ^~~~~~~~~~~~
+..\..\CommonSource\MulLoopQueue\m_priority_queues.c: In function 'PriorityTableGetLowest':
+..\..\CommonSource\MulLoopQueue\m_priority_queues.c:393:1: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
+ printf("!!!!!prio %d ,source %2x ; rear_zero_count %d \r\n",prio,p_table[i-1],rear_zero_count);
+ ^~~~~~
+..\..\CommonSource\MulLoopQueue\m_priority_queues.c:393:1: warning: incompatible implicit declaration of built-in function 'printf'
+..\..\CommonSource\MulLoopQueue\m_priority_queues.c:393:1: note: include '<stdio.h>' or provide a declaration of 'printf'
 gcc -o [T]LogicLab.exe "CommonSource\\AppCommon.o" "CommonSource\\AppError.o" "CommonSource\\CharStringDebug\\CharStringDebugModule.o" "CommonSource\\FileOperation\\command.o" "CommonSource\\FileOperation\\read_scripts.o" "CommonSource\\IrqAndTimer\\TimeManagerExtern.o" "CommonSource\\IrqAndTimer\\app_timer.o" "CommonSource\\IrqAndTimer\\user_irq.o" "CommonSource\\LogFile\\user_log.o" "CommonSource\\Math\\bit_operation.o" "CommonSource\\Math\\lcm_gcd.o" "CommonSource\\Math\\random_number.o" "CommonSource\\MulLoopQueue\\loop_queues.o" "CommonSource\\MulLoopQueue\\m_list_node.o" "CommonSource\\MulLoopQueue\\m_priority_queues.o" "CommonSource\\StateMachine\\StateMachine.o" "CustomizedModule\\ButtonModule\\ButtonModule.o" "CustomizedModule\\FlashReadWrite\\FlashEventHandle.o" "ScriptsCommandModule\\HexCommand.o" "TB_TinyDancer\\FlashReadWrite\\UserFlash.o" "TB_TinyDancer\\FlashReadWrite\\UserFlashTB.o" "TB_TinyDancer\\UsartCommunication\\UsartCommunication.o" UserDebug.o main.o user_timer.o 
 Info: Nothing to build for [T]LogicLab

@@ -381,7 +381,7 @@ static X_Boolean PriorityTableGetLowest(uint32_t *p_table,X_Boolean isHighPriori
 	if(p_table == X_Null || p_priority == X_Null) {return X_False;}
 
 	uint16_t size = GET_PRIORITY_TABLE_SIZE_BY_PRIORITY_SCOPE(max_priority_value);
-	prio = (size * BIT_COUNT_IN_UINT32) - 1;
+	prio = (size-1) * BIT_COUNT_IN_UINT32;
 	isAllZero = X_True;
 	for(i=size;i>0;i--)
 	{
@@ -390,15 +390,14 @@ static X_Boolean PriorityTableGetLowest(uint32_t *p_table,X_Boolean isHighPriori
 	}
 	if( isAllZero == X_True )  {return X_False;}
 	rear_zero_count = GetRearZeroCount(p_table[i-1]);
-	if(prio >= BIT_COUNT_IN_UINT32) {prio = prio - BIT_COUNT_IN_UINT32;}
-//	//////////printf("!!!!!prio %d ,source %2x ; rear_zero_count %d \r\n",prio,p_table[i-1],rear_zero_count);
+printf("!!!!!prio %d ,source %2x ; rear_zero_count %d \r\n",prio,p_table[i-1],rear_zero_count);
 	prio +=(uint16_t)(BIT_COUNT_IN_UINT32 - rear_zero_count);
+	if(prio >= 1) {prio = prio - 1;}
 	if(prio > max_priority_value) {return X_False;}
 
 	if(isHighPriorityFromSmall == X_True) {priority_convert = prio;}
 	else{priority_convert = max_priority_value - prio;}
 	*p_priority = priority_convert;
-
 	return X_True;
 }
 static X_Boolean PrioroityQueueBorrowNode(sPriorityQueueListNodeSpace const*p_space,sListNodeWithPriority **p_node)
