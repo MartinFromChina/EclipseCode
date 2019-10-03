@@ -1,6 +1,15 @@
-14:23:02 **** Incremental Build of configuration Debug for project [T]LogicLab ****
+14:38:08 **** Incremental Build of configuration Debug for project [T]LogicLab ****
 Info: Internal Builder is used for build
 gcc "-ID:\\AllApplication\\GitAll\\EclipseCode\\[T]LogicLab\\ScriptsCommandModule" -O0 -g3 -Wall -c -fmessage-length=0 -o "CommonSource\\MulLoopQueue\\m_priority_queues.o" "..\\..\\CommonSource\\MulLoopQueue\\m_priority_queues.c" 
+..\..\CommonSource\MulLoopQueue\m_priority_queues.c: In function 'NodeTailAdd':
+..\..\CommonSource\MulLoopQueue\m_priority_queues.c:414:25: warning: variable 'p_node_head' set but not used [-Wunused-but-set-variable]
+  sListNodeWithPriority *p_node_head;
+                         ^~~~~~~~~~~
+..\..\CommonSource\MulLoopQueue\m_priority_queues.c: In function 'NodePullAway':
+..\..\CommonSource\MulLoopQueue\m_priority_queues.c:459:25: warning: variable 'p_node_head' set but not used [-Wunused-but-set-variable]
+  sListNodeWithPriority *p_node_head;
+                         ^~~~~~~~~~~
+At top level:
 ..\..\CommonSource\MulLoopQueue\m_priority_queues.c:399:18: warning: 'PrioroityQueueReturnNode' defined but not used [-Wunused-function]
  static X_Boolean PrioroityQueueReturnNode(sPriorityQueueListNodeSpace const*p_space,uint16_t node_ID)
                   ^~~~~~~~~~~~~~~~~~~~~~~~
