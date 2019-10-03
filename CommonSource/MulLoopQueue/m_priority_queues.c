@@ -390,7 +390,7 @@ static X_Boolean PriorityTableGetLowest(uint32_t *p_table,X_Boolean isHighPriori
 	}
 	if( isAllZero == X_True )  {return X_False;}
 	rear_zero_count = GetRearZeroCount(p_table[i-1]);
-printf("!!!!!prio %d ,source %2x ; rear_zero_count %d \r\n",prio,p_table[i-1],rear_zero_count);
+//printf("!!!!!prio %d ,source %2x ; rear_zero_count %d \r\n",prio,p_table[i-1],rear_zero_count);
 	prio +=(uint16_t)(BIT_COUNT_IN_UINT32 - rear_zero_count);
 	if(prio >= 1) {prio = prio - 1;}
 	if(prio > max_priority_value) {return X_False;}
@@ -429,7 +429,6 @@ static X_Boolean PrioroityQueueReturnNode(sPriorityQueueListNodeSpace const*p_sp
 
 	return X_True;
 }
-
 static m_app_result NodeTailAdd(sPriorityQueueListNodeSpace const*p_space,uint16_t priority,uint16_t *p_node_ID)
 {
 	uint16_t i;
@@ -464,6 +463,7 @@ static m_app_result NodeTailAdd(sPriorityQueueListNodeSpace const*p_space,uint16
 				{
 					isOK 		  = X_True;
 					isInsertAgain = X_True;
+//			printf("!!!!! 1,same priority insert again %d \r\n",priority);
 					PrioroityQueueReturnNode(p_space,p_next_node ->node_ID_in_list_array);
 					*p_node_ID = p_current_node ->node_ID_in_list_array;
 					break;
@@ -473,6 +473,14 @@ static m_app_result NodeTailAdd(sPriorityQueueListNodeSpace const*p_space,uint16
 			else
 			{
 				isOK = X_True;
+				if(p_current_node ->priority == priority)  // same priority insert again , no need new node ,reconfig the old one
+				{
+					isInsertAgain = X_True;
+//			printf("!!!!! 2,same priority insert again %d \r\n",priority);
+					PrioroityQueueReturnNode(p_space,p_next_node ->node_ID_in_list_array);
+					*p_node_ID = p_current_node ->node_ID_in_list_array;
+					break;
+				}
 				p_current_node ->NextPtr = p_next_node;
 				break;
 			}
@@ -487,7 +495,6 @@ static m_app_result NodeTailAdd(sPriorityQueueListNodeSpace const*p_space,uint16
 	return APP_SUCCESSED;
 
 }
-
 static m_app_result NodePullAway(sPriorityQueueListNodeSpace const*p_space,uint16_t priority,uint16_t *p_node_ID)
 {
 	uint16_t i;
@@ -527,14 +534,24 @@ static m_app_result NodePullAway(sPriorityQueueListNodeSpace const*p_space,uint1
 			p_node_going_to_drop = p_current_node;
 			p_right_node         = p_node_going_to_drop ->NextPtr; // maybe null !!!
 			*p_node_ID = p_node_going_to_drop ->node_ID_in_list_array;
+			break;
 		}
-
 		if(p_current_node ->NextPtr != X_Null)
 		{
 			p_left_node = p_current_node;
 			p_current_node = p_current_node ->NextPtr;
 		}
-		else{break;}
+		else
+		{
+			if(p_current_node ->priority == priority)
+			{
+				isOK = X_True;
+				p_node_going_to_drop = p_current_node;
+				p_right_node         = p_node_going_to_drop ->NextPtr; // maybe null !!!
+				*p_node_ID = p_node_going_to_drop ->node_ID_in_list_array;
+			}
+			break;
+		}
 	}
 
 	if(isOK == X_False) {return APP_UNEXPECT_STATE;}
@@ -547,8 +564,6 @@ static m_app_result NodePullAway(sPriorityQueueListNodeSpace const*p_space,uint1
 	(*p_space ->p_current_used_node_count) --;
 	return APP_SUCCESSED;
 }
-
-
 X_Void 		mPriorityQueueInitialize(const sMyPriorityListManager *p_manager)
 {
 	uint16_t i,priority_default;
@@ -580,7 +595,6 @@ X_Void 		mPriorityQueueInitialize(const sMyPriorityListManager *p_manager)
 		if(p_manager ->onDebug != X_Null) {p_manager ->onDebug(PQO_init,1,p_manager);}
 	#endif
 }
-
 X_Boolean   mPriorityQueuePush(const sMyPriorityListManager *p_manager,uint16_t priority,uint16_t *p_node_number)
 {
 	m_app_result result;
@@ -622,6 +636,7 @@ X_Boolean   RealseMyPriorityQueueNodeByPriority(const sMyPriorityListManager *p_
 					,p_manager ->MaxPriorityValue,priority) == X_False) {return X_False;}
 
 	result = NodePullAway(p_manager ->p_node_space_handle,priority,p_node_released);
+//	printf("!!!!!node pull away result: %s \r\n",AppErrorGet(result,X_Null));
 	return (result == APP_SUCCESSED);
 }
 uint16_t    GetMyPriorityQueueUsedNodeCount(const sMyPriorityListManager *p_manager)
