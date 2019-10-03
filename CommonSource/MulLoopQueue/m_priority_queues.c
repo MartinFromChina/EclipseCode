@@ -391,7 +391,7 @@ static X_Boolean PriorityTableGetLowest(uint32_t *p_table,X_Boolean isHighPriori
 	if( isAllZero == X_True )  {return X_False;}
 	rear_zero_count = GetRearZeroCount(p_table[i-1]);
 	if(prio >= BIT_COUNT_IN_UINT32) {prio = prio - BIT_COUNT_IN_UINT32;}
-//	printf("!!!!!prio %d ,source %2x ; rear_zero_count %d \r\n",prio,p_table[i-1],rear_zero_count);
+//	//////////printf("!!!!!prio %d ,source %2x ; rear_zero_count %d \r\n",prio,p_table[i-1],rear_zero_count);
 	prio +=(uint16_t)(BIT_COUNT_IN_UINT32 - rear_zero_count);
 	if(prio > max_priority_value) {return X_False;}
 
@@ -420,7 +420,6 @@ static X_Boolean PrioroityQueueBorrowNode(sPriorityQueueListNodeSpace const*p_sp
 	}
 	return isOK;
 }
-
 static X_Boolean PrioroityQueueReturnNode(sPriorityQueueListNodeSpace const*p_space,uint16_t node_ID)
 {
 	if(p_space == X_Null ) {return X_False;}// necessary?
@@ -434,100 +433,120 @@ static X_Boolean PrioroityQueueReturnNode(sPriorityQueueListNodeSpace const*p_sp
 
 static m_app_result NodeTailAdd(sPriorityQueueListNodeSpace const*p_space,uint16_t priority,uint16_t *p_node_ID)
 {
-//	sListNodeSpace * p_current_node;
-//	sListNodeSpace * p_next_node;
-	sListNodeWithPriority *p_node_head;
-//	if(BorrowNode(s_sll ->p_param,&p_next_node) == X_False) {return APP_NO_ENOUGH_SPACE;}
-//	if(p_head == X_Null) {return APP_POINTER_NULL;}
-//
-//
-	p_node_head = p_space->p_list_head_nodes[priority % LIST_NODE_TABLE_SIZE];
-//
-//	p_next_node ->extern_information = infor_number;
-//	p_next_node ->NextPtr			   = X_Null;
-//
-//	if(s_sll ->p_manager ->used_node_num == 0)
-//	{
-//		s_sll ->p_manager ->current_head_node_number = p_next_node ->node_ID_in_list_array;
-//		p_current_node = p_next_node;//just for debug
-//	}
-//	else
-//	{
-//		if(NodePointerGetByNodeOrderNumber(s_sll ->p_param,s_sll ->p_manager ->current_head_node_number
-//									,(s_sll ->p_manager ->used_node_num - 1),&p_current_node) == X_False)
-//		{
-//			ReturnNode(s_sll ->p_param,p_next_node ->node_ID_in_list_array);
-//			return APP_ERROR;
-//		}
-//
-//		p_current_node ->NextPtr = p_next_node;
-//	}
-//	#if (USB_MY_LIST_NODE_DEBUG == 1)
-//	if(s_sll ->onDebug != X_Null)
-//	{
-//		if(s_sll ->onDebugParamCollect != X_Null){s_sll ->onDebugParamCollect(SQO_Push,p_current_node ->node_ID_in_list_array);}
-//		if(s_sll ->onDebugParamCollect != X_Null){s_sll ->onDebugParamCollect(SQO_Push,p_next_node ->node_ID_in_list_array);}
-//		s_sll ->onDebug(LO_TailAdd,0,s_sll);
-//		if(s_sll ->onDebugParamCollect != X_Null){s_sll ->onDebugParamCollect(SQO_Clear,0);}
-//	}
-//	#endif
-//	s_sll ->p_manager ->used_node_num ++;
-	(*p_space ->p_current_used_node_count) ++;
+	uint16_t i;
+	X_Boolean isOK,isInsertAgain;
+	sListNodeWithPriority * p_current_node;
+	sListNodeWithPriority * p_next_node;
+	sListNodeWithPriority * p_head_node;
+
+	if(p_space == X_Null || p_node_ID == X_Null) {return APP_POINTER_NULL;}
+
+	if(PrioroityQueueBorrowNode(p_space,&p_next_node) == X_True)
+	{
+		p_next_node ->priority = priority;
+		p_next_node ->NextPtr  = X_Null;
+		*p_node_ID = p_next_node ->node_ID_in_list_array;
+	}
+	else {return APP_NO_ENOUGH_SPACE;}
+
+
+	p_head_node = p_space->p_list_head_nodes[priority % LIST_NODE_TABLE_SIZE];
+	isInsertAgain = X_False;
+	if(p_head_node == X_Null) {p_space->p_list_head_nodes[priority % LIST_NODE_TABLE_SIZE] = p_next_node;}
+	else
+	{
+		p_current_node = p_head_node;
+		isOK = X_False;
+		for(i=0;i<p_space ->max_node_count;i++)
+		{
+			if(p_current_node ->NextPtr != X_Null)
+			{
+				if(p_current_node ->priority == priority)  // same priority insert again , no need new node ,reconfig the old one
+				{
+					isOK 		  = X_True;
+					isInsertAgain = X_True;
+					PrioroityQueueReturnNode(p_space,p_next_node ->node_ID_in_list_array);
+					*p_node_ID = p_current_node ->node_ID_in_list_array;
+					break;
+				}
+				p_current_node = p_current_node ->NextPtr;
+			}
+			else
+			{
+				isOK = X_True;
+				p_current_node ->NextPtr = p_next_node;
+				break;
+			}
+		}
+		if(isOK == X_False)
+		{
+			PrioroityQueueReturnNode(p_space,p_next_node ->node_ID_in_list_array);
+			return APP_ERROR;
+		}
+	}
+	if(isInsertAgain == X_False){(*p_space ->p_current_used_node_count) ++;}
 	return APP_SUCCESSED;
+
 }
 
 static m_app_result NodePullAway(sPriorityQueueListNodeSpace const*p_space,uint16_t priority,uint16_t *p_node_ID)
 {
-//	sListNodeSpace * p_node_going_to_drop;
-//	sListNodeSpace * p_left_node;
-//	sListNodeSpace * p_right_node;
+	uint16_t i;
+	X_Boolean isOK;
+	sListNodeWithPriority * p_current_node;
+	sListNodeWithPriority * p_node_going_to_drop;
+	sListNodeWithPriority * p_left_node;
+	sListNodeWithPriority * p_right_node;
 	sListNodeWithPriority *p_node_head;
-//	if(s_sll == X_Null) {return APP_POINTER_NULL;}
-//	if(s_sll ->p_manager ->isInitOK == X_False){return APP_UNEXPECT_STATE;}
+
+	if(p_space == X_Null || p_node_ID == X_Null) {return APP_POINTER_NULL;}
+	if((*p_space ->p_current_used_node_count) == 0){return APP_ALREADY_DONE_BEFORE;}
 
 	p_node_head = p_space ->p_list_head_nodes[priority % LIST_NODE_TABLE_SIZE];
-//
-//	if(node_order_number >= s_sll ->p_manager ->used_node_num) {return APP_PARAM_ERROR;}
-	if((*p_space ->p_current_used_node_count) == 0){return APP_ALREADY_DONE_BEFORE;}
-//
-//	if(s_sll ->p_manager ->used_node_num ==  (node_order_number + 1)) //
-//	{
-//		#if (USB_MY_LIST_NODE_DEBUG == 1)
-//		if(s_sll ->onDebug != X_Null) {s_sll ->onDebug(LO_PullAway,0,s_sll);}
-//		#endif
-//		return mSingleListTailRemove(s_sll);
-//	}
-//
-//	if(node_order_number == 0)
-//	{
-//		#if (USB_MY_LIST_NODE_DEBUG == 1)
-//		if(s_sll ->onDebug != X_Null) {s_sll ->onDebug(LO_PullAway,1,s_sll);}
-//		#endif
-//		return mSingleListHeadRemove(s_sll);
-//	}
-//
-//	if(NodePointerGetByNodeOrderNumber(s_sll ->p_param,s_sll ->p_manager ->current_head_node_number
-//												,(node_order_number),&p_node_going_to_drop) == X_False){return APP_ERROR;}
-//	if(NodePointerGetByNodeOrderNumber(s_sll ->p_param,s_sll ->p_manager ->current_head_node_number
-//													,(node_order_number - 1),&p_left_node) == X_False) {return APP_ERROR;}
-//	if(NodePointerGetByNodeOrderNumber(s_sll ->p_param,s_sll ->p_manager ->current_head_node_number
-//														,(node_order_number + 1),&p_right_node) == X_False) {return APP_ERROR;}
-//
-//	p_left_node->NextPtr = p_right_node;
-//	s_sll ->p_manager ->used_node_num --;
-	(*p_space ->p_current_used_node_count) --;
-//	if(ReturnNode(s_sll ->p_param,p_node_going_to_drop ->node_ID_in_list_array) == X_True)
-//	{
-//		#if (USB_MY_LIST_NODE_DEBUG == 1)
-//		if(s_sll ->onDebug != X_Null) {s_sll ->onDebug(LO_PullAway,2,s_sll);}
-//		#endif
+	if(p_node_head == X_Null) {return APP_POINTER_NULL;}
+
+	if(p_node_head ->NextPtr == X_Null)
+	{
+		if(p_node_head ->priority != priority) {return APP_UNEXPECT_STATE;}
+		if(PrioroityQueueReturnNode(p_space,p_node_head ->node_ID_in_list_array) == X_False) {return APP_ERROR;}
+		*p_node_ID = p_node_head ->node_ID_in_list_array;
+		p_space->p_list_head_nodes[priority % LIST_NODE_TABLE_SIZE] = X_Null;
+		(*p_space ->p_current_used_node_count) --;
+
 		return APP_SUCCESSED;
-//	}
-//	#if (USB_MY_LIST_NODE_DEBUG == 1)
-//	if(s_sll ->onDebug != X_Null) {s_sll ->onDebug(LO_PullAway,3,s_sll);}
-//	#endif
-//	return APP_ERROR;
-//
+	}
+
+	p_current_node = p_node_head;
+	p_left_node    = X_Null;
+	p_right_node   = X_Null;
+	isOK = X_False;
+	for(i=0;i<p_space ->max_node_count;i++)
+	{
+		if(p_current_node ->priority == priority)
+		{
+			isOK = X_True;
+			p_node_going_to_drop = p_current_node;
+			p_right_node         = p_node_going_to_drop ->NextPtr; // maybe null !!!
+			*p_node_ID = p_node_going_to_drop ->node_ID_in_list_array;
+		}
+
+		if(p_current_node ->NextPtr != X_Null)
+		{
+			p_left_node = p_current_node;
+			p_current_node = p_current_node ->NextPtr;
+		}
+		else{break;}
+	}
+
+	if(isOK == X_False) {return APP_UNEXPECT_STATE;}
+//	if(p_left_node == X_Null && p_right_node == X_Null) {return APP_UNEXPECT_STATE;} // not necessary
+
+	if(p_left_node == X_Null) {p_space->p_list_head_nodes[priority % LIST_NODE_TABLE_SIZE] = p_right_node;}
+	else {p_left_node->NextPtr = p_right_node;}
+
+	if(PrioroityQueueReturnNode(p_space,p_node_going_to_drop ->node_ID_in_list_array) == X_False) {return APP_ERROR;}
+	(*p_space ->p_current_used_node_count) --;
+	return APP_SUCCESSED;
 }
 
 
@@ -604,12 +623,17 @@ X_Boolean   RealseMyPriorityQueueNodeByPriority(const sMyPriorityListManager *p_
 					,p_manager ->MaxPriorityValue,priority) == X_False) {return X_False;}
 
 	result = NodePullAway(p_manager ->p_node_space_handle,priority,p_node_released);
-
 	return (result == APP_SUCCESSED);
 }
 uint16_t    GetMyPriorityQueueUsedNodeCount(const sMyPriorityListManager *p_manager)
 {
 	if(p_manager == X_Null) {return 0;}
+	/* just for debug
+	uint8_t i;
+	for(i=0;i<LIST_NODE_TABLE_SIZE;i++)
+	{
+		printf("!!!!! p_node_head %d is %2x \r\n",i,p_manager ->p_node_space_handle ->p_list_head_nodes[i]);
+	}		*/
 	return (*p_manager ->p_node_space_handle->p_current_used_node_count);
 }
 X_Boolean   GetCurrentUsedPriorityScope(const sMyPriorityListManager *p_manager,uint16_t *p_high,uint16_t *p_low)

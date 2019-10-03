@@ -20,7 +20,7 @@ static uint32_t DebugParamCollect(eSimpleQueueOperation op,uint32_t param);
 //						,X_True
 //						,X_Null,X_Null);
 
-APP_PRIORITY_QUEUE_DEF(p_priority_queue,5,450,X_False,X_Null,X_Null);
+APP_PRIORITY_QUEUE_DEF(p_priority_queue,15,20,X_False,X_Null,X_Null);
 
 FILE * FlashTestOpenFile(void)
 {
@@ -38,8 +38,8 @@ X_Void onTick(X_Void)
 	uint8_t sector_number;
 	if(GetSectorNumber(&sector_number) == X_True)
 	{
-		SEGGER_RTT_Debug(FLASH_SECTOR_DEBUG,(60,"**%d**flash ready ? %d ; current sector number %d\r\n"
-													,debug_counter,DoesFlashReady(),sector_number));
+//		SEGGER_RTT_Debug(FLASH_SECTOR_DEBUG,(60,"**%d**flash ready ? %d ; current sector number %d\r\n"
+//													,debug_counter,DoesFlashReady(),sector_number));
 		debug_counter ++;
 		isJustReady = X_True;
 //		Test_PriorityQueue(sector_number);
@@ -47,6 +47,10 @@ X_Void onTick(X_Void)
 		if(isOK == X_False)
 		{
 			SEGGER_RTT_Debug(FLASH_SECTOR_DEBUG,(60," push failed\r\n"));
+		}
+		else
+		{
+			SEGGER_RTT_Debug(FLASH_SECTOR_DEBUG,(60," push successed priority %d _____node number %d\r\n",sector_number,node_num));
 		}
 	}
 //	mFlashEventHandlerRun(p_flash_handler);
@@ -63,9 +67,9 @@ X_Void onTick(X_Void)
 			SEGGER_RTT_Debug(FLASH_SECTOR_DEBUG,(60,"node_count %d;high %d low %d \r\n",node_count,high,low));
 		}
 		isOK = mPriorityQueuePop(p_priority_queue,&priority,&node_num);
-		SEGGER_RTT_Debug(FLASH_SECTOR_DEBUG,(60," pop %s , priority %d \r\n",(isOK == X_True)?"OK":"Failed",priority));
+		SEGGER_RTT_Debug(FLASH_SECTOR_DEBUG,(60," pop %s , priority %d ----node number %d\r\n",(isOK == X_True)?"OK":"Failed",priority,node_num));
 		isOK = mPriorityQueuePop(p_priority_queue,&priority,&node_num);
-		SEGGER_RTT_Debug(FLASH_SECTOR_DEBUG,(60," pop %s , priority %d \r\n",(isOK == X_True)?"OK":"Failed",priority));
+		SEGGER_RTT_Debug(FLASH_SECTOR_DEBUG,(60," pop %s , priority %d ----node number %d\r\n",(isOK == X_True)?"OK":"Failed",priority,node_num));
 	}
 
 }

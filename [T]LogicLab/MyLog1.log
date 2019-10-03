@@ -1,69 +1,107 @@
-2019-10-03 22:37:07.310 hello I am string debug 
-2019-10-03 22:37:08.709 **0**flash ready ? 0 ; current sector number 63
-2019-10-03 22:37:09.982 **1**flash ready ? 0 ; current sector number 67
-2019-10-03 22:37:11.269 **2**flash ready ? 0 ; current sector number 73
-2019-10-03 22:37:12.557 **3**flash ready ? 0 ; current sector number 76
-2019-10-03 22:37:13.851 **4**flash ready ? 0 ; current sector number 80
-2019-10-03 22:37:15.121 **5**flash ready ? 1 ; current sector number 86
-2019-10-03 22:37:15.234  push failed
-2019-10-03 22:37:15.355 node_count 5;high 80 low 63 
-2019-10-03 22:37:15.465  pop OK , priority 80 
-2019-10-03 22:37:15.575  pop OK , priority 76 
-2019-10-03 22:37:15.795  pop OK , priority 73 
-2019-10-03 22:37:15.905  pop OK , priority 67 
-2019-10-03 22:37:16.451 **6**flash ready ? 1 ; current sector number 89
-2019-10-03 22:37:16.562 node_count 2;high 89 low 63 
-2019-10-03 22:37:16.672  pop OK , priority 89 
-2019-10-03 22:37:16.782  pop OK , priority 63 
-2019-10-03 22:37:17.103  pop Failed , priority 64 
-2019-10-03 22:37:17.212  pop Failed , priority 64 
-2019-10-03 22:37:17.756 **7**flash ready ? 1 ; current sector number 93
-2019-10-03 22:37:17.878 node_count 1;high 93 low 93 
-2019-10-03 22:37:17.989  pop OK , priority 93 
-2019-10-03 22:37:18.099  pop Failed , priority 93 
-2019-10-03 22:37:18.439  pop Failed , priority 64 
-2019-10-03 22:37:18.549  pop Failed , priority 64 
-2019-10-03 22:37:19.088 **8**flash ready ? 1 ; current sector number 96
-2019-10-03 22:37:19.197 node_count 1;high 96 low 96 
-2019-10-03 22:37:19.307  pop OK , priority 96 
-2019-10-03 22:37:19.417  pop Failed , priority 96 
-2019-10-03 22:37:19.728  pop Failed , priority 64 
-2019-10-03 22:37:19.838  pop Failed , priority 64 
-2019-10-03 22:37:20.379 **9**flash ready ? 1 ; current sector number 103
-2019-10-03 22:37:20.490 node_count 1;high 103 low 103 
-2019-10-03 22:37:20.600  pop OK , priority 103 
-2019-10-03 22:37:20.706  pop Failed , priority 103 
-2019-10-03 22:37:21.030  pop Failed , priority 64 
-2019-10-03 22:37:21.140  pop Failed , priority 64 
-2019-10-03 22:37:21.678 **10**flash ready ? 1 ; current sector number 106
-2019-10-03 22:37:21.789 node_count 1;high 106 low 106 
-2019-10-03 22:37:21.899  pop OK , priority 106 
-2019-10-03 22:37:22.010  pop Failed , priority 106 
-2019-10-03 22:37:22.338  pop Failed , priority 64 
-2019-10-03 22:37:22.448  pop Failed , priority 64 
-2019-10-03 22:37:22.990 **11**flash ready ? 0 ; current sector number 109
-2019-10-03 22:37:24.277 **12**flash ready ? 0 ; current sector number 116
-2019-10-03 22:37:25.568 **13**flash ready ? 0 ; current sector number 119
-2019-10-03 22:37:26.859 **14**flash ready ? 0 ; current sector number 122
-2019-10-03 22:37:28.131 **15**flash ready ? 0 ; current sector number 129
-2019-10-03 22:37:29.421 **16**flash ready ? 0 ; current sector number 132
-2019-10-03 22:37:29.531  push failed
-2019-10-03 22:37:30.709 **17**flash ready ? 1 ; current sector number 135
-2019-10-03 22:37:30.819  push failed
-2019-10-03 22:37:30.929 node_count 5;high 129 low 109 
-2019-10-03 22:37:31.039  pop OK , priority 129 
-2019-10-03 22:37:31.149  pop OK , priority 122 
-2019-10-03 22:37:31.369  pop OK , priority 119 
-2019-10-03 22:37:31.479  pop OK , priority 116 
-2019-10-03 22:37:32.010 **18**flash ready ? 1 ; current sector number 138
-2019-10-03 22:37:32.131 node_count 2;high 138 low 109 
-2019-10-03 22:37:32.241  pop OK , priority 138 
-2019-10-03 22:37:32.362  pop OK , priority 109 
-2019-10-03 22:37:32.687  pop Failed , priority 64 
-2019-10-03 22:37:32.805  pop Failed , priority 64 
-2019-10-03 22:37:33.345 **19**flash ready ? 1 ; current sector number 145
-2019-10-03 22:37:33.455 node_count 1;high 145 low 145 
-2019-10-03 22:37:33.565  pop OK , priority 145 
-2019-10-03 22:37:33.675  pop Failed , priority 145 
-2019-10-03 22:37:34.005  pop Failed , priority 64 
-2019-10-03 22:37:34.115  pop Failed , priority 64 
+2019-10-04 00:29:14.427 hello I am string debug 
+2019-10-04 00:29:15.796  push successed priority 7 _____node number 0
+2019-10-04 00:29:17.106  push successed priority 10 _____node number 1
+2019-10-04 00:29:18.388  push successed priority 17 _____node number 2
+2019-10-04 00:29:19.678  push successed priority 20 _____node number 3
+2019-10-04 00:29:20.948  push successed priority 23 _____node number 4
+2019-10-04 00:29:22.228  push failed
+2019-10-04 00:29:22.338 node_count 5;high 23 low 7 
+2019-10-04 00:29:22.448  pop OK , priority 23 ----node number 4
+2019-10-04 00:29:22.558  pop OK , priority 20 ----node number 3
+2019-10-04 00:29:22.888  pop OK , priority 17 ----node number 2
+2019-10-04 00:29:22.997  pop OK , priority 10 ----node number 1
+2019-10-04 00:29:23.539  push successed priority 33 _____node number 1
+2019-10-04 00:29:23.649 node_count 2;high 33 low 7 
+2019-10-04 00:29:23.757  pop OK , priority 33 ----node number 1
+2019-10-04 00:29:23.867  pop OK , priority 7 ----node number 0
+2019-10-04 00:29:24.187  pop Failed , priority 64 ----node number 65535
+2019-10-04 00:29:24.300  pop Failed , priority 64 ----node number 65535
+2019-10-04 00:29:24.820  push successed priority 36 _____node number 0
+2019-10-04 00:29:24.930 node_count 1;high 36 low 36 
+2019-10-04 00:29:25.040  pop OK , priority 36 ----node number 0
+2019-10-04 00:29:25.149  pop Failed , priority 36 ----node number 0
+2019-10-04 00:29:25.470  pop Failed , priority 64 ----node number 65535
+2019-10-04 00:29:25.580  pop Failed , priority 64 ----node number 65535
+2019-10-04 00:29:26.125  push successed priority 43 _____node number 0
+2019-10-04 00:29:26.236 node_count 1;high 43 low 43 
+2019-10-04 00:29:26.341  pop OK , priority 43 ----node number 0
+2019-10-04 00:29:26.451  pop Failed , priority 43 ----node number 0
+2019-10-04 00:29:26.788  pop Failed , priority 64 ----node number 65535
+2019-10-04 00:29:26.898  pop Failed , priority 64 ----node number 65535
+2019-10-04 00:29:27.447  push successed priority 46 _____node number 0
+2019-10-04 00:29:27.558 node_count 1;high 46 low 46 
+2019-10-04 00:29:27.668  pop OK , priority 46 ----node number 0
+2019-10-04 00:29:27.778  pop Failed , priority 46 ----node number 0
+2019-10-04 00:29:28.108  pop Failed , priority 64 ----node number 65535
+2019-10-04 00:29:28.218  pop Failed , priority 64 ----node number 65535
+2019-10-04 00:29:28.753  push successed priority 49 _____node number 0
+2019-10-04 00:29:28.864 node_count 1;high 49 low 49 
+2019-10-04 00:29:28.974  pop OK , priority 49 ----node number 0
+2019-10-04 00:29:29.083  pop Failed , priority 49 ----node number 0
+2019-10-04 00:29:29.404  pop Failed , priority 64 ----node number 65535
+2019-10-04 00:29:29.514  pop Failed , priority 64 ----node number 65535
+2019-10-04 00:29:30.045  push successed priority 53 _____node number 0
+2019-10-04 00:29:31.337  push successed priority 59 _____node number 1
+2019-10-04 00:29:32.648  push successed priority 62 _____node number 2
+2019-10-04 00:29:33.930  push successed priority 66 _____node number 3
+2019-10-04 00:29:35.207  push successed priority 72 _____node number 4
+2019-10-04 00:29:36.497  push failed
+2019-10-04 00:29:37.769  push failed
+2019-10-04 00:29:37.879 node_count 5;high 72 low 53 
+2019-10-04 00:29:37.988  pop OK , priority 72 ----node number 4
+2019-10-04 00:29:38.098  pop OK , priority 66 ----node number 3
+2019-10-04 00:29:38.421  pop OK , priority 62 ----node number 2
+2019-10-04 00:29:38.539  pop OK , priority 59 ----node number 1
+2019-10-04 00:29:39.061  push successed priority 82 _____node number 1
+2019-10-04 00:29:39.171 node_count 2;high 82 low 53 
+2019-10-04 00:29:39.281  pop OK , priority 82 ----node number 1
+2019-10-04 00:29:39.393  pop OK , priority 53 ----node number 0
+2019-10-04 00:29:39.721  pop Failed , priority 64 ----node number 65535
+2019-10-04 00:29:39.831  pop Failed , priority 64 ----node number 65535
+2019-10-04 00:29:40.362  push successed priority 89 _____node number 0
+2019-10-04 00:29:40.473 node_count 1;high 89 low 89 
+2019-10-04 00:29:40.583  pop OK , priority 89 ----node number 0
+2019-10-04 00:29:40.693  pop Failed , priority 89 ----node number 0
+2019-10-04 00:29:41.013  pop Failed , priority 64 ----node number 65535
+2019-10-04 00:29:41.124  pop Failed , priority 64 ----node number 65535
+2019-10-04 00:29:41.664  push successed priority 92 _____node number 0
+2019-10-04 00:29:41.775 node_count 1;high 92 low 92 
+2019-10-04 00:29:41.885  pop OK , priority 92 ----node number 0
+2019-10-04 00:29:41.995  pop Failed , priority 92 ----node number 0
+2019-10-04 00:29:42.326  pop Failed , priority 64 ----node number 65535
+2019-10-04 00:31:47.148 hello I am string debug 
+2019-10-04 00:31:48.569  push successed priority 3 _____node number 0
+2019-10-04 00:31:49.849  push successed priority 6 _____node number 1
+2019-10-04 00:31:51.146  push successed priority 12 _____node number 2
+2019-10-04 00:31:52.419  push successed priority 16 _____node number 3
+2019-10-04 00:31:53.690  push successed priority 19 _____node number 4
+2019-10-04 00:31:54.980  push successed priority 2 _____node number 5
+2019-10-04 00:31:56.261  push successed priority 9 _____node number 6
+2019-10-04 00:31:57.543  push successed priority 12 _____node number 2
+2019-10-04 00:31:58.835  push successed priority 15 _____node number 7
+2019-10-04 00:32:00.128  push successed priority 2 _____node number 8
+2019-10-04 00:32:01.428  push successed priority 5 _____node number 9
+2019-10-04 00:32:01.539 PriorityScope get false 
+2019-10-04 00:32:01.649 node_count 10;high 19 low 64 
+2019-10-04 00:32:01.762  pop OK , priority 19 ----node number 4
+2019-10-04 00:32:01.869  pop OK , priority 16 ----node number 3
+2019-10-04 00:32:02.080  pop OK , priority 15 ----node number 7
+2019-10-04 00:32:02.190  pop OK , priority 12 ----node number 2
+2019-10-04 00:32:02.730  push successed priority 8 _____node number 2
+2019-10-04 00:32:02.838 PriorityScope get false 
+2019-10-04 00:32:02.948 node_count 7;high 9 low 64 
+2019-10-04 00:32:03.054  pop Failed , priority 9 ----node number 2
+2019-10-04 00:32:03.168  pop OK , priority 8 ----node number 2
+2019-10-04 00:32:03.388  pop OK , priority 6 ----node number 1
+2019-10-04 00:32:03.498  pop Failed , priority 5 ----node number 1
+2019-10-04 00:32:04.030  push successed priority 12 _____node number 1
+2019-10-04 00:32:04.152 PriorityScope get false 
+2019-10-04 00:32:04.260 node_count 6;high 12 low 64 
+2019-10-04 00:32:04.372  pop OK , priority 12 ----node number 1
+2019-10-04 00:32:04.482  pop OK , priority 3 ----node number 0
+2019-10-04 00:32:04.702  pop Failed , priority 2 ----node number 65535
+2019-10-04 00:32:04.815  pop Failed , priority 2 ----node number 65535
+2019-10-04 00:32:05.350  push successed priority 18 _____node number 0
+2019-10-04 00:32:05.460 PriorityScope get false 
+2019-10-04 00:32:05.570 node_count 5;high 18 low 64 
+2019-10-04 00:32:05.680  pop OK , priority 18 ----node number 0

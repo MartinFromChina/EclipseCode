@@ -48,7 +48,7 @@ static X_Boolean EventGenerator(X_Void * p_param)
 	user_sector_number = GetRandomNumber(0,MAX_SECTOR_NUMBER);
 	SEGGER_RTT_Debug_Once(FLASH_DEBUG,p_script_func_num,2,(30,"EventGenerator %d\r\n",user_sector_number));
 
-	if(generator_counter < 5) {generator_counter ++;}
+	if(generator_counter < 10) {generator_counter ++;}
 	else
 	{
 		generator_counter = 0;
