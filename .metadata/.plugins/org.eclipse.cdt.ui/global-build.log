@@ -1,8 +1,11 @@
-12:56:16 **** Incremental Build of configuration Debug for project [T]LogicLab ****
+14:23:02 **** Incremental Build of configuration Debug for project [T]LogicLab ****
 Info: Internal Builder is used for build
-gcc "-ID:\\AllApplication\\GitAll\\EclipseCode\\[T]LogicLab\\ScriptsCommandModule" -O0 -g3 -Wall -c -fmessage-length=0 -o "TB_TinyDancer\\FlashReadWrite\\UserFlash.o" "..\\TB_TinyDancer\\FlashReadWrite\\UserFlash.c" 
-..\TB_TinyDancer\FlashReadWrite\UserFlash.c:167:15: warning: 'onFlashDebug' defined but not used [-Wunused-function]
- static X_Void onFlashDebug(eFlashDebugOperation op,uint8_t operation_ID,const sMyFlashEventHandler * p_handler)
-               ^~~~~~~~~~~~
+gcc "-ID:\\AllApplication\\GitAll\\EclipseCode\\[T]LogicLab\\ScriptsCommandModule" -O0 -g3 -Wall -c -fmessage-length=0 -o "CommonSource\\MulLoopQueue\\m_priority_queues.o" "..\\..\\CommonSource\\MulLoopQueue\\m_priority_queues.c" 
+..\..\CommonSource\MulLoopQueue\m_priority_queues.c:399:18: warning: 'PrioroityQueueReturnNode' defined but not used [-Wunused-function]
+ static X_Boolean PrioroityQueueReturnNode(sPriorityQueueListNodeSpace const*p_space,uint16_t node_ID)
+                  ^~~~~~~~~~~~~~~~~~~~~~~~
+..\..\CommonSource\MulLoopQueue\m_priority_queues.c:379:18: warning: 'PrioroityQueueBorrowNode' defined but not used [-Wunused-function]
+ static X_Boolean PrioroityQueueBorrowNode(sPriorityQueueListNodeSpace const*p_space,sListNodeWithPriority **p_node)
+                  ^~~~~~~~~~~~~~~~~~~~~~~~
 gcc -o [T]LogicLab.exe "CommonSource\\AppCommon.o" "CommonSource\\AppError.o" "CommonSource\\CharStringDebug\\CharStringDebugModule.o" "CommonSource\\FileOperation\\command.o" "CommonSource\\FileOperation\\read_scripts.o" "CommonSource\\IrqAndTimer\\TimeManagerExtern.o" "CommonSource\\IrqAndTimer\\app_timer.o" "CommonSource\\IrqAndTimer\\user_irq.o" "CommonSource\\LogFile\\user_log.o" "CommonSource\\Math\\bit_operation.o" "CommonSource\\Math\\lcm_gcd.o" "CommonSource\\Math\\random_number.o" "CommonSource\\MulLoopQueue\\loop_queues.o" "CommonSource\\MulLoopQueue\\m_list_node.o" "CommonSource\\MulLoopQueue\\m_priority_queues.o" "CommonSource\\StateMachine\\StateMachine.o" "CustomizedModule\\ButtonModule\\ButtonModule.o" "CustomizedModule\\FlashReadWrite\\FlashEventHandle.o" "ScriptsCommandModule\\HexCommand.o" "TB_TinyDancer\\FlashReadWrite\\UserFlash.o" "TB_TinyDancer\\FlashReadWrite\\UserFlashTB.o" "TB_TinyDancer\\UsartCommunication\\UsartCommunication.o" UserDebug.o main.o user_timer.o 
 Info: Nothing to build for [T]LogicLab

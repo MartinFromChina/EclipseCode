@@ -27,6 +27,7 @@ typedef enum
 	PQO_NodeCount,
 	PQO_PriorityScope,
 	PQO_GetPority,
+	PQO_GetNodeNumber,
 	PQO_DoesEmpty,
 }ePriorityQueueOperation;
 
@@ -103,10 +104,6 @@ X_Boolean   DoesMyPriorityQueueEmpty(const sMyPriorityListManager *p_manager);
 
 #endif
 
-#ifdef USE_PRIORITY_QUEUE_BASED_ON_ARRAY
-
-#endif
-
 #ifdef USE_PRIORITY_QUEUE_BASED_ON_PRIORITY_TABLE
 
 typedef struct _sListNodeWithPriority sListNodeWithPriority;
@@ -171,10 +168,10 @@ struct s_MyPriorityListManager
 		static  sMyPriorityListManager const* p_manager = &CONCAT_2(p_manager,_priority_queue_entry)
 
 X_Void 		mPriorityQueueInitialize(const sMyPriorityListManager *p_manager);
-X_Boolean   mPriorityQueuePush(const sMyPriorityListManager *p_manager,uint16_t priority,uint16_t *node_number);
-X_Boolean   mPriorityQueuePop(const sMyPriorityListManager *p_manager,uint16_t *priority,uint16_t *node_number);
+X_Boolean   mPriorityQueuePush(const sMyPriorityListManager *p_manager,uint16_t priority,uint16_t *p_node_number);
+X_Boolean   mPriorityQueuePop(const sMyPriorityListManager *p_manager,uint16_t *p_priority,uint16_t *p_node_number);
 X_Void      ClearMyPriorityQueue(const sMyPriorityListManager *p_manager);
-m_app_result  RealseMyPriorityQueueNodeByPriority(const sMyPriorityListManager *p_manager,uint16_t priority);
+X_Boolean   RealseMyPriorityQueueNodeByPriority(const sMyPriorityListManager *p_manager,uint16_t priority,uint16_t *p_node_released);
 uint16_t    GetMyPriorityQueueUsedNodeCount(const sMyPriorityListManager *p_manager);
 X_Boolean   GetCurrentUsedPriorityScope(const sMyPriorityListManager *p_manager,uint16_t *p_high,uint16_t *p_low);
 X_Boolean   GetPriorityByNodeNumber(const sMyPriorityListManager *p_manager,uint16_t node_number,uint16_t *p_priority);
