@@ -1,0 +1,14 @@
+2019-10-05 21:07:56.437 hello I am string debug 
+2019-10-05 21:07:56.542 flash event handler init OK
+2019-10-05 21:07:56.646 base_addr:0; size:0 bytes; min erase unit:0 bytes; min program unit:0 bytes;
+2019-10-05 21:07:56.750  sector_size:0; max sector_count:0;
+2019-10-05 21:07:57.758 **0**flash ready ? 0 ; current sector number 5
+2019-10-05 21:07:58.974 **1**flash ready ? 0 ; current sector number 9
+2019-10-05 21:08:00.190 **2**flash ready ? 0 ; current sector number 15
+2019-10-05 21:08:01.404 **3**flash ready ? 0 ; current sector number 18
+2019-10-05 21:08:02.623 **4**flash ready ? 0 ; current sector number 2
+2019-10-05 21:08:03.835 **5**flash ready ? 0 ; current sector number 5
+2019-10-05 21:08:05.051 **6**flash ready ? 0 ; current sector number 8
+2019-10-05 21:08:06.264 **7**flash ready ? 0 ; current sector number 15
+2019-10-05 21:08:07.484 **8**flash ready ? 0 ; current sector number 18
+2019-10-05 21:08:08.701 **9**flash ready ? 0 ; current sector number 1

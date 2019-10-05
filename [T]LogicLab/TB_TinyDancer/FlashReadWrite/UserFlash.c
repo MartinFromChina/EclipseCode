@@ -6,91 +6,31 @@ static X_Void FlashTestDebugInit(X_Void);
 static X_Void onFlashDebug(eFlashDebugOperation op,uint8_t operation_ID,const sMyFlashEventHandler * p_handler);
 static uint32_t DebugParamCollect(eSimpleQueueOperation op,uint32_t param);
 
-//APP_FLASH_EVENT_HANDLER_DEFINE(p_flash_handler
-//								,0,0
-//								,0,0
-//								,0,0
-//								,,X_Null,X_Null,X_Null,X_Null,X_Null
-//								,onFlashDebug,DebugParamCollect
-//								);
-
-//APP_PRIORITY_QUEUE_DEF(p_flash_handler
-//						,20
-//						,2000
-//						,X_True
-//						,X_Null,X_Null);
-
-APP_PRIORITY_QUEUE_DEF(p_priority_queue,15,20,X_True);
+APP_FLASH_EVENT_HANDLER_DEFINE(p_flash_handler
+								,0,0
+								,0,0
+								,0,0
+								,X_Null,X_Null,X_Null,X_Null,X_Null,X_Null
+								,onFlashDebug,DebugParamCollect
+								);
 
 FILE * FlashTestOpenFile(void)
 {
-//	mFlashEventInit(p_flash_handler);
+	mFlashEventInit(p_flash_handler);
 	FlashTestDebugInit();
-	mPriorityQueueInitialize(p_priority_queue);
 	return fopen(".//TB_TinyDancer//FlashReadWrite//command.txt", "r");
 }
 static uint16_t debug_counter = 0;
-static X_Boolean isJustReady = X_True,isStopPush = X_False,isStopPop = X_False;
 X_Void onTick(X_Void)
 {
-	X_Boolean isOK;
-	uint16_t node_num,priority,high,low,node_count;
 	uint8_t sector_number;
 	if(GetSectorNumber(&sector_number) == X_True)
 	{
-//		SEGGER_RTT_Debug(FLASH_SECTOR_DEBUG,(60,"**%d**flash ready ? %d ; current sector number %d\r\n"
-//													,debug_counter,DoesFlashReady(),sector_number));
+		SEGGER_RTT_Debug(FLASH_SECTOR_DEBUG,(60,"**%d**flash ready ? %d ; current sector number %d\r\n"
+													,debug_counter,DoesFlashReady(),sector_number));
 		debug_counter ++;
-//		Test_PriorityQueue(sector_number);
-		if(isStopPush == X_False)
-		{
-			isJustReady = X_True;
-			isStopPop = X_False;
-			isOK = mPriorityQueuePush(p_priority_queue,sector_number,&node_num);
-			node_count = GetMyPriorityQueueUsedNodeCount(p_priority_queue);
-			if(isOK == X_False)
-			{
-				SEGGER_RTT_Debug(FLASH_SECTOR_DEBUG,(60," push failed\r\n"));
-			}
-			else
-			{
-				SEGGER_RTT_Debug(FLASH_SECTOR_DEBUG,(80," push successed priority %d _____node number %d;current node count %d \r\n"
-						,sector_number,node_num,node_count));
-			}
-		}
-
 	}
-//	mFlashEventHandlerRun(p_flash_handler);
-	if(DoesFlashReady() == X_True)
-	{
-		if(isJustReady == X_True)
-		{
-			isJustReady = X_False;
-			isStopPush  = X_True;
-			if(GetCurrentUsedPriorityScope(p_priority_queue,&high,&low) == X_False)
-			{
-				SEGGER_RTT_Debug(FLASH_SECTOR_DEBUG,(60,"PriorityScope get false \r\n"));
-			}
-			node_count = GetMyPriorityQueueUsedNodeCount(p_priority_queue);
-			if(node_count == 0) {isStopPush = X_False;}
-			SEGGER_RTT_Debug(FLASH_SECTOR_DEBUG,(60,"node_count %d;high %d low %d \r\n",node_count,high,low));
-		}
-		if(isStopPop == X_True) {return;}
-		isOK = mPriorityQueuePop(p_priority_queue,&priority,&node_num);
-		node_count = GetMyPriorityQueueUsedNodeCount(p_priority_queue);
-		if(node_count == 0) {isStopPop = X_True;}
-		SEGGER_RTT_Debug(FLASH_SECTOR_DEBUG,(80," pop %s , priority %d ----node number %d;node count release %d\r\n"
-				,(isOK == X_True)?"OK":"Failed",priority,node_num,node_count));
-		isOK = mPriorityQueuePop(p_priority_queue,&priority,&node_num);
-		node_count = GetMyPriorityQueueUsedNodeCount(p_priority_queue);
-		SEGGER_RTT_Debug(FLASH_SECTOR_DEBUG,(80," pop %s , priority %d ----node number %d;node count release %d\r\n"
-				,(isOK == X_True)?"OK":"Failed",priority,node_num,node_count));
-	}
-	else
-	{
-		isStopPush = X_False;
-	}
-
+	mFlashEventHandlerRun(p_flash_handler);
 }
 
 

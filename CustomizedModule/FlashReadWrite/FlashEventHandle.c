@@ -49,7 +49,7 @@ m_app_result mFlashWriteRequest(const sMyFlashEventHandler *p_handler,uint32_t w
 	if(p_handler ->p_manager ->isInitOK == X_False) {return APP_UNEXPECT_STATE;}
 	return APP_SUCCESSED;
 }
-m_app_result mFlashEraseRequest(const sMyFlashEventHandler *p_handler,uint32_t Erase_start_addr,uint32_t erase_length,FLASH_POINTER_TYPE const * p_src,onEraseFinished erase_cb)
+m_app_result mFlashEraseRequest(const sMyFlashEventHandler *p_handler,uint32_t erase_start_addr,uint32_t erase_length,onEraseFinished erase_cb)
 {
 	if(p_handler == X_Null) {return APP_POINTER_NULL;}
 	if(p_handler ->p_manager ->isInitOK == X_False) {return APP_UNEXPECT_STATE;}
