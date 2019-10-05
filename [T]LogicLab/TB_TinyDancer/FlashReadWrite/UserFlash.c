@@ -7,10 +7,10 @@ static X_Void onFlashDebug(eFlashDebugOperation op,uint8_t operation_ID,const sM
 static uint32_t DebugParamCollect(eSimpleQueueOperation op,uint32_t param);
 
 APP_FLASH_EVENT_HANDLER_DEFINE(p_flash_handler
-								,0,0
-								,0,0
-								,0,0
-								,X_Null,X_Null,X_Null,X_Null,X_Null,X_Null
+								,4096,8192
+								,256,256
+								,256,32
+								,X_Null,X_Null,X_Null,X_Null,X_Null,X_Null,X_Null
 								,onFlashDebug,DebugParamCollect
 								);
 

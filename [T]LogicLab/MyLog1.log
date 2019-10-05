@@ -12,3 +12,58 @@
 2019-10-05 21:08:06.264 **7**flash ready ? 0 ; current sector number 15
 2019-10-05 21:08:07.484 **8**flash ready ? 0 ; current sector number 18
 2019-10-05 21:08:08.701 **9**flash ready ? 0 ; current sector number 1
+2019-10-05 22:05:37.419 hello I am string debug 
+2019-10-05 22:05:38.730 **0**flash ready ? 0 ; current sector number 7
+2019-10-05 22:05:39.944 **1**flash ready ? 0 ; current sector number 11
+2019-10-05 22:09:36.222 hello I am string debug 
+2019-10-05 22:09:36.327 flash event handler init OK
+2019-10-05 22:09:36.431 base_addr:0; size:4096 bytes; min erase unit:0 bytes; min program unit:0 bytes;
+2019-10-05 22:09:36.539  sector_size:0; max sector_count:0;
+2019-10-05 22:09:37.550 **0**flash ready ? 0 ; current sector number 8
+2019-10-05 22:09:38.761 **1**flash ready ? 0 ; current sector number 11
+2019-10-05 22:10:02.471 hello I am string debug 
+2019-10-05 22:10:03.783 **0**flash ready ? 0 ; current sector number 13
+2019-10-05 22:10:05.000 **1**flash ready ? 0 ; current sector number 16
+2019-10-05 22:10:06.217 **2**flash ready ? 0 ; current sector number 3
+2019-10-05 22:10:45.273 hello I am string debug 
+2019-10-05 22:10:45.379 flash event handler init OK
+2019-10-05 22:10:45.483 base_addr:0; size:4096 bytes; min erase unit:0 bytes; min program unit:0 bytes;
+2019-10-05 22:10:45.592  sector_size:256; max sector_count:16;
+2019-10-05 22:10:46.601 **0**flash ready ? 0 ; current sector number 13
+2019-10-05 22:10:47.819 **1**flash ready ? 0 ; current sector number 17
+2019-10-05 22:12:01.520 hello I am string debug 
+2019-10-05 22:12:01.625 flash event handler init OK
+2019-10-05 22:12:01.729 base_addr:0; size:4096 bytes; min erase unit:256 bytes; min program unit:256 bytes;
+2019-10-05 22:12:01.834  sector_size:256; max sector_count:16;
+2019-10-05 22:12:02.843 **0**flash ready ? 0 ; current sector number 1
+2019-10-05 22:12:04.058 **1**flash ready ? 0 ; current sector number 5
+2019-10-05 22:12:05.272 **2**flash ready ? 0 ; current sector number 11
+2019-10-05 22:12:23.999 hello I am string debug 
+2019-10-05 22:12:25.313 **0**flash ready ? 0 ; current sector number 17
+2019-10-05 22:12:26.530 **1**flash ready ? 0 ; current sector number 0
+2019-10-05 22:12:49.176 hello I am string debug 
+2019-10-05 22:12:49.282 flash event handler init OK
+2019-10-05 22:12:49.390 base_addr:0; size:3840 bytes; min erase unit:256 bytes; min program unit:256 bytes;
+2019-10-05 22:12:49.496  sector_size:256; max sector_count:15;
+2019-10-05 22:12:50.510 **0**flash ready ? 0 ; current sector number 18
+2019-10-05 22:12:51.723 **1**flash ready ? 0 ; current sector number 1
+2019-10-05 22:13:23.061 hello I am string debug 
+2019-10-05 22:13:23.166 flash event handler init OK
+2019-10-05 22:13:23.270 base_addr:0; size:4096 bytes; min erase unit:255 bytes; min program unit:256 bytes;
+2019-10-05 22:13:23.375  sector_size:256; max sector_count:16;
+2019-10-05 22:13:24.386 **0**flash ready ? 0 ; current sector number 9
+2019-10-05 22:13:25.602 **1**flash ready ? 0 ; current sector number 13
+2019-10-05 22:14:24.671 hello I am string debug 
+2019-10-05 22:14:25.984 **0**flash ready ? 0 ; current sector number 8
+2019-10-05 22:14:27.204 **1**flash ready ? 0 ; current sector number 15
+2019-10-05 22:14:45.113 hello I am string debug 
+2019-10-05 22:14:46.424 **0**flash ready ? 0 ; current sector number 17
+2019-10-05 22:14:47.638 **1**flash ready ? 0 ; current sector number 0
+2019-10-05 22:15:16.016 hello I am string debug 
+2019-10-05 22:15:16.121 flash event handler init OK
+2019-10-05 22:15:16.232 base_addr:4096; size:8192 bytes; min erase unit:256 bytes; min program unit:256 bytes;
+2019-10-05 22:15:16.336  sector_size:256; max sector_count:32;
+2019-10-05 22:15:17.348 **0**flash ready ? 0 ; current sector number 18
+2019-10-05 22:15:34.811 hello I am string debug 
+2019-10-05 22:15:36.124 **0**flash ready ? 0 ; current sector number 0
+2019-10-05 22:15:37.343 **1**flash ready ? 0 ; current sector number 4
