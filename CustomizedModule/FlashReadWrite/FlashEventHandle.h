@@ -93,6 +93,7 @@ struct _sMyFlashEventHandler
 	sListManager		    const* p_loop_queue;
 	sMyPriorityListManager  const* p_priority_queue;
 	sMyFlashEventAction     const* p_action;
+	StateSimpleParam  		const *p_flash_state;
 	X_Void 						(*onDebug)(eFlashDebugOperation e_fdo,uint8_t operation_ID,const sMyFlashEventHandler * p_handler);
 	uint32_t                    (*onDebugParamCollect)(eSimpleQueueOperation op,uint32_t param);
 };
@@ -119,6 +120,26 @@ typedef struct
 	static const sMyFlashEventBasicParam   CONCAT_2(p_handler,_flash_basicparam) = {flash_base_addr,flash_total_size_in_bytes,flash_erase_unit,flash_program_unit};\
 	static const sMyFlashEventUserParam    CONCAT_2(p_handler,_flash_userparam) = {flash_user_define_sector_size,flash_user_define_total_sector_count};      \
 	static const sMyFlashEventAction       CONCAT_2(p_handler,_flash_action) = {init,uninit,read,write,erase,does_busy,busy_flag_set};	\
+	static const StateAction CONCAT_2(p_flash_event, _FlashAction)[] = {			\
+					{X_Null},												\
+					{X_Null},												\
+					{X_Null},										\
+					{X_Null},									\
+					{X_Null},										\
+					{X_Null},								\
+					{X_Null},								\
+					{X_Null},								\
+					{X_Null},									\
+					{X_Null},											\
+					{X_Null},									\
+			};																				\
+																							\
+			/***********************/														\
+			APP_SIMPLE_STATE_MACHINE_DEF_WITH_OUT_POINTER(p_falsh_event_state_action		\
+												,sizeof(CONCAT_2(p_flash_event, _FlashAction))/sizeof(CONCAT_2(p_flash_event, _FlashAction)[0])   	\
+												,1																									\
+												,&CONCAT_2(p_flash_event, _FlashAction)[0]);														\
+			/***********************/													\
 	static const sMyFlashEventHandler CONCAT_2(p_handler,_flash_handle_entry) = {			\
 	 &CONCAT_2(p_handler,_flash_manager_entry)												\
 	,&CONCAT_2(p_handler,_flash_basicparam)													\
@@ -126,6 +147,7 @@ typedef struct
 	,&CONCAT_2(p_simple_queue_for_flash,_loopqueue_entry)									\
 	,&CONCAT_2(p_prio_queue_for_flash,_priority_queue_entry)								\
 	,&CONCAT_2(p_handler,_flash_action)														\
+	,&CONCAT_2(p_falsh_event_state_action,_entry)											\
 	,debug_method																			\
 	,param_debug																			\
 	};																						\

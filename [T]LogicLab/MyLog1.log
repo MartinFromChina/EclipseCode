@@ -67,3 +67,9 @@
 2019-10-05 22:15:34.811 hello I am string debug 
 2019-10-05 22:15:36.124 **0**flash ready ? 0 ; current sector number 0
 2019-10-05 22:15:37.343 **1**flash ready ? 0 ; current sector number 4
+2019-10-07 08:55:17.477 hello I am string debug 
+2019-10-07 08:55:18.801 **0**flash ready ? 0 ; current sector number 2
+2019-10-07 08:55:20.021 **1**flash ready ? 0 ; current sector number 5
+2019-10-07 08:55:21.241 **2**flash ready ? 0 ; current sector number 12
+2019-10-07 08:55:22.458 **3**flash ready ? 0 ; current sector number 15
+2019-10-07 08:55:23.678 **4**flash ready ? 0 ; current sector number 18

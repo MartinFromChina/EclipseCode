@@ -193,6 +193,10 @@ m_app_result mFlashEventHandlerBeginProcessing(const sMyFlashEventHandler *p_han
 
 X_Void mFlashEventHandlerRun(const sMyFlashEventHandler *p_handler)
 {
+	s_StateMachineParam smp;
 	if(p_handler == X_Null) {return;}
 	if(p_handler ->p_manager ->isInitOK == X_False) {return;}
+
+	SimpleStateMachineRun(p_handler->p_flash_state,&smp,X_Null,X_Null);
+
 }
