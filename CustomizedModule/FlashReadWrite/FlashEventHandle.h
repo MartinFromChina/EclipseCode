@@ -124,6 +124,21 @@ typedef struct
 	X_Void				(*busy_flag_set)(X_Boolean isBusy);
 }sMyFlashEventAction;
 
+
+typedef struct
+{
+	s_StateMachineParam 	base;
+	X_Boolean               isStateMachineStop;
+	StateNumber 			LatestStateBeforeRequestCheck;
+	uint16_t 				wait_counter;
+}sMyFlashStateParamExtern;
+
+typedef struct
+{
+	sMyFlashStateParamExtern *p_fspe;
+	StateSimpleParam  		const*p_flash_state;
+}sMyFlashEventHandlerState;
+
 typedef struct   _sMyFlashEventHandler    sMyFlashEventHandler;
 struct _sMyFlashEventHandler
 {
@@ -132,12 +147,12 @@ struct _sMyFlashEventHandler
 	sMyFlashEventUserParam  const* p_user_param;
 	sListManager		    const* p_loop_queue;
 #if (M_FLASH_ENABLE_USER_MULTI_PARTITION == 1)
-	sUserInforPageTable     *p_user_infor_table;
+	sUserInforPageTable     	 *p_user_infor_table;
 	sMyPriorityListManager  const* p_priority_queue;
 	X_Void						(*onUserInforConfig)(sUserInforPageTable *p_user_infor_table);
 #endif
-	sMyFlashEventAction     const* p_action;
-	StateSimpleParam  		const *p_flash_state;
+	sMyFlashEventAction     const*p_action;
+	sMyFlashEventHandlerState const*p_state_machine;
 	X_Void 						(*onDebug)(eFlashDebugOperation e_fdo,uint8_t operation_ID,const sMyFlashEventHandler * p_handler);
 	uint32_t                    (*onDebugParamCollect)(eSimpleQueueOperation op,uint32_t param);
 };
@@ -186,8 +201,12 @@ typedef struct
 			APP_SIMPLE_STATE_MACHINE_DEF_WITH_OUT_POINTER(p_falsh_event_state_action		\
 												,sizeof(CONCAT_2(p_flash_event, _FlashAction))/sizeof(CONCAT_2(p_flash_event, _FlashAction)[0])   	\
 												,1																									\
-												,&CONCAT_2(p_flash_event, _FlashAction)[0]);														\
-			/***********************/													\
+												,&CONCAT_2(p_flash_event, _FlashAction)[0]);			\
+			static sMyFlashStateParamExtern    CONCAT_2(p_handler,_s_MFSPE) = {{DEFAULT_STATE_NUMBER},X_False,DEFAULT_STATE_NUMBER,0};				\
+			static const sMyFlashEventHandlerState CONCAT_2(p_handler,_s_MFEHS) = {			\
+					,&CONCAT_2(p_handler,_s_MFSPE)											\
+					,&CONCAT_2(p_falsh_event_state_action,_entry)};							\
+			/***********************/														\
 	static const sMyFlashEventHandler CONCAT_2(p_handler,_flash_handle_entry) = {			\
 	 &CONCAT_2(p_handler,_flash_manager_entry)												\
 	,&CONCAT_2(p_handler,_flash_basicparam)													\
@@ -197,7 +216,7 @@ typedef struct
 	,&CONCAT_2(p_prio_queue_for_flash,_priority_queue_entry)								\
 	,user_infor_config																		\
 	,&CONCAT_2(p_handler,_flash_action)														\
-	,&CONCAT_2(p_falsh_event_state_action,_entry)											\
+	,&CONCAT_2(p_handler,_s_MFEHS)															\
 	,debug_method																			\
 	,param_debug																			\
 	};																						\
@@ -236,6 +255,10 @@ typedef struct
 												,sizeof(CONCAT_2(p_flash_event, _FlashAction))/sizeof(CONCAT_2(p_flash_event, _FlashAction)[0])   	\
 												,1																									\
 												,&CONCAT_2(p_flash_event, _FlashAction)[0]);														\
+			static sMyFlashStateParamExtern    CONCAT_2(p_handler,_s_MFSPE) = {{DEFAULT_STATE_NUMBER},X_False,DEFAULT_STATE_NUMBER,0};				\
+			static const sMyFlashEventHandlerState CONCAT_2(p_handler,_s_MFEHS) = {		\
+					&CONCAT_2(p_handler,_s_MFSPE)										\
+					,&CONCAT_2(p_falsh_event_state_action,_entry)};						\
 			/***********************/													\
 	static const sMyFlashEventHandler CONCAT_2(p_handler,_flash_handle_entry) = {			\
 	 &CONCAT_2(p_handler,_flash_manager_entry)												\
@@ -243,7 +266,7 @@ typedef struct
 	,&CONCAT_2(p_handler,_flash_userparam)													\
 	,&CONCAT_2(p_simple_queue_for_flash,_loopqueue_entry)									\
 	,&CONCAT_2(p_handler,_flash_action)														\
-	,&CONCAT_2(p_falsh_event_state_action,_entry)											\
+	,&CONCAT_2(p_handler,_s_MFEHS)															\
 	,debug_method																			\
 	,param_debug																			\
 	};																						\

@@ -59,7 +59,9 @@ m_app_result mFlashEventInit(const sMyFlashEventHandler *p_handler)
 	p_handler ->p_manager ->sector_count_in_erase_unit = (uint16_t)(p_handler ->p_basic_param ->erase_uint / p_handler ->p_user_param ->sector_size);
 	if(p_handler ->onUserInforConfig != X_Null) {p_handler ->onUserInforConfig(p_handler ->p_user_infor_table);}
 #endif
-
+	p_handler ->p_state_machine ->p_fspe->isStateMachineStop = X_False;
+	p_handler ->p_state_machine ->p_fspe->wait_counter = 0;
+	p_handler ->p_state_machine ->p_fspe->LatestStateBeforeRequestCheck = DEFAULT_STATE_NUMBER;
 	p_handler ->p_manager ->isInitOK = X_True;
 
 	#if (USE_MY_FLASH_EVENT_HANDLER_DEBUG == 1)
@@ -108,6 +110,8 @@ m_app_result mFlashReadRequest(const sMyFlashEventHandler *p_handler,uint32_t re
 	if(does_addr_is_within_bounds(p_handler ->p_basic_param ->base_addr,p_handler ->p_basic_param ->total_size_in_bytes
 									,read_start_addr,read_length)== X_False) {return APP_PARAM_ERROR;}
 #endif
+
+#if (M_FLASH_READ_IMMEDIATELY == 0)
 	M_FLASH_ENTER_CRITICAL_REGION_METHOD;
 	node_num = SimpleQueueFirstIn(p_handler ->p_loop_queue,&isOK,X_False);
 	M_FLASH_EXIT_CRITICAL_REGION_METHOD;
@@ -121,6 +125,11 @@ m_app_result mFlashReadRequest(const sMyFlashEventHandler *p_handler,uint32_t re
 		return APP_SUCCESSED;
 	}
 	return APP_UNEXPECT_STATE;
+#else
+	UNUSED_VARIABLE(read_cb);
+	p_handler ->p_action ->read_evt_handler(read_start_addr,p_dest,read_length);
+	return APP_SUCCESSED;
+#endif
 }
 m_app_result mFlashWriteRequest(const sMyFlashEventHandler *p_handler,uint32_t write_start_addr,uint32_t write_length,FLASH_POINTER_TYPE const * p_src,onMyFlashWrite write_cb)
 {
@@ -190,6 +199,7 @@ m_app_result mFlashEraseRequest(const sMyFlashEventHandler *p_handler,uint32_t e
 #if (M_FLASH_ENABLE_USER_MULTI_PARTITION == 1)
 m_app_result mFlashSectorReadRequest(const sMyFlashEventHandler *p_handler,uint32_t page_number,uint32_t sector_number,uint32_t length,FLASH_POINTER_TYPE  * p_dest,onMyFlashRead read_cb)
 {
+	uint32_t read_start_addr;
 	uint16_t node_num;
 	X_Boolean isOK;
 
@@ -203,6 +213,7 @@ m_app_result mFlashSectorReadRequest(const sMyFlashEventHandler *p_handler,uint3
 	if(((page_number * p_handler ->p_basic_param ->erase_uint) + sector_number * p_handler ->p_user_param ->sector_size)
 			>= p_handler ->p_basic_param ->total_size_in_bytes){return APP_PARAM_ERROR;}
 #endif
+#if (M_FLASH_READ_IMMEDIATELY == 0)
 	M_FLASH_ENTER_CRITICAL_REGION_METHOD;
 	node_num = SimpleQueueFirstIn(p_handler ->p_loop_queue,&isOK,X_False);
 	M_FLASH_EXIT_CRITICAL_REGION_METHOD;
@@ -217,6 +228,12 @@ m_app_result mFlashSectorReadRequest(const sMyFlashEventHandler *p_handler,uint3
 		return APP_SUCCESSED;
 	}
 	return APP_UNEXPECT_STATE;
+#else
+	UNUSED_VARIABLE(read_cb);
+	read_start_addr = (p_handler ->p_user_param ->sector_size * sector_number) + (p_handler ->p_basic_param ->erase_uint * page_number);
+	p_handler ->p_action ->read_evt_handler(read_start_addr,p_dest,length);
+	return APP_SUCCESSED;
+#endif
 }
 m_app_result mFlashSectorWriteRequest(const sMyFlashEventHandler *p_handler,uint32_t page_number,uint32_t sector_number,uint32_t length,FLASH_POINTER_TYPE const * p_src,onMyFlashWrite write_cb)
 {
@@ -242,39 +259,55 @@ m_app_result mFlashSectorWriteRequest(const sMyFlashEventHandler *p_handler,uint
 	{
 		p_handler ->p_manager ->simul_write_param[node_num].write_start_addr
 				=  (p_handler ->p_user_param ->sector_size * sector_number) + (p_handler ->p_basic_param ->erase_uint * page_number);;
-		p_handler ->p_manager ->simul_write_param[node_num].write_length   = length;
+		p_handler ->p_manager ->simul_write_param[node_num].write_length  = length;
 		p_handler ->p_manager ->simul_write_param[node_num].p_src		  = p_src;
-		p_handler ->p_manager ->simul_write_param[node_num].write_cb		  = write_cb;
+		p_handler ->p_manager ->simul_write_param[node_num].write_cb	  = write_cb;
 		return APP_SUCCESSED;
 	}
 	return APP_UNEXPECT_STATE;
 }
-
+#endif
 m_app_result mFlashEventHandlerHold(const sMyFlashEventHandler *p_handler)
 {
 	if(p_handler == X_Null) {return APP_POINTER_NULL;}
 	if(p_handler ->p_manager ->isInitOK == X_False) {return APP_UNEXPECT_STATE;}
+	p_handler ->p_state_machine ->p_fspe->isStateMachineStop = X_True;
 	return APP_SUCCESSED;
 }
 m_app_result mFlashEventHandlerBeginProcessing(const sMyFlashEventHandler *p_handler)
 {
 	if(p_handler == X_Null) {return APP_POINTER_NULL;}
 	if(p_handler ->p_manager ->isInitOK == X_False) {return APP_UNEXPECT_STATE;}
+	p_handler ->p_state_machine ->p_fspe->isStateMachineStop = X_False;
 	return APP_SUCCESSED;
 }
-#endif
 
 X_Void mFlashEventHandlerRun(const sMyFlashEventHandler *p_handler)
 {
-	s_StateMachineParam smp;
 	if(p_handler == X_Null) {return;}
 	if(p_handler ->p_manager ->isInitOK == X_False) {return;}
-
-	SimpleStateMachineRun(p_handler->p_flash_state,&smp,X_Null,X_Null);
-
+	SimpleStateMachineRun(p_handler ->p_state_machine->p_flash_state,&(p_handler ->p_state_machine->p_fspe->base),X_Null,X_Null);
+}
+X_Void  mFlashEventTimerModuleRun(const sMyFlashEventHandler *p_handler)
+{
+	if(p_handler == X_Null) {return;}
+	if(p_handler ->p_manager ->isInitOK == X_False) {return;}
+	if(p_handler ->p_state_machine ->p_fspe ->wait_counter >= M_FLASH_TIMER_MODULE_INTERVAL_IN_MS)
+	{
+		p_handler ->p_state_machine ->p_fspe ->wait_counter -= M_FLASH_TIMER_MODULE_INTERVAL_IN_MS;
+	}
 }
 
 X_Boolean DoesMyFlashModuleBusy(const sMyFlashEventHandler *p_handler)
 {
 	return X_True;
 }
+
+/****************************************flash event handler state machine**************************************************/
+typedef enum
+{
+	RWF_Idle = 0,
+	RWF_CheckReadWriteRequest,
+	RWF_WriteRequest,
+	RWF_WaitResponse,
+}RWF_state;

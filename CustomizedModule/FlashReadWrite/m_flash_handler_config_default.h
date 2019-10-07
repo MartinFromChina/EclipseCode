@@ -11,8 +11,11 @@ typedef FLASH_RETURN_TYPE (*onMyFlashErase)(uint32_t addr,uint32_t length_in_byt
 /************************************************************************************/
 #define M_FLASH_MAX_SIMPLE_REQUEST_HOLD_COUNT   20
 #define M_FLASH_MAX_REQUEST_HOLD_COUNT   		30
+#define M_FLASH_READ_IMMEDIATELY                1
 #define M_FLASH_ENABLE_PARAM_CHECK				1
 #define M_FLASH_ENABLE_USER_MULTI_PARTITION     1
+#define M_FLASH_TIMER_MODULE_INTERVAL_IN_MS 		   8
+#define M_FLASH_WAIT_OPERATION_FINISHED_TIME_IN_MS     30
 
 #define M_FLASH_ENTER_CRITICAL_REGION_METHOD
 #define M_FLASH_EXIT_CRITICAL_REGION_METHOD
