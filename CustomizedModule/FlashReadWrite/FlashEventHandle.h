@@ -92,6 +92,10 @@ typedef struct
 typedef struct
 {
 	X_Boolean isInitOK;
+#if (M_FLASH_ENABLE_USER_MULTI_PARTITION == 1)
+	uint16_t  sector_count_in_erase_unit;
+	sMyFlashWriteParam simul_write_param[M_FLASH_MAX_REQUEST_HOLD_COUNT];
+#endif
 	sMyFlashOperationParam fop[M_FLASH_MAX_SIMPLE_REQUEST_HOLD_COUNT];
 }sMyFlashModuleManager;
 
@@ -160,7 +164,7 @@ typedef struct
 	SIMPLE_LOOPQUEUE_DEF_WITHOUT_POINTER(p_simple_queue_for_flash,M_FLASH_MAX_SIMPLE_REQUEST_HOLD_COUNT);										 \
 	APP_PRIORITY_QUEUE_DEF_WITHOUT_POINTER(p_prio_queue_for_flash,M_FLASH_MAX_REQUEST_HOLD_COUNT,(flash_user_define_total_sector_count-1),X_True); \
 	static 		 sUserInforPageTable       CONCAT_2(p_handler,_user_infor_page_table_entry) = {0,X_Null};	\
-	static 		 sMyFlashModuleManager     CONCAT_2(p_handler,_flash_manager_entry) = {X_False,{}}; 		\
+	static 		 sMyFlashModuleManager     CONCAT_2(p_handler,_flash_manager_entry) = {X_False,0,{}}; 		\
 	static const sMyFlashEventBasicParam   CONCAT_2(p_handler,_flash_basicparam) = {flash_base_addr,flash_total_size_in_bytes,flash_erase_unit,flash_program_unit};\
 	static const sMyFlashEventUserParam    CONCAT_2(p_handler,_flash_userparam) = {flash_user_define_sector_size,flash_user_define_total_sector_count};      \
 	static const sMyFlashEventAction       CONCAT_2(p_handler,_flash_action) = {init,uninit,read,write,erase,does_busy,busy_flag_set};	\
