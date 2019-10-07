@@ -5,12 +5,20 @@
 #include "..\..\CommonSource\AppError.h"
 #include "..\..\CommonSource\MulLoopQueue\loop_queues.h"
 #include "..\..\CommonSource\MulLoopQueue\m_priority_queues.h"
+#include "..\..\CommonSource\StateMachine\StateMachine.h"
 
 #ifdef USE_LOCAL_FLASH_HANDLER_CONFIG
 	#include "m_flash_handler_config_local.h"
 #else
 	#include "m_flash_handler_config_default.h"
 #endif
+
+typedef enum
+{
+	MFO_Read,
+	MFO_Write,
+	MFO_Erase,
+}eMyFlashOperation;
 
 typedef enum
 {
@@ -53,10 +61,25 @@ typedef struct
 
 typedef struct
 {
+	uint32_t erase_start_addr;
+	uint32_t erase_length;
+	onMyFlashErase erase_cb;
+}sMyFlashEraseParam;
+
+typedef struct
+{
+	eMyFlashOperation opcode;
+	union {
+			sMyFlashReadParam  fr;
+			sMyFlashWriteParam fw;
+			sMyFlashEraseParam fe;
+		};
+}sMyFlashOperationParam;
+
+typedef struct
+{
 	X_Boolean isInitOK;
-	uint8_t   priority_counter;
-	sMyFlashReadParam  fr[M_FLASH_MAX_READ_REQUEST_HOLD_COUNT];
-	sMyFlashWriteParam fw[M_FLASH_MAX_WRITE_REQUEST_HOLD_COUNT];
+	sMyFlashOperationParam fop[M_FLASH_MAX_SIMPLE_REQUEST_HOLD_COUNT];
 }sMyFlashModuleManager;
 
 typedef struct
@@ -91,7 +114,9 @@ struct _sMyFlashEventHandler
 	sMyFlashEventBasicParam const* p_basic_param;
 	sMyFlashEventUserParam  const* p_user_param;
 	sListManager		    const* p_loop_queue;
+#if (M_FLASH_ENABLE_USER_MULTI_PARTITION == 1)
 	sMyPriorityListManager  const* p_priority_queue;
+#endif
 	sMyFlashEventAction     const* p_action;
 	StateSimpleParam  		const *p_flash_state;
 	X_Void 						(*onDebug)(eFlashDebugOperation e_fdo,uint8_t operation_ID,const sMyFlashEventHandler * p_handler);
@@ -106,7 +131,9 @@ typedef struct
 	m_flash_event_debug_handler debug_handler[MAX_MY_FLASH_EVENT_DEBUG_ID_COUNT];
 }sMyFlashEventMessageDebugTable;
 
-#define APP_FLASH_EVENT_HANDLER_DEFINE(p_handler											\
+
+#if (M_FLASH_ENABLE_USER_MULTI_PARTITION == 1)
+	#define APP_FLASH_EVENT_HANDLER_DEFINE(p_handler											\
 										,flash_base_addr,flash_total_size_in_bytes			\
 										,flash_erase_unit,flash_program_unit 				\
 										,flash_user_define_sector_size						\
@@ -114,9 +141,9 @@ typedef struct
 										,init,uninit,read,write,erase,does_busy,busy_flag_set \
 										,debug_method,param_debug							\
 										)													\
-	SIMPLE_LOOPQUEUE_DEF_WITHOUT_POINTER(p_simple_queue_for_flash,M_FLASH_MAX_READ_REQUEST_HOLD_COUNT);										 \
+	SIMPLE_LOOPQUEUE_DEF_WITHOUT_POINTER(p_simple_queue_for_flash,M_FLASH_MAX_SIMPLE_REQUEST_HOLD_COUNT);										 \
 	APP_PRIORITY_QUEUE_DEF_WITHOUT_POINTER(p_prio_queue_for_flash,M_FLASH_MAX_READ_REQUEST_HOLD_COUNT,(flash_user_define_total_sector_count-1),X_True); \
-	static 		 sMyFlashModuleManager      CONCAT_2(p_handler,_flash_manager_entry) = {X_False,0,{},{}}; 		\
+	static 		 sMyFlashModuleManager      CONCAT_2(p_handler,_flash_manager_entry) = {X_False,{}}; 		\
 	static const sMyFlashEventBasicParam   CONCAT_2(p_handler,_flash_basicparam) = {flash_base_addr,flash_total_size_in_bytes,flash_erase_unit,flash_program_unit};\
 	static const sMyFlashEventUserParam    CONCAT_2(p_handler,_flash_userparam) = {flash_user_define_sector_size,flash_user_define_total_sector_count};      \
 	static const sMyFlashEventAction       CONCAT_2(p_handler,_flash_action) = {init,uninit,read,write,erase,does_busy,busy_flag_set};	\
@@ -152,6 +179,54 @@ typedef struct
 	,param_debug																			\
 	};																						\
 	static sMyFlashEventHandler const* p_handler = &CONCAT_2(p_handler,_flash_handle_entry)
+#else
+	#define APP_FLASH_EVENT_HANDLER_DEFINE(p_handler											\
+										,flash_base_addr,flash_total_size_in_bytes			\
+										,flash_erase_unit,flash_program_unit 				\
+										,flash_user_define_sector_size						\
+										,flash_user_define_total_sector_count				\
+										,init,uninit,read,write,erase,does_busy,busy_flag_set \
+										,debug_method,param_debug							\
+										)													\
+	SIMPLE_LOOPQUEUE_DEF_WITHOUT_POINTER(p_simple_queue_for_flash,M_FLASH_MAX_SIMPLE_REQUEST_HOLD_COUNT);										 \
+	static 		 sMyFlashModuleManager      CONCAT_2(p_handler,_flash_manager_entry) = {X_False,{}}; 		\
+	static const sMyFlashEventBasicParam   CONCAT_2(p_handler,_flash_basicparam) = {flash_base_addr,flash_total_size_in_bytes,flash_erase_unit,flash_program_unit};\
+	static const sMyFlashEventUserParam    CONCAT_2(p_handler,_flash_userparam) = {flash_user_define_sector_size,flash_user_define_total_sector_count};      \
+	static const sMyFlashEventAction       CONCAT_2(p_handler,_flash_action) = {init,uninit,read,write,erase,does_busy,busy_flag_set};	\
+	static const StateAction CONCAT_2(p_flash_event, _FlashAction)[] = {			\
+					{X_Null},												\
+					{X_Null},												\
+					{X_Null},										\
+					{X_Null},									\
+					{X_Null},										\
+					{X_Null},								\
+					{X_Null},								\
+					{X_Null},								\
+					{X_Null},									\
+					{X_Null},											\
+					{X_Null},									\
+			};																				\
+																							\
+			/***********************/														\
+			APP_SIMPLE_STATE_MACHINE_DEF_WITH_OUT_POINTER(p_falsh_event_state_action		\
+												,sizeof(CONCAT_2(p_flash_event, _FlashAction))/sizeof(CONCAT_2(p_flash_event, _FlashAction)[0])   	\
+												,1																									\
+												,&CONCAT_2(p_flash_event, _FlashAction)[0]);														\
+			/***********************/													\
+	static const sMyFlashEventHandler CONCAT_2(p_handler,_flash_handle_entry) = {			\
+	 &CONCAT_2(p_handler,_flash_manager_entry)												\
+	,&CONCAT_2(p_handler,_flash_basicparam)													\
+	,&CONCAT_2(p_handler,_flash_userparam)													\
+	,&CONCAT_2(p_simple_queue_for_flash,_loopqueue_entry)									\
+	,&CONCAT_2(p_handler,_flash_action)														\
+	,&CONCAT_2(p_falsh_event_state_action,_entry)											\
+	,debug_method																			\
+	,param_debug																			\
+	};																						\
+	static sMyFlashEventHandler const* p_handler = &CONCAT_2(p_handler,_flash_handle_entry)
+#endif
+
+
 
 m_app_result mFlashEventInit(const sMyFlashEventHandler *p_handler);
 m_app_result mFlashEventUnInit(const sMyFlashEventHandler *p_handler);

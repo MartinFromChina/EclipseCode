@@ -10,7 +10,6 @@
 #include "..\AppError.h"
 #include "..\AppCommon.h"
 #include "loop_queues.h"
-#include "..\StateMachine\StateMachine.h"
 
 #ifdef USE_LOCAL_PRIORITY_QUEUE_CONFIG
 	#include "m_priority_queues_config_local.h"

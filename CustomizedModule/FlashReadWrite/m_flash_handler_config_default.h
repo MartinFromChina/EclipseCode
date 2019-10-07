@@ -9,10 +9,9 @@ typedef FLASH_RETURN_TYPE (*onMyFlashWrite)(uint32_t addr,FLASH_POINTER_TYPE con
 typedef FLASH_RETURN_TYPE (*onMyFlashErase)(uint32_t addr,uint32_t length_in_bytes);
 
 /************************************************************************************/
-#define M_FLASH_MAX_READ_REQUEST_HOLD_COUNT     10
-#define M_FLASH_MAX_WRITE_REQUEST_HOLD_COUNT    10
+#define M_FLASH_MAX_SIMPLE_REQUEST_HOLD_COUNT   20
 #define M_FLASH_ENABLE_PARAM_CHECK				1
-#define M_FLASH_ENABLE_USER_MULTI_PARTITION     1
+#define M_FLASH_ENABLE_USER_MULTI_PARTITION     0
 
 #define M_FLASH_ENTER_CRITICAL_REGION_METHOD
 #define M_FLASH_EXIT_CRITICAL_REGION_METHOD

@@ -44,8 +44,10 @@ m_app_result mFlashEventInit(const sMyFlashEventHandler *p_handler)
 		#endif
 	#endif
 	p_handler->p_action ->init();
-	p_handler->p_manager->priority_counter = 0;
+	SimpleQueueInitialize(p_handler ->p_loop_queue);
+#if (M_FLASH_ENABLE_USER_MULTI_PARTITION == 1)
 	mPriorityQueueInitialize(p_handler ->p_priority_queue);
+#endif
 	p_handler ->p_manager ->isInitOK = X_True;
 
 	#if (USE_MY_FLASH_EVENT_HANDLER_DEBUG == 1)
@@ -73,9 +75,10 @@ m_app_result mFlashEventUnInit(const sMyFlashEventHandler *p_handler)
 	if(p_handler ->p_manager ->isInitOK == X_False) {return APP_UNEXPECT_STATE;}
 	if(p_handler->p_action ->uninit != X_Null) {p_handler->p_action ->uninit();}
 
-	p_handler->p_manager->priority_counter = 0;
 	ClearSimpleQueue(p_handler ->p_loop_queue);
+#if (M_FLASH_ENABLE_USER_MULTI_PARTITION == 1)
 	ClearMyPriorityQueue(p_handler ->p_priority_queue);
+#endif
 	p_handler ->p_manager ->isInitOK = X_False;
 	return APP_SUCCESSED;
 }
@@ -98,10 +101,11 @@ m_app_result mFlashReadRequest(const sMyFlashEventHandler *p_handler,uint32_t re
 	M_FLASH_EXIT_CRITICAL_REGION_METHOD;
 	if(isOK == X_True)
 	{
-		p_handler ->p_manager ->fr[node_num].read_start_addr = read_start_addr;
-		p_handler ->p_manager ->fr[node_num].read_length     = read_length;
-		p_handler ->p_manager ->fr[node_num].p_dest			 = p_dest;
-		p_handler ->p_manager ->fr[node_num].read_cb		 = read_cb;
+		p_handler ->p_manager ->fop[node_num].opcode = MFO_Read;
+		p_handler ->p_manager ->fop[node_num].fr.read_start_addr = read_start_addr;
+		p_handler ->p_manager ->fop[node_num].fr.read_length     = read_length;
+		p_handler ->p_manager ->fop[node_num].fr.p_dest			 = p_dest;
+		p_handler ->p_manager ->fop[node_num].fr.read_cb		 = read_cb;
 		return APP_SUCCESSED;
 	}
 	return APP_UNEXPECT_STATE;
@@ -127,22 +131,25 @@ m_app_result mFlashWriteRequest(const sMyFlashEventHandler *p_handler,uint32_t w
 #endif
 
 	M_FLASH_ENTER_CRITICAL_REGION_METHOD;
-	isOK = mPriorityQueuePush(p_handler ->p_priority_queue,p_handler->p_manager->priority_counter,&node_num);
-	p_handler->p_manager->priority_counter ++;
+	node_num = SimpleQueueFirstIn(p_handler ->p_loop_queue,&isOK,X_False);
 	M_FLASH_EXIT_CRITICAL_REGION_METHOD;
 
 	if(isOK == X_True)
 	{
-		p_handler ->p_manager ->fw[node_num].write_start_addr = write_start_addr;
-		p_handler ->p_manager ->fw[node_num].write_length     = write_length;
-		p_handler ->p_manager ->fw[node_num].p_src			  = p_src;
-		p_handler ->p_manager ->fw[node_num].write_cb		  = write_cb;
+		p_handler ->p_manager ->fop[node_num].opcode = MFO_Write;
+		p_handler ->p_manager ->fop[node_num].fw.write_start_addr = write_start_addr;
+		p_handler ->p_manager ->fop[node_num].fw.write_length     = write_length;
+		p_handler ->p_manager ->fop[node_num].fw.p_src			  = p_src;
+		p_handler ->p_manager ->fop[node_num].fw.write_cb		  = write_cb;
 		return APP_SUCCESSED;
 	}
 	return APP_UNEXPECT_STATE;
 }
 m_app_result mFlashEraseRequest(const sMyFlashEventHandler *p_handler,uint32_t erase_start_addr,uint32_t erase_length,onMyFlashErase erase_cb)
 {
+	uint16_t node_num;
+	X_Boolean isOK;
+
 	if(p_handler == X_Null) {return APP_POINTER_NULL;}
 	if(p_handler ->p_manager ->isInitOK == X_False) {return APP_UNEXPECT_STATE;}
 
@@ -152,8 +159,20 @@ m_app_result mFlashEraseRequest(const sMyFlashEventHandler *p_handler,uint32_t e
 	if(does_addr_is_within_bounds(p_handler ->p_basic_param ->base_addr,p_handler ->p_basic_param ->total_size_in_bytes
 									,erase_start_addr,erase_length)== X_False) {return APP_PARAM_ERROR;}
 #endif
-	p_handler ->p_action ->erase_evt_handler(erase_start_addr,erase_length);//erase_evt_handler != X_Null is checked when init
-	return APP_SUCCESSED;
+
+	M_FLASH_ENTER_CRITICAL_REGION_METHOD;
+	node_num = SimpleQueueFirstIn(p_handler ->p_loop_queue,&isOK,X_False);
+	M_FLASH_EXIT_CRITICAL_REGION_METHOD;
+
+	if(isOK == X_True)
+	{
+		p_handler ->p_manager ->fop[node_num].opcode = MFO_Erase;
+		p_handler ->p_manager ->fop[node_num].fe.erase_start_addr = erase_start_addr;
+		p_handler ->p_manager ->fop[node_num].fe.erase_length     = erase_length;
+		p_handler ->p_manager ->fop[node_num].fe.erase_cb		  = erase_cb;
+		return APP_SUCCESSED;
+	}
+	return APP_UNEXPECT_STATE;
 }
 
 #if (M_FLASH_ENABLE_USER_MULTI_PARTITION == 1)
