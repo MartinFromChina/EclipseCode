@@ -204,7 +204,7 @@ typedef struct
 												,&CONCAT_2(p_flash_event, _FlashAction)[0]);			\
 			static sMyFlashStateParamExtern    CONCAT_2(p_handler,_s_MFSPE) = {{DEFAULT_STATE_NUMBER},X_False,DEFAULT_STATE_NUMBER,0};				\
 			static const sMyFlashEventHandlerState CONCAT_2(p_handler,_s_MFEHS) = {			\
-					,&CONCAT_2(p_handler,_s_MFSPE)											\
+					&CONCAT_2(p_handler,_s_MFSPE)											\
 					,&CONCAT_2(p_falsh_event_state_action,_entry)};							\
 			/***********************/														\
 	static const sMyFlashEventHandler CONCAT_2(p_handler,_flash_handle_entry) = {			\

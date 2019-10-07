@@ -22,14 +22,14 @@ static X_Boolean PriorityTableInit(uint32_t *p_table,uint16_t max_priority)
 static X_Boolean PriorityTableInsert(uint32_t *p_table,X_Boolean isHighPriorityFromSmall,uint16_t max_priority_value,uint16_t priority)
 {
 	uint16_t priority_convert;
+	TYPE_DEF_PRIORITY_TABLE_VALUE bit,bit_number;
+	uint16_t index;
+
 	if(p_table == X_Null) {return X_False;}
 	if(priority > max_priority_value) {return X_False;}
 
 	if(isHighPriorityFromSmall == X_True) {priority_convert = priority;}
 	else {priority_convert = max_priority_value - priority;}
-
-	TYPE_DEF_PRIORITY_TABLE_VALUE bit,bit_number;
-	uint16_t index;
 
 	index = priority_convert/BIT_COUNT_IN_UINT32;
 	bit_number = (TYPE_DEF_PRIORITY_TABLE_VALUE)priority_convert & (BIT_COUNT_IN_UINT32 - 1u);
@@ -41,14 +41,14 @@ static X_Boolean PriorityTableInsert(uint32_t *p_table,X_Boolean isHighPriorityF
 static X_Boolean PriorityTableRemove(uint32_t *p_table,X_Boolean isHighPriorityFromSmall,uint16_t max_priority_value,uint16_t priority)
 {
 	uint16_t priority_convert;
+	TYPE_DEF_PRIORITY_TABLE_VALUE bit,bit_number;
+	uint16_t index;
+
 	if(p_table == X_Null) {return X_False;}
 	if(priority > max_priority_value) {return X_False;}
 
 	if(isHighPriorityFromSmall == X_True) {priority_convert = priority;}
 	else {priority_convert = max_priority_value - priority;}
-
-	TYPE_DEF_PRIORITY_TABLE_VALUE bit,bit_number;
-	uint16_t index;
 
 	index = priority_convert/BIT_COUNT_IN_UINT32;
 	bit_number = (TYPE_DEF_PRIORITY_TABLE_VALUE)priority_convert & (BIT_COUNT_IN_UINT32 - 1u);
@@ -61,11 +61,11 @@ static X_Boolean PriorityTableRemove(uint32_t *p_table,X_Boolean isHighPriorityF
 }
 static X_Boolean PriorityTableGetHighest(uint32_t *p_table,X_Boolean isHighPriorityFromSmall,uint16_t max_priority_value,uint16_t *p_priority)
 {
-	uint16_t i,prio,priority_convert;
+	uint16_t i,prio,priority_convert,size;
 	X_Boolean isAllZero;
 	if(p_table == X_Null || p_priority == X_Null) {return X_False;}
 
-	uint16_t size = GET_PRIORITY_TABLE_SIZE_BY_PRIORITY_SCOPE(max_priority_value);
+	size = GET_PRIORITY_TABLE_SIZE_BY_PRIORITY_SCOPE(max_priority_value);
 	prio = 0;
 	isAllZero = X_True;
 	for(i=0;i<size;i++)
@@ -86,12 +86,12 @@ static X_Boolean PriorityTableGetHighest(uint32_t *p_table,X_Boolean isHighPrior
 }
 static X_Boolean PriorityTableGetLowest(uint32_t *p_table,X_Boolean isHighPriorityFromSmall,uint16_t max_priority_value,uint16_t *p_priority)
 {
-	uint16_t i,prio,priority_convert;
+	uint16_t i,prio,priority_convert,size;
 	uint8_t  rear_zero_count;
 	X_Boolean isAllZero;
 	if(p_table == X_Null || p_priority == X_Null) {return X_False;}
 
-	uint16_t size = GET_PRIORITY_TABLE_SIZE_BY_PRIORITY_SCOPE(max_priority_value);
+	size = GET_PRIORITY_TABLE_SIZE_BY_PRIORITY_SCOPE(max_priority_value);
 	prio = (size-1) * BIT_COUNT_IN_UINT32;
 	isAllZero = X_True;
 	for(i=size;i>0;i--)

@@ -30,7 +30,6 @@ static X_Boolean does_user_define_sector_is_page_aligned(uint32_t erase_unit,uin
 }
 #endif
 
-
 m_app_result mFlashEventInit(const sMyFlashEventHandler *p_handler)
 {
 	if(p_handler == X_Null) {return APP_POINTER_NULL;}
@@ -98,9 +97,10 @@ m_app_result mFlashEventUnInit(const sMyFlashEventHandler *p_handler)
 }
 m_app_result mFlashReadRequest(const sMyFlashEventHandler *p_handler,uint32_t read_start_addr,uint32_t read_length,FLASH_POINTER_TYPE * p_dest,onMyFlashRead read_cb)
 {
+#if (M_FLASH_READ_IMMEDIATELY == 0)
 	uint16_t node_num;
 	X_Boolean isOK;
-
+#endif
 	if(p_handler == X_Null) {return APP_POINTER_NULL;}
 	if(p_handler ->p_manager ->isInitOK == X_False) {return APP_UNEXPECT_STATE;}
 
@@ -199,9 +199,12 @@ m_app_result mFlashEraseRequest(const sMyFlashEventHandler *p_handler,uint32_t e
 #if (M_FLASH_ENABLE_USER_MULTI_PARTITION == 1)
 m_app_result mFlashSectorReadRequest(const sMyFlashEventHandler *p_handler,uint32_t page_number,uint32_t sector_number,uint32_t length,FLASH_POINTER_TYPE  * p_dest,onMyFlashRead read_cb)
 {
-	uint32_t read_start_addr;
+#if (M_FLASH_READ_IMMEDIATELY == 0)
 	uint16_t node_num;
 	X_Boolean isOK;
+#else
+	uint32_t read_start_addr;
+#endif
 
 	if(p_handler == X_Null) {return APP_POINTER_NULL;}
 	if(p_handler ->p_manager ->isInitOK == X_False) {return APP_UNEXPECT_STATE;}
