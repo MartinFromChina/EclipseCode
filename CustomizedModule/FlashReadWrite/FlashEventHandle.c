@@ -21,6 +21,13 @@ static X_Boolean does_addr_is_within_bounds(uint32_t start_addr,uint32_t total_l
     return (   (addr           >= start_addr)
             && ((addr + len) <= (start_addr + total_length))  );
 }
+
+static X_Boolean does_user_define_sector_is_page_aligned(uint32_t erase_unit,uint32_t sector_size)
+{
+	if(sector_size > erase_unit) {return X_False;}
+	if(erase_unit % sector_size == 0) {return X_True;}
+	return X_False;
+}
 #endif
 
 
@@ -39,6 +46,8 @@ m_app_result mFlashEventInit(const sMyFlashEventHandler *p_handler)
 		if(p_handler ->p_basic_param->erase_uint == 0 || p_handler ->p_basic_param->program_unit == 0) {return APP_PARAM_ERROR;}
 		if(does_addr_is_page_aligned(p_handler ->p_basic_param ->erase_uint,p_handler ->p_basic_param ->base_addr) == X_False) {return APP_PARAM_ERROR;}
 		#if (M_FLASH_ENABLE_USER_MULTI_PARTITION == 1)
+			if(does_user_define_sector_is_page_aligned(p_handler ->p_basic_param ->erase_uint,p_handler ->p_user_param ->sector_size)
+																							== X_False){return APP_PARAM_ERROR;}
 			if(p_handler ->p_basic_param->total_size_in_bytes !=
 				(p_handler ->p_user_param ->sector_size * p_handler ->p_user_param ->total_sector_count)){return APP_PARAM_ERROR;}
 		#endif
@@ -47,7 +56,9 @@ m_app_result mFlashEventInit(const sMyFlashEventHandler *p_handler)
 	SimpleQueueInitialize(p_handler ->p_loop_queue);
 #if (M_FLASH_ENABLE_USER_MULTI_PARTITION == 1)
 	mPriorityQueueInitialize(p_handler ->p_priority_queue);
+	if(p_handler ->onUserInforConfig != X_Null) {p_handler ->onUserInforConfig(p_handler ->p_user_infor_table);}
 #endif
+
 	p_handler ->p_manager ->isInitOK = X_True;
 
 	#if (USE_MY_FLASH_EVENT_HANDLER_DEBUG == 1)
@@ -176,21 +187,47 @@ m_app_result mFlashEraseRequest(const sMyFlashEventHandler *p_handler,uint32_t e
 }
 
 #if (M_FLASH_ENABLE_USER_MULTI_PARTITION == 1)
-m_app_result mFlashSectorReadRequest(const sMyFlashEventHandler *p_handler,uint32_t sector_number,uint32_t length,FLASH_POINTER_TYPE  * p_dest,onMyFlashRead read_cb)
+m_app_result mFlashSectorReadRequest(const sMyFlashEventHandler *p_handler,uint32_t page_number,uint32_t sector_number,uint32_t length,FLASH_POINTER_TYPE  * p_dest,onMyFlashRead read_cb)
 {
+	uint16_t node_num;
+	X_Boolean isOK;
+
 	if(p_handler == X_Null) {return APP_POINTER_NULL;}
 	if(p_handler ->p_manager ->isInitOK == X_False) {return APP_UNEXPECT_STATE;}
+	if(p_handler ->p_user_infor_table ->UserInforCountbyErasePage == 0 || p_handler ->p_user_infor_table ->p_infor == X_Null){return APP_POINTER_NULL;}
 
 #if (M_FLASH_ENABLE_PARAM_CHECK == 1)
+	if((sector_number * p_handler ->p_user_param ->sector_size) >= p_handler ->p_basic_param ->erase_uint){return APP_PARAM_ERROR;}
+	if(((page_number * p_handler ->p_basic_param ->erase_uint) + sector_number * p_handler ->p_user_param ->sector_size)
+			>= p_handler ->p_basic_param ->total_size_in_bytes){return APP_PARAM_ERROR;}
+	if(length > p_handler ->p_user_param ->sector_size || length == 0){return APP_PARAM_ERROR;}
 #endif
-	return APP_SUCCESSED;
+	M_FLASH_ENTER_CRITICAL_REGION_METHOD;
+	node_num = SimpleQueueFirstIn(p_handler ->p_loop_queue,&isOK,X_False);
+	M_FLASH_EXIT_CRITICAL_REGION_METHOD;
+	if(isOK == X_True)
+	{
+		p_handler ->p_manager ->fop[node_num].opcode = MFO_Read;
+		p_handler ->p_manager ->fop[node_num].fr.read_start_addr
+				= (p_handler ->p_user_param ->sector_size * sector_number) + (p_handler ->p_basic_param ->erase_uint * page_number);
+		p_handler ->p_manager ->fop[node_num].fr.read_length     = length;
+		p_handler ->p_manager ->fop[node_num].fr.p_dest			 = p_dest;
+		p_handler ->p_manager ->fop[node_num].fr.read_cb		 = read_cb;
+		return APP_SUCCESSED;
+	}
+	return APP_UNEXPECT_STATE;
 }
-m_app_result mFlashSectorWriteRequest(const sMyFlashEventHandler *p_handler,uint32_t sector_number,uint32_t length,FLASH_POINTER_TYPE const * p_src,onMyFlashWrite write_cb)
+m_app_result mFlashSectorWriteRequest(const sMyFlashEventHandler *p_handler,uint32_t page_number,uint32_t sector_number,uint32_t length,FLASH_POINTER_TYPE const * p_src,onMyFlashWrite write_cb)
 {
 	if(p_handler == X_Null) {return APP_POINTER_NULL;}
 	if(p_handler ->p_manager ->isInitOK == X_False) {return APP_UNEXPECT_STATE;}
+	if(p_handler ->p_user_infor_table ->UserInforCountbyErasePage == 0 || p_handler ->p_user_infor_table ->p_infor == X_Null){return APP_POINTER_NULL;}
 
 #if (M_FLASH_ENABLE_PARAM_CHECK == 1)
+	if((sector_number * p_handler ->p_user_param ->sector_size) >= p_handler ->p_basic_param ->erase_uint){return APP_PARAM_ERROR;}
+	if(((page_number * p_handler ->p_basic_param ->erase_uint) + sector_number * p_handler ->p_user_param ->sector_size)
+			>= p_handler ->p_basic_param ->total_size_in_bytes){return APP_PARAM_ERROR;}
+	if(length > p_handler ->p_user_param ->sector_size || length == 0){return APP_PARAM_ERROR;}
 #endif
 
 	return APP_SUCCESSED;
@@ -218,4 +255,9 @@ X_Void mFlashEventHandlerRun(const sMyFlashEventHandler *p_handler)
 
 	SimpleStateMachineRun(p_handler->p_flash_state,&smp,X_Null,X_Null);
 
+}
+
+X_Boolean DoesMyFlashModuleBusy(const sMyFlashEventHandler *p_handler)
+{
+	return X_True;
 }

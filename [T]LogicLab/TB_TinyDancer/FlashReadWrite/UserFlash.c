@@ -6,11 +6,51 @@ static X_Void FlashTestDebugInit(X_Void);
 static X_Void onFlashDebug(eFlashDebugOperation op,uint8_t operation_ID,const sMyFlashEventHandler * p_handler);
 static uint32_t DebugParamCollect(eSimpleQueueOperation op,uint32_t param);
 
+static uint8_t pentype = 0;
+static uint8_t penname[10];
+static const sUserInforInFlashTable InforTable[] = {
+{
+	#if (USE_MY_FLASH_EVENT_HANDLER_DEBUG == 1)
+	"Pentype"
+	#endif
+	,0,1,&pentype,},
+{
+	#if (USE_MY_FLASH_EVENT_HANDLER_DEBUG == 1)
+		"Pen name"
+	#endif
+	,1,10,penname,},
+};
+
+static uint8_t user_prefer[40];
+static const sUserInforInFlashTable UserPreferInforTable[] = {
+{
+	#if (USE_MY_FLASH_EVENT_HANDLER_DEBUG == 1)
+		"user prefer infor"
+	#endif
+	,0,40,user_prefer,},
+};
+
+static const sUserInformationInFlash Page[] ={
+		{0,2,InforTable},
+		{1,1,UserPreferInforTable},
+};
+static const sUserInforPageTable  UserInforPageTable = {2,Page};
+
+X_Void UserInforConfig(sUserInforPageTable *p_user_infor_table)
+{
+	if(p_user_infor_table != X_Null)
+	{
+		p_user_infor_table ->UserInforCountbyErasePage = UserInforPageTable.UserInforCountbyErasePage;
+		p_user_infor_table ->p_infor = UserInforPageTable.p_infor;
+	}
+}
+
 APP_FLASH_EVENT_HANDLER_DEFINE(p_flash_handler
 								,4096,8192
 								,256,256
 								,256,32
 								,X_Null,X_Null,X_Null,X_Null,X_Null,X_Null,X_Null
+								,UserInforConfig
 								,onFlashDebug,DebugParamCollect
 								);
 
