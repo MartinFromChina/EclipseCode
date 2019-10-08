@@ -51,6 +51,7 @@ APP_FLASH_EVENT_HANDLER_DEFINE(p_flash_handler
 								,256,32
 								,X_Null,X_Null,X_Null,X_Null,X_Null,X_Null,X_Null
 								,UserInforConfig
+								,X_Null,X_Null
 								,onFlashDebug,DebugParamCollect
 								);
 

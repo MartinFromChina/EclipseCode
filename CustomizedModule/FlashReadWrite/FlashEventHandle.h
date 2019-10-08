@@ -132,7 +132,11 @@ typedef struct
 	StateNumber 			LatestStateBeforeRequestCheck;
 	uint16_t 				wait_counter;
 }sMyFlashStateParamExtern;
-
+typedef struct
+{
+  uint16_t (*get_ms)(X_Void);
+  X_Void   (*set_ms)(uint16_t time);
+}sMyFlashEventTimer;
 typedef struct
 {
 	sMyFlashStateParamExtern *p_fspe;
@@ -152,6 +156,7 @@ struct _sMyFlashEventHandler
 	X_Void						(*onUserInforConfig)(sUserInforPageTable *p_user_infor_table);
 #endif
 	sMyFlashEventAction     const*p_action;
+	sMyFlashEventTimer		const*p_timer;
 	sMyFlashEventHandlerState const*p_state_machine;
 	X_Void 						(*onDebug)(eFlashDebugOperation e_fdo,uint8_t operation_ID,const sMyFlashEventHandler * p_handler);
 	uint32_t                    (*onDebugParamCollect)(eSimpleQueueOperation op,uint32_t param);
@@ -174,12 +179,14 @@ typedef struct
 										,flash_user_define_total_sector_count				\
 										,init,uninit,read,write,erase,does_busy,busy_flag_set \
 										,user_infor_config									\
+										,time_set_ms,time_get_ms							\
 										,debug_method,param_debug							\
 										)													\
 	SIMPLE_LOOPQUEUE_DEF_WITHOUT_POINTER(p_simple_queue_for_flash,M_FLASH_MAX_SIMPLE_REQUEST_HOLD_COUNT);										 \
 	APP_PRIORITY_QUEUE_DEF_WITHOUT_POINTER(p_prio_queue_for_flash,M_FLASH_MAX_REQUEST_HOLD_COUNT,(flash_user_define_total_sector_count-1),X_True); \
 	static 		 sUserInforPageTable       CONCAT_2(p_handler,_user_infor_page_table_entry) = {0,X_Null};	\
 	static 		 sMyFlashModuleManager     CONCAT_2(p_handler,_flash_manager_entry) = {X_False,0,{}}; 		\
+	static const sMyFlashEventTimer        CONCAT_2(p_handler,_flash_timer_entry)  = {time_set_ms,time_get_ms};\
 	static const sMyFlashEventBasicParam   CONCAT_2(p_handler,_flash_basicparam) = {flash_base_addr,flash_total_size_in_bytes,flash_erase_unit,flash_program_unit};\
 	static const sMyFlashEventUserParam    CONCAT_2(p_handler,_flash_userparam) = {flash_user_define_sector_size,flash_user_define_total_sector_count};      \
 	static const sMyFlashEventAction       CONCAT_2(p_handler,_flash_action) = {init,uninit,read,write,erase,does_busy,busy_flag_set};	\
@@ -216,6 +223,7 @@ typedef struct
 	,&CONCAT_2(p_prio_queue_for_flash,_priority_queue_entry)								\
 	,user_infor_config																		\
 	,&CONCAT_2(p_handler,_flash_action)														\
+	,&CONCAT_2(p_handler,_flash_timer_entry)												\
 	,&CONCAT_2(p_handler,_s_MFEHS)															\
 	,debug_method																			\
 	,param_debug																			\
@@ -229,10 +237,12 @@ typedef struct
 										,flash_user_define_total_sector_count				\
 										,init,uninit,read,write,erase,does_busy,busy_flag_set \
 										,user_infor_config									\
+										,time_set_ms,time_get_ms							\
 										,debug_method,param_debug							\
 										)													\
 	SIMPLE_LOOPQUEUE_DEF_WITHOUT_POINTER(p_simple_queue_for_flash,M_FLASH_MAX_SIMPLE_REQUEST_HOLD_COUNT);										 \
 	static 		 sMyFlashModuleManager      CONCAT_2(p_handler,_flash_manager_entry) = {X_False,{}}; 		\
+	static const sMyFlashEventTimer         CONCAT_2(p_handler,_flash_timer_entry)  = {time_set_ms,time_get_ms};\
 	static const sMyFlashEventBasicParam   CONCAT_2(p_handler,_flash_basicparam) = {flash_base_addr,flash_total_size_in_bytes,flash_erase_unit,flash_program_unit};\
 	static const sMyFlashEventUserParam    CONCAT_2(p_handler,_flash_userparam) = {flash_user_define_sector_size,flash_user_define_total_sector_count};      \
 	static const sMyFlashEventAction       CONCAT_2(p_handler,_flash_action) = {init,uninit,read,write,erase,does_busy,busy_flag_set};	\
@@ -266,6 +276,7 @@ typedef struct
 	,&CONCAT_2(p_handler,_flash_userparam)													\
 	,&CONCAT_2(p_simple_queue_for_flash,_loopqueue_entry)									\
 	,&CONCAT_2(p_handler,_flash_action)														\
+	,&CONCAT_2(p_handler,_flash_timer_entry)												\
 	,&CONCAT_2(p_handler,_s_MFEHS)															\
 	,debug_method																			\
 	,param_debug																			\

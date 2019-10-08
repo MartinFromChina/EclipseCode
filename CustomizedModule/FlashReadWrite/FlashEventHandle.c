@@ -102,11 +102,12 @@ m_app_result mFlashReadRequest(const sMyFlashEventHandler *p_handler,uint32_t re
 	X_Boolean isOK;
 #endif
 	if(p_handler == X_Null) {return APP_POINTER_NULL;}
-	if(p_handler ->p_manager ->isInitOK == X_False) {return APP_UNEXPECT_STATE;}
+	if(p_handler ->p_manager ->isInitOK == X_False) {return APP_UNEXPECT_STATE;}// p_handler :not null
 
 #if (M_FLASH_ENABLE_PARAM_CHECK == 1)
-	if(does_addr_is_aligned32(read_start_addr) == X_False) {return APP_PARAM_ERROR;}
-	if(read_length == 0) {return APP_PARAM_ERROR;}
+	if(p_dest == X_Null) {return APP_POINTER_NULL;} // p_dest :not null
+	if(does_addr_is_aligned32(read_start_addr) == X_False) {return APP_PARAM_ERROR;} // addr : align32
+	if(read_length == 0) {return APP_PARAM_ERROR;} // length != 0 , <  max
 	if(does_addr_is_within_bounds(p_handler ->p_basic_param ->base_addr,p_handler ->p_basic_param ->total_size_in_bytes
 									,read_start_addr,read_length)== X_False) {return APP_PARAM_ERROR;}
 #endif
@@ -137,14 +138,15 @@ m_app_result mFlashWriteRequest(const sMyFlashEventHandler *p_handler,uint32_t w
 	X_Boolean isOK;
 
 	if(p_handler == X_Null) {return APP_POINTER_NULL;}
-	if(p_handler ->p_manager ->isInitOK == X_False) {return APP_UNEXPECT_STATE;}
+	if(p_handler ->p_manager ->isInitOK == X_False) {return APP_UNEXPECT_STATE;}//p_handler : not null
 
 #if (M_FLASH_ENABLE_PARAM_CHECK == 1)
-	if(write_length == 0) {return APP_PARAM_ERROR;}
+	if(p_src == X_Null) {return APP_POINTER_NULL;}  // p_src : not null , word aligned
+	if(write_length == 0) {return APP_PARAM_ERROR;} // length != 0 , multiple of the program unit, < max
 	/* Length must be a multiple of the program unit. */
 	if(write_length % p_handler ->p_basic_param ->program_unit != 0) {return APP_PARAM_ERROR;}
 	/* Source and destination addresses must be word-aligned. */
-	if(does_addr_is_aligned32(write_start_addr) == X_False) {return APP_PARAM_ERROR;}
+	if(does_addr_is_aligned32(write_start_addr) == X_False) {return APP_PARAM_ERROR;} //addr : aligned32
 	if(does_addr_is_aligned32((uint32_t)p_src) == X_False) {return APP_PARAM_ERROR;}
 
 	if(does_addr_is_within_bounds(p_handler ->p_basic_param ->base_addr,p_handler ->p_basic_param ->total_size_in_bytes
@@ -172,13 +174,13 @@ m_app_result mFlashEraseRequest(const sMyFlashEventHandler *p_handler,uint32_t e
 	X_Boolean isOK;
 
 	if(p_handler == X_Null) {return APP_POINTER_NULL;}
-	if(p_handler ->p_manager ->isInitOK == X_False) {return APP_UNEXPECT_STATE;}
+	if(p_handler ->p_manager ->isInitOK == X_False) {return APP_UNEXPECT_STATE;}// p_handler : not null
 
 #if (M_FLASH_ENABLE_PARAM_CHECK == 1)
-	if(does_addr_is_page_aligned(p_handler ->p_basic_param ->erase_uint,erase_start_addr) == X_False) {return APP_PARAM_ERROR;}
+	if(does_addr_is_page_aligned(p_handler ->p_basic_param ->erase_uint,erase_start_addr) == X_False) {return APP_PARAM_ERROR;}// addr page_aligned
 	if(erase_length == 0) {return APP_PARAM_ERROR;}
 	if(does_addr_is_within_bounds(p_handler ->p_basic_param ->base_addr,p_handler ->p_basic_param ->total_size_in_bytes
-									,erase_start_addr,erase_length)== X_False) {return APP_PARAM_ERROR;}
+									,erase_start_addr,erase_length)== X_False) {return APP_PARAM_ERROR;} // length !=0 , < max
 #endif
 
 	M_FLASH_ENTER_CRITICAL_REGION_METHOD;
@@ -206,15 +208,16 @@ m_app_result mFlashSectorReadRequest(const sMyFlashEventHandler *p_handler,uint3
 	uint32_t read_start_addr;
 #endif
 
-	if(p_handler == X_Null) {return APP_POINTER_NULL;}
+	if(p_handler == X_Null) {return APP_POINTER_NULL;}//p_handler : not null
 	if(p_handler ->p_manager ->isInitOK == X_False) {return APP_UNEXPECT_STATE;}
 	if(p_handler ->p_user_infor_table ->UserInforCountbyErasePage == 0 || p_handler ->p_user_infor_table ->p_infor == X_Null){return APP_POINTER_NULL;}
 
 #if (M_FLASH_ENABLE_PARAM_CHECK == 1)
-	if(length > p_handler ->p_user_param ->sector_size || length == 0){return APP_PARAM_ERROR;}
-	if(sector_number >= p_handler ->p_manager ->sector_count_in_erase_unit){return APP_PARAM_ERROR;}
+	if(p_dest == X_Null) {return APP_POINTER_NULL;} // p_dest : not null
+	if(length > p_handler ->p_user_param ->sector_size || length == 0){return APP_PARAM_ERROR;}// length != 0 ; < max
+	if(sector_number >= p_handler ->p_manager ->sector_count_in_erase_unit){return APP_PARAM_ERROR;} //sector_number:<=max
 	if(((page_number * p_handler ->p_basic_param ->erase_uint) + sector_number * p_handler ->p_user_param ->sector_size)
-			>= p_handler ->p_basic_param ->total_size_in_bytes){return APP_PARAM_ERROR;}
+			>= p_handler ->p_basic_param ->total_size_in_bytes){return APP_PARAM_ERROR;} // page_number <=max
 #endif
 #if (M_FLASH_READ_IMMEDIATELY == 0)
 	M_FLASH_ENTER_CRITICAL_REGION_METHOD;
@@ -243,15 +246,18 @@ m_app_result mFlashSectorWriteRequest(const sMyFlashEventHandler *p_handler,uint
 	uint16_t node_num,priority;
 	X_Boolean isOK;
 
-	if(p_handler == X_Null) {return APP_POINTER_NULL;}
+	if(p_handler == X_Null) {return APP_POINTER_NULL;}// p_handler : not null
 	if(p_handler ->p_manager ->isInitOK == X_False) {return APP_UNEXPECT_STATE;}
 	if(p_handler ->p_user_infor_table ->UserInforCountbyErasePage == 0 || p_handler ->p_user_infor_table ->p_infor == X_Null){return APP_POINTER_NULL;}
 
 #if (M_FLASH_ENABLE_PARAM_CHECK == 1)
-	if(length > p_handler ->p_user_param ->sector_size || length == 0){return APP_PARAM_ERROR;}
-	if(sector_number >= p_handler ->p_manager ->sector_count_in_erase_unit){return APP_PARAM_ERROR;}
+	if(p_src == X_Null) {return APP_POINTER_NULL;} // p_src not null
+	if(length > p_handler ->p_user_param ->sector_size || length == 0){return APP_PARAM_ERROR;} // length !=0 , < max
+	if(sector_number >= p_handler ->p_manager ->sector_count_in_erase_unit){return APP_PARAM_ERROR;} // sector <= max
 	if(((page_number * p_handler ->p_basic_param ->erase_uint) + sector_number * p_handler ->p_user_param ->sector_size)
-			>= p_handler ->p_basic_param ->total_size_in_bytes){return APP_PARAM_ERROR;}
+			>= p_handler ->p_basic_param ->total_size_in_bytes){return APP_PARAM_ERROR;}// page_number <= max
+	/* Source and destination addresses must be word-aligned. */
+	if(does_addr_is_aligned32((uint32_t)p_src) == X_False) {return APP_PARAM_ERROR;}
 #endif
 
 	priority =  (page_number * p_handler ->p_manager ->sector_count_in_erase_unit) + sector_number;
@@ -261,7 +267,8 @@ m_app_result mFlashSectorWriteRequest(const sMyFlashEventHandler *p_handler,uint
 	if(isOK == X_True)
 	{
 		p_handler ->p_manager ->simul_write_param[node_num].write_start_addr
-				=  (p_handler ->p_user_param ->sector_size * sector_number) + (p_handler ->p_basic_param ->erase_uint * page_number);;
+				=  (p_handler ->p_user_param ->sector_size * sector_number) + (p_handler ->p_basic_param ->erase_uint * page_number);
+		/* Length must be a multiple of the program unit. */
 		p_handler ->p_manager ->simul_write_param[node_num].write_length  = length;
 		p_handler ->p_manager ->simul_write_param[node_num].p_src		  = p_src;
 		p_handler ->p_manager ->simul_write_param[node_num].write_cb	  = write_cb;
@@ -290,14 +297,12 @@ X_Void mFlashEventHandlerRun(const sMyFlashEventHandler *p_handler)
 	if(p_handler == X_Null) {return;}
 	if(p_handler ->p_manager ->isInitOK == X_False) {return;}
 	SimpleStateMachineRun(p_handler ->p_state_machine->p_flash_state,&(p_handler ->p_state_machine->p_fspe->base),X_Null,X_Null);
-}
-X_Void  mFlashEventTimerModuleRun(const sMyFlashEventHandler *p_handler)
-{
-	if(p_handler == X_Null) {return;}
-	if(p_handler ->p_manager ->isInitOK == X_False) {return;}
-	if(p_handler ->p_state_machine ->p_fspe ->wait_counter >= M_FLASH_TIMER_MODULE_INTERVAL_IN_MS)
+	if(p_handler ->p_timer ->get_ms == X_Null || p_handler ->p_timer ->set_ms == X_Null)
 	{
-		p_handler ->p_state_machine ->p_fspe ->wait_counter -= M_FLASH_TIMER_MODULE_INTERVAL_IN_MS;
+		if(p_handler ->p_state_machine ->p_fspe ->wait_counter >= M_FLASH_TIMER_MODULE_INTERVAL_IN_MS)
+		{
+			p_handler ->p_state_machine ->p_fspe ->wait_counter -= M_FLASH_TIMER_MODULE_INTERVAL_IN_MS;
+		}
 	}
 }
 
