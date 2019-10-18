@@ -24,11 +24,9 @@
 					static uint32_t    CONCAT_2(p_entry_name,_whole) = init_value;									\
 					static uint32_t*   p_entry_name = &CONCAT_2(p_entry_name,_whole)
 #else
-	#define STRING_DEBUG_ONCE_ENTRY_DEF(p_entry_name,init_value)            			\
-					static uint8_t*   p_entry_name = X_Null
+	#define STRING_DEBUG_ONCE_ENTRY_DEF(p_entry_name,init_value)
 
-	#define STRING_DEBUG_COUNTER_ENTRY_DEF(p_entry_name)            							\
-					static uint8_t*   p_entry_name = X_Null
+	#define STRING_DEBUG_COUNTER_ENTRY_DEF(p_entry_name)
 #endif
 
 
